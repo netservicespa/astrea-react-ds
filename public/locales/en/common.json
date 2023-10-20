@@ -1,0 +1,54 @@
+{
+  "dragDrop": {
+    "labels": {
+      "textDrag": "Drag and drop documents inside the dotted area or upload files from your local drive using the appropriate button.",
+      "rilasciaFile": "Drop the file",
+      "loadFromFile": "Load from file"
+    },
+    "errors": {
+      "tipoAllegatoRequired": "Please specify the attachment type."
+    }
+  },
+  "modal": {
+    "buttons": {
+      "submit": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "dialog": {
+    "buttons": {
+      "submit": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "form": {
+    "buttons": {
+      "submit": "Submit",
+      "reset": "Clear"
+    },
+    "errors": {
+      "required": "The '{{field}}' field is required"
+    }
+  },
+  "wizard": {
+    "next": "Next",
+    "previous": "Back",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "abort": {
+      "modalTitle": "Exit the Wizard",
+      "modalDescription": "By clicking \"Confirm\" you will exit the wizard."
+    }
+  },
+  "httpStatus": {
+    "404": {
+      "title": "Page or Resource Not Found",
+      "message": "When typing the web address, ensure it is correct.<br/><br/>If you have copied the web address, make sure the entire address is correct.<br/><br/>If the web address is correct but the error still persists, please contact the help desk."
+    },
+    "500": {
+      "title": "Internal server error",
+      "message": "An internal server error has occured"
+    },
+    "backButton": "Back to the previous page"
+  }
+}

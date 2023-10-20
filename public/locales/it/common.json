@@ -1,0 +1,54 @@
+{
+  "dragDrop": {
+    "labels": {
+      "textDrag": "Trascina i documenti all'interno dell'area tratteggiata o carica i file da locale tramite l'apposito bottone",
+      "rilasciaFile": "Rilascia il file",
+      "loadFromFile": "Carica da locale"
+    },
+    "errors": {
+      "tipoAllegatoRequired": "Specificare la tipologia dell'allegato"
+    }
+  },
+  "modal": {
+    "buttons": {
+      "submit": "Conferma",
+      "cancel": "Annulla"
+    }
+  },
+  "dialog": {
+    "buttons": {
+      "submit": "Conferma",
+      "cancel": "Annulla"
+    }
+  },
+  "form": {
+    "buttons": {
+      "submit": "Invia",
+      "reset": "Reset"
+    },
+    "errors": {
+      "required": "Il campo '{{field}}' è obbligatorio"
+    }
+  },
+  "wizard": {
+    "next": "Avanti",
+    "previous": "Indietro",
+    "cancel": "Annulla",
+    "submit": "Conferma",
+    "abort": {
+      "modalTitle": "Esci dalla procedura guidata",
+      "modalDescription": "Cliccando \"Conferma\" uscirai dalla procedura guidata."
+    }
+  },
+  "httpStatus": {
+    "404": {
+      "title": "Pagina o risorsa non trovata",
+      "message": "Quando si digita l'indirizzo web, verificare che sia corretto.<br/><br/>Se avete incollato l'indirizzo web, controllate che l'intero indirizzo sia corretto.<br/><br/>Se l'indirizzo web è corretto ma l'errore è ancora visibile, contattare l'help desk."
+    },
+    "500": {
+      "title": "Internal server error",
+      "message": "Si è verificato un errore imprevisto"
+    },
+    "backButton": "Torna alla pagina precedente"
+  }
+}
