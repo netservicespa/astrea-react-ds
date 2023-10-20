@@ -38,7 +38,8 @@
   "scripts": {
     "build": "rollup -c",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@fontsource/titillium-web": "^4.5.9"
