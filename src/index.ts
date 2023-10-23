@@ -61,4 +61,4 @@ export * from './util/types';
 /**
  * Themes
  */
-export { theme as defaultTheme } from './themes/DefaultTheme';
+export { theme as NetServiceTheme } from './themes/NetServiceTheme';
