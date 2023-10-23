@@ -1,59 +1,79 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Box, PaginationItem, Input, Pagination, TablePagination,} from '@mui/material';
-import { styled } from '@mui/material/styles';
+import {Box, Input, Pagination, PaginationItem, TablePagination,} from '@mui/material';
+import {styled} from '@mui/material/styles';
 
-const PaginationWrapper = styled(Box)(({ theme }) => ({
+
+/**
+ * Dynamic Pagination Component
+ *
+ * @author vadim.chilinciuc
+ */
+
+
+const PaginationWrapper = styled(Box)(({theme}) => ({
 	display: 'flex',
 	justifyContent: 'flex-center',
 	marginTop: theme.spacing(2),
 }));
-interface PaginationProps {
-	paginationType:'normal' | 'table'
-	page:number
-	totalPages?:number
-	totalElements?:number
-	onChangePage:any
+
+const divWrapperStyle ={
+	fontSize: '0.875rem',
+	marginLeft: '8px',
+	color: '#000000a6',
 }
-export const PaginationComponent = (props: any) => {
-	const { paginationType,page, onChangePage,totalPages,totalElements,  } = props;
-	const [currentPage, setCurrentPage] = useState(page);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
-	const [inputPage, setInputPage] = useState(page);
+
+const inputStyle={
+	width: '40px',
+	height: '32px',
+	border: '1px solid #e8e8e8',
+	color: '#000000a6',
+}
 
 
-	useEffect(() => {
-		setCurrentPage(page);
-	}, [page]);
+interface PaginationProps {
+	/**
+	 * Defines the pagination type : normal or table.
+	 */
+	paginationType: "normal" | "table"
+	/**
+	 * Defines the total pages
+	 */
+	totalPages?: number
+	/**
+	 * Defines the total elements
+	 */
+	totalElements?: number
+}
+
+
+export const PaginationComponent = (props: PaginationProps) => {
+	const {paginationType, totalPages=0, totalElements=0} = props;
+	const [currentPage, setCurrentPage] = useState(1);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+
 
 	const handleChangePage = (_: unknown, newPage: number) => {
-		if (totalPages && newPage >= 0 && newPage <= totalPages) {
-			onChangePage(newPage);
-			setCurrentPage(newPage);
-		}
+		setCurrentPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = (event:any) => {
+
+	const handleChangeRowsPerPage = (event: any) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
-		setCurrentPage(0);
+		setCurrentPage(1);
 	};
 
 	const handleInputChange = (event: any) => {
 		const value = Number(event.target.value);
 		if (value == 0) {
-			setInputPage(1);
+			setCurrentPage(1);
 		} else if (totalPages && value < totalPages) {
-			setInputPage(value);
+			setCurrentPage(value);
 		} else {
-			setInputPage(totalPages);
+			setCurrentPage(totalPages);
 		}
 	};
 
-	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === 'Enter') {
-			onChangePage(inputPage);
-			setCurrentPage(inputPage);
-		}
-	};
 
 	return (
 		<>
@@ -62,7 +82,7 @@ export const PaginationComponent = (props: any) => {
 				<TablePagination
 					component="div"
 					count={totalElements}
-					page={page}
+					page={currentPage}
 					onPageChange={handleChangePage}
 					rowsPerPage={rowsPerPage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
@@ -98,32 +118,17 @@ export const PaginationComponent = (props: any) => {
 					/>
 					<div style={{display: 'flex', alignItems: 'center'}}>
 						<div
-							style={{
-								fontSize: '0.875rem',
-								marginLeft: '8px',
-								marginRight: '8px',
-								color: '#000000a6',
-							}}
+							style={divWrapperStyle}
 						>
 							Pag.
 						</div>
 						<Input
-							style={{
-								width: '40px',
-								height: '32px',
-								border: '1px solid #e8e8e8',
-								color: '#000000a6',
-							}}
-							value={inputPage}
+							style={inputStyle}
+							value={currentPage}
 							onChange={handleInputChange}
-							onKeyPress={handleKeyPress}
 						/>
 						<div
-							style={{
-								fontSize: '0.875rem',
-								marginLeft: '8px',
-								color: '#000000a6',
-							}}
+							style={divWrapperStyle}
 						>
 							di {totalPages}
 						</div>
@@ -133,6 +138,6 @@ export const PaginationComponent = (props: any) => {
 
 		</>
 
-				)
+	)
 
-			};
+};
