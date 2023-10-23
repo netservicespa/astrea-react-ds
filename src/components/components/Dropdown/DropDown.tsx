@@ -74,33 +74,37 @@ export const DropdownComponent = ({router,dropdownItems,onLogout,children,dropDo
 						vertical: dropDownConfiguration?.transformOrigin?.vertical,
 						horizontal: dropDownConfiguration?.transformOrigin?.horizontal,
 					}}
-					PaperProps={{
-						elevation: 0,
-						sx: {
-							overflow: 'visible',
-							filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-							border:'1px solid #b1b4b6',
-							mt: 4,
-							'& .MuiAvatar-root': {
-								width: 32,
-								height: 32,
-								ml: -0.5,
-								mr: 1,
-							}
+					slotProps={{
+						paper: {
+							elevation: 0,
+							sx: {
+								overflow: 'visible',
+								filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+								border: '1px solid #b1b4b6',
+								mt: 4,
+								'& .MuiAvatar-root': {
+									width: 32,
+									height: 32,
+									ml: -0.5,
+									mr: 1,
+								},
+						  	},
 						},
 					}}
 				>
-					{dropdownItems.map((item:any,index:number) => (
-						<DynamicLink to={item.path} router={router} key={index}>
-							<MenuItem>
-								<ListItemIcon>
-									{item.icon || <HomeIcon />}
-								</ListItemIcon>
-								{item.name}
-							</MenuItem>
-							<Divider />
-						</DynamicLink>
-					))}
+					{dropdownItems && dropdownItems.length > 0 && (
+						dropdownItems.map((item:any, index:number) => (
+							<DynamicLink to={item.path} router={router} key={index}>
+								<MenuItem>
+									<ListItemIcon>
+										{item.icon || <HomeIcon />}
+									</ListItemIcon>
+									{item.name}
+								</MenuItem>
+								<Divider />
+							</DynamicLink>
+						))
+					)}
 					<MenuItem onClick={() => handleMenuItemClick("Logout")}>
 						<ListItemIcon>
 							<LogoutIcon />

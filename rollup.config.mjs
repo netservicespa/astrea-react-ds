@@ -18,6 +18,7 @@ export default [
         file: packageJson.main,
         format: 'cjs',
         sourcemap: 'inline',
+        plugins: [terser()],
       },
       {
         file: packageJson.module,
@@ -30,7 +31,6 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
-      terser(),
     ],
     external: ['react', 'react-dom', 'styled-components'],
   },

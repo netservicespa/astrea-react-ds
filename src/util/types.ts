@@ -128,6 +128,8 @@ export interface IDropDown {
    */
   dropdownItems: IDropdownItems[];
 
+  userPanelMenuItems?: any;
+
   /**
    * Optional callback function invoked when the "logout" action is triggered.
    */
