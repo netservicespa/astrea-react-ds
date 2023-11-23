@@ -36,6 +36,8 @@ export interface ValidatedFormProps<T extends Object> {
    * `<ValidatedForm buttonsSlot={`
    * `   <DefaultButtons buttonPosition="right" submitText="Submit" resetText="Reset" />`
    * `} />`
+   * 
+   * buttonPosition: `"left" | "right" | "reverse" | "reverseLeft" | "reverseRight" | "spaceBetween"`
    */
   buttonsSlot?: React.ReactNode | boolean;
 }
@@ -130,8 +132,10 @@ export const DefaultButtons = <T extends Object>({ buttonPosition = 'right', sub
   const getButtonContainerJustify = () => {
     switch (buttonPosition) {
       case 'right':
+      case 'reverseRight':
         return 'flex-end';
       case 'left':
+      case 'reverseLeft':
         return 'flex-start';
       case 'spaceBetween':
       case 'reverse':
@@ -140,23 +144,40 @@ export const DefaultButtons = <T extends Object>({ buttonPosition = 'right', sub
         return 'flex-end';
     }
   };
-
+  
   const isReverse = buttonPosition === 'reverse';
-
+  const isReverseLeft = buttonPosition === 'reverseLeft';
+  const isReverseRight = buttonPosition === 'reverseRight';
+  
   return (
     <Grid item container xs={12} justifyContent={getButtonContainerJustify()}>
-      {isReverse && (
-        <Button onClick={submit} variant="contained">
+      {(isReverseLeft || (isReverse && !isReverseRight)) && (
+        <Button onClick={doReset} sx={{ mr: 1 }}>
+          {resetText || t('form.buttons.reset')}
+        </Button>
+      )}
+  
+      {!(isReverseRight) && (
+        <Button onClick={submit} variant="contained" sx={{ mr: 1 }}>
           {submitText || t('form.buttons.submit')}
         </Button>
       )}
-      <Button sx={{ mr: isReverse ? 0 : 1 }} onClick={doReset}>
-        {resetText || t('form.buttons.reset')}
-      </Button>
-      {!isReverse && (
-        <Button onClick={submit} variant="contained">
-          {submitText || t('form.buttons.submit')}
+  
+      {(!isReverse && !isReverseLeft && !isReverseRight) && (
+        <Button onClick={doReset}>
+          {resetText || t('form.buttons.reset')}
         </Button>
+      )}
+  
+      {isReverseRight && (
+        <>
+          <Button onClick={doReset} sx={{ mr: 1 }}>
+            {resetText || t('form.buttons.reset')}
+          </Button>
+          <Button onClick={submit} variant="contained">
+            {submitText || t('form.buttons.submit')}
+          </Button>
+        </>
       )}
     </Grid>
   );

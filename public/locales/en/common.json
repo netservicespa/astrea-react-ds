@@ -1,5 +1,6 @@
 {
   "dragDrop": {
+    "noFile": "No file has been uploaded",
     "labels": {
       "textDrag": "Drag and drop documents inside the dotted area or upload files from your local drive using the appropriate button.",
       "rilasciaFile": "Drop the file",
@@ -10,6 +11,7 @@
     }
   },
   "modal": {
+    "close": "Close",
     "buttons": {
       "submit": "Confirm",
       "cancel": "Cancel"

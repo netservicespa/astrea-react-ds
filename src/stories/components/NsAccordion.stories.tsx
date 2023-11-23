@@ -6,6 +6,7 @@ import {
 } from '../../components/components/NsAccordion';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 export default {
   title: 'Components/Accordion',
@@ -99,7 +100,7 @@ Default.args = {
     </Typography>
   ),
   expanded: 'panel1',
-  icon: <ExpandMoreIcon />,
+  icon: <FilterAltIcon />,
   typographyProps: { 
     variant: 'h2', 
   },

@@ -5,6 +5,7 @@ import { Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { NsButton } from './NsButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 export interface NsModalProps {
 	title: string;
@@ -120,6 +121,7 @@ export const NsModal: React.FC<NsModalProps> = ({
         handleClose();
     };
 
+    const {t} = useTranslation();
 	const renderContent = () => (
         <>
             {fullScreen ? (
@@ -128,8 +130,8 @@ export const NsModal: React.FC<NsModalProps> = ({
                         <Typography variant="h1" component="h2">{title}</Typography>
                         {(showCancelButton || showConfirmButton) && (
                             <Box sx={fullScreenActionsStyle}>
-                                {showCancelButton && <NsButton onClick={handleClose} color="secondary" size="small">Cancel</NsButton>}
-                                {showConfirmButton && <NsButton onClick={handleConfirm} color="primary" size="small">Confirm</NsButton>}
+                                {showCancelButton && <NsButton onClick={handleClose} color="secondary" size="small">{t('modal.buttons.cancel')}</NsButton>}
+                                {showConfirmButton && <NsButton onClick={handleConfirm} color="primary" size="small">{t('modal.buttons.confirm')}</NsButton>}
                             </Box>
                         )}
                     </Box>
@@ -139,7 +141,7 @@ export const NsModal: React.FC<NsModalProps> = ({
                 </>
             ) : (
                 <>
-                    <Typography component="a" sx={closeLinkStyle} onClick={handleClose}>Close</Typography>
+                    <Typography component="a" sx={closeLinkStyle} onClick={handleClose}>{t('modal.close')}</Typography>
                     <StyledModalContent>
                         <Typography id="modal-modal-title" variant="h1" component="h2">{title}</Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>{content}</Typography>
@@ -149,8 +151,8 @@ export const NsModal: React.FC<NsModalProps> = ({
 
             {!fullScreen && (showCancelButton || showConfirmButton) && (
                 <StyledModalActions>
-                    {showCancelButton && <NsButton onClick={handleClose} color="secondary" size="small" sx={{ mr: 1 }}>Cancel</NsButton>}
-                    {showConfirmButton && <NsButton onClick={handleConfirm} color="primary" size="small">Confirm</NsButton>}
+                    {showCancelButton && <NsButton onClick={handleClose} color="secondary" size="small" sx={{ mr: 1 }}>{t('modal.buttons.cancel')}</NsButton>}
+                    {showConfirmButton && <NsButton onClick={handleConfirm} color="primary" size="small">{t('modal.buttons.confirm')}</NsButton>}
                 </StyledModalActions>
             )}
         </>

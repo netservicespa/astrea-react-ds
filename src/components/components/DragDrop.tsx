@@ -180,7 +180,7 @@ export function DragDrop({
             images.length <=0 ?
                 <Box>
                   <Typography component="h4" variant="h4" margin={3} padding={0}>
-                    No file has been uploaded
+                    {t('dragDrop.noFile')}
                   </Typography>
                 </Box>
               :null

@@ -1,5 +1,6 @@
 {
   "dragDrop": {
+    "noFile": "Non è stato caricato alcun file",
     "labels": {
       "textDrag": "Trascina i documenti all'interno dell'area tratteggiata o carica i file da locale tramite l'apposito bottone",
       "rilasciaFile": "Rilascia il file",
@@ -10,6 +11,7 @@
     }
   },
   "modal": {
+    "close": "Chiudi",
     "buttons": {
       "submit": "Conferma",
       "cancel": "Annulla"

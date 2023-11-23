@@ -12,6 +12,7 @@ export interface NsAccordionProps {
   content: React.ReactNode;
   disabled?: boolean;
   icon?: React.ReactNode;
+  expandIcon?: React.ReactNode;
   typographyProps?: React.ComponentProps<typeof Typography>;
   expanded?: boolean;
   onChange?: (event: React.SyntheticEvent, isExpanded: boolean) => void;
@@ -51,7 +52,8 @@ export const NsAccordion: React.FC<NsAccordionProps> = ({
   title,
   content,
   disabled = false,
-  icon = <ExpandMoreIcon />,
+  icon,
+  expandIcon = <ExpandMoreIcon />,
   typographyProps,
   expanded,
   onChange,
@@ -67,10 +69,11 @@ export const NsAccordion: React.FC<NsAccordionProps> = ({
       {...otherProps}
     >
       <StyledAccordionSummary
-        expandIcon={icon}
+        expandIcon={expandIcon}
         aria-controls={`${slugifiedTitle}-content`}
         id={`${slugifiedTitle}-header`}
       >
+        {icon && <div style={{ marginRight: '8px' }}>{icon}</div>}
         <Typography {...typographyProps}>{title}</Typography>
       </StyledAccordionSummary>
       <StyledAccordionDetails>{content}</StyledAccordionDetails>

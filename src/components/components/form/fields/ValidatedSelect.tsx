@@ -25,6 +25,7 @@ export const ValidatedSelect: React.FC<ValidatedSelectProps> = ({
   defaultValue,
   validate,
   errorMessage,
+  placeholder,
   changed,
   disabled,
   ...rest
@@ -44,16 +45,15 @@ export const ValidatedSelect: React.FC<ValidatedSelectProps> = ({
   const setValueCallback = useCallback(
     (event) => {
       const { value } = event.target;
-  
+
       setValue(value);
-  
+
       if (changed) {
         changed(event);
       }
     },
     [setValue, changed]
   );
-  
 
   React.useEffect(() => {
     if (disabled) {
@@ -71,6 +71,7 @@ export const ValidatedSelect: React.FC<ValidatedSelectProps> = ({
         defaultValue={defaultValue}
         fullWidth
         size={size}
+        placeholder={placeholder}
         onChange={setValueCallback}
         disabled={disabled}
       >
