@@ -1,6 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { Button, Input } from '@mui/material';
 
+/**
+ * File Upload Component
+ * @author vadim.chilinciuc
+ *
+ */
+
 function FileUpload({ onChange, value }: any) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [selectedFile, setSelectedFile] = useState<any>(value);

@@ -13,11 +13,17 @@ export const LabelInput: React.FC<React.PropsWithChildren<LabelProps>> = ({
   children,
 }) => {
   const id = React.useMemo(() => nameHtml || uniqueId('u_label-'), [nameHtml]);
+  const isRequired = React.Children.toArray(children).some((child) =>
+    React.isValidElement(child) && child.props.required
+  );
+
   return (
     <Box pr={1}>
-      <FormLabel htmlFor={id}>
-        <Typography marginBottom={1}><span style={{fontSize:'1.2rem'}}>{label}</span></Typography>
-      </FormLabel>
+      <Typography component="span" marginBottom={1} style={{ display: 'inline', fontSize: '1.2rem' }}>
+        {isRequired && <span style={{ color: 'red' }}>*</span>}
+        {label}
+      </Typography>
+
       {React.Children.map(children, (element, idx) => {
         return idx === 0 && React.isValidElement(element)
           ? React.cloneElement(

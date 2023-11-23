@@ -37,7 +37,7 @@ export interface NsTableProps<T extends { id: number }> {
   columns: TableLibraryColumnWithExport<T>[];
 }
 
-const NsTable: React.FC<NsTableProps<any>> = ({ data, onFrameClick, columns }) => {
+export const NsTable: React.FC<NsTableProps<any>> = ({ data, onFrameClick, columns }) => {
     const theme = useTheme([getTheme(), BASELINE_THEME])
     const nodes = {nodes: data}
 
@@ -68,5 +68,3 @@ const NsTable: React.FC<NsTableProps<any>> = ({ data, onFrameClick, columns }) =
         </>
     )
 }
-
-export default NsTable;

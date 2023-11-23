@@ -50,6 +50,7 @@ export const DropdownComponent = ({router,dropdownItems,onLogout,children,dropDo
 		setAnchorEl(null);
 	};
 
+
 	const handleMenuItemClick = (item:any) => {
 		console.log(`Menu item "${item}" clicked!`);
 		handleMenuClose(); // Close the menu after an item is clicked

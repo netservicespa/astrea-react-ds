@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps } from '@mui/material';
+import { TextFieldProps } from '@mui/material';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -9,14 +9,16 @@ import uniqueId from '../../../../util/uniqueId';
 import { useFormField } from 'relay-forms';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment, { Moment } from 'moment';
+import { PickersInputComponentLocaleText } from '@mui/x-date-pickers/locales';
 
 const FMT = 'DD/MM/YYYY';
 
 export type ValidatedDateCalendarProps = ValidatedInput<
   Omit<TextFieldProps, 'value'>,
   string
->;
-
+> & {
+  localeText?: PickersInputComponentLocaleText<moment.Moment>;
+};
 
 export const ValidatedDateCalendar: React.FC<ValidatedDateCalendarProps> = ({
   name,
@@ -25,12 +27,16 @@ export const ValidatedDateCalendar: React.FC<ValidatedDateCalendarProps> = ({
   validate,
   errorMessage,
   disabled,
+  dependsOn,
+  onChange,
+  localeText,
   ...rest
 }) => {
   const key = useMemo(() => name || uniqueId('v_picker-'), [name]);
+  const deps = useMemo(() => dependsOn, []);
 
   const validateCallback = useCallback(
-    (v: string) => composeValidators(validate, errorMessage)(v),
+    (v: string, deps) => composeValidators(validate, errorMessage)(v, deps),
     [validate, errorMessage]
   );
 
@@ -38,13 +44,25 @@ export const ValidatedDateCalendar: React.FC<ValidatedDateCalendarProps> = ({
     key,
     initialValue: defaultValue as string,
     validate: validateCallback,
+    dependsOn: deps,
   });
 
   const setPickerValueCallback = useCallback(
-    (value: Moment | null) => {
-      setValue(value ? value!.format(FMT) : '');
+    (date: Moment | null) => {
+      const formattedDate = date ? date.format(FMT) : '';
+      setValue(formattedDate);
+
+      if (onChange) {
+        const fakeEvent = {
+          target: { value: formattedDate, name: name },
+          currentTarget: { value: formattedDate, name: name },
+          preventDefault: () => {},
+          stopPropagation: () => {},
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+        onChange(fakeEvent);
+      }
     },
-    [setValue]
+    [setValue, onChange]
   );
 
   React.useEffect(() => {
@@ -64,6 +82,7 @@ export const ValidatedDateCalendar: React.FC<ValidatedDateCalendarProps> = ({
           slotProps={{
             textField: { error: !!error, fullWidth: true, ...rest },
           }}
+          localeText={localeText}
         />
       </LocalizationProvider>
     </LabelInput>

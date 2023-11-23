@@ -50,5 +50,16 @@
       "message": "An internal server error has occured"
     },
     "backButton": "Back to the previous page"
+  },
+  "spinner": {
+    "loading": "Waiting..."
+  },
+  "header": {
+    "userMenu": "User menu",
+    "notifications": "Notifications",
+    "openNotifications": "Open notifications",
+    "closeNotifications": "Close notifications",
+    "account": "Account",
+    "openAccount": "Open account"
   }
 }

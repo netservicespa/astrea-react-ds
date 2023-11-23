@@ -61,7 +61,7 @@ const StyledH2 = styled(Typography)<StyledCardContentProps>(
   })
 );
 
-export default function NsCard({
+export function NsCard({
   icon = null,
   title = "",
   subtitle = "",

@@ -50,5 +50,16 @@
       "message": "Si è verificato un errore imprevisto"
     },
     "backButton": "Torna alla pagina precedente"
+  },
+  "spinner": {
+    "loading": "Caricamento..."
+  },
+  "header": {
+    "userMenu": "Menu utente",
+    "notifications": "Notifiche",
+    "openNotifications": "Apri notifiche",
+    "closeNotifications": "Chiudi notifiche",
+    "account": "Account",
+    "openAccount": "Apri account"
   }
 }

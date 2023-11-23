@@ -31,6 +31,7 @@ const Template: StoryFn<typeof ValidatedForm> = (args) => {
   return (
     <>
       <ValidatedForm
+        {...args}
         sx={{ width: '50%' }}
         onSubmit={(data: any) => setData(data)}
         onReset={() => setData({})}
@@ -39,17 +40,19 @@ const Template: StoryFn<typeof ValidatedForm> = (args) => {
           <Grid item xs={12}>
             <ValidatedTextInput
               name="textField"
-              label="Text Field*"
+              label="Text Field"
               validate={required}
               errorMessage={t('form.errors.required', { field: 'Text Field' })}
+              required={true}
             />
           </Grid>
           <Grid item xs={12}>
             <ValidatedDateCalendar
               name="dateField"
-              label="Date Field*"
+              label="Date Field"
               validate={required}
               errorMessage={t('form.errors.required', { field: 'Date Field' })}
+              required={true}
             />
           </Grid>
         </Grid>

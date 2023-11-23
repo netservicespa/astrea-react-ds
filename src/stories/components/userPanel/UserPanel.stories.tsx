@@ -4,6 +4,10 @@ import {UserPanel} from "../../../components/components/userPanel/UserPanel";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 
+/**
+ * Use the User panel component to display important options to the user.
+ */
+
 const meta: Meta<typeof UserPanel> = {
 	title: 'Patterns/UserPanel',
 	component: UserPanel
@@ -18,33 +22,11 @@ export const IUserPanel: Story = {
 			thin: 'title',
 			subtitle: 'version 1.0.0',
 		},
-		user: {
-			name: 'Vadim Chilinciuc',
-		},
-		menuItems:[
-			{
-				"name": "Link 1",
-				"path": "/"
-			},
-			{
-				"name": "Link 2",
-				"path": "/link2"
-			},
-			{
-				"name": "Link 3",
-				"path": "/link3"
-			},
-			{
-				"name": "Link 4",
-				"path": "/link4"
-			}
-		],
 		userPanelMenuItems: [
 			{ name: 'Profile', path: '/', icon: <PersonIcon /> },
 			{ name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
 		],
 		configuration:{
-			centralLogo:false,
 			dropDownConfiguration: {
 				anchorOrigin: {
 					vertical: 'top',

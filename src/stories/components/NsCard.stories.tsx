@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import NsCard from '../../components/components/card/NsCard';
+import { NsCard } from '../../components/components/card/NsCard';
 import { CardProps } from '@mui/material/Card';
 import GetAppIcon from '@mui/icons-material/GetApp';
 

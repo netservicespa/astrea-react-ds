@@ -74,7 +74,7 @@ export function DragDrop({
           }
         });
 
-        setImages([...array, ...uniqueFiles]);
+        onUpdate([...array, ...uniqueFiles]);
       },
       [images]
   );

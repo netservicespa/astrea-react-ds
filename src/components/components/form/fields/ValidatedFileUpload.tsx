@@ -4,6 +4,12 @@ import { composeValidators } from "../validators";
 import { useFormField } from "relay-forms";
 import FileUpload from "../../FileUpload";
 
+/**
+ * Validated File Upload Component
+ * @author vadim.chilinciuc
+ *
+ */
+
 function ValidatedFileUpload({
 								 name,
 								 defaultValue,

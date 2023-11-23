@@ -1,37 +1,36 @@
 {
   "name": "@netservice/astrea-react-ds",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "contributors": [
     {
-      "name" : "Eduardo Santarelli",
-      "email" : "eduardo.santarelli@netservice.eu",
-      "url" : "https://github.com/edusan"
+      "name": "Eduardo Santarelli",
+      "email": "eduardo.santarelli@netservice.eu",
+      "url": "https://github.com/edusan"
     },
     {
-      "name" : "Lorenzo Di Giacomo",
-      "email" : "lorenzo.digiacomo@netservice.eu",
-      "url" : "https://github.com/morrys"
+      "name": "Lorenzo Di Giacomo",
+      "email": "lorenzo.digiacomo@netservice.eu",
+      "url": "https://github.com/morrys"
     },
     {
-      "name" : "Mustapha Aoussar",
-      "email" : "mustapha.aoussar@netservice.eu",
-      "url" : "https://github.com/aoussarmustapha"
+      "name": "Mustapha Aoussar",
+      "email": "mustapha.aoussar@netservice.eu",
+      "url": "https://github.com/aoussarmustapha"
     },
     {
-      "name" : "Stefano Barilli",
-      "email" : "stefano.barilli@netservice.eu",
-      "url" : "https://github.com/stefanobarilli94"
+      "name": "Stefano Barilli",
+      "email": "stefano.barilli@netservice.eu",
+      "url": "https://github.com/stefanobarilli94"
     },
     {
-      "name" : "Vadim Chilinciuc",
-      "email" : "vadim.chilinciuc@netservice.eu",
-      "url" : "https://github.com/vadimchilinciuc"
-    }   
+      "name": "Vadim Chilinciuc",
+      "email": "vadim.chilinciuc@netservice.eu",
+      "url": "https://github.com/vadimchilinciuc"
+    }
   ],
-
   "files": [
     "dist/**/*"
   ],
@@ -59,7 +58,7 @@
     "moment": "^2.29.4",
     "notistack": "^2.0.8",
     "react-i18next": "^13.0.3",
-    "relay-forms": "^2.0.0",
+    "relay-forms": "^2.1.1",
     "relay-hooks": "^8.0.0",
     "relay-runtime": "^15.0.0",
     "@table-library/react-table-library": "^4.1.7"
@@ -108,7 +107,7 @@
     "react-dropzone": "^14.2.3",
     "react-i18next": "^13.0.3",
     "react-relay": "^15.0.0",
-    "relay-forms": "^2.0.0",
+    "relay-forms": "^2.1.1",
     "relay-hooks": "^8.0.0",
     "relay-runtime": "^15.0.0",
     "rollup": "^3.2.5",

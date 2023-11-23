@@ -4,6 +4,10 @@ import React from 'react';
 import {useTranslation} from "react-i18next";
 import {DragDrop} from "../../../components/components/DragDrop";
 
+/**
+ * The DragDrop component allows users to select and upload files easily through a drag-and-drop interface.
+ *
+ */
 export default {
 	title: 'Patterns/Drag and Drop File Upload',
 	component: DragDrop,

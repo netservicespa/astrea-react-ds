@@ -25,9 +25,19 @@ export interface ValidatedFormProps<T extends Object> {
    */
   sx?: SxProps<Theme>;
   /**
-   * Whether to show the form's default submit and reset buttons.
+   * Custom slot for form buttons. This prop allows passing a custom React component to render 
+   * the form's submit and reset buttons. If not provided, a default button component will be used.
+   * This provides flexibility in customizing the appearance and behavior of the form's buttons.
+   * 
+   * Example usage:
+   * `<ValidatedForm buttonsSlot={<CustomButtonComponent />} />`
+   * 
+   * The component can also be the predefined 'DefaultButtons' with custom props like:
+   * `<ValidatedForm buttonsSlot={`
+   * `   <DefaultButtons buttonPosition="right" submitText="Submit" resetText="Reset" />`
+   * `} />`
    */
-  showButtons?: boolean;
+  buttonsSlot?: React.ReactNode | boolean;
 }
 
 /**
@@ -44,7 +54,7 @@ export const ValidatedForm = <T extends Object>({
   onReset,
   sx,
   children,
-  showButtons = true,
+  buttonsSlot = true
 }: React.PropsWithChildren<ValidatedFormProps<T>>) => {
   return (
     <ValidatedFormWrapper name={name}>
@@ -52,7 +62,7 @@ export const ValidatedForm = <T extends Object>({
         onSubmit={onSubmit}
         onReset={onReset}
         sx={sx}
-        showButtons={showButtons}
+        buttonsSlot={buttonsSlot}
       >
         {children}
       </FormInner>
@@ -65,9 +75,49 @@ const FormInner = <T extends Object>({
   onReset,
   sx,
   children,
-  showButtons,
+  buttonsSlot = true
 }: React.PropsWithChildren<ValidatedFormProps<T>>) => {
+  const formContextValue: FormContextValue<T> = { onSubmit, onReset };
+
+  let buttonsContent;
+  if (buttonsSlot === true) {
+    buttonsContent = <DefaultButtons />;
+  } else if (buttonsSlot === false) {
+    buttonsContent = null;
+  } else {
+    buttonsContent = buttonsSlot;
+  }
+  
+  return (
+    <FormContext.Provider value={formContextValue}>
+      <Grid sx={sx} container>
+        <Grid item xs={12}>
+          {children}
+        </Grid>
+        <Grid mb={2} mr={1} item container xs={12}>
+          <Errors />
+        </Grid>
+        {buttonsContent}
+      </Grid>
+    </FormContext.Provider>
+  );
+};
+
+interface FormContextValue<T> {
+  onSubmit: (values: T) => void;
+  onReset?: () => void;
+}
+
+const FormContext = React.createContext<FormContextValue<any>>({
+  onSubmit: () => {},
+});
+
+export const useFormContext = <T extends Object>() => React.useContext<FormContextValue<T>>(FormContext);
+
+export const DefaultButtons = <T extends Object>({ buttonPosition = 'right', submitText = 'Submit', resetText = 'Reset' }) => {
   const { t } = useTranslation();
+  const { onSubmit, onReset } = useFormContext();
+
   const { submit, reset } = useForm<T>({
     onSubmit: (values) => onSubmit(values),
   });
@@ -77,23 +127,36 @@ const FormInner = <T extends Object>({
     reset();
   };
 
+  const getButtonContainerJustify = () => {
+    switch (buttonPosition) {
+      case 'right':
+        return 'flex-end';
+      case 'left':
+        return 'flex-start';
+      case 'spaceBetween':
+      case 'reverse':
+        return 'space-between';
+      default:
+        return 'flex-end';
+    }
+  };
+
+  const isReverse = buttonPosition === 'reverse';
+
   return (
-    <Grid sx={sx} container>
-      <Grid item xs={12}>
-        {children}
-      </Grid>
-      <Grid mb={2} mr={1} item container xs={12}>
-        <Errors />
-      </Grid>
-      {showButtons && (
-        <Grid item container xs={12} justifyContent="space-between">
-          <Button sx={{ mr: 1 }} onClick={doReset}>
-            {t('form.buttons.reset')}
-          </Button>
-          <Button sx={{ mr: 1 }} variant="contained" onClick={submit}>
-            {t('form.buttons.submit')}
-          </Button>
-        </Grid>
+    <Grid item container xs={12} justifyContent={getButtonContainerJustify()}>
+      {isReverse && (
+        <Button onClick={submit} variant="contained">
+          {submitText || t('form.buttons.submit')}
+        </Button>
+      )}
+      <Button sx={{ mr: isReverse ? 0 : 1 }} onClick={doReset}>
+        {resetText || t('form.buttons.reset')}
+      </Button>
+      {!isReverse && (
+        <Button onClick={submit} variant="contained">
+          {submitText || t('form.buttons.submit')}
+        </Button>
       )}
     </Grid>
   );

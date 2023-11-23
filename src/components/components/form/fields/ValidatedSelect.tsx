@@ -42,15 +42,18 @@ export const ValidatedSelect: React.FC<ValidatedSelectProps> = ({
   });
 
   const setValueCallback = useCallback(
-    (event: any) => {
+    (event) => {
+      const { value } = event.target;
+  
+      setValue(value);
+  
       if (changed) {
         changed(event);
       }
-      const value = event.target.value;
-      setValue(value);
     },
-    [setValue]
+    [setValue, changed]
   );
+  
 
   React.useEffect(() => {
     if (disabled) {

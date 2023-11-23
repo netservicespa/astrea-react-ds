@@ -27,7 +27,6 @@ export const Header = ({
 				configuration={configuration}/>
 		);
 	}
-
 	return (
 		<HorizontalHeader
 			type={type}

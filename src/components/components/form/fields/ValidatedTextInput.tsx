@@ -21,6 +21,7 @@ export const ValidatedTextInput: React.FC<ValidatedTextInputProps> = ({
   validate,
   errorMessage,
   disabled,
+  onChange,
   ...rest
 }) => {
   const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
@@ -43,25 +44,27 @@ export const ValidatedTextInput: React.FC<ValidatedTextInputProps> = ({
   }, [disabled]);
 
   const setValueCallback = useCallback(
-    (event: any) => {
-      const value = event.target.value;
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
       setValue(value);
+
+      if (onChange) {
+        onChange(event);
+      }
     },
-    [setValue]
+    [setValue, onChange]
   );
 
   return (
-    <>
-      <LabelInput nameHtml={key} label={label as string}>
-        <TextField
-          {...rest}
-          fullWidth
-          value={value}
-          error={!!error}
-          onChange={setValueCallback}
-          disabled={disabled}
-        />
-      </LabelInput>
-    </>
+    <LabelInput nameHtml={key} label={label as string}>
+      <TextField
+        {...rest}
+        fullWidth
+        value={value}
+        error={!!error}
+        onChange={setValueCallback}
+        disabled={disabled}
+      />
+    </LabelInput>
   );
 };

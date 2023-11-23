@@ -1,7 +1,7 @@
 // NsTable.stories.tsx
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import NsTable, { NsTableProps } from '../../components/components/table/NsTable';
+import { NsTable, NsTableProps } from '../../components/components/table/NsTable';
 import { TableLibraryColumnWithExport } from '../../components/components/table/table';
 
 type ExampleDataType = {

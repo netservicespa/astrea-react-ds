@@ -14,25 +14,29 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { ValidatedTextInput } from '../../components/form/fields/ValidatedTextInput';
 import { required } from '../../components/form/validators';
 import { useTranslation } from 'react-i18next';
-import { ValidatedForm } from '../../components/form/ValidatedForm';
+import {
+  DefaultButtons,
+  ValidatedForm,
+} from '../../components/form/ValidatedForm';
 import { NsButton } from '../../components/NsButton';
-import {Header} from "../../patterns/navigation/Header";
+import { Header } from '../../patterns/navigation/Header';
 
 interface LoginProps {
   onButtonClick: () => void;
   logoSrc?: string;
   gradient?: string;
   imagePath?: string;
-  headerLogo?: React.ReactElement
+  headerLogo?: React.ReactElement;
   title1?: string;
   title2?: string;
-  headerTitle?:{
-      bold: string,
-      thin: string,
-      subtitle: string,
-  }
-  cardBorderRadius?:string;
+  headerTitle?: {
+    bold: string;
+    thin: string;
+    subtitle: string;
+  };
+  cardBorderRadius?: string;
   description?: string;
+  buttonsSlot?: React.ReactNode | boolean;
   loginButtonText?: string;
   type?: 'link' | 'form' | 'classic';
   handleFormSubmit: any;
@@ -49,7 +53,8 @@ export const Login: React.FC<LoginProps> = ({
   headerTitle,
   cardBorderRadius,
   description = '',
-  loginButtonText = 'Entra con Keycloak',
+  buttonsSlot = true,
+  loginButtonText,
   type = 'classic',
   handleFormSubmit,
 }) => {
@@ -72,51 +77,57 @@ export const Login: React.FC<LoginProps> = ({
       }}
     >
       <Grid container>
-          {type === 'classic' ?
-              //if classic we put the Header
-              <Grid item xs={12} sm={12}>
-                <Header logo={headerLogo} title={headerTitle} configuration={{centralLogo:true}}/>
-              </Grid>
-              :
-              <>
-                <Grid item xs={12} sm={4}>
-                  <div
-                      style={{
-                        backgroundColor: '#fff',
-                        height: '100vh',
-                        borderTopRightRadius: '35px',
-                        borderBottomRightRadius: '35px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                  >
-                    <Card>
-                      <CardMedia
-                          component="img"
-                          height="220"
-                          image={logoSrc}
-                          style={{
-                            maxWidth: '220px',
-                            objectFit: 'contain',
-                            marginBottom: '10px',
-                          }}
-                      />
-                    </Card>
-                    <Typography variant="h1" align="center">
-                      {title1}
-                      {title2 && (
-                          <>
-                            <br />
-                            {title2}
-                          </>
-                      )}
-                    </Typography>
-                  </div>
-                </Grid>
-              </>
-          }
+        {type === 'classic' ? (
+          //if classic we put the Header
+          <Grid item xs={12} sm={12}>
+            <Header
+              logo={headerLogo}
+              title={headerTitle}
+              configuration={{ centralLogo: true }}
+              router={null}
+              type={'horizontal'}
+            />
+          </Grid>
+        ) : (
+          <>
+            <Grid item xs={12} sm={4}>
+              <div
+                style={{
+                  backgroundColor: '#fff',
+                  height: '100vh',
+                  borderTopRightRadius: '35px',
+                  borderBottomRightRadius: '35px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="220"
+                    image={logoSrc}
+                    style={{
+                      maxWidth: '220px',
+                      objectFit: 'contain',
+                      marginBottom: '10px',
+                    }}
+                  />
+                </Card>
+                <Typography variant="h1" align="center">
+                  {title1}
+                  {title2 && (
+                    <>
+                      <br />
+                      {title2}
+                    </>
+                  )}
+                </Typography>
+              </div>
+            </Grid>
+          </>
+        )}
         <Grid item xs={12} sm={type !== 'classic' ? 8 : 12}>
           <div
             style={{
@@ -157,6 +168,7 @@ export const Login: React.FC<LoginProps> = ({
                   </Box>
                 ) : (
                   <ValidatedForm
+                    buttonsSlot={buttonsSlot}
                     onSubmit={handleFormSubmit}
                     onReset={() => setData(null)}
                   >

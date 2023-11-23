@@ -1,6 +1,8 @@
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import { darken } from '@mui/system';
 
+export const accordionBackgroundColor = '#ebefef';
+
 const paletteColors = {
   primary: {
     main: '#308A7D',
@@ -76,18 +78,21 @@ const themeOptions = {
         root: {
           '&.Mui-focused': {
             boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
-          },'&.MuiInput-underline:before ':{
-            borderBottom: 'none'
           },
-          '&.MuiInput-underline:after ':{
-          borderBottom: 'none' /* Remove the bottom border when the input is active */
-},
-          '&.MuiInput-underline:hover:not(.Mui-disabled):before' :{
-            borderBottom: 'none' /* Remove the bottom border on hover */
+          '&.MuiInput-underline:before ': {
+            borderBottom: 'none',
+          },
+          '&.MuiInput-underline:after ': {
+            borderBottom:
+              'none' /* Remove the bottom border when the input is active */,
+          },
+          '&.MuiInput-underline:hover:not(.Mui-disabled):before': {
+            borderBottom: 'none' /* Remove the bottom border on hover */,
           },
           '&.MuiInput-underline:after': {
-            borderBottom: 'none' /* Remove the bottom border when the input is active */
-          }
+            borderBottom:
+              'none' /* Remove the bottom border when the input is active */,
+          },
         },
         input: {
           padding: '8px',
@@ -140,13 +145,11 @@ const themeOptions = {
             boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
           },
 
-
           '&.MuiButton-containedSecondary:not(.Mui-disabled):active': {
-            boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`
+            boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
           },
           '&.MuiButton-outlinedSecondary:not(.Mui-disabled):active': {
             boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
-
           },
 
           '&.MuiButton-containedError:not(.Mui-disabled):active': {
@@ -157,21 +160,29 @@ const themeOptions = {
             boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
           },
 
-
           '&.MuiButton-containedSecondary': {
-            color:'#2E5A60',
-            boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.primary.main, 0.4)}`
+            color: '#2E5A60',
+            boxShadow: `inset 0 -3px 0 0 ${darken(
+              paletteColors.primary.main,
+              0.4
+            )}`,
           },
           '&.MuiButton-containedSuccess': {
-            boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.success.main, 0.5)}`
+            boxShadow: `inset 0 -3px 0 0 ${darken(
+              paletteColors.success.main,
+              0.5
+            )}`,
           },
           '&.MuiButton-containedError': {
-            boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.error.main, 0.5)}`
+            boxShadow: `inset 0 -3px 0 0 ${darken(
+              paletteColors.error.main,
+              0.5
+            )}`,
           },
           '&.Mui-disabled:not(.MuiButton-outlinedPrimary)': {
             boxShadow: `inset 0 -3px 0 0 ${darken('#A1A1A1', 0.5)}`,
             backgroundColor: '#A1A1A1',
-            color: '#FFF'
+            color: '#FFF',
           },
 
           '&.Mui-disabled.MuiButton-outlinedPrimary': {
@@ -186,12 +197,15 @@ const themeOptions = {
           },
           '&.MuiButton-outlinedSecondary:not(.Mui-disabled)': {
             border: 'unset',
-            boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.primary.main, 0.4)}`,
-            color:'#2E5A60',
+            boxShadow: `inset 0 -3px 0 0 ${darken(
+              paletteColors.primary.main,
+              0.4
+            )}`,
+            color: '#2E5A60',
           },
 
           '&.MuiButton-outlinedError:not(.Mui-disabled)': {
-            border: `2px solid ${paletteColors.error.main}`
+            border: `2px solid ${paletteColors.error.main}`,
           },
         },
       },
@@ -214,12 +228,15 @@ const themeOptions = {
       },
     },
   },
+  accordion: {
+    backgroundColor: accordionBackgroundColor,
+  },
   header: {
     backgroundColor: '#000',
     borderColor: '#308a7d',
     menuBackgroundColor: 'rgba(229, 237, 238, 0.99)',
     menuTextColor: '#FFF',
-    focusBackgroundColor: `${paletteColors.focus.main}`
+    focusBackgroundColor: `${paletteColors.focus.main}`,
   },
   footer: {
     backgroundColor: '#0f193b',

@@ -2,11 +2,15 @@ import React from 'react';
 import { UserPanelProps } from 'src/util/types';
 import { Header } from '../../../components/patterns/navigation/Header';
 
+/**
+ * User Panel Component
+ * @author vadim.chilinciuc
+ *
+ */
+
 export function UserPanel({
   title,
-  user,
   logo,
-  menuItems,
   userPanelMenuItems,
   router,
   configuration,
@@ -18,11 +22,10 @@ export function UserPanel({
       title={title}
       logo={logo}
       userPanelMenuItems={userPanelMenuItems}
-      menuItems={menuItems}
       router={router}
-      user={user}
       onLogout={onLogout}
       configuration={configuration}
+     type={'horizontal'}
     />
   );
 }

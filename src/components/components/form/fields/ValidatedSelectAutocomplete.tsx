@@ -29,9 +29,10 @@ export function ValidatedSelectAutocomplete({
   validate,
   errorMessage,
   disabled,
+  placeholder,
   changed,
   ...rest
-}: ValidatedSelectAutocompleteProps): React.JSX.Element {
+}: ValidatedSelectAutocompleteProps): JSX.Element {
   const key = useMemo(() => name ?? uniqueId('v_selectac-'), [name]);
 
   const validateCallback = useCallback(
@@ -82,8 +83,15 @@ export function ValidatedSelectAutocomplete({
         disablePortal
         autoComplete
         value={value}
+        disabled={disabled}
         renderInput={(props) => (
-          <TextField name={name} error={!!error} {...props} />
+          <TextField
+            name={name}
+            error={!!error}
+            {...props}
+            disabled={disabled}
+            placeholder={placeholder}
+          />
         )}
       />
     </LabelInput>

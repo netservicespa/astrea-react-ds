@@ -5,21 +5,24 @@ export { FullPageSpinner } from './components/FullPageSpinner';
 export { ErrorBoundary } from './components/error/ErrorBoundary';
 export { FallbackPage } from './components/error/FallbackPage';
 export { Header } from './components/patterns/navigation/Header';
-export { Footer } from './components/components/footer/Footer';
+export { NsFooter } from './components/patterns/footer/NsFooter';
 export { DragDrop } from './components/components/DragDrop';
 export { Errors } from './components/components/Errors';
 export { LabelInput } from './components/components/LabelInput';
 export { NsButton } from './components/components/NsButton';
-export { TabsComponent } from './components/components/tabs/Tabs';
+export { NsTabs } from './components/components/tabs/Tabs';
 export { NsAccordion } from './components/components/NsAccordion';
 export { NsProgress } from './components/components/NsProgress';
 export { PageHeader } from './components/components/PageHeader/PageHeader';
 export { NsModal } from './components/components/NsModal';
+export { NsTag } from './components/components/NsTag';
+export { NsCard } from './components/components/card/NsCard';
+// export { NsTable } from './components/components/table/NsTable'; TODO: change the table library that we use here or resolve the issue with ES Module
 
 /**
  * Forms and validation
  */
-export { ValidatedForm } from './components/components/form/ValidatedForm';
+export * from './components/components/form/ValidatedForm';
 export { ValidatedFormWrapper } from './components/components/form/ValidatedFormWrapper';
 export { ValidatedCheckbox } from './components/components/form/fields/ValidatedCheckbox';
 export { ValidatedRadio } from './components/components/form/fields/ValidatedRadio';

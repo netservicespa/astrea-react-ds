@@ -5,11 +5,16 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import { accordionBackgroundColor } from '../../themes/NetServiceTheme';
 
 export interface NsAccordionProps {
   title: string;
   content: React.ReactNode;
   disabled?: boolean;
+  icon?: React.ReactNode;
+  typographyProps?: React.ComponentProps<typeof Typography>;
+  expanded?: boolean;
+  onChange?: (event: React.SyntheticEvent, isExpanded: boolean) => void;
   otherProps?: React.ComponentProps<typeof Accordion>;
 }
 
@@ -17,8 +22,9 @@ const StyledAccordion = styled(Accordion)({
   marginBottom: '10px',
 });
 
-const StyledAccordionSummary = styled(AccordionSummary)({
-  backgroundColor: '#ebefef',
+const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
+  backgroundColor:
+    theme?.accordion?.backgroundColor || accordionBackgroundColor,
   paddingLeft: '14px',
   paddingRight: '14px',
   '& .MuiTypography-root': {
@@ -27,7 +33,7 @@ const StyledAccordionSummary = styled(AccordionSummary)({
   '& .Mui-expanded': {
     margin: '12px 0',
   },
-});
+}));
 
 const StyledAccordionDetails = styled(AccordionDetails)({
   backgroundColor: 'white',
@@ -45,18 +51,27 @@ export const NsAccordion: React.FC<NsAccordionProps> = ({
   title,
   content,
   disabled = false,
+  icon = <ExpandMoreIcon />,
+  typographyProps,
+  expanded,
+  onChange,
   otherProps,
 }) => {
   const slugifiedTitle = toSlug(title);
 
   return (
-    <StyledAccordion disabled={disabled} {...otherProps}>
+    <StyledAccordion
+      disabled={disabled}
+      expanded={expanded}
+      onChange={onChange}
+      {...otherProps}
+    >
       <StyledAccordionSummary
-        expandIcon={<ExpandMoreIcon />}
+        expandIcon={icon}
         aria-controls={`${slugifiedTitle}-content`}
         id={`${slugifiedTitle}-header`}
       >
-        <Typography>{title}</Typography>
+        <Typography {...typographyProps}>{title}</Typography>
       </StyledAccordionSummary>
       <StyledAccordionDetails>{content}</StyledAccordionDetails>
     </StyledAccordion>

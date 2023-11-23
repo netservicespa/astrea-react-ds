@@ -1,8 +1,7 @@
 import React from 'react';
+import { FormValueStateReturn, ValidateFunction } from 'relay-forms';
 
-export type ValidatorType<ValueType = unknown> = (
-  value: ValueType
-) => Promise<string | undefined> | string | undefined;
+export type ValidatorType<ValueType = unknown> = ValidateFunction<ValueType>;
 
 export type ValidatorFactoryType<ValueType = unknown> = (
   message: React.ReactNode
@@ -18,6 +17,7 @@ export type ValidatedInput<InputType, ValueType> = InputType & {
   /** Callback onChange @deprecated */
   changed?: (data: ValueType) => void;
   size?: 'small' | 'medium' | 'large';
+  dependsOn?: string[];
   /** Se true, l'input è disabilitato */
   disabled?: boolean;
 };
@@ -36,7 +36,7 @@ export const composeValidators =
       | ValidatorFactoryType<ValueType>[],
     errorMessages?: string | string[] | null
   ): ValidatorType<ValueType> =>
-  (value) => {
+  (value, deps) => {
     if (!validators) {
       return undefined;
     }
@@ -49,12 +49,13 @@ export const composeValidators =
     if (!Array.isArray(errorMessages)) {
       errorMessages = [errorMessages];
     }
-    let msg = '';
     for (let i = 0; i < validators.length; i++) {
-      const result = validators[i](errorMessages[i] || ' ')(value);
-      msg += result ? result : '';
+      const result = validators[i](errorMessages[i] || ' ')(value, deps);
+      if (result) {
+        return result;
+      }
     }
-    return msg.length === 0 ? undefined : msg.trim();
+    return undefined;
   };
 
 export const validateFiscalCode: ValidatorFactoryType =

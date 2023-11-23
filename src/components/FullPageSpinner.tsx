@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Backdrop, CircularProgress, circularProgressClasses, Typography, Box } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 
 export type FullPageSpinnerProps = {
     isOpen: boolean;
@@ -62,6 +63,7 @@ const getColorStyle = (color: string) => {
 };
 
 export const FullPageSpinner: React.FC<FullPageSpinnerProps> = (props) => {
+    const { t } = useTranslation();
     const { isOpen, value, color = 'secondary', variant = 'indeterminate', backdropColor, ...otherProps } = props;
     const colorStyle = getColorStyle(color);
     const shouldShowPercentage = variant === 'determinate';
@@ -79,7 +81,7 @@ export const FullPageSpinner: React.FC<FullPageSpinnerProps> = (props) => {
                     )}
                 </PositionedBox>
                 <WaitingText variant="h6" color={color === 'success' ? '#006636' : color}>
-                    Waiting...
+                    {t('spinner.loading')}
                 </WaitingText>
             </SpinnerContainer>
         </StyledBackdrop>

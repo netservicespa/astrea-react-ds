@@ -137,8 +137,8 @@ devDependencies:
     specifier: ^15.0.0
     version: 15.0.0(react@17.0.2)
   relay-forms:
-    specifier: ^2.0.0
-    version: 2.0.0(react@17.0.2)(relay-hooks@8.0.0)(relay-runtime@15.0.0)
+    specifier: ^2.1.1
+    version: 2.1.1(react@17.0.2)(relay-hooks@8.0.0)(relay-runtime@15.0.0)
   relay-hooks:
     specifier: ^8.0.0
     version: 8.0.0(react@17.0.2)(relay-runtime@15.0.0)
@@ -9249,8 +9249,8 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /relay-forms@2.0.0(react@17.0.2)(relay-hooks@8.0.0)(relay-runtime@15.0.0):
-    resolution: {integrity: sha512-4WbYMt54w8UcO4PU3aVbIFeq17njsUvwM8lbpvKnGppwqvtXNWwEe+I4uuli7dTOURhLthU+x5utNWxUbCeauA==}
+  /relay-forms@2.1.1(react@17.0.2)(relay-hooks@8.0.0)(relay-runtime@15.0.0):
+    resolution: {integrity: sha512-CZiiNTpgns1C/7qeb/KKx2e67jP6+d+8CVKZiBQOWg8YLQlOoonOqDN8k6BLvD5aIET5GG8bwX67j8MujdMbVw==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18
       relay-hooks: ^7.2.0 || ^8.0.0

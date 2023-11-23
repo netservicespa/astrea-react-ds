@@ -7,6 +7,13 @@ const PaginationWrapper = styled(Box)(({ theme }) => ({
 	justifyContent: 'flex-center',
 	marginTop: theme.spacing(2),
 }));
+
+/**
+ * Dynamic Pagination Component
+ * @author vadim.chilinciuc
+ *
+ */
+
 interface PaginationProps {
 	paginationType:'normal' | 'table'
 	page:number
@@ -14,7 +21,8 @@ interface PaginationProps {
 	totalElements?:number
 	onChangePage:any
 }
-export const PaginationComponent = (props: any) => {
+
+export const PaginationComponent = (props: PaginationProps) => {
 	const { paginationType,page, onChangePage,totalPages,totalElements,  } = props;
 	const [currentPage, setCurrentPage] = useState(page);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);

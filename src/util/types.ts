@@ -1,4 +1,5 @@
 import React from 'react';
+import { INotificationData } from 'src/components/components/notification/NotificationComponent';
 
 export type User = {
   name: string;
@@ -41,71 +42,67 @@ export interface IDropDownConfiguration {
 
 export interface HeaderProps {
   /**
-   * Defines the type of the header (vertical or horizontal).
+   * Type of the header, which can be either 'vertical' or 'horizontal'.
    */
   type: 'vertical' | 'horizontal';
+
   /**
-   * The title displayed in the header.
+   * Optional: The title to be displayed in the header.
    */
   title?: ApplicationTitle;
+
   /**
-   *
-   * Optional callback, invoked when ,logout is clicked.
+   * Optional: Callback function invoked when the logout option is clicked.
    */
   onLogout?: () => void;
+
   /**
-   * Router object required for enabling routing functionality.
+   *  Router object required for enabling routing functionality.
    */
-  router?: any;
+  router: any;
+
   /**
-   * An array of header menu items that redirect to specific paths when clicked.
+   * Optional: An array of header menu items that redirect to specific paths when clicked.
    */
   menuItems?: MenuItem[];
+
   /**
-   * Configuration for enabling notification functionality
+   * Optional: Configuration for enabling notification functionality (Bell Icon).
    *
-   * (Bell Icon ).
-   *
-   * Consult 'Notification Panel Component' for More Info about the data .
+   * See 'Notification Panel Component' for more details about the data.
    */
-  notificationData?: {
-    read: IReadWrite[];
-    unread: IReadWrite[];
-  };
+  notificationData?: INotificationData;
+
   /**
-   * Configuration for enabling user panel functionality
+   * Optional: Configuration for enabling user panel functionality (User Icon).
    *
-   * ( User Icon ).
-   *
-   * Consult 'User Panel Component' for More Info about the data .
+   * See 'User Panel Component' for more details about the data.
    */
   userPanelMenuItems?: IUserPanelItem[];
+
   /**
-   *
-   * The logo displayed in the header.
+   * Optional: The logo displayed in the header.
    */
   logo?: React.ReactElement;
+
   /**
-   *
-   * Extra configuration options for:
+   * Optional: Extra configuration options for:
    * - Managing the header logo position. If centralLogo=true, the logo will be centered.
    * - Managing the User Panel dropdown configuration.
    */
   configuration: {
-    centralLogo: boolean;
+    centralLogo?: boolean;
     dropDownConfiguration?: IDropDownConfiguration | undefined;
   };
 }
 
 export interface UserPanelProps {
   title: ApplicationTitle;
-  user: any;
-  menuItems: MenuItem[];
   router?: any;
   userPanelMenuItems: IUserPanelItem[];
   logo?: React.ReactElement;
   configuration: {
-    centralLogo: boolean;
+    centralLogo?: boolean;
     dropDownConfiguration?: IDropDownConfiguration | undefined;
   };
   onLogout: () => void;
@@ -115,7 +112,6 @@ export interface ILink {
   href: string;
   text: string;
 }
-
 
 export interface IDropDown {
   /**
@@ -127,8 +123,6 @@ export interface IDropDown {
    * An array of dropdown items that redirect to specific paths when clicked.
    */
   dropdownItems: IDropdownItems[];
-
-  userPanelMenuItems?: any;
 
   /**
    * Optional callback function invoked when the "logout" action is triggered.
@@ -144,12 +138,6 @@ export interface IDropDown {
    * Extra configuration for managing the dropdown, such as anchor position and other details (refer to MUI dropdown documentation for more information).
    */
   dropDownConfiguration?: IDropDownConfiguration;
-}
-
-export interface IReadWrite {
-  id: number;
-  status: string;
-  text: string;
 }
 
 export interface DynamicLinkProps {

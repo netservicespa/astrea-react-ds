@@ -14,6 +14,11 @@ const StyledCard = styled(Card)<any>(({ theme, type }) => (console.log("typeee",
 	boxSizing: 'border-box',
 }));
 
+/**
+ * Panel Component
+ * @author vadim.chilinciuc
+ *
+ */
 export const Panel = ({ type = "primary",title,subtitle}: IPanel) => {
 
 		return (

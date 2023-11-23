@@ -4,7 +4,10 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { Header } from '../../../components/patterns/navigation/Header';
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+/**
+ * Headers are containers attached to the top of a page that allow the user to navigate through the application.
+ *
+ */
 const meta: Meta<typeof Header> = {
   title: 'Patterns/Navigation/Header',
   component: Header,
