@@ -18,4 +18,5 @@ export const WizardContext = React.createContext<IWizardContext>({
   },
 });
 
-export const useWizard = () => useContext(WizardContext);
+export const useWizard = <T = unknown>() =>
+  useContext<IWizardContext<T>>(WizardContext);

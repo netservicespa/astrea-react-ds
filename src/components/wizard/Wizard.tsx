@@ -1,14 +1,14 @@
 import { Box, Container, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon/SvgIcon';
-import { Breakpoint } from '@mui/system';
-import React, { ReactElement, useMemo, useReducer } from 'react';
+import { BoxProps } from '@mui/system';
+import React, { ReactElement, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'relay-forms';
-import { NsModal } from '../components/NsModal';
 import { Errors } from '../components/Errors';
+import { NsModal } from '../components/NsModal';
 import { ValidatedFormWrapper } from '../components/form/ValidatedFormWrapper';
-import { WizardStepper } from './Stepper';
+import { WizardStepperProps, WizardStepper } from './Stepper';
 import { IWizardContext, WizardContext, useWizard } from './WizardContext';
 import { WizardActionKind, wizardReducer } from './WizardReducer';
 
@@ -25,6 +25,11 @@ export interface WizardProps<T = unknown> {
    * The Wizard's children should always be some implementation of WizardSteps
    */
   children: WizardStepType | WizardStepType[] | any;
+  /**
+   * The Wizard's stepper component, or false if no stepper is required
+   * @todo Expose all of MUI's stepper properties to the user
+   */
+  StepperSlot?: React.ElementType<WizardStepperProps> | boolean;
   /**
    * Optionally use this prop to pass data to the first step of the wizard
    */
@@ -51,10 +56,12 @@ export interface WizardProps<T = unknown> {
 export function Wizard<T = unknown>({
   children,
   initialData,
+  StepperSlot = true,
   onStep,
   onCommit,
   onAbort,
-}: WizardProps<T>) {
+  ...boxProps
+}: WizardProps<T> & BoxProps) {
   const theme = useTheme();
 
   // Fetch all children steps' icons
@@ -109,14 +116,27 @@ export function Wizard<T = unknown>({
     }, 0);
   }, [state.data]);
 
-  return (
-    <WizardContext.Provider value={ctx}>
+  // Find out what the actual stepper component is
+  let actualStepper: JSX.Element;
+  if (StepperSlot === true) {
+    actualStepper = (
       <WizardStepper
         icons={icons}
         activeStep={state.step}
         steps={stepsLabels}
       />
-      <Box mt={3} border={(theme as any).custom?.borders[0]}>
+    );
+  } else if (StepperSlot === false) {
+    actualStepper = <></>;
+  } else {
+    actualStepper = (
+      <StepperSlot icons={icons} activeStep={state.step} steps={stepsLabels} />
+    );
+  }
+  return (
+    <WizardContext.Provider value={ctx}>
+      {actualStepper}
+      <Box mt={3} border={(theme as any).custom?.borders[0]} {...boxProps}>
         <>{React.Children.toArray(children)[state.step]}</>
       </Box>
     </WizardContext.Provider>
@@ -168,11 +188,7 @@ export const WizardProgressButtons: React.FC<WizardProgressButtonsProps> = ({
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'row', p: 3 }}>
-        <Button
-          color="inherit"
-          onClick={handleOpen}
-          sx={{ marginRight: 1 }}
-        >
+        <Button color="inherit" onClick={handleOpen} sx={{ marginRight: 1 }}>
           {t('wizard.cancel')}
         </Button>
         <Box sx={{ flex: '1 1 auto' }} />
@@ -199,7 +215,7 @@ export const WizardProgressButtons: React.FC<WizardProgressButtonsProps> = ({
           onConfirm={() => abort?.()}
           openFromParent={true}
           externalOpen={open}
-          onOpen={handleOpen} 
+          onOpen={handleOpen}
           onClose={handleClose}
           showCancelButton
           showConfirmButton

@@ -53,20 +53,23 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
-
+function ColorlibStepIcon({
+  active,
+  completed,
+  className,
+  icon,
+}: Readonly<StepIconProps>) {
   return (
     <ColorlibStepIconRoot
       ownerState={{ completed, active }}
       className={className}
     >
-      {props.icon}
+      {icon}
     </ColorlibStepIconRoot>
   );
 }
 
-interface HorizontalLinearStepperProps {
+export interface WizardStepperProps {
   steps: string[];
   activeStep: number;
   icons: (typeof SvgIcon)[];
@@ -76,7 +79,7 @@ export function WizardStepper({
   steps,
   activeStep,
   icons,
-}: HorizontalLinearStepperProps) {
+}: Readonly<WizardStepperProps>) {
   const iconElements = React.useMemo(
     () => icons.map((i) => React.createElement(i)),
     [icons]

@@ -1,13 +1,36 @@
 import EditIcon from '@mui/icons-material/Edit';
-import { Container, MenuItem, Typography } from '@mui/material';
+import DataObjectSharp from '@mui/icons-material/DataObjectSharp';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import {
+  Container,
+  Grid,
+  MenuItem,
+  Step,
+  StepConnector,
+  StepIconProps,
+  StepLabel,
+  Stepper,
+  Typography,
+} from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ValidatedTextInput } from '../../components/components/form/fields/ValidatedTextInput';
-import { ValidatedSelectAutocomplete } from '../../components/components/form/fields/ValidatedSelectAutocomplete';
+import {
+  SelectItem,
+  ValidatedSelectAutocomplete,
+} from '../../components/components/form/fields/ValidatedSelectAutocomplete';
 import { required } from '../../components/components/form/validators';
 import { GridLayout } from '../../components/layout/GridLayout';
-import { Wizard, WizardFormStep } from '../../components/wizard/Wizard';
+import {
+  Wizard,
+  WizardFormStep,
+  WizardProgressButtons,
+  WizardStep,
+  WizardStepProps,
+} from '../../components/wizard/Wizard';
+import { useWizard } from '../../components/wizard/WizardContext';
+import { WizardStepperProps } from '../../components/wizard/Stepper';
 
 export default {
   title: 'Patterns/Wizard',
@@ -28,11 +51,11 @@ interface FormContents {
   field1?: string;
   field2?: string;
   field3?: string;
-  field4?: string;
+  field4?: SelectItem;
   field5?: string;
 }
 
-const Template: StoryFn<typeof Wizard> = (args) => {
+const Template: StoryFn<typeof Wizard> = ({ sx, StepperSlot }) => {
   const { t } = useTranslation();
   const [data, setData] = React.useState<Partial<FormContents> | undefined>();
   const [finished, setFinished] = React.useState(false);
@@ -45,8 +68,11 @@ const Template: StoryFn<typeof Wizard> = (args) => {
       </Container>
     );
   } else {
+    console.log(sx, StepperSlot);
     return (
       <Wizard
+        sx={sx}
+        StepperSlot={StepperSlot}
         initialData={{ name: 'test' }}
         onStep={(result) => setData(result)}
         onCommit={(_) => {
@@ -79,7 +105,7 @@ const Template: StoryFn<typeof Wizard> = (args) => {
             />
           </GridLayout>
         </WizardFormStep>
-        <WizardFormStep name="Second Step" icon={EditIcon}>
+        <WizardFormStep name="Second Step" icon={DataObjectSharp}>
           <Typography mx={1} my={2}>
             Don't forget to fill this fields as well:
           </Typography>
@@ -104,9 +130,72 @@ const Template: StoryFn<typeof Wizard> = (args) => {
             </ValidatedSelectAutocomplete>
           </GridLayout>
         </WizardFormStep>
+        <WizardStep name="Summary" icon={SummarizeIcon}>
+          <SummaryStep />
+        </WizardStep>
       </Wizard>
     );
   }
 };
 
-export const Grid = Template.bind({});
+const SummaryStep: React.FC = () => {
+  const { next, previous, state } = useWizard<FormContents>();
+
+  return (
+    <Container maxWidth={false}>
+      <Typography mx={1} my={2}>
+        Summary
+      </Typography>
+      <GridLayout rowSize={1}>
+        <Typography>Field1={state.data?.field1}</Typography>
+        <Typography>Field2={state.data?.field2}</Typography>
+        <Typography>Field3={state.data?.field3}</Typography>
+        <Typography>Field4={state.data?.field4?.label}</Typography>
+      </GridLayout>
+      <WizardProgressButtons onNext={() => next()} onPrev={() => previous()} />
+    </Container>
+  );
+};
+
+const CustomStepper: React.FC<WizardStepperProps> = ({
+  steps,
+  activeStep,
+  icons,
+}) => {
+  const iconElements = React.useMemo(
+    () => icons.map((i) => React.createElement(i)),
+    [icons]
+  );
+
+  return (
+    <Grid item xs={12}>
+      <Stepper
+        alternativeLabel
+        connector={<StepConnector />}
+        activeStep={activeStep}
+      >
+        {steps.map((label, index) => {
+          return (
+            <Step key={label}>
+              <StepLabel icon={iconElements[index]}>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+    </Grid>
+  );
+};
+
+export const DefaultWizard = Template.bind({});
+DefaultWizard.args = { StepperSlot: true };
+
+export const CustomizedWizard = Template.bind({});
+CustomizedWizard.args = {
+  sx: { borderRadius: '1em', border: '2px solid black' },
+  StepperSlot: CustomStepper,
+};
+
+export const NoStepperWizard = Template.bind({});
+NoStepperWizard.args = {
+  StepperSlot: false,
+};
