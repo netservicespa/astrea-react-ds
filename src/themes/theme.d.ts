@@ -22,6 +22,10 @@ declare module '@mui/material/styles' {
     };
     typography: {
       fontFamily: string;
+      h1: {
+        fontSize: string;
+        fontWeight: number;
+      };
     };
   }
   interface ThemeOptions {
@@ -33,6 +37,13 @@ declare module '@mui/material/styles' {
     };
     footer?: {
       backgroundColor?: string;
+    };
+    typography?: {
+      fontFamily?: string;
+      h1?: {
+        fontSize?: string;
+        fontWeight?: number;
+      };
     };
   }
 }

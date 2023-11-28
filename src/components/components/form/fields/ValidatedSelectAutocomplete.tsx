@@ -71,6 +71,10 @@ export function ValidatedSelectAutocomplete({
     [children]
   );
 
+  React.useEffect(() => {
+    setValue((defaultValue || null) as string);
+  }, [items]);
+
   return (
     <LabelInput nameHtml={key} label={label as string}>
       <Autocomplete<SelectItem, boolean, boolean, boolean>

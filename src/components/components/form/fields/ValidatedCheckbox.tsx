@@ -5,7 +5,7 @@ import uniqueId from '../../../../util/uniqueId';
 import { composeValidators, ValidatedInput } from '../validators';
 
 interface AdditionalProps {
-  label: string;
+  label: string | React.ReactNode;
   labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
 }
 
@@ -22,6 +22,7 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
   labelPlacement,
   errorMessage,
   disabled,
+  sx,
   ...rest
 }) => {
   const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
@@ -55,6 +56,7 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
     <FormControlLabel
       control={
         <Checkbox
+          sx={sx}
           {...rest}
           value={value}
           onChange={setValueCallback}
