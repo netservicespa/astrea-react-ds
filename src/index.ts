@@ -31,6 +31,8 @@ export { ValidatedDragDrop } from './components/components/form/fields/Validated
 export { ValidatedSelect } from './components/components/form/fields/ValidatedSelect';
 export { ValidatedSelectAutocomplete } from './components/components/form/fields/ValidatedSelectAutocomplete';
 export { ValidatedTextInput } from './components/components/form/fields/ValidatedTextInput';
+export { ValidatedTextArea } from './components/components/form/fields/ValidatedTextArea';
+export { ValidatedFileUpload } from './components/components/form/fields/ValidatedFileUpload';
 export * from './components/components/form/validators';
 
 /**
