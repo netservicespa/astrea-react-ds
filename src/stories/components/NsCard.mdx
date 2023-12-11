@@ -1,0 +1,34 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as NsCard from './NsCard.stories';
+
+<Meta of={NsCard} />
+
+<h1>Card</h1>
+<p>The Card component is a reusable UI element designed to display content in a structured and visually appealing manner. It's commonly used to present information, such as articles, user profiles, or product details, in a unified format.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The Card component encapsulates a layout structure consisting of elements like headers, bodies, footers, and optional actions or buttons. It provides a container for content and often includes customizable styling options to suit various design needs.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Use the Card component to organize related content logically.</li>
+  <li>Maintain consistency in the design of cards across your application for a cohesive user experience.</li>
+  <li>Keep the content within the card concise and relevant to the context.</li>
+	<li>Utilize responsive design principles to ensure the card adapts well to different screen sizes.</li>
+</ul>
+
+<h3>Props</h3>
+<p>The Card component accepts the following props:</p>
+<Controls />
+
+<h3>Accessibility</h3>
+<p>To enhance accessibility, ensure the following:</p>
+<ul>
+  <li>Use semantic HTML elements within the Card component (e.g., &lt;article&gt;, &lt;header&gt;, &lt;footer&gt;).</li>
+  <li>Include descriptive alt text for images within the card (if any).</li>
+	<li>Implement proper keyboard navigation and focus management for interactive elements like buttons within the card.</li>
+</ul>
+
+<h3>Usage</h3>
+<p>Use the Card component to structure and present content hierarchically. Determine what elements (title, content, footer) should be displayed within the card to convey information effectively.</p>

@@ -22,6 +22,14 @@ const paletteColors = {
   focus: {
     main: '#FFE300',
   },
+  borderColor: {
+    main: '#B1B4B6',
+  },
+  darkTextColor: {
+    primary: '#000000',
+    secondary: '#3D3D3D',
+    tertiary: '#595959',
+  },
   type: 'light',
 };
 
@@ -65,6 +73,25 @@ const themeOptions = {
     },
   },
   components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          '&.MuiTab-textColorPrimary': {
+            backgroundColor: '#E8E8E8',
+            color: '#000',
+          },
+          '&.MuiTab-textColorPrimary:not(.Mui-selected)': {
+            borderColor: '#E8E8E8',
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#FFF',
+          },
+          '&:hover:not(.Mui-selected)': {
+            backgroundColor: 'lightgray',
+          },
+        },
+      },
+    },
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {

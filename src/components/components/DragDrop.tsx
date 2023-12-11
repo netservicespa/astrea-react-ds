@@ -150,7 +150,7 @@ export function DragDrop({
                 {isDragActive ? (
                   <Box textAlign={'center'} padding={'0 5px 0 5px'}>
                     <input {...getInputProps()} />
-                    {t('dragDrop.labels.rilasciaFile')}
+                    {t('dragDrop.labels.releaseFile')}
                   </Box>
                 ) : (
                   <Box textAlign={'center'}>

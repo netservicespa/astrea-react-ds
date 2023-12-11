@@ -17,6 +17,8 @@ export { PageHeader } from './components/components/PageHeader/PageHeader';
 export { NsModal } from './components/components/NsModal';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
+export { NsTooltip } from './components/components/NsTooltip';
+
 // export { NsTable } from './components/components/table/NsTable'; TODO: change the table library that we use here or resolve the issue with ES Module
 
 /**

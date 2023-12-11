@@ -5,6 +5,14 @@ declare module '@mui/material/styles' {
     focus: {
       main: string;
     };
+    borderColor: {
+      main: string;
+    };
+    darkTextColor: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+    };
   }
   interface Theme {
     accordion: {

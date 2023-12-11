@@ -1,0 +1,36 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as NsAccordion from './NsAccordion.stories';
+
+<Meta of={NsAccordion} />
+
+<h1>Accordion</h1>
+<p>The Accordion component is a user interface element that organizes content into collapsible sections, allowing users to expand or collapse individual sections to reveal or hide content. It typically consists of multiple panels, each containing a header and a content section that can be toggled open or closed independently.</p>
+<Primary/>
+
+<h3>How it works</h3>
+<p>The Accordion component takes an array of panels as a prop. Each panel consists of a header and content. Clicking or activating the header of a panel expands or collapses its content section. Only one panel can be open at a time.</p>
+
+<h3>Best Practices</h3>
+<ol>
+  <li>Ensure the Accordion component provides a clear visual indication (such as icons or arrows) to signify the expand/collapse state of each panel</li>
+  <li>Use semantic HTML elements and appropriate ARIA attributes to enhance accessibility for screen reader users.</li>
+  <li>Optimize performance by lazy-loading content within the panels if dealing with large amounts of data.</li>
+</ol>
+
+<h3>Props</h3>
+<Controls />
+<ol>
+  <li>Panels (Array, required): An array of objects containing the header and content for each panel.</li>
+  <li>Title (string, required): The visible title text for the accordion header.</li>
+  <li>Content (ReactNode, required): Collapsed content or ReactNode displayed upon expanding the accordion.</li>
+  <li>Disabled (boolean, optional): Disables interaction if set.</li>
+</ol>
+
+<h3>Accessibility</h3>
+<ol>
+  <li>Implement keyboard accessibility by allowing users to navigate and toggle panels using the keyboard (e.g., 'Enter' or 'Spacebar' key).</li>
+  <li>Include proper ARIA attributes (aria-expanded, aria-controls, aria-hidden) to ensure screen reader compatibility and convey the state of the accordion to assistive technologies.</li>
+</ol>
+
+<h3>Usage</h3>
+<p>This Accordion component provides a flexible way to organize and display collapsible content sections. Adjust the styling and structure as needed to fit your specific design requirements.</p>

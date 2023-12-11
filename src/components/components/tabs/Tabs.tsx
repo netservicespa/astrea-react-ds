@@ -1,12 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Tab, Tabs, TabsProps, Typography } from '@mui/material';
+import { TabProps } from '@mui/material/Tab';
+import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
   noPadding?: boolean;
+}
+
+interface StyledTabProps extends TabProps {
+  isActive: boolean;
 }
 
 function CustomTabPanel({
@@ -16,7 +23,9 @@ function CustomTabPanel({
   noPadding,
   ...other
 }: TabPanelProps) {
+  const theme = useTheme();
   const isVisible = value === index;
+
   return (
     <div
       role="tabpanel"
@@ -25,7 +34,7 @@ function CustomTabPanel({
       aria-labelledby={`tab-${index}`}
       {...other}
       style={{
-        border: '1px solid gray',
+        border: `1px solid ${theme.palette.borderColor.main}`,
         ...(isVisible ? {} : { display: 'none' }),
         overflow: 'hidden',
         zIndex: 1,
@@ -67,6 +76,8 @@ export const NsTabs: React.FC<
   NsTabsProps & Omit<TabsProps, 'value' | 'onChange' | 'children'>
 > = ({ tabs, configuration, ...otherProps }) => {
   const [value, setValue] = useState(0);
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleChange = useCallback(
     (_: React.SyntheticEvent, newValue: number) => {
@@ -75,23 +86,25 @@ export const NsTabs: React.FC<
     []
   );
 
-  const { t } = useTranslation();
-
-  const tabStyle = (isActive: boolean) => ({
+  const StyledTab = styled(Tab)<StyledTabProps>(({ theme, isActive }) => ({
     textTransform: 'capitalize',
-    bgcolor: isActive ? 'white' : 'primary.main',
-    color: isActive ? 'grey' : 'white',
-    borderLeft: '1px solid gray',
-    borderRight: '1px solid gray',
-    borderTop: isActive ? '1px solid gray' : '1px solid gray', // Mantiene il bordo superiore per il tab attivo
-    borderBottom: isActive ? 'none' : '1px solid gray', // Nasconde il bordo inferiore se attivo
-    height: isActive ? '48px' : '40px',
-    minHeight: '40px',
+    fontSize: '1rem',
+    bgcolor: isActive ? 'white' : `${theme.palette.primary.main}`,
+    color: isActive ? '#3D3D3D' : 'white',
+    borderLeft: `1px solid ${theme.palette.borderColor.main}`,
+    borderRight: `1px solid ${theme.palette.borderColor.main}`,
+    borderTop: `1px solid ${theme.palette.borderColor.main}`,
+    borderBottom: isActive ? 'none' : `1px solid ${theme.palette.borderColor.main}`,
+    height: isActive ? '48px' : '43px',
+    minHeight: '43px',
     margin: '0px', // Rimuove margini esterni
     '&:not(:last-child)': {
       marginRight: '4px',
     },
-  });
+    '&:focus': {
+      boxShadow: 'inset 0 0 0 3px black',
+    },
+  }));
 
   return (
     <Box
@@ -115,11 +128,12 @@ export const NsTabs: React.FC<
         }}
       >
         {tabs.map((tab, index) => (
-          <Tab
+          <StyledTab
             key={tab.id}
             label={t(tab.label)}
+            isActive={value === index}
+            tabIndex={0}
             {...a11yProps(index)}
-            sx={tabStyle(value === index)}
           />
         ))}
       </Tabs>

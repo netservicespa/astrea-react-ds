@@ -31,10 +31,9 @@ function isRangeValid<ValueType>(message: React.ReactNode) {
         if (!start.isSameOrBefore(end)) {
           return message as string;
         }
-        return;
       }
     }
-    return message as string;
+    return undefined;
   };
 }
 
