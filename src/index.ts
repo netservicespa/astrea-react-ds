@@ -18,6 +18,8 @@ export { NsModal } from './components/components/NsModal';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
 export { NsTooltip } from './components/components/NsTooltip';
+export { DropdownComponent } from './components/components/Dropdown/DropDown';
+export { PaginationComponent } from './components/components/pagination/Pagination';
 
 // export { NsTable } from './components/components/table/NsTable'; TODO: change the table library that we use here or resolve the issue with ES Module
 
