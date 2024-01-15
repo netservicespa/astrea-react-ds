@@ -5,7 +5,7 @@ import { FallbackPage } from '../../components/error/FallbackPage';
 import { Button, Container } from '@mui/material';
 
 export default {
-  title: 'Components/ErrorBoundary',
+  title: 'Tools/ErrorBoundary',
   component: ErrorBoundary,
 } as Meta<typeof ErrorBoundary>;
 

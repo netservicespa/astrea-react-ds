@@ -126,9 +126,12 @@ export function DragDrop({
       {
         <div>
           {showCarica && (
-            <div
-              style={{ margin: '0 25px 0 25px' }}
+            <Box
               {...getRootProps({ className: 'dropzone' })}
+              mt={0}
+              mb={0}
+              ml="16px"
+              mr="16px"
             >
               <Box
                 mt={3}
@@ -148,7 +151,7 @@ export function DragDrop({
                   <FileUploadIcon color="disabled" sx={{ fontSize: 50 }} />
                 </Box>
                 {isDragActive ? (
-                  <Box textAlign={'center'} padding={'0 5px 0 5px'}>
+                  <Box textAlign={'center'}>
                     <input {...getInputProps()} />
                     {t('dragDrop.labels.releaseFile')}
                   </Box>
@@ -167,7 +170,7 @@ export function DragDrop({
                   {t('dragDrop.labels.loadFromFile')}
                 </Button>
               </Box>
-            </div>
+            </Box>
           )}
           <Box>
             <Typography component="h2" variant="h2" margin={3} padding={0}>
@@ -192,7 +195,7 @@ export function DragDrop({
             </Box>
           ) : null}
 
-          <Box margin={3} padding={0}>
+          <Box margin={0} padding={0}>
             {!multiple &&
               images.map((image, index) => {
                 return (

@@ -9,7 +9,7 @@ import { GridLayout } from '../../../components/layout/GridLayout';
 import { useTranslation } from 'react-i18next';
 
 export default {
-  title: 'Layouts/GridLayout',
+  title: 'Tools/GridLayout',
   component: GridLayout,
   parameters: {
     docs: { source: { type: 'code' } },

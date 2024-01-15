@@ -1,0 +1,38 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as ValidatedCheckBox from './ValidatedCheckBox.stories';
+
+<Meta of={ValidatedCheckBox} />
+
+<h1>Checkboxes</h1>
+<p>The Checkboxes component is a reusable React component designed to render a set of checkboxes that allow users to select multiple options from a list. It provides an intuitive interface for users to make multiple selections within a group of options.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The Checkboxes component renders a list of checkboxes based on the provided data or options array. It manages the state of the selected checkboxes internally and triggers a callback function to update the parent component with the selected options.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Keep the list of options concise and relevant to ensure a smooth user experience.</li>
+  <li>Provide clear labels and descriptions for each checkbox to assist users in making selections.</li>
+  <li>Maintain consistency in styling and positioning of the checkboxes for a cohesive design.</li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+
+<h3>Accessibility</h3>
+<p>To ensure accessibility, the Checkboxes component adheres to the following guidelines:</p>
+<ul>
+  <li>Provides descriptive labels associated with each checkbox using the <em><strong>aria-label</strong></em> or <em><strong>aria-labelledby</strong></em> attribute.</li>
+  <li>Utilises proper semantic HTML elements to enhance screen reader compatibility.</li>
+	<li>Ensures keyboard navigation by allowing users to interact with checkboxes using the keyboard alone, without relying solely on mouse interaction.</li>
+</ul>
+
+<h3>Select all / Deselect all </h3>
+<p>The "Select All" option in checkboxes is particularly useful in scenarios where users are presented with a long list of options and may want to quickly select or deselect all items at once. Its inclusion can significantly enhance user experience and efficiency in certain contexts:</p>
+<ul>
+  <li><strong>Large Lists:</strong> When dealing with a long list of checkboxes, such as selecting multiple items from a list of products, emails, or categories, the "Select All" option allows users to easily toggle all items on or off instead of individually selecting each one.</li>
+  <li><strong>Granular Control:</strong> Users may have a need to select specific items individually and then use the "Select All" option to quickly complement their selection or reset all checkboxes to a default state.</li>
+  <li><strong>Batch Operations:</strong> In scenarios where users need to perform batch operations on multiple items (e.g., deleting emails, applying filters), the "Select All" checkbox can streamline the process by enabling users to manipulate all items at once.</li>
+	<li><strong>Default Selection:</strong> It can serve as a default option to quickly select all items when most or all options are typically required.</li>
+</ul>

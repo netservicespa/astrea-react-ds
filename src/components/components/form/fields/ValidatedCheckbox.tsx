@@ -22,10 +22,11 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
   labelPlacement,
   errorMessage,
   disabled,
+  onChange,
   sx,
   ...rest
 }) => {
-  const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
+  const key = useMemo(() => name ?? uniqueId('v_txt-'), [name]);
 
   const validateCallback = useCallback(
     (v: boolean) => composeValidators(validate, errorMessage)(v),
@@ -34,7 +35,7 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
 
   const [{ value }, setValue] = useFormField({
     key,
-    initialValue: defaultChecked || false,
+    initialValue: !!defaultChecked,
     validate: validateCallback,
   });
 
@@ -42,13 +43,23 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
     (event: any) => {
       const value = event.target.checked;
       setValue(value);
+
+      if (onChange) {
+        const fakeEvent = {
+          target: { value: true, name },
+          currentTarget: { value: true, name },
+          preventDefault: () => {},
+          stopPropagation: () => {},
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+        onChange(fakeEvent, value);
+      }
     },
-    [setValue]
+    [setValue, onChange]
   );
 
   React.useEffect(() => {
     if (disabled) {
-      setValue(defaultChecked || false);
+      setValue(!!defaultChecked);
     }
   }, [disabled]);
 
@@ -58,12 +69,12 @@ export const ValidatedCheckbox: React.FC<ValidatedCheckboxProps> = ({
         <Checkbox
           sx={sx}
           {...rest}
-          value={value}
+          checked={value}
           onChange={setValueCallback}
           disabled={disabled}
         />
       }
-      labelPlacement={labelPlacement || 'end'}
+      labelPlacement={labelPlacement ?? 'end'}
       label={label}
     />
   );

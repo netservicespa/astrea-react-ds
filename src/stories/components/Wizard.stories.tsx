@@ -1,5 +1,5 @@
-import EditIcon from '@mui/icons-material/Edit';
 import DataObjectSharp from '@mui/icons-material/DataObjectSharp';
+import EditIcon from '@mui/icons-material/Edit';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import {
   Container,
@@ -7,7 +7,6 @@ import {
   MenuItem,
   Step,
   StepConnector,
-  StepIconProps,
   StepLabel,
   Stepper,
   Typography,
@@ -15,22 +14,22 @@ import {
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ValidatedTextInput } from '../../components/components/form/fields/ValidatedTextInput';
+import { ValidatedCheckbox } from '../../components/components/form/fields/ValidatedCheckbox';
 import {
   SelectItem,
   ValidatedSelectAutocomplete,
 } from '../../components/components/form/fields/ValidatedSelectAutocomplete';
+import { ValidatedTextInput } from '../../components/components/form/fields/ValidatedTextInput';
 import { required } from '../../components/components/form/validators';
 import { GridLayout } from '../../components/layout/GridLayout';
+import { WizardStepperProps } from '../../components/wizard/Stepper';
 import {
   Wizard,
   WizardFormStep,
   WizardProgressButtons,
   WizardStep,
-  WizardStepProps,
 } from '../../components/wizard/Wizard';
 import { useWizard } from '../../components/wizard/WizardContext';
-import { WizardStepperProps } from '../../components/wizard/Stepper';
 
 export default {
   title: 'Patterns/Wizard',
@@ -53,6 +52,7 @@ interface FormContents {
   field3?: string;
   field4?: SelectItem;
   field5?: string;
+  check1?: boolean;
 }
 
 const Template: StoryFn<typeof Wizard> = ({ sx, StepperSlot }) => {
@@ -102,6 +102,11 @@ const Template: StoryFn<typeof Wizard> = ({ sx, StepperSlot }) => {
               errorMessage={t('form.errors.required', {
                 field: 'Field 2',
               })}
+            />
+            <ValidatedCheckbox
+              name="check1"
+              label={t('Check 1')}
+              defaultChecked={data?.check1}
             />
           </GridLayout>
         </WizardFormStep>

@@ -17,6 +17,7 @@ export { PageHeader } from './components/components/PageHeader/PageHeader';
 export { NsModal } from './components/components/NsModal';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
+export { NsTable } from './components/components/NsTable';
 export { NsTooltip } from './components/components/NsTooltip';
 export { DropdownComponent } from './components/components/Dropdown/DropDown';
 export { PaginationComponent } from './components/components/pagination/Pagination';

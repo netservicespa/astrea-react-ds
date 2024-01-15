@@ -1,0 +1,51 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as ValidatedDateCalendar from './ValidatedDateCalendar.stories';
+
+<Meta of={ValidatedDateCalendar} />
+
+<h1>Date calendar</h1>
+<p>The Date Calendar Input is a React component designed to provide users with an intuitive way to select dates through a calendar interface. It offers a user-friendly experience for inputting and selecting dates within a web application.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The Date Calendar Input allows users to either type a date manually or click on an input field to open a calendar view. Users can then navigate through the calendar to select a specific date. It usually provides features like month and year navigation, selectable dates, and the ability to highlight the current date.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Ensure the calendar input is easily accessible and visible to users.</li>
+  <li>Provide clear instructions or hints on how to use the calendar input for date selection.</li>
+  <li>Handle different date formats and localize date representations for international users.</li>
+	<li>Consider using an accessible design that accommodates keyboard navigation and screen reader users.</li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+
+<h3>Accessibility</h3>
+<p>To ensure accessibility, the Date Calendar Input should adhere to the following guidelines:</p>
+<ul>
+  <li>Use semantic HTML elements where possible.</li>
+  <li>Implement ARIA attributes for screen readers and assistive technologies.</li>
+  <li>Ensure proper keyboard navigation for users who may not use a mouse.</li>
+	<li>Provide text alternatives for non-text content such as icons or visual cues.</li>
+</ul>
+
+<h3>Usage</h3>
+<p>The decision to use a Date Calendar Input versus a simple Date Input depends on various factors related to user experience, design, and functionality requirements within your application. Here are scenarios where using a Date Calendar Input might be more suitable:</p>
+<ul>
+  <li><strong>Enhanced User Experience:</strong> If your application requires a more user-friendly and intuitive way for users to select dates, a Date Calendar Input provides a visual calendar interface.</li>
+  <li><strong>Visual Representation:</strong> If your application benefits from a visual representation of dates, such as highlighting weekends, holidays, or unavailable dates, a Date Calendar Input can offer a clearer view and understanding of date options.</li>
+  <li><strong>Reducing Input Errors:</strong> Calendar inputs can help prevent input errors for date formats, especially when users come from different regions where date formats vary.</li>
+	<li><strong>Mobile-Friendly Interactions:</strong> Calendar inputs can offer improved usability on touch devices by providing larger touch targets for selecting dates.</li>
+</ul>
+
+<p>However, a simple Date Input might be more suitable in scenarios where:</p>
+<ul>
+  <li><strong>Space Constraints:</strong> If the available space for input is limited, a simple Date Input might be more practical than a calendar view, which could occupy more screen real estate.</li>
+  <li><strong>Specific Date Entry:</strong> When users are expected to input specific dates without the need for visual representation or a range of selectable dates, a Date Input might be more straightforward.</li>
+  <li><strong>Simplicity and Minimalism:</strong> For applications that prioritize simplicity and minimalism in their design, a Date Input might align better with the overall UI.</li>
+	<li><strong>Input Precision:</strong>  In cases where users are required to input time in addition to date, a simple Date Input might be extended to include time selection while keeping the input field clean and focused.</li>
+</ul>
+
+<p>In summary, choose a Date Calendar Input when the user experience benefits from visual date selection, complex date range selections, or when reducing input errors is crucial. Conversely, opt for a simple Date Input when space constraints, specific date entry, or minimalistic design are the primary considerations. Ultimately, the choice should align with the specific needs and usability of your application.</p>
+<Stories />

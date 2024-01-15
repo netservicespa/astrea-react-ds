@@ -6,7 +6,7 @@ import {
 } from '../../components/layout/httpStatus/HttpStatus.layout';
 
 export default {
-  title: 'Layouts/HttpStatus',
+  title: 'Tools/HttpStatus',
   component: HttpStatus,
   argTypes: {
     httpCode: {
