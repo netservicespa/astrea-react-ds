@@ -1,6 +1,6 @@
 {
   "name": "@netservice/astrea-react-ds",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
@@ -116,6 +116,6 @@
     "storybook-dark-mode": "^3.0.1",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "tslib": "^2.4.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   }
 }

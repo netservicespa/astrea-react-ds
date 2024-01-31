@@ -28,6 +28,10 @@
       "submit": "Submit",
       "reset": "Clear"
     },
+    "fileUpload": {
+      "selectFile": "Select a file",
+      "noFileSelected": "No file choosen"
+    },
     "errors": {
       "required": "The '{{field}}' field is required"
     }

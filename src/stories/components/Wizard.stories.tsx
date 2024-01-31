@@ -30,6 +30,7 @@ import {
   WizardStep,
 } from '../../components/wizard/Wizard';
 import { useWizard } from '../../components/wizard/WizardContext';
+import { ValidatedFileUpload } from '../../components/components/form/fields/ValidatedFileUpload';
 
 export default {
   title: 'Patterns/Wizard',
@@ -53,13 +54,13 @@ interface FormContents {
   field4?: SelectItem;
   field5?: string;
   check1?: boolean;
+  fileUpload?: any;
 }
 
 const Template: StoryFn<typeof Wizard> = ({ sx, StepperSlot }) => {
   const { t } = useTranslation();
   const [data, setData] = React.useState<Partial<FormContents> | undefined>();
   const [finished, setFinished] = React.useState(false);
-  console.log(data);
   if (finished) {
     return (
       <Container maxWidth={false}>
@@ -107,6 +108,14 @@ const Template: StoryFn<typeof Wizard> = ({ sx, StepperSlot }) => {
               name="check1"
               label={t('Check 1')}
               defaultChecked={data?.check1}
+            />
+            <ValidatedFileUpload
+              displayForm
+              errorMessage="The 'File' field is required"
+              name="fileUpload"
+              defaultValue={data?.fileUpload}
+              onChange={() => console.log('ciao')}
+              validate={required}
             />
           </GridLayout>
         </WizardFormStep>

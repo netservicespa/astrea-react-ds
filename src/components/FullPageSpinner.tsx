@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 export type FullPageSpinnerProps = {
     isOpen: boolean;
     value: number;
-    color?: 'primary' | 'secondary' | 'success' | 'error';
     variant?: 'determinate' | 'indeterminate';
     backdropColor?: string;
 };
@@ -64,23 +63,23 @@ const getColorStyle = (color: string) => {
 
 export const FullPageSpinner: React.FC<FullPageSpinnerProps> = (props) => {
     const { t } = useTranslation();
-    const { isOpen, value, color = 'secondary', variant = 'indeterminate', backdropColor, ...otherProps } = props;
-    const colorStyle = getColorStyle(color);
+    const { isOpen, value, variant = 'indeterminate', backdropColor, ...otherProps } = props;
+  
     const shouldShowPercentage = variant === 'determinate';
     return (
         <StyledBackdrop open={isOpen} backdropColor={backdropColor} {...otherProps}>
             <SpinnerContainer>
-                <PositionedBox colorStyle={colorStyle}>
-                    <StyledCircularProgress size={70} variant={variant} value={variant === 'determinate' ? value : undefined} color={color} />
+                <PositionedBox >
+                    <StyledCircularProgress size={70} variant={variant} value={variant === 'determinate' ? value : undefined} />
                     {shouldShowPercentage && (
                         <CenteredBox>
-                            <StyledTypography variant="caption" color="inherit">
-                                {`${Math.round(value)}%`}
+                            <StyledTypography variant="caption" >
+														    {`${Math.round(value)}%`}
                             </StyledTypography>
                         </CenteredBox>
                     )}
                 </PositionedBox>
-                <WaitingText variant="h6" color={color === 'success' ? '#006636' : color}>
+                <WaitingText variant="h6" >
                     {t('spinner.loading')}
                 </WaitingText>
             </SpinnerContainer>

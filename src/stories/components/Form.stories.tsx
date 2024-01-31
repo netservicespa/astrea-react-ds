@@ -34,6 +34,12 @@ interface FormContents {
  */
 const Template: StoryFn<typeof ValidatedForm> = (args) => {
     const [data, setData] = React.useState<FormContents>({});
+    const [selectedMeal, setSelectedMeal] = React.useState(null);
+    
+    const handleRadioChange = (event) => {
+        setSelectedMeal(event.target.value);
+    };
+
     return (
         <>
             <ValidatedForm {...args} onSubmit={(data: any) => setData(data)} onReset={() => setData({})}>
@@ -47,28 +53,41 @@ const Template: StoryFn<typeof ValidatedForm> = (args) => {
                         required={true}
                     >
                         <MenuItem value="1">1 </MenuItem>
-												<MenuItem value="2">2 </MenuItem>
-												<MenuItem value="3">3 </MenuItem>
+                        <MenuItem value="2">2 </MenuItem>
+                        <MenuItem value="3">3 </MenuItem>
                     </ValidatedSelect>
                     <ValidatedSelectAutocomplete
                         defaultValue=""
                         errorMessage="The 'Select Autocomplete' field is required"
                         label="Autocomplete Select"
-                        name="select"
+                        name="selectAutocomplete"
                         validate={required}
+                        required={true}
                     >
                         <MenuItem value="1">1</MenuItem>
                         <MenuItem value="2">2</MenuItem>
-												<MenuItem value="3">3</MenuItem>
+                        <MenuItem value="3">3</MenuItem>
                     </ValidatedSelectAutocomplete>
-                    <ValidatedTextInput label="Check me out!" name="ciaone" />
-                    <ValidatedTextArea label="Check me out!" name="ciaone" />
+                    <ValidatedTextInput 
+                        label="Check me out!" 
+                        name="textInput"
+                        errorMessage="The 'Text Input' field is required"
+                        validate={required}
+                        required={true}
+                    />
+                    <ValidatedTextArea 
+                        label="Check me out!"
+                        name="textArea"
+                        errorMessage="The 'Text Area' field is required"
+                        validate={required}
+                        required={true}
+                    />
                     <ValidatedDateCalendar
                         errorMessage="The 'Date Field' field is required"
                         label="Date Field*"
                         name="dateField"
-                        validate={required}
                         required={true}
+                        validate={required}
                     />
 
                     <div>

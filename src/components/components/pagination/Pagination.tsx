@@ -107,7 +107,7 @@ export const PaginationComponent = (props: PaginationProps) => {
 					<div style={{display: 'flex', alignItems: 'center'}}>
 						<div
 							style={{
-								fontSize: '0.875rem',
+								fontSize: '1.125rem',
 								marginLeft: '8px',
 								marginRight: '8px',
 								color: '#000000a6',
@@ -128,7 +128,7 @@ export const PaginationComponent = (props: PaginationProps) => {
 						/>
 						<div
 							style={{
-								fontSize: '0.875rem',
+								fontSize: '1.125rem',
 								marginLeft: '8px',
 								color: '#000000a6',
 							}}

@@ -158,6 +158,27 @@ const themeOptions = {
         disableRipple: true,
       },
     },
+    
+		MuiPaginationItem: {
+			styleOverrides: {
+        root: {
+          fontSize: '1.125rem',
+					'&.Mui-selected': {
+            backgroundColor: '#cce2df',
+						border: '3px solid #2e5a60',
+						borderBottom: '3px solid #2e5a60',
+						color: '#2e5a60',
+						
+						height: '44px',
+						width: '44px',
+          },
+					'&.Mui-selected:hover': {
+						color: '#fff',
+				  },
+        },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
         root: {
@@ -207,14 +228,14 @@ const themeOptions = {
             )}`,
           },
           '&.Mui-disabled:not(.MuiButton-outlinedPrimary)': {
-            boxShadow: `inset 0 -3px 0 0 ${darken('#A1A1A1', 0.5)}`,
-            backgroundColor: '#A1A1A1',
+            boxShadow: `inset 0 -3px 0 0 ${darken('#595959', 0.5)}`,
+            backgroundColor: '#595959',
             color: '#FFF',
           },
 
           '&.Mui-disabled.MuiButton-outlinedPrimary': {
             color: '#797979',
-            border: `3px solid #A1A1A1`,
+            border: `3px solid #595959`,
           },
           '&.Mui-focusVisible': {
             boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,

@@ -11,13 +11,13 @@ export type ValidatedTextAreaProps = ValidatedInput<
   string
 >;
 
-const TextareaAutosizeStyled = styled(TextareaAutosize)(({ theme }: { theme: any }) => ({
-    fontFamily: `${theme.typography.fontFamily}`,
+const TextareaAutosizeStyled = styled(TextareaAutosize)(({ theme, error }: { theme: any; error: boolean }) => ({
+  fontFamily: `${theme.typography.fontFamily}`,
   display: 'block',
   padding: 8,
   minHeight: '90px',
   width: '100%',
-  borderColor: '#B1B4B6',
+  borderColor: error ? 'red' : '#B1B4B6',
   outline: '0',
   borderRadius: '0',
   '&:focus': {
@@ -25,7 +25,7 @@ const TextareaAutosizeStyled = styled(TextareaAutosize)(({ theme }: { theme: any
     borderWidth: '3px',
   },
   '&:hover': {
-    borderColor: '#0B0C0C',
+    borderColor: error ? 'red' : '#0B0C0C',
   },
 }));
 

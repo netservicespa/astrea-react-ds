@@ -2,16 +2,19 @@ import {Meta, StoryObj} from '@storybook/react';
 import React from 'react';
 import {PageHeader} from "../../../components/components/PageHeader/PageHeader";
 import {NsButton} from "../../../components/components/NsButton";
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
-/**
- * Page Header Stories
- * @author vadim.chilinciuc
- */
 
 
 const meta: Meta<typeof PageHeader> = {
 	title: 'Patterns/Page Header',
 	component: PageHeader,
+	parameters: {
+    layout: 'fullscreen',
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
+  },
 };
 
 export const IPageHeader: Story = {
@@ -19,12 +22,12 @@ export const IPageHeader: Story = {
 		onClose: () => {
 		},
 		pageData: {
-			title: 'EDIT MODE',
+			title: 'TITLE',
 			logoPath: './images/u11.png',
-			subtitle: 'Forensic_challenge_4.pcap',
+			subtitle: 'This is the subtitle',
 			pageHeaderButton: [
 				{
-					childComponent: <NsButton>Some Text</NsButton>,
+					childComponent: <NsButton>Button</NsButton>,
 					handleFunction: () => {
 						console.log("Button Clicked!")
 					}

@@ -49,12 +49,17 @@ export const ValidatedFileUpload = ({
     }
   }, [disabled]);
 
+  React.useEffect(() => {
+    setValue(defaultValue as File);
+  }, [defaultValue]);
+
   return (
     <div>
       <FileUpload
         {...rest}
         name={name}
         value={value}
+        defaultValue={defaultValue}
         onChange={setValueCallback}
       />
     </div>

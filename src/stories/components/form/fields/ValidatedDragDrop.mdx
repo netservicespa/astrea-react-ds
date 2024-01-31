@@ -1,0 +1,34 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as ValidatedDragDrop from './ValidatedDragDrop.stories';
+
+<Meta of={ValidatedDragDrop} />
+
+<h1>Drag & drop</h1>
+<p>The Upload Drag and Drop component is a React component designed to facilitate file uploads by allowing users to drag and drop files directly into a designated area for uploading. This feature provides a seamless and intuitive way for users to upload files by dragging them from their file explorer and dropping them onto a specified zone within the application or website.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The component renders a designated area on the screen where users can drag and drop files. When files are dropped or selected, the component handles the upload process, allowing the application to process the uploaded files according to the provided logic.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Provide clear visual cues to indicate the drop zone for users.</li>
+  <li>Offer alternative upload methods for users who may not be able to drag and drop files (e.g., a file selector button).</li>
+  <li>Ensure proper error handling and feedback messages for successful and failed uploads.</li>
+	<li>Consider the size and types of files that the component will support and communicate these limitations to users.</li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+<p>Text</p>
+
+<h3>Accessibility</h3>
+<ul>
+  <li>Ensure the component is accessible to users who rely on screen readers by providing appropriate labels and instructions for using the drag and drop feature.</li>
+  <li>Use semantic HTML elements and ARIA attributes to enhance accessibility.</li>
+</ul>
+
+<h3>Usage</h3>
+<p>When users need to upload files or images, drag and drop can provide an intuitive method for selecting and transferring files from their local system to a web application or platform.</p>
+
+<Stories />

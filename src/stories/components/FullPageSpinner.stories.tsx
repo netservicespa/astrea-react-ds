@@ -4,15 +4,9 @@ import { Box } from "@mui/material";
 import { FullPageSpinner, FullPageSpinnerProps } from '../../components/FullPageSpinner';
 
 export default {
-  title: 'Components/Spinner',
+  title: 'Components/Loader',
   component: FullPageSpinner,
     argTypes: {
-        color: {
-            label: 'Color',
-            control: { type: 'radio' },
-            options: ['primary', 'secondary', 'success', 'error'],
-            defaultValue:'secondary',
-        },
         variant: {
             label: 'Variant',
             control: { type: 'radio' },
@@ -57,12 +51,11 @@ const Template: StoryFn<FullPageSpinnerProps> = (args) => {
   );
 };
 
-export const LoadingSpinner = Template.bind({});
-LoadingSpinner.args = {
+export const LoadingLoader = Template.bind({});
+LoadingLoader.args = {
   isOpen: true,
   value: 50,
   variant: 'determinate',
-  color: 'secondary',
 };
 
 
@@ -98,10 +91,9 @@ const IndeterminateLoadingTemplate: StoryFn<FullPageSpinnerProps> = (args) => {
   );
 };
 
-export const SpinnerWithProgressLabel = IndeterminateLoadingTemplate.bind({});
-SpinnerWithProgressLabel.args = {
+export const LoaderWithProgressLabel = IndeterminateLoadingTemplate.bind({});
+LoaderWithProgressLabel.args = {
   isOpen: true,
   value: 50,
   variant: 'indeterminate',
-  color: 'secondary',
 };

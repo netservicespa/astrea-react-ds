@@ -6,7 +6,7 @@ import {DropdownComponent} from "../../../components/components/Dropdown/DropDow
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const meta: Meta<typeof DropdownComponent> = {
-	title: 'Components/DropDown',
+	title: 'Components/Dropdown',
 	component: DropdownComponent
 };
 

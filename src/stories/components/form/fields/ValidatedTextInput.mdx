@@ -1,0 +1,38 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as ValidatedTextInput from './ValidatedTextInput.stories';
+
+<Meta of={ValidatedTextInput} />
+
+<h1>Text Input</h1>
+<h3>What is</h3>
+<p>The Text Input component is an input field that allows users to enter text or alphanumeric characters.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The Text Input component provides a field where users can type and input textual information.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Set appropriate input types (`text`, `email`, `password`, etc.) to help mobile devices optimize the keyboard layout.</li>
+  <li>Use placeholder text to provide hints or examples of the expected input format.</li>
+	<li>Implement input validation and provide meaningful error messages to guide users.</li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+
+<h3>Accessibility</h3>
+<ul>
+  <li>Associate the Text Input with a label using HTML `<label>` elements and the `for` attribute.</li>
+  <li>Ensure the input field has a discernible focus state for users navigating via keyboard.</li>
+</ul>
+
+<h3>Do</h3>
+<ul>
+  <li>Use Text Input when users need to input textual information.</li>
+  <li>Provide clear instructions or placeholders within the input field to guide users.</li>
+</ul>
+
+<h3>Don'ts</h3>
+<p>Avoid using Text Input for inputs that require specific formatting or validation without proper guidance or error handling.</p>
+<Stories />

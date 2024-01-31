@@ -167,7 +167,7 @@ devDependencies:
     specifier: ^2.4.1
     version: 2.6.1
   typescript:
-    specifier: ^4.8.4
+    specifier: ^4.9.5
     version: 4.9.5
 
 packages:

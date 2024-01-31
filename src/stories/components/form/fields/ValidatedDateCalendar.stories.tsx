@@ -50,21 +50,12 @@ const Template: StoryFn<typeof ValidatedDateCalendar> = (args) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <ValidatedDateCalendar
-            name="dateFieldFrom"
-            label="Date From*"
+            name="birthdaydate"
+            label="Birthday date"
             validate={required}
-            errorMessage={t('form.errors.required', { field: 'Date From' })}
+            errorMessage={t('form.errors.required', { field: 'Birthday date' })}
           />
-          <ValidatedDateCalendar
-            name="dateFieldTo"
-            label="Date To*"
-            validate={[required, isRangeValid]}
-            dependsOn={['dateFieldFrom']}
-            errorMessage={[
-              t('form.errors.required', { field: 'Date To' }),
-              "Start Date can't be after End Date",
-            ]}
-          />
+          
         </Grid>
       </Grid>
     </ValidatedForm>

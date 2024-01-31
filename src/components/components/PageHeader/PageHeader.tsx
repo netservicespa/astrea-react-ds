@@ -126,13 +126,13 @@ export const PageHeader = ({pageData, configuration, onClose}: PageHeaderProps) 
 						src={pageData.logoPath}
 					/> : null}
 					<span>
-						<Typography variant={'h1'} fontWeight={700} sx={{fontFamily: ['Roboto', 'sans-serif']}}>
+						<Typography variant={'h1'} fontWeight={700} sx={{fontFamily: ["Titillium Web"]}}>
 							{pageData.title}
 						</Typography>
 					</span>
 					<span>
 						<Typography variant={'h4'} fontWeight={700}
-									sx={{fontFamily: ["Lato Bold", "Lato", "sans-serif"]}}>
+									sx={{fontFamily: ["Titillium Web"]}}>
 							{pageData.subtitle}
 						</Typography>
 
@@ -144,19 +144,6 @@ export const PageHeader = ({pageData, configuration, onClose}: PageHeaderProps) 
 						</a>
 					))}
 				</nav>
-				<AuthContainer>
-					<nav aria-label="Close Button">
-						<a
-							aria-label="Close Icon"
-							title="Close"
-							style={{cursor: 'pointer'}}
-							onClick={onClose}
-						>
-							{<CloseIcon/>} {' '}
-
-						</a>
-					</nav>
-				</AuthContainer>
 			</NavigationContainer>
 
 		</HeaderContainer>

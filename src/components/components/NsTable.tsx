@@ -62,62 +62,72 @@ const StyledTableCell: any = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-export const NsTable = ({ rows, columns }: NsTableProps) => {
+function renderValue(value: string) {
+  const parts = value.split('<br>');
+
   return (
     <>
-      <StyledTableContainer>
-        <TableContainer sx={{ borderBottom: 'unset' }} component={Paper}>
-          <TableContainer>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead sx={{}}>
-                <TableRow>
-                  {columns?.map((column: any, i: number) => {
-                    return (
-                      <StyledTableCell key={i}>
-                        <Box component="span">
-                          {column.renderHeadCell
-                            ? column.renderHeadCell(column.label, rows)
-                            : column.label}
-                        </Box>
-                      </StyledTableCell>
-                    );
-                  })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows?.map((row: any, i: number) => {
-                  return (
-                    <TableRow hover tabIndex={-1} key={i}>
-                      {columns?.map((column: any, index: number) => {
-                        const value = row[column?.id];
-                        if (column.renderBodyCell) {
-                          return column.renderBodyCell(column, row, index);
-                        }
+      {parts.map((part, i) => (
+        <p key={i} style={{ margin: '0' }}>{part}</p>  
+      ))}
+    </>
+  );
+}
 
-                        return (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            style={{
-                              fontWeight: column.fontWeight,
-                              fontSize: column.fontSize,
-                            }}
-                            sx={{
-                              borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                            }}
-                          >
-                            {value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
+export const NsTable = ({ rows, columns }: NsTableProps) => {
+  return (
+    <StyledTableContainer>
+      <TableContainer sx={{ borderBottom: 'unset', margin: '0' }} component={Paper}>
+        <TableContainer>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead sx={{}}>
+              <TableRow>
+                {columns?.map((column: any, i: number) => {
+                  return (
+                    <StyledTableCell key={i}>
+                      <Box component="span">
+                        {column.renderHeadCell
+                          ? column.renderHeadCell(column.label, rows)
+                          : column.label}
+                      </Box>
+                    </StyledTableCell>
                   );
                 })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows?.map((row: any, i: number) => {
+                return (
+                  <TableRow hover tabIndex={-1} key={i}>
+                    {columns?.map((column: any, index: number) => {
+                      const value = row[column?.id];
+                      if (column.renderBodyCell) {
+                        return column.renderBodyCell(column, row, index);
+                      }
+
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{
+                            fontWeight: column.fontWeight,
+                            fontSize: column.fontSize,
+                          }}
+                          sx={{
+                            borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                          }}
+                        >
+                          {renderValue(value)}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </TableContainer>
-      </StyledTableContainer>
-    </>
+      </TableContainer>
+    </StyledTableContainer>
   );
 };

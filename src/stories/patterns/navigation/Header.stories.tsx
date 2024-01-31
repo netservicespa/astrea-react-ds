@@ -9,7 +9,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
  *
  */
 const meta: Meta<typeof Header> = {
-  title: 'Patterns/Navigation/Header',
+  title: 'Patterns/Header',
   component: Header,
   parameters: {
     layout: 'fullscreen',
