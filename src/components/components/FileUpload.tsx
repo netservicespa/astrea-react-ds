@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useId } from 'react';
 import { Button, Input } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +18,7 @@ export function FileUpload({ onChange, value }: FileUploadProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<any>(value);
   const {t} = useTranslation();
+  const inputId = useId();
 
   // Function to handle file selection
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,10 +53,11 @@ export function FileUpload({ onChange, value }: FileUploadProps) {
         type="file"
         onChange={handleFileSelect}
         disableUnderline
-        id="file-input"
+        id={inputId}
         style={{ display: 'none' }}
+        ref={inputRef}
       />
-      <label htmlFor="file-input">
+      <label htmlFor={inputId}>
         <Button variant="contained" color="secondary" size="small" component="span">{t('form.fileUpload.selectFile')}</Button>
       </label>
       <Box pl={2} component="span">{value?.name ? value.name : t('form.fileUpload.noFileSelected')} </Box>
