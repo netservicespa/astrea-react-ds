@@ -1,9 +1,9 @@
 import { addons } from '@storybook/manager-api';
-import NetServiceTheme from './nsds-theme';
+import themeDark from './astrea-theme-dark';
 
 addons.setConfig({
   isFullscreen: false,
   showNav: true,
   showPanel: true,
-  theme: NetServiceTheme,
+  theme: themeDark,
 });

@@ -1,15 +1,15 @@
-import { Select } from "@mui/material";
-import * as React from "react";
-import { useCallback, useMemo } from "react";
-import { SelectProps } from "@mui/material/Select/Select";
-import { LabelInput } from "../../../components/LabelInput";
-import { composeValidators, ValidatedInput } from "../validators";
-import uniqueId from "../../../../util/uniqueId";
-import { useFormField } from "relay-forms";
+import { Select } from '@mui/material';
+import * as React from 'react';
+import { useCallback, useMemo } from 'react';
+import { SelectProps } from '@mui/material/Select/Select';
+import { LabelInput } from '../../../components/LabelInput';
+import { composeValidators, ValidatedInput } from '../validators';
+import uniqueId from '../../../../util/uniqueId';
+import { useFormField } from 'relay-forms';
 
 export type ValidatedSelectProps = ValidatedInput<
-    Omit<SelectProps, "value">,
-    string
+  Omit<SelectProps, 'value'>,
+  string
 >;
 
 /*const SelectStyled = styled(Select)(({ theme }) => ({
@@ -21,66 +21,66 @@ export type ValidatedSelectProps = ValidatedInput<
  * Supporta la validazione tramite i campi validate
  */
 export const ValidatedSelect: React.FC<ValidatedSelectProps> = ({
-    name,
-    /** Etichetta della select */
-    label,
-    children,
-    size,
-    defaultValue,
-    validate,
-    errorMessage,
-    placeholder,
-    changed,
-    disabled,
-    ...rest
+  name,
+  /** Etichetta della select */
+  label,
+  children,
+  size,
+  defaultValue,
+  validate,
+  errorMessage,
+  placeholder,
+  changed,
+  disabled,
+  ...rest
 }) => {
-    const key = useMemo(() => name || uniqueId("v_select-"), [name]);
-    const validateCallback = useCallback(
-        (v: string) => composeValidators(validate, errorMessage)(v),
-        [validate, errorMessage]
-    );
+  const key = useMemo(() => name || uniqueId('v_select-'), [name]);
+  const validateCallback = useCallback(
+    (v: string) => composeValidators(validate, errorMessage)(v),
+    [validate, errorMessage]
+  );
 
-    const [{ value, error }, setValue] = useFormField({
-        key,
-        initialValue: (defaultValue || "") as string,
-        validate: validateCallback,
-    });
+  const [{ value, error }, setValue] = useFormField({
+    key,
+    initialValue: (defaultValue || '') as string,
+    validate: validateCallback,
+  });
 
-    const setValueCallback = useCallback(
-        (event) => {
-            const { value } = event.target;
+  const setValueCallback = useCallback(
+    (event: any) => {
+      const { value } = event.target;
 
-            setValue(value);
+      setValue(value);
 
-            if (changed) {
-                changed(event);
-            }
-        },
-        [setValue, changed]
-    );
+      if (changed) {
+        changed(event);
+      }
+    },
+    [setValue, changed]
+  );
 
-    React.useEffect(() => {
-        if (disabled) {
-            setValue((defaultValue || "") as string);
-        }
-    }, [disabled]);
+  React.useEffect(() => {
+    if (disabled) {
+      setValue((defaultValue || '') as string);
+    }
+  }, [disabled]);
 
-    return (
-        <LabelInput nameHtml={key} label={label as string}>
-            <Select
-                {...rest}
-                name={name}
-                error={!!error}
-                value={value}
-                defaultValue={defaultValue}
-                fullWidth
-                size={size}
-                placeholder={placeholder}
-                onChange={setValueCallback}
-                disabled={disabled}
-            >
-                {children}
-            </Select>
-        </LabelInput>
-    );
+  return (
+    <LabelInput nameHtml={key} label={label as string}>
+      <Select
+        {...rest}
+        name={name}
+        error={!!error}
+        value={value}
+        defaultValue={defaultValue}
+        fullWidth
+        size={size}
+        placeholder={placeholder}
+        onChange={setValueCallback}
+        disabled={disabled}
+      >
+        {children}
+      </Select>
+    </LabelInput>
+  );
 };

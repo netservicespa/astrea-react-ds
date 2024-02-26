@@ -10,7 +10,8 @@ export { DragDrop } from './components/components/DragDrop';
 export { Errors } from './components/components/Errors';
 export { LabelInput } from './components/components/LabelInput';
 export { NsButton } from './components/components/NsButton';
-export { NsTabs } from './components/components/tabs/Tabs';
+export { NsTabs } from './components/components/tabs/NsTabs';
+export { NsPanel } from './components/components/panel/NsPanel';
 export { NsAccordion } from './components/components/NsAccordion';
 export { NsProgress } from './components/components/NsProgress';
 export { PageHeader } from './components/components/PageHeader/PageHeader';
@@ -19,8 +20,9 @@ export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
 export { NsTable } from './components/components/NsTable';
 export { NsTooltip } from './components/components/NsTooltip';
-export { DropdownComponent } from './components/components/Dropdown/DropDown';
-export { PaginationComponent } from './components/components/pagination/Pagination';
+export { NsDropdown } from './components/components/Dropdown/NsDropDown';
+export { NsPagination } from './components/components/pagination/NsPagination';
+export { NsFeedback } from './components/components/feedback/NsFeedback';
 
 // export { NsTable } from './components/components/table/NsTable'; TODO: change the table library that we use here or resolve the issue with ES Module
 
@@ -72,3 +74,5 @@ export * from './util/types';
  * Themes
  */
 export { theme as NetServiceTheme } from './themes/NetServiceTheme';
+export { BlueChiaTheme } from './themes/BlueChiaTheme';
+export { GoldMinaTheme } from './themes/GoldMinaTheme';

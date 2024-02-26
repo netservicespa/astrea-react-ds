@@ -53,16 +53,43 @@ const Template = (args) => <NsTag {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'filled', 
-    label: 'primary',
+    label: 'Primary',
     color: 'primary',
     size: 'medium',
     onDelete: undefined
 };
 
+export const Error = Template.bind({});
+Error.args = {
+    variant: 'filled',
+    label: 'Error',
+    color: 'error',
+    size: 'medium',
+		onDelete: undefined
+}; 
+
+export const Warning = Template.bind({});
+Warning.args = {
+    variant: 'filled',
+    label: 'Warning',
+    color: 'warning',
+    size: 'medium',
+		onDelete: undefined
+};
+
 export const Success = Template.bind({});
 Success.args = {
     variant: 'filled',
-    label: 'success',
+    label: 'Success',
     color: 'success',
+    size: 'medium',
+		onDelete: undefined
+};
+
+export const ErasableFilter = Template.bind({});
+ErasableFilter.args = {
+    variant: 'filled',
+    label: 'Error',
+    color: 'error',
     size: 'medium',
 };

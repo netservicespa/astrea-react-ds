@@ -36,7 +36,8 @@ export const ValidatedDateCalendar: React.FC<ValidatedDateCalendarProps> = ({
   const deps = useMemo(() => dependsOn, []);
 
   const validateCallback = useCallback(
-    (v: string, deps) => composeValidators(validate, errorMessage)(v, deps),
+    (v: string, deps: any) =>
+      composeValidators(validate, errorMessage)(v, deps),
     [validate, errorMessage]
   );
 

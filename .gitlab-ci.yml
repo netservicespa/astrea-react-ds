@@ -1,0 +1,68 @@
+image: $DOCKER_REGISTRY/cicd/node-ci-image:1.0
+
+variables:
+  CI: ''
+  IMAGE_NAME: $DOCKER_REGISTRY/astrea/astrea-react-storybook
+  IMAGE_VERSION: $BRANCH_NAME
+
+stages:
+  - build
+  - publishSite
+  - test
+  - analysis
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+before_script:
+  - 'echo CI coordinates: $CI_BUILD_NAME, $CI_BUILD_REF_NAME $CI_BUILD_STAGE'
+  - 'echo nexus auth: $CI_NEXUS_USERNAME'
+
+# Run the build to check that we don't have any errors
+buildPackage:
+  stage: build
+  script:
+    - corepack enable && corepack prepare pnpm@latest --activate
+    - pnpm install
+    - pnpm run build
+  except:
+    - tags
+
+deploySite:
+  stage: publishSite
+  image: $DOCKER_REGISTRY/docker/docker:default
+  script:
+    - 'export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: ''{ print $2 }'' | sed ''s/[", ]//g'')'
+    - sed -i "s/latest/$PACKAGE_VERSION/" docker-compose.yml
+    - docker images
+    - docker image prune -f || true
+    - docker volume prune -f || true
+    - docker -H "tcp://$REMOTE_DOCKER_HOST:2375" --tlsverify=1 --tlscacert=$CA_PEM --tlscert=$CERT_PEM --tlskey=$KEY_PEM compose down
+    - docker -H "tcp://$REMOTE_DOCKER_HOST:2375" --tlsverify=1 --tlscacert=$CA_PEM --tlscert=$CERT_PEM --tlskey=$KEY_PEM compose up -d --build --remove-orphans
+  tags:
+    - docker
+  only:
+    - master
+
+runTests:
+  stage: test
+  script:
+    - echo "Not implementd yet!"
+
+sonarManual:
+  stage: analysis
+  when: manual
+  script:
+    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true
+  except:
+    - tags
+
+sonar:
+  stage: analysis
+  script:
+    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true
+  only:
+    variables:
+      - $CI_COMMIT_TAG =~ /(([0-9]*)(\.))(([0-9]{2})(\.)){2}([0-9]){3}((-RC)([0-9]+))?/

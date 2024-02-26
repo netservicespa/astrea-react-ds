@@ -7,6 +7,9 @@ import { composeValidators, ValidatedInput } from '../validators';
 interface AdditionalProps {
   label: string;
   labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
+  value: string; // Aggiungi questa prop per il valore di ogni radio button
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; // Handler per cambiamenti
+  checked: boolean; // Determina se il radio è selezionato
 }
 
 export type ValidatedRadioProps = ValidatedInput<
@@ -22,6 +25,9 @@ export const ValidatedRadio: React.FC<ValidatedRadioProps> = ({
   labelPlacement,
   errorMessage,
   disabled,
+  value, // Usa questa prop per il valore del radio
+  onChange, // Usa questa prop per gestire i cambiamenti
+  checked, // Determina se il radio è selezionato
   ...rest
 }) => {
   const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
@@ -31,7 +37,7 @@ export const ValidatedRadio: React.FC<ValidatedRadioProps> = ({
     [validate, errorMessage]
   );
 
-  const [{ value }, setValue] = useFormField({
+  const [{ value: fieldValue }, setFieldValue] = useFormField({
     key,
     initialValue: defaultChecked || false,
     validate: validateCallback,
@@ -40,24 +46,25 @@ export const ValidatedRadio: React.FC<ValidatedRadioProps> = ({
   const setValueCallback = useCallback(
     (event: any) => {
       const value = event.target.checked;
-      setValue(value);
+      setFieldValue(value);
     },
-    [setValue]
+    [setFieldValue]
   );
 
   React.useEffect(() => {
     if (disabled) {
-      setValue(defaultChecked || false);
+      setFieldValue(defaultChecked || false);
     }
-  }, [disabled]);
+  }, [disabled, defaultChecked, setFieldValue]);
 
   return (
     <FormControlLabel
       control={
         <Radio
           {...rest}
+          checked={checked}
+          onChange={onChange}
           value={value}
-          onChange={setValueCallback}
         />
       }
       labelPlacement={labelPlacement || 'end'}

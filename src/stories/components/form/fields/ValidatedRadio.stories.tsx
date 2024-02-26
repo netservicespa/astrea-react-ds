@@ -12,18 +12,22 @@ export default {
 
 const Template: StoryFn<typeof ValidatedRadio> = (args) => {
   const { t } = useTranslation();
+  const [selectedValue, setSelectedValue] = React.useState<string | null>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(event.target.value);
+  };
 
   return (
-    <ValidatedForm onSubmit={() => {}} showButtons={false}>
-      <FormLabel component="legend">Choose your favourite meal</FormLabel>
+    <ValidatedForm onSubmit={() => {}} buttonsSlot={false}>
+      <FormLabel component="legend">{t('Choose your favourite meal')}</FormLabel>
       <FormGroup>
-        <ValidatedRadio label="Tortellini" labelPlacement="end" />
-        <ValidatedRadio label="Lasagne" labelPlacement="end" />
-        <ValidatedRadio label="Erbazzone" labelPlacement="end" />
-        <ValidatedRadio label="Pizza" labelPlacement="end" />
+        <ValidatedRadio label="Tortellini" value="Tortellini" checked={selectedValue === "Tortellini"} onChange={handleChange} />
+        <ValidatedRadio label="Lasagne" value="Lasagne" checked={selectedValue === "Lasagne"} onChange={handleChange} />
+        <ValidatedRadio label="Erbazzone" value="Erbazzone" checked={selectedValue === "Erbazzone"} onChange={handleChange} />
+        <ValidatedRadio label="Pizza" value="Pizza" checked={selectedValue === "Pizza"} onChange={handleChange} />
       </FormGroup>
     </ValidatedForm>
   );
 };
-
 export const Radio = Template.bind({});

@@ -1,17 +1,23 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Button, Grid, Typography } from '@mui/material';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ConfirmPageProps {
   title: string;
-    description: string;
-    showDetailButton?: boolean;
-    detailLink?: string;
+  description: string;
+  showDetailButton?: boolean;
+  detailLink?: string;
 }
 
-  
-const ConfirmPage: React.FC<ConfirmPageProps> = ({ title, description, showDetailButton, detailLink }) => {
-  
+export const NsConfirmPage: React.FC<ConfirmPageProps> = ({
+  title,
+  description,
+  showDetailButton,
+  detailLink,
+}) => {
+  const { t } = useTranslation();
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -28,25 +34,25 @@ const ConfirmPage: React.FC<ConfirmPageProps> = ({ title, description, showDetai
           variant="outlined"
           color="primary"
           type="button"
-          onClick={() => (console.log('torna al indietro'), window.close())}
+          onClick={() => window.close()}
         >
-          Torna indietro
+          {t('confirmPage.comeBack')}
         </Button>
-        
-        {showDetailButton && 
-        <Button
-          sx={{ marginLeft: '10px' }}
-          variant="contained"
-          color="primary"
-          type="button"
-          onClick={() => (console.log('visualizza dettaglio'), window.open(detailLink))}
-        >
-          Visualizza Dettaglio
-        </Button>
-        }
+
+        {showDetailButton && (
+          <Button
+            sx={{ marginLeft: '10px' }}
+            variant="contained"
+            color="primary"
+            type="button"
+            onClick={() => window.open(detailLink)}
+          >
+            {t('confirmPage.viewDetail')}
+          </Button>
+        )}
       </Grid>
     </Grid>
   );
-}
+};
 
-export default ConfirmPage;
+export default NsConfirmPage;

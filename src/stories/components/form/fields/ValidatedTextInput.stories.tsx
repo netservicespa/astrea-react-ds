@@ -10,7 +10,7 @@ export default {
 
 const Template: StoryFn<typeof ValidatedTextInput> = (args) => {
   return (
-    <ValidatedForm onSubmit={() => {}} showButtons={false}>
+    <ValidatedForm onSubmit={() => {}} buttonsSlot={false}>
       <ValidatedTextInput label="Check me out!" name="ciaone" />
     </ValidatedForm>
   );

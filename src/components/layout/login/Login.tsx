@@ -44,7 +44,7 @@ interface LoginProps {
 
 export const Login: React.FC<LoginProps> = ({
   onButtonClick,
-  logoSrc = './images/logo-dark.png',
+	logoSrc ='./images/logo-dark.png',
   gradient = 'linear-gradient(-233.26983238966562deg, rgba(48, 138, 125, 0.99) 1.4305340335588706e-14%, #0c4b50 99.99999999999999%)',
   imagePath = './images/ns-abstarct.jpg',
   headerLogo,
@@ -61,6 +61,7 @@ export const Login: React.FC<LoginProps> = ({
   const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  //const [logoSrc, setLogoSrc] = useState('./images/logo-dark.png'); // Initialize with the default logoSrc value
   const [showPassword, setShowPassword] = useState(false);
   const inputType = showPassword ? 'text' : 'password';
   const [data, setData] = React.useState<any>(null);
@@ -68,6 +69,14 @@ export const Login: React.FC<LoginProps> = ({
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+	const CustomButtonComponent = () => {
+    return (
+      <NsButton onClick={() => {console.log("submit")}} variant="contained">
+        {t('form.buttons.submit')}
+      </NsButton>
+    )
+  }
   return (
     <div
       style={{
@@ -95,8 +104,7 @@ export const Login: React.FC<LoginProps> = ({
                 style={{
                   backgroundColor: '#fff',
                   height: '100vh',
-                  borderTopRightRadius: '35px',
-                  borderBottomRightRadius: '35px',
+                  
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -151,7 +159,8 @@ export const Login: React.FC<LoginProps> = ({
                     '.MuiCardHeader-title': {
                       fontSize: 'xx-large',
                       fontWeight: 'bold',
-                    },
+											textAlign: type === 'link' ? 'center' : 'left',
+											},
                     padding: '0 0 16px 0',
                   }}
                 />
@@ -168,14 +177,13 @@ export const Login: React.FC<LoginProps> = ({
                   </Box>
                 ) : (
                   <ValidatedForm
-                    buttonsSlot={buttonsSlot}
-                    onSubmit={handleFormSubmit}
-                    onReset={() => setData(null)}
+                    buttonsSlot={<CustomButtonComponent />}
+										onSubmit={handleFormSubmit}
                   >
                     <Box sx={{ mb: 2 }}>
                       <ValidatedTextInput
                         name="username"
-                        label="Username"
+                        label="Username*"
                         validate={required}
                         errorMessage={t('form.errors.required', {
                           field: 'Username',
@@ -186,7 +194,7 @@ export const Login: React.FC<LoginProps> = ({
                     <Box sx={{ mb: 2 }}>
                       <ValidatedTextInput
                         name="password"
-                        label="Password"
+                        label="Password*"
                         validate={required}
                         errorMessage={t('form.errors.required', {
                           field: 'Password',

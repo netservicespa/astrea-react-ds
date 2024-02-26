@@ -1,4 +1,8 @@
+import { Meta } from "@storybook/blocks";
+import { NsCard } from '../components/components/card/NsCard';
+import { GridLayout } from '../components/layout/GridLayout';
 
+<Meta title="Welcome" />
 
 <h1>Welcome to Astrea Design System</h1>
 
@@ -7,25 +11,26 @@
 </p>
 
 <h2>Why Design System</h2>
-<h4>a. Styles:</h4>
-<p>
-  Our design system offers a cohesive set of styles, including typography, color palettes, spacing, and visual elements. Consistent styles ensure a unified look and feel, enhancing brand identity and user recognition.
-</p>
 
-<h4>b. Components:</h4>
-<p>
-  Astrea provides a library of reusable UI components such as buttons, forms, cards, navigation bars, and more. These components maintain consistency in design and behavior, streamlining development and promoting efficiency.
-</p>
-
-<h4>c. Patterns:</h4>
-<p>
-  We've curated design patterns for common user interactions and workflows. These patterns are tested and optimized for usability, ensuring a seamless and intuitive user experience.
-</p>
-
-<h4>d. Layouts:</h4>
-<p>
-  Astrea offers predefined layouts and grid systems that facilitate the structuring and organization of content. These layouts maintain consistency in the arrangement of elements across different screens and devices.
-</p>
+<GridLayout rowSize={3}>
+  <NsCard 
+    mainText="Styles" 
+    subText="Our design system offers a cohesive set of styles, including typography, color palettes, spacing, and visual elements. Consistent styles ensure a unified look and feel, enhancing brand identity and user recognition."
+    cardVariant="classic"
+  />
+  <NsCard 
+    mainText="Components" 
+    subText="Astrea provides a library of reusable UI components such as buttons, forms, cards, navigation bars, and more. These components maintain consistency in design and behavior, streamlining development and promoting efficiency."
+  />
+  <NsCard 
+    mainText="Patterns" 
+    subText="We've curated design patterns for common user interactions and workflows. These patterns are tested and optimized for usability, ensuring a seamless and intuitive user experience."
+  />
+  <NsCard 
+    mainText="Layouts" 
+    subText="Astrea offers predefined layouts and grid systems that facilitate the structuring and organization of content. These layouts maintain consistency in the arrangement of elements across different screens and devices."
+  />
+</GridLayout>
 
 <h2>More Resources</h2>
 <h4>a. Design Guidelines:</h4>

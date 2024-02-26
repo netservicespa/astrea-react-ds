@@ -154,6 +154,13 @@ const themeOptions = {
       },
     },
     MuiButtonBase: {
+			styleOverrides: {
+        root: {
+					' .MuiChip-deleteIcon': {
+            fontSize: '18px !important',
+          },
+				},
+			},
       defaultProps: {
         disableRipple: true,
       },
@@ -258,6 +265,7 @@ const themeOptions = {
         },
       },
     },
+
     MuiFormLabel: {
       styleOverrides: {
         root: {
@@ -277,7 +285,7 @@ const themeOptions = {
       },
     },
 
-		MuiPaper: {
+    MuiPaper: {
       styleOverrides: {
         root: {
           marginTop: '5px',
@@ -285,86 +293,81 @@ const themeOptions = {
       },
     },
 
-		MuiMenuItem: {
+    MuiMenuItem: {
       styleOverrides: {
         root: {
           //backgroundColor: '#FFF',
-					border: '1px solid #B1B4B6'
+          border: '1px solid #B1B4B6',
         },
       },
     },
-		MuiPickersLayout: {
+    MuiPickersLayout: {
       styleOverrides: {
         root: {
           //backgroundColor: '#FFF',
-					border: '1px solid #B1B4B6'
-        },
-      },
-    },
-		
-		MuiPickersPopper: {
-			styleOverrides: {
-        root: {
-			//backgroundColor: '#FFF',
-			border: '0'
-			},
-		},
-	  },
-
-
-		MuiPopper: {
-      styleOverrides: {
-        root: {
-          //backgroundColor: '#FFF',
-					border: '1px solid #B1B4B6'
+          border: '1px solid #B1B4B6',
         },
       },
     },
 
-		MuiCheckbox: {
-			styleOverrides: {
+    MuiPickersPopper: {
+      styleOverrides: {
+        root: {
+          //backgroundColor: '#FFF',
+          border: '0',
+        },
+      },
+    },
+
+    MuiPopper: {
+      styleOverrides: {
+        root: {
+          //backgroundColor: '#FFF',
+          border: '1px solid #B1B4B6',
+        },
+      },
+    },
+
+    MuiCheckbox: {
+      styleOverrides: {
         root: {
           color: '#000',
-					/*'&.Mui-checked .MuiCheckbox-root': {
+          /*'&.Mui-checked .MuiCheckbox-root': {
             borderColor: '#0B0C0C',
             borderWidth: '3px',
           },*/
-					'&.Mui-checked': {
-						
-						"& svg": {
+          '&.Mui-checked': {
+            '& svg': {
               fill: '#000',
-							border: '3px solid #000',
-							boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
-							alignItems: 'center',
+              border: '3px solid #000',
+              boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
+              alignItems: 'center',
               justifyContent: 'center',
-              "& path": {
-                d:
-                  "path('M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z')",
-									position: 'relative',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-15%, -15%)',
-              }
-            }
-					}
+              '& path': {
+                d: "path('M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z')",
+                position: 'relative',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-15%, -15%)',
+              },
+            },
+          },
         },
       },
     },
 
-		MuiRadio: {
-			styleOverrides: {
+    MuiRadio: {
+      styleOverrides: {
         root: {
           color: '#000',
-					border: '4px round #000',
-					'&.Mui-checked': {
-          
-
-					  "& svg": {
-						  fill: '#000',
-						  boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
-							borderRadius: '50%',
-					  }
-				  },
+          border: '4px round #000',
+          '&.Mui-checked': {
+            '& svg': {
+              fill: '#000',
+              boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
+              borderRadius: '50%',
+            },
+          },
         },
       },
     },

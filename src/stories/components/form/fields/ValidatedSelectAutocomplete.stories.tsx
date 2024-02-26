@@ -18,7 +18,7 @@ const Template: StoryFn<typeof ValidatedSelectAutocomplete> = (args) => {
   const { placeholder } = args;
 
   return (
-    <ValidatedForm onSubmit={() => {}} showButtons={false}>
+    <ValidatedForm onSubmit={() => {}} buttonsSlot={false}>
       <Grid container>
         <Grid item xs={3}>
           <ValidatedSelectAutocomplete

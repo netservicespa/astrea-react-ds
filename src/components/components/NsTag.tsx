@@ -26,7 +26,9 @@ const StyledChip = styled(
         borderStyle: 'solid',
         height: '25px'
     };
-
+		const IconColor = {
+			color: theme.palette[colorValue].main,
+	  };
     return {
         ...(variant === 'filled' ? {
             backgroundColor: lighten(theme.palette[colorValue].main, 0.8),
@@ -36,6 +38,38 @@ const StyledChip = styled(
             backgroundColor: 'transparent',
             ...commonStyles,
         } : {}),
+				...(colorValue === 'primary' ? { 
+					".MuiChip-deleteIcon": {
+						color: theme.palette[colorValue].main,
+          },
+					".MuiChip-deleteIcon:hover": {
+						color: '#205d54',
+          }
+				} : {}),
+				...(colorValue === 'error' ? { 
+					".MuiChip-deleteIcon": {
+						color: theme.palette[colorValue].main,
+          },
+					".MuiChip-deleteIcon:hover": {
+						color: '#9f2714',
+          }
+				} : {}), 
+				...(colorValue === 'warning' ? { 
+					".MuiChip-deleteIcon": {
+						color: theme.palette[colorValue].main,
+          },
+					".MuiChip-deleteIcon:hover": {
+						color: '#a54b01',
+          }
+				} : {}),
+				...(colorValue === 'success' ? { 
+					".MuiChip-deleteIcon": {
+						color: theme.palette[colorValue].main,
+          },
+					".MuiChip-deleteIcon:hover": {
+						color: '#004525',
+          }
+				} : {}),
     };
 });
 

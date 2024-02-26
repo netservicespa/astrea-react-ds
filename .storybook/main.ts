@@ -11,6 +11,24 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
     '@storybook/addon-a11y',
     'storybook-dark-mode',
+    {
+      name: "@storybook/addon-styling-webpack",
+      options: {
+        rules: [
+          {
+            test: /\.s[ac]ss$/i,
+            use: [
+              "style-loader",
+              "css-loader",
+              {
+                loader: "sass-loader",
+                options: { implementation: require.resolve("sass") }
+              },
+            ],
+          },
+        ]
+      },
+    },
   ],
   framework: {
     name: '@storybook/react-webpack5',
@@ -20,27 +38,5 @@ const config: StorybookConfig = {
     autodocs: true,
   },
   staticDirs: ['../public'],
-  webpackFinal: async (config, { configType }) => {
-    config.resolve = config.resolve || {};
-    config.resolve.modules = [
-      ...(config.resolve.modules || []),
-      path.resolve(__dirname, '../src'),
-    ];
-    
-    config.module?.rules?.push({
-      test: /\.(png|jpe?g|gif)$/i,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: 'images/[name].[ext]',
-            publicPath: '/',
-          },
-        },
-      ],
-    });
-
-    return config;
-  },
 };
 export default config;

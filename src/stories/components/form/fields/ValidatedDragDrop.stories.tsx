@@ -16,7 +16,7 @@ const Template: StoryFn<typeof ValidatedDragDrop> = (args) => {
   const { t } = useTranslation();
 
   return (
-    <ValidatedForm onSubmit={() => {}} showButtons={false}>
+    <ValidatedForm onSubmit={() => {}} buttonsSlot={false}>
       <Grid container>
         <Grid item xs={3} md={6}>
           <ValidatedDragDrop

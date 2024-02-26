@@ -8,13 +8,13 @@ import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { HeaderProps } from 'src/util/types';
 import {
-  DropdownComponent,
+  NsDropdown,
   DynamicLink,
-} from '../../../components/Dropdown/DropDown';
+} from '../../../components/Dropdown/NsDropDown';
 import {
   INotificationData,
-  NotificationComponent,
-} from '../../../components/notification/NotificationComponent';
+  NsNotification,
+} from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -39,7 +39,7 @@ const Logo = styled('svg')({
 const LogoContainer = styled('div')(
   ({ theme, configuration }: any) => css`
     background-color: ${theme.header.backgroundColor};
-    border-bottom: 8px solid ${theme.header.borderColor};
+    border-bottom: 0px solid ${theme.header.borderColor};
     padding: 20px 20px;
     display: flex;
     justify-content: ${!configuration?.centralLogo
@@ -215,9 +215,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
           aria-label={t('header.notifications')}
           title={t('header.openNotifications')}
         >
-          <NotificationComponent {...notificationData}>
+          <NsNotification {...notificationData}>
             <NotificationsNoneOutlinedIcon />
-          </NotificationComponent>{' '}
+          </NsNotification>{' '}
           <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>
             {t('header.notifications')}
           </Box>
@@ -229,14 +229,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
           title={t('header.openAccount')}
           style={{ marginLeft: '20px' }}
         >
-          <DropdownComponent
+          <NsDropdown
             dropdownItems={userPanelMenuItems}
             router={router}
             onLogout={onLogout}
             dropDownConfiguration={configuration?.dropDownConfiguration}
           >
             <AccountCircleIcon />
-          </DropdownComponent>{' '}
+          </NsDropdown>{' '}
           <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>
             {t('header.account')}
           </Box>
@@ -270,7 +270,7 @@ export default function HorizontalHeader({
           {logo ?? (
             <Box
               component="img"
-              src="images/ns-logo-white.png"
+              src="./images/logo-light.png"
               alt="logo"
               sx={{ maxHeight: '45px' }}
             />
@@ -285,6 +285,13 @@ export default function HorizontalHeader({
         <div
           className={!configuration?.centralLogo ? 'mobile-menu-icon' : ''}
           onClick={handleMenuToggle}
+					style={{ 
+						color: 'white', 
+						textAlign: 'center', 
+						display: 'flex', 
+						alignItems: 'center', 
+						justifyContent: 'center' 
+					}}
         >
           {isMenuOpen ? (
             <>

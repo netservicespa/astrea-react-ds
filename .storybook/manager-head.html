@@ -1,16 +1,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- TODO: add info for og -->
+<meta property="og:description" content="Astrea Design System" />
+<meta property="og:title" content="Astrea Design System" />
+<meta property="og:image" content="" />
+<title>Astrea Design System</title>
 <style>
-    body {
-        font-family: 'Titillium Web', sans-serif;
+    body, html body * {
+        font-family: 'Titillium Web', sans-serif !important;
+    }
+    iframe#storybook-preview-iframe {
+        background: none;
     }
     .sidebar-container * {
         font-weight: 400;
         font-size: 1rem;
         line-height: 2;
     }
-
     .sidebar-container .sidebar-item,
     .sidebar-container .sidebar-item a {
         align-items: center;
@@ -20,9 +26,4 @@
         height: 16px;
         margin-top: 0;
     }
-    .sidebar-container .sidebar-item[data-selected="true"]:hover,
-    .sidebar-container .sidebar-item[data-selected="true"]{
-        background: #308a7d;
-    }
 </style>
-<title>NS React UI Kit</title>

@@ -1,0 +1,6 @@
+@use 'themes/light-theme' with (
+  $class: 'light-theme'
+);
+@use 'themes/dark-theme' with (
+  $class: 'dark-theme'
+);

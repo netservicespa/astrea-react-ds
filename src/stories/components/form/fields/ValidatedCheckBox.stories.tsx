@@ -14,7 +14,7 @@ const Template: StoryFn<typeof ValidatedCheckbox> = (args) => {
   const { t } = useTranslation();
 
   return (
-    <ValidatedForm onSubmit={() => {}} showButtons={false}>
+    <ValidatedForm onSubmit={() => {}} buttonsSlot={false}>
       <FormLabel component="legend">Choose your favourite meal</FormLabel>
       <FormGroup>
         <ValidatedCheckbox label="Tortellini" labelPlacement="end" />

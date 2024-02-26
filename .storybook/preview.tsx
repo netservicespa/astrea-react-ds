@@ -1,10 +1,15 @@
+import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import type { Preview } from '@storybook/react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
+import themeLight from './astrea-theme-light';
+import themeDark from './astrea-theme-dark';
 import { theme as nsTheme } from '../src/themes/NetServiceTheme';
-import { themes } from '@storybook/theming';
-import React from 'react';
+import { theme as blueChia } from '../src/themes/BlueChia';
+import './styles.scss';
+
+const isDark = typeof window !== `undefined` ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches : null;
 
 export const globalTypes = {
   theme: {
@@ -15,7 +20,10 @@ export const globalTypes = {
     toolbar: {
       icon: 'paintbrush',
       dynamicTitle: true,
-      items: [{ value: 'nsTheme', left: '🌙', title: 'Astrea Theme' }],
+      items: [
+        { value: 'nsTheme', left: '🌊', title: 'Green NS' },
+        { value: 'blueChia', left: '🍃', title: 'Blue Chia' }
+      ],
     },
   },
   /*locale: {
@@ -36,6 +44,7 @@ export const globalTypes = {
 // pull your desired theme from.
 const THEMES = {
   nsTheme,
+  blueChia,
 };
 
 // Wrap stories in the I18nextProvider component
@@ -76,6 +85,8 @@ const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
+      expanded: true,
+      sort: 'requiredFirst',
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
@@ -86,6 +97,8 @@ const preview: Preview = {
       storySort: {
         method: 'alphabetical',
         order: [
+          'Welcome',
+          'Styles',
           'Components',
           'Navigation',
           'Form',
@@ -96,14 +109,17 @@ const preview: Preview = {
         locales: 'en-US',
       },
     },
-    backgrounds: {
-      grid: {
-        disable: true,
-      },
-      disableBackgrounds: true,
-    },
+    backgrounds: { disable: true },
+    layout: 'centered',
     darkMode: {
-      dark: { ...themes.dark, appBg: 'black' },
+      current: isDark ? 'dark' : 'light',
+      // Override the default dark theme
+      dark: { ...themeDark },
+      // Override the default light theme
+      light: { ...themeLight },
+      darkClass: 'dark-theme',
+      lightClass: 'light-theme',
+      stylePreview: true
     },
     showCode: true,
   },

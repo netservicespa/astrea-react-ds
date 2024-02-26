@@ -24,7 +24,7 @@ const Template = (args) => <Login {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  logoSrc: './images/logo.png',
+  logoSrc: './images/logo-dark.png',
   gradient:
     'linear-gradient(-240.64224645720873deg, rgba(48, 138, 125, 0.99)  1.9191447712979693e-14%, rgba(48, 138, 125, 0.7), #0c4b50 100% )',
   imagePath: './images/ns-abstarct.jpg',
@@ -52,7 +52,8 @@ LoginForm.args = {
 
 export const ClassicForm = Template.bind({});
 ClassicForm.args = {
-  gradient:
+  
+	gradient:
     'linear-gradient(-240.64224645720873deg, rgba(48, 138, 125, 0.99)  1.9191447712979693e-14%, rgba(48, 138, 125, 0.7), #0c4b50 100% )',
   imagePath: './images/ns-abstarct.jpg',
   headerTitle: {
@@ -77,7 +78,6 @@ LoginWithButtonSlot.args = {
     <DefaultButtons
       buttonPosition="right"
       submitText="Entra"
-      resetText="Cancella"
     />
   ),
 };

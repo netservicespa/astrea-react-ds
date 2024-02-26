@@ -1,0 +1,28 @@
+@mixin apply-where-selector($element) {
+    :where(#{$element}:not(.sb-anchor, .sb-unstyled, .sb-unstyled #{$element})) {
+        @content;
+    }
+}
+
+$class: 'dark-theme' !default;
+$font-color: #FFF;
+
+body.dark-theme {
+    @include apply-where-selector('p') { 
+        color: $font-color;
+    }
+    @include apply-where-selector('h1') { 
+        color: $font-color;
+    }
+    @include apply-where-selector('h2') { 
+        color: $font-color;
+    }
+    thead.docblock-argstable-head th span {
+        color: $font-color;
+    }
+
+    /* MDX elements */
+    .MuiPaper-root.MuiCard-root .MuiTypography-root {
+        color: #000;
+    }
+}

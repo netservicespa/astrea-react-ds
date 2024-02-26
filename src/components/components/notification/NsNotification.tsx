@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { NsTabs } from '../../../components/components/tabs/Tabs';
+import { NsTabs } from '../tabs/NsTabs';
 import { DynamicLinkProps } from 'src/util/types';
-import { DynamicLink } from '../Dropdown/DropDown';
+import { DynamicLink } from '../Dropdown/NsDropDown';
 
 export interface IReadWrite {
   id: number;
@@ -43,6 +43,7 @@ export interface INotificationData {
   read: NotificationData;
   unread: NotificationData;
   onlyButton?: Omit<DynamicLinkProps, 'children'>;
+  children: React.ReactNode;
 }
 
 /**
@@ -133,7 +134,7 @@ const MainNotificationDiv = ({
   );
 };
 
-export const NotificationComponent: React.FC<INotificationData> = ({
+export const NsNotification: React.FC<INotificationData> = ({
   read,
   unread,
   children,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { INotificationData } from 'src/components/components/notification/NotificationComponent';
+import { INotificationData } from '../components/components/notification/NsNotification';
 
 export type User = {
   name: string;
