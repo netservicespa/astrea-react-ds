@@ -3,14 +3,14 @@ import { Button, Grid, Typography } from '@mui/material';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export interface ConfirmPageProps {
+export interface NsConfirmPageProps {
   title: string;
   description: string;
   showDetailButton?: boolean;
   detailLink?: string;
 }
 
-export const NsConfirmPage: React.FC<ConfirmPageProps> = ({
+export const NsConfirmPage: React.FC<NsConfirmPageProps> = ({
   title,
   description,
   showDetailButton,

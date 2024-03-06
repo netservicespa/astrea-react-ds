@@ -88,7 +88,7 @@ export function ValidatedSelectAutocomplete({
         autoComplete
         value={value}
         disabled={disabled}
-        renderInput={(props) => (
+        renderInput={(props: any) => (
           <TextField
             name={name}
             error={!!error}

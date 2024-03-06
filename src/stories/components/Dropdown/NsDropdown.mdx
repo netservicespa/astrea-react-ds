@@ -1,0 +1,63 @@
+import {
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from '@storybook/blocks';
+import * as NsDropdown from './NsDropdown.stories';
+
+<Meta of={NsDropdown} />
+
+<h1>Dropdown</h1>
+<p>
+  The Dropdown component is a reusable UI element used to present a list of
+  selectable options in a collapsible menu. It allows users to choose a single
+  option from the provided list
+</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>
+  The Dropdown component typically consists of a trigger element (such as a
+  button, an icon or text) and a list of options that appear when the trigger is
+  activated (clicked or hovered over). Users can select an option from the list,
+  and the Dropdown collapses to display the chosen value in the trigger element.
+</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>
+    Keep the list of options concise and relevant to the user's needs to avoid
+    overwhelming them.
+  </li>
+  <li>
+    Provide clear labeling and intuitive design for the trigger element to
+    indicate its functionality.
+  </li>
+  <li>
+    Test the Dropdown component across different devices and screen sizes to
+    ensure responsiveness and consistent behavior.
+  </li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+
+<h3>Accessibility</h3>
+<p>To ensure accessibility:</p>
+<ul>
+  <li>Use proper semantic HTML elements for the Dropdown structure.</li>
+  <li>
+    Implement keyboard navigation for selecting options within the Dropdown.
+  </li>
+  <li>
+    Include ARIA attributes and labels for screen readers to provide context and
+    improve usability for users with disabilities.
+  </li>
+</ul>
+
+<h3>Usage</h3>
+<p>text</p>

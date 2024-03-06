@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { Box } from "@mui/material";
-import { FullPageSpinner, FullPageSpinnerProps } from '../../components/FullPageSpinner';
+import { Box } from '@mui/material';
+import {
+  NsFullPageSpinner,
+  NsFullPageSpinnerProps,
+} from '../../components/NsFullPageSpinner';
 
 export default {
   title: 'Components/Loader',
-  component: FullPageSpinner,
-    argTypes: {
-        variant: {
-            label: 'Variant',
-            control: { type: 'radio' },
-            options: ['indeterminate', 'determinate'],
-            defaultValue:'indeterminate',
-        },
+  component: NsFullPageSpinner,
+  argTypes: {
+    variant: {
+      label: 'Variant',
+      control: { type: 'radio' },
+      options: ['indeterminate', 'determinate'],
+      defaultValue: 'indeterminate',
     },
-} as Meta<typeof FullPageSpinner>;
+  },
+} as Meta<typeof NsFullPageSpinner>;
 
-const Template: StoryFn<FullPageSpinnerProps> = (args) => {
+const Template: StoryFn<NsFullPageSpinnerProps> = (args) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -39,14 +42,14 @@ const Template: StoryFn<FullPageSpinnerProps> = (args) => {
   return (
     <Box
       sx={{
-          width: 200,
-          height: 200,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+        width: 200,
+        height: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <FullPageSpinner {...args} value={progress} />
+      <NsFullPageSpinner {...args} value={progress} />
     </Box>
   );
 };
@@ -58,8 +61,9 @@ LoadingLoader.args = {
   variant: 'determinate',
 };
 
-
-const IndeterminateLoadingTemplate: StoryFn<FullPageSpinnerProps> = (args) => {
+const IndeterminateLoadingTemplate: StoryFn<NsFullPageSpinnerProps> = (
+  args
+) => {
   const { value, variant } = args;
   const [progress, setProgress] = useState(value);
 
@@ -68,7 +72,9 @@ const IndeterminateLoadingTemplate: StoryFn<FullPageSpinnerProps> = (args) => {
       setProgress(value);
     } else {
       const timer = setInterval(() => {
-        setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+        setProgress((prevProgress) =>
+          prevProgress >= 100 ? 0 : prevProgress + 10
+        );
       }, 800);
       return () => {
         clearInterval(timer);
@@ -78,15 +84,15 @@ const IndeterminateLoadingTemplate: StoryFn<FullPageSpinnerProps> = (args) => {
 
   return (
     <Box
-        sx={{
-            width: 200,
-            height: 200,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}
+      sx={{
+        width: 200,
+        height: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
-      <FullPageSpinner {...args} value={progress} />
+      <NsFullPageSpinner {...args} value={progress} />
     </Box>
   );
 };

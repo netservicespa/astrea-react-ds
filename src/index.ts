@@ -1,7 +1,7 @@
 /**
  * Export all the components that are exposed by this library.
  */
-export { FullPageSpinner } from './components/FullPageSpinner';
+export { NsFullPageSpinner } from './components/NsFullPageSpinner';
 export { ErrorBoundary } from './components/error/ErrorBoundary';
 export { FallbackPage } from './components/error/FallbackPage';
 export { Header } from './components/patterns/navigation/Header';
@@ -14,13 +14,13 @@ export { NsTabs } from './components/components/tabs/NsTabs';
 export { NsPanel } from './components/components/panel/NsPanel';
 export { NsAccordion } from './components/components/NsAccordion';
 export { NsProgress } from './components/components/NsProgress';
-export { PageHeader } from './components/components/PageHeader/PageHeader';
+export { NsPageHeader } from './components/components/PageHeader/NsPageHeader';
 export { NsModal } from './components/components/NsModal';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
 export { NsTable } from './components/components/NsTable';
 export { NsTooltip } from './components/components/NsTooltip';
-export { NsDropdown } from './components/components/Dropdown/NsDropDown';
+export { NsDropDown } from './components/components/Dropdown/NsDropDown';
 export { NsPagination } from './components/components/pagination/NsPagination';
 export { NsFeedback } from './components/components/feedback/NsFeedback';
 

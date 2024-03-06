@@ -1,0 +1,80 @@
+import {
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from '@storybook/blocks';
+import * as NsFeedback from './NsFeedback.stories';
+
+<Meta of={NsFeedback} />
+
+<h1>Feedback</h1>
+<p>
+  The Feedback component is a versatile React component designed to display
+  notifications or alerts to users within a web application. It serves as a
+  user-friendly way to convey important information, warnings, or updates to
+  users in real-time.
+</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>
+  The Feedback component operates by accepting incoming messages or
+  notifications as props and displaying them to the user in a visually appealing
+  manner. It typically appears as a small pop-up or banner that can be
+  customised in terms of appearance, duration, and positioning on the screen.
+</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>
+    Keep messages concise: Ensure that the notifications displayed through the
+    Notifier component are brief and easy to understand at a glance.
+  </li>
+  <li>
+    Avoid overwhelming users: Use notifications judiciously to avoid bombarding
+    users with excessive alerts, maintaining a balance between informative and
+    intrusive.
+  </li>
+  <li>
+    Customise for context: Tailor the appearance and behaviour of the Notifier
+    component based on the application's design and the urgency of the message.
+  </li>
+</ul>
+
+<h3>Props</h3>
+<Controls />
+
+<h3>Accessibility</h3>
+<p>
+  To ensure accessibility, consider the following points while using the
+  Notifier component:
+</p>
+<ul>
+  <li>
+    Keyboard accessibility: Make sure users can dismiss notifications using
+    keyboard controls or provide an accessible way to close the notification.
+  </li>
+  <li>
+    Screen reader compatibility: Ensure that the content of the notifications is
+    accessible to screen readers by providing proper ARIA attributes and
+    semantic markup.
+  </li>
+</ul>
+
+<h3>Usage</h3>
+<ul>
+  <li>
+    Balance Information Delivery: Ensure that notifications strike a balance
+    between informing users and not interrupting their workflow excessively.
+  </li>
+  <li>
+    Placement and Timing: Test and determine optimal positions and timing for
+    notifications to appear, considering user attention and workflow.
+  </li>
+</ul>
+
+<Stories />

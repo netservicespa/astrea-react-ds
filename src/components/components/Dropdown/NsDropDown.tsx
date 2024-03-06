@@ -53,7 +53,7 @@ export const DynamicLink = ({ router, to, children }: DynamicLinkProps) => {
   }
 };
 
-export const NsDropdown = ({
+export const NsDropDown = ({
   router,
   dropdownItems,
   onLogout,

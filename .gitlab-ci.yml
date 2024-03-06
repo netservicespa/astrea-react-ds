@@ -27,7 +27,20 @@ buildPackage:
     - corepack enable && corepack prepare pnpm@latest --activate
     - pnpm install
     - pnpm run build
+  only:
+    - master
+    - tags
+
+# Run the build to check that we don't have any errors
+buildPackageAndStorybook:
+  stage: build
+  script:
+    - corepack enable && corepack prepare pnpm@latest --activate
+    - pnpm install
+    - pnpm run build
+    - pnpm run build-storybook
   except:
+    - master
     - tags
 
 deploySite:

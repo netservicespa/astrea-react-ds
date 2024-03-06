@@ -105,18 +105,24 @@ export const NsFeedback = ({
         <Alert variant={variant} onClose={onCloseSnack} severity={severity}>
           <h3
             style={{
-              marginTop: '-11px',
+              marginTop: '1px',
               fontWeight: 600,
               fontStyle: 'normal',
               textAlign: 'left',
               fontSize: '32px',
               lineHeight: '42px',
+              paddingBottom: '-20px',
             }}
           >
             {title}
           </h3>
           <p
-            style={{ marginTop: '-20px', fontSize: '20px', lineHeight: '0px' }}
+            style={{
+              marginTop: '-20px',
+              fontSize: '20px',
+              lineHeight: '-31px',
+              marginBottom: '10px',
+            }}
           >
             {message}
           </p>

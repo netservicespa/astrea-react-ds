@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { HeaderProps } from 'src/util/types';
 import {
-  NsDropdown,
+  NsDropDown,
   DynamicLink,
 } from '../../../components/Dropdown/NsDropDown';
 import {
@@ -229,14 +229,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
           title={t('header.openAccount')}
           style={{ marginLeft: '20px' }}
         >
-          <NsDropdown
+          <NsDropDown
             dropdownItems={userPanelMenuItems}
             router={router}
             onLogout={onLogout}
             dropDownConfiguration={configuration?.dropDownConfiguration}
           >
             <AccountCircleIcon />
-          </NsDropdown>{' '}
+          </NsDropDown>{' '}
           <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>
             {t('header.account')}
           </Box>
@@ -285,13 +285,13 @@ export default function HorizontalHeader({
         <div
           className={!configuration?.centralLogo ? 'mobile-menu-icon' : ''}
           onClick={handleMenuToggle}
-					style={{ 
-						color: 'white', 
-						textAlign: 'center', 
-						display: 'flex', 
-						alignItems: 'center', 
-						justifyContent: 'center' 
-					}}
+          style={{
+            color: 'white',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           {isMenuOpen ? (
             <>

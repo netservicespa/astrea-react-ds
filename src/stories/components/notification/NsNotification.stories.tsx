@@ -2,28 +2,26 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import {
   INotificationData,
-  NotificationComponent,
-} from '../../../components/components/notification/NotificationComponent';
+  NsNotification,
+} from '../../../components/components/notification/NsNotification';
 import { StoryFn } from '@storybook/react';
 import { Header } from '../../../components/patterns/navigation/Header';
 import { Typography } from '@mui/material';
 
-const meta: Meta<typeof NotificationComponent> = {
+const meta: Meta<typeof NsNotification> = {
   title: 'Patterns/Notification panel',
-  component: NotificationComponent,
+  component: NsNotification,
 };
 
 export default meta;
-type Story = StoryObj<typeof NotificationComponent>;
+type Story = StoryObj<typeof NsNotification>;
 
 /**
  * Notification Component's Stories
  * @author vadim.chilinciuc
  */
 
-const Template: StoryFn<typeof NotificationComponent> = (
-  args: INotificationData
-) => {
+const Template: StoryFn<typeof NsNotification> = (args: INotificationData) => {
   const title = {
     bold: 'Application',
     thin: 'title',
@@ -39,9 +37,9 @@ const Template: StoryFn<typeof NotificationComponent> = (
     />
   );
 };
-export const INotificationComponent = Template.bind({});
+export const INsNotification = Template.bind({});
 
-INotificationComponent.args = {
+INsNotification.args = {
   unread: {
     notifications: [
       {

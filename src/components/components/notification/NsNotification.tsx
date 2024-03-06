@@ -153,7 +153,7 @@ export const NsNotification: React.FC<INotificationData> = ({
       label: `Read (${read.totalCount})`,
       children: <MainNotificationDiv isReadUnread={'READ'} {...read} />,
     },
-  ];
+  ] as any;
 
   const DivIcon: any = onlyButton ? DynamicLink : React.Fragment;
   const boxWidth = onlyButton ? 'auto' : '364px';
