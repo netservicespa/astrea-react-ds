@@ -1,26 +1,33 @@
-import { Container, Divider, FormGroup, FormLabel, MenuItem, Typography } from '@mui/material';
+import {
+  Container,
+  Divider,
+  FormGroup,
+  FormLabel,
+  MenuItem,
+  Typography,
+} from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { ValidatedForm } from '../../components/components/form/ValidatedForm';
-import { ValidatedTextInput } from '../../components/components/form/fields/ValidatedTextInput';
-import { ValidatedTextArea } from '../../components/components/form/fields/ValidatedTextArea';
-import { ValidatedDateCalendar } from '../../components/components/form/fields/ValidatedDateCalendar';
-import { ValidatedCheckbox } from '../../components/components/form/fields/ValidatedCheckbox';
-import { ValidatedSelect } from '../../components/components/form/fields/ValidatedSelect';
-import { ValidatedSelectAutocomplete } from '../../components/components/form/fields/ValidatedSelectAutocomplete';
-import { ValidatedRadio } from '../../components/components/form/fields/ValidatedRadio';
-import { ValidatedDragDrop } from '../../components/components/form/fields/ValidatedDragDrop';
-import { ValidatedFileUpload } from '../../components/components/form/fields/ValidatedFileUpload';
+import { NsForm } from '../../components/components/form/NsForm';
+import { NsTextInput } from '../../components/components/form/fields/NsTextInput';
+import { NsTextArea } from '../../components/components/form/fields/NsTextArea';
+import { NsDateCalendar } from '../../components/components/form/fields/NsDateCalendar';
+import { NsCheckbox } from '../../components/components/form/fields/NsCheckbox';
+import { NsSelect } from '../../components/components/form/fields/NsSelect';
+import { NsSelectAutocomplete } from '../../components/components/form/fields/NsSelectAutocomplete';
+import { NsRadio } from '../../components/components/form/fields/NsRadio';
+import { NsDragDrop } from '../../components/components/form/fields/NsDragDrop';
+import { NsFileUpload } from '../../components/components/form/fields/NsFileUpload';
 import { required } from '../../components/components/form/validators';
-import { GridLayout } from '../../components/layout/GridLayout';
+import { NsGridLayout } from '../../components/layout/NsGridLayout';
 
 export default {
-    title: 'Components/Forms',
-    component: ValidatedForm,
-    parameters: {
-        docs: { source: { type: 'code' } },
-    },
-} as Meta<typeof ValidatedForm>;
+  title: 'Components/Forms',
+  component: NsForm,
+  parameters: {
+    docs: { source: { type: 'code' } },
+  },
+} as Meta<typeof NsForm>;
 
 interface FormContents {
   textField?: string;
@@ -32,107 +39,135 @@ interface FormContents {
  * @param args
  * @returns
  */
-const Template: StoryFn<typeof ValidatedForm> = (args) => {
-    const [data, setData] = React.useState<FormContents>({});
-    const [selectedMeal, setSelectedMeal] = React.useState(null);
-    
-    const handleRadioChange = (event) => {
-        setSelectedMeal(event.target.value);
-    };
+const Template: StoryFn<typeof NsForm> = (args) => {
+  const [data, setData] = React.useState<FormContents>({});
+  const [selectedMeal, setSelectedMeal] = React.useState(null);
 
-    return (
-        <>
-            <ValidatedForm {...args} onSubmit={(data: any) => setData(data)} onReset={() => setData({})}>
-                <GridLayout rowSize={2}>
-                    <ValidatedSelect
-                        defaultValue=""
-                        errorMessage="The 'Select' field is required"
-                        label="Select"
-                        name="select"
-                        validate={required}
-                        required={true}
-                    >
-                        <MenuItem value="1">1 </MenuItem>
-                        <MenuItem value="2">2 </MenuItem>
-                        <MenuItem value="3">3 </MenuItem>
-                    </ValidatedSelect>
-                    <ValidatedSelectAutocomplete
-                        defaultValue=""
-                        errorMessage="The 'Select Autocomplete' field is required"
-                        label="Autocomplete Select"
-                        name="selectAutocomplete"
-                        validate={required}
-                        required={true}
-                    >
-                        <MenuItem value="1">1</MenuItem>
-                        <MenuItem value="2">2</MenuItem>
-                        <MenuItem value="3">3</MenuItem>
-                    </ValidatedSelectAutocomplete>
-                    <ValidatedTextInput 
-                        label="Check me out!" 
-                        name="textInput"
-                        errorMessage="The 'Text Input' field is required"
-                        validate={required}
-                        required={true}
-                    />
-                    <ValidatedTextArea 
-                        label="Check me out!"
-                        name="textArea"
-                        errorMessage="The 'Text Area' field is required"
-                        validate={required}
-                        required={true}
-                    />
-                    <ValidatedDateCalendar
-                        errorMessage="The 'Date Field' field is required"
-                        label="Date Field*"
-                        name="dateField"
-                        required={true}
-                        validate={required}
-                    />
+  const handleRadioChange = (event) => {
+    setSelectedMeal(event.target.value);
+  };
 
-                    <div>
-                        <FormLabel component="legend">Choose your favourite meal</FormLabel>
-                        <FormGroup>
-                            <ValidatedCheckbox label="Tortellini" labelPlacement="end" />
-                            <ValidatedCheckbox label="Lasagne" labelPlacement="end" />
-                            <ValidatedCheckbox label="Erbazzone" labelPlacement="end" />
-                            <ValidatedCheckbox label="Pizza" labelPlacement="end" />
-                        </FormGroup>
-                    </div>
+  return (
+    <>
+      <NsForm
+        {...args}
+        onSubmit={(data: any) => setData(data)}
+        onReset={() => setData({})}
+      >
+        <NsGridLayout rowSize={2}>
+          <NsSelect
+            defaultValue=""
+            errorMessage="The 'Select' field is required"
+            label="Select"
+            name="select"
+            validate={required}
+            required={true}
+          >
+            <MenuItem value="1">1 </MenuItem>
+            <MenuItem value="2">2 </MenuItem>
+            <MenuItem value="3">3 </MenuItem>
+          </NsSelect>
+          <NsSelectAutocomplete
+            defaultValue=""
+            errorMessage="The 'Select Autocomplete' field is required"
+            label="Autocomplete Select"
+            name="selectAutocomplete"
+            validate={required}
+            required={true}
+          >
+            <MenuItem value="1">1</MenuItem>
+            <MenuItem value="2">2</MenuItem>
+            <MenuItem value="3">3</MenuItem>
+          </NsSelectAutocomplete>
+          <NsTextInput
+            label="Check me out!"
+            name="textInput"
+            errorMessage="The 'Text Input' field is required"
+            validate={required}
+            required={true}
+          />
+          <NsTextArea
+            label="Check me out!"
+            name="textArea"
+            errorMessage="The 'Text Area' field is required"
+            validate={required}
+            required={true}
+          />
+          <NsDateCalendar
+            errorMessage="The 'Date Field' field is required"
+            label="Date Field*"
+            name="dateField"
+            required={true}
+            validate={required}
+          />
 
-                    <div>
-                        <FormLabel component="legend">Choose your favourite meal</FormLabel>
-                        <FormGroup>
-                            <ValidatedRadio label="Tortellini" labelPlacement="end" />
-                            <ValidatedRadio label="Lasagne" labelPlacement="end" />
-                            <ValidatedRadio label="Erbazzone" labelPlacement="end" />
-                            <ValidatedRadio label="Pizza" labelPlacement="end" />
-                        </FormGroup>
-                    </div>
-                    <ValidatedDragDrop
-                        buttonStatus
-                        displayForm
-                        errorMessage="The 'File' field is required"
-                        name="uploadFile"
-                        onFileLoaded={() => console.log('ciao')}
-                        validate={required}
-                    />
-                    <ValidatedFileUpload
-                        displayForm
-                        errorMessage="The 'File' field is required"
-                        name="fileUpload"
-                        onChange={() => console.log('ciao')}
-                        validate={required}
-                    />
-                </GridLayout>
-            </ValidatedForm>
-            <Container maxWidth={false}>
-                <Divider sx={{ my: 4 }} />
-                <Typography>Form Data:</Typography>
-                <Typography component="pre">{JSON.stringify(data, null, 2)}</Typography>
-            </Container>
-        </>
-    );
+          <div>
+            <FormLabel component="legend">Choose your favourite meal</FormLabel>
+            <FormGroup>
+              <NsCheckbox label="Tortellini" labelPlacement="end" />
+              <NsCheckbox label="Lasagne" labelPlacement="end" />
+              <NsCheckbox label="Erbazzone" labelPlacement="end" />
+              <NsCheckbox label="Pizza" labelPlacement="end" />
+            </FormGroup>
+          </div>
+
+          <div>
+            <FormLabel component="legend">Choose your favourite meal</FormLabel>
+            <FormGroup>
+              <NsRadio
+                label="Tortellini"
+                labelPlacement="end"
+                onChange={() => {}}
+                checked={false}
+                value={''}
+              />
+              <NsRadio
+                label="Lasagne"
+                labelPlacement="end"
+                onChange={() => {}}
+                checked={false}
+                value={''}
+              />
+              <NsRadio
+                label="Erbazzone"
+                labelPlacement="end"
+                onChange={() => {}}
+                checked={false}
+                value={''}
+              />
+              <NsRadio
+                label="Pizza"
+                labelPlacement="end"
+                onChange={() => {}}
+                checked={false}
+                value={''}
+              />
+            </FormGroup>
+          </div>
+          <NsDragDrop
+            buttonStatus
+            displayForm
+            errorMessage="The 'File' field is required"
+            name="uploadFile"
+            onFileLoaded={() => console.log('ciao')}
+            validate={required}
+          />
+          <NsFileUpload
+            displayForm
+            errorMessage="The 'File' field is required"
+            name="fileUpload"
+            onChange={() => console.log('ciao')}
+            validate={required}
+          />
+        </NsGridLayout>
+      </NsForm>
+      <Container maxWidth={false}>
+        <Divider sx={{ my: 4 }} />
+        <Typography>Form Data:</Typography>
+        <Typography component="pre">{JSON.stringify(data, null, 2)}</Typography>
+      </Container>
+    </>
+  );
 };
 
 export const Form = Template.bind({});

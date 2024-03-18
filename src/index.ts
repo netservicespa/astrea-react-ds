@@ -4,11 +4,43 @@
 export { NsFullPageSpinner } from './components/NsFullPageSpinner';
 export { ErrorBoundary } from './components/error/ErrorBoundary';
 export { FallbackPage } from './components/error/FallbackPage';
-export { Header } from './components/patterns/navigation/Header';
+
+/**
+ * @deprecated
+ * The "Header" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsHeader" component.
+ */
+export {
+  NsHeader,
+  NsHeader as Header,
+} from './components/patterns/navigation/NsHeader';
+
+/**
+ * @deprecated
+ * The "DragDrop" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsDragDrop" component.
+ */
+export {
+  NsDragAndDrop,
+  NsDragAndDrop as DragDrop,
+} from './components/components/NsDragAndDrop';
 export { NsFooter } from './components/patterns/footer/NsFooter';
-export { DragDrop } from './components/components/DragDrop';
-export { Errors } from './components/components/Errors';
-export { LabelInput } from './components/components/LabelInput';
+/**
+ * @deprecated
+ * The "Errors" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsErrors" component.
+ */
+export { NsErrors, NsErrors as Errors } from './components/components/NsErrors';
+
+/**
+ * @deprecated
+ * The "LabelInput" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsLabelInput" component.
+ */
+export {
+  NsLabelInput,
+  NsLabelInput as LabelInput,
+} from './components/components/NsLabelInput';
 export { NsButton } from './components/components/NsButton';
 export { NsTabs } from './components/components/tabs/NsTabs';
 export { NsPanel } from './components/components/panel/NsPanel';
@@ -28,18 +60,80 @@ export { NsFeedback } from './components/components/feedback/NsFeedback';
 
 /**
  * Forms and validation
+ *
+ * the following components are deprecated:
+ *
+ * @deprecated
+ *  - "ValidatedCheckbox" component is deprecated, use "NsCheckbox"
+ * @deprecated
+ *  - "ValidatedDateCalendar" component is deprecated, use "NsDateCalendar"
+ * @deprecated
+ *  - "ValidatedDragDrop" component is deprecated, use "NsDragDrop"
+ * @deprecated
+ *  - "ValidatedFileUpload" component is deprecated, use "NsFileUpload"
+ * @deprecated
+ *  - "ValidatedRadio" component is deprecated, use "NsRadio"
+ * @deprecated
+ *  - "ValidatedSelect" component is deprecated, use "NsSelect"
+ * @deprecated
+ *  - "ValidatedSelectAutocomplete" component is deprecated, use "NsSelectAutocomplete"
+ * @deprecated
+ *  - "ValidatedTextArea" component is deprecated, use "NsTextArea"
+ * @deprecated
+ *  - "ValidatedTextInput" component is deprecated, use "NsTextInput"
+ * @deprecated
+ *  - "ValidatedForm" component is deprecated, use "NsForm"
+ *
+ * will be removed starting with version 2.0 of astrea-react-ds.
  */
-export * from './components/components/form/ValidatedForm';
-export { ValidatedFormWrapper } from './components/components/form/ValidatedFormWrapper';
-export { ValidatedCheckbox } from './components/components/form/fields/ValidatedCheckbox';
-export { ValidatedRadio } from './components/components/form/fields/ValidatedRadio';
-export { ValidatedDateCalendar } from './components/components/form/fields/ValidatedDateCalendar';
-export { ValidatedDragDrop } from './components/components/form/fields/ValidatedDragDrop';
-export { ValidatedSelect } from './components/components/form/fields/ValidatedSelect';
-export { ValidatedSelectAutocomplete } from './components/components/form/fields/ValidatedSelectAutocomplete';
-export { ValidatedTextInput } from './components/components/form/fields/ValidatedTextInput';
-export { ValidatedTextArea } from './components/components/form/fields/ValidatedTextArea';
-export { ValidatedFileUpload } from './components/components/form/fields/ValidatedFileUpload';
+export {
+  NsFormProps,
+  NsFormProps as FormProps,
+  NsForm,
+  NsForm as ValidatedForm,
+  useFormContext,
+  DefaultButtons,
+} from './components/components/form/NsForm';
+export {
+  NsFormWrapper,
+  NsFormWrapper as ValidatedFormWrapper,
+} from './components/components/form/NsFormWrapper';
+export {
+  NsCheckbox,
+  NsCheckbox as ValidatedCheckbox,
+} from './components/components/form/fields/NsCheckbox';
+export {
+  NsRadio,
+  NsRadio as ValidatedRadio,
+} from './components/components/form/fields/NsRadio';
+export {
+  NsDateCalendar,
+  NsDateCalendar as ValidatedDateCalendar,
+} from './components/components/form/fields/NsDateCalendar';
+export {
+  NsDragDrop,
+  NsDragDrop as ValidatedDragDrop,
+} from './components/components/form/fields/NsDragDrop';
+export {
+  NsSelect,
+  NsSelect as ValitatedSelect,
+} from './components/components/form/fields/NsSelect';
+export {
+  NsSelectAutocomplete,
+  NsSelectAutocomplete as ValidatedSelectAutocomplete,
+} from './components/components/form/fields/NsSelectAutocomplete';
+export {
+  NsTextInput,
+  NsTextInput as ValidatedTextInput,
+} from './components/components/form/fields/NsTextInput';
+export {
+  NsTextArea,
+  NsTextArea as ValidatedTextArea,
+} from './components/components/form/fields/NsTextArea';
+export {
+  NsFileUpload,
+  NsFileUpload as ValidatedFileUpload,
+} from './components/components/form/fields/NsFileUpload';
 export * from './components/components/form/validators';
 
 /**
@@ -47,22 +141,82 @@ export * from './components/components/form/validators';
  */
 export * from './components/notifier/NotificationContext';
 export * from './components/notifier/NotificationReducer';
-export { Notifier } from './components/notifier/Notifier';
+
+/**
+ * @deprecated
+ * The "Notifier" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsNotifier" component.
+ */
+export {
+  NsNotifier,
+  NsNotifier as Notifier,
+} from './components/notifier/NsNotifier';
 
 /**
  * Wizard
+ *
+ * @deprecated
+ *  - "Wizard" component is deprecated, use "NsWizard"
+ * @deprecated
+ *  - "WizardFormStep" component is deprecated, use "NsWizardFormStep"
+ * @deprecated
+ *  - "WizardStep" component is deprecated, use "NsWizardStep"
+ * @deprecated
+ *  - "WizardProgressButtons" component is deprecated, use "NsWizardProgressButtons"
+ * @deprecated
+ *  - "WizardStepper" component is deprecated, use "NsWizardStepper"
+ * @deprecated
+ *  - "WizardStepperProps" interface is deprecated, use "NsWizardStepperProps"
+ * will be removed starting with version 2.0 of astrea-react-ds.
  */
-export * from './components/wizard/Wizard';
-export * from './components/wizard/Stepper';
+export {
+  NsWizard,
+  NsWizard as Wizard,
+  NsWizardFormStep,
+  NsWizardFormStep as WizardFormStep,
+  NsWizardStep,
+  NsWizardStep as WizardStep,
+  NsWizardProgressButtons,
+  NsWizardProgressButtons as WizardProgressButtons,
+} from './components/wizard/NsWizard';
+export {
+  NsWizardStepper,
+  NsWizardStepper as WizardStepper,
+  NsWizardStepperProps,
+  NsWizardStepperProps as WizardStepperProps,
+} from './components/wizard/NsStepper';
 export * from './components/wizard/WizardContext';
 export * from './components/wizard/WizardReducer';
 
 /**
  * Layouts
  */
-export { GridLayout } from './components/layout/GridLayout';
-export { HttpStatus } from './components/layout/httpStatus/HttpStatus.layout';
-export { Login } from './components/layout/login/Login';
+/**
+ * @deprecated
+ * The "GridLayout" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsGridLayout" component.
+ */
+export {
+  NsGridLayout,
+  NsGridLayout as GridLayout,
+} from './components/layout/NsGridLayout';
+
+/**
+ * @deprecated
+ * The "HttpStatus" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsHttpStatus" component.
+ * */
+export {
+  NsHttpStatus,
+  NsHttpStatus as HttpStatus,
+} from './components/layout/httpStatus/NsHttpStatus';
+
+/**
+ * @deprecated
+ * The "Login" component is deprecated, it will be removed starting with version 2.0 of astrea-react-ds.
+ * use the "NsLogin" component.
+ */
+export { NsLogin, NsLogin as Login } from './components/layout/login/NsLogin';
 
 /**
  * Utils

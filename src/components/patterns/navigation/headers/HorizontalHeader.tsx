@@ -6,7 +6,7 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { HeaderProps } from 'src/util/types';
+import { HeaderProps } from '../../../../util/types';
 import {
   NsDropDown,
   DynamicLink,
@@ -191,7 +191,7 @@ const AuthContainer = styled('div')(
   `
 );
 
-interface UserMenuProps {
+export interface UserMenuProps {
   notificationData?: INotificationData;
   userPanelMenuItems: any;
   router: any;
@@ -264,8 +264,8 @@ export default function HorizontalHeader({
 
   // @ts-ignore
   return (
-    <HeaderContainer configuration={configuration}>
-      <LogoContainer configuration={configuration}>
+    <HeaderContainer {...configuration}>
+      <LogoContainer {...configuration}>
         <DynamicLink key={'/'} to={'/'} router={router}>
           {logo ?? (
             <Box
@@ -306,7 +306,7 @@ export default function HorizontalHeader({
       </LogoContainer>
       <NavigationContainer
         className={isMenuOpen ? 'open' : ''}
-        configuration={configuration}
+        {...configuration}
       >
         <nav aria-label="Menu principale">
           {menuItems?.map((item) => (
@@ -321,7 +321,7 @@ export default function HorizontalHeader({
             notificationData={notificationData}
             router={router}
             onLogout={onLogout}
-            configuration={configuration}
+            {...configuration}
           />
         </AuthContainer>
       </NavigationContainer>

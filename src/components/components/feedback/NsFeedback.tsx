@@ -85,7 +85,7 @@ export const NsFeedback = ({
                 fontStyle: 'normal',
                 textAlign: 'left',
                 fontSize: '32px',
-                lineHeight: '42px',
+                lineHeight: '18px',
               }}
             >
               {title}

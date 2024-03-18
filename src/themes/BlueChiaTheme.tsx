@@ -1,5 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import { darken } from '@mui/system';
+import { itIT } from '@mui/x-date-pickers/locales';
+import { itIT as coreItIT } from '@mui/material/locale';
 
 const paletteColors = {
   primary: {
@@ -132,6 +134,15 @@ const themeOptions = {
         },
       ],
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            padding: '0',
+          },
+        }
+      }
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
@@ -254,8 +265,21 @@ const themeOptions = {
         standardInfo: {
           borderRadius: '0px !important',
         },
+        icon: {
+          marginTop: '11px',
+          fontSize: '26px',
+        },
       },
     },
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          ' .MuiModal-backdrop': {
+            backgroundColor: `${paletteColors.primary.main}80`,
+          },
+        },
+      },
+    }
   },
   MuiFormLabel: {
     styleOverrides: {
@@ -294,4 +318,4 @@ export type CustomTheme = {
 };
 
 // @ts-ignore
-export const BlueChiaTheme = responsiveFontSizes(createTheme(themeOptions));
+export const BlueChiaTheme = responsiveFontSizes(createTheme(themeOptions, itIT, coreItIT));

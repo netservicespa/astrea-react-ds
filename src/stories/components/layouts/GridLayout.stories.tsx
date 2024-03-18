@@ -1,16 +1,16 @@
 import { Container, Divider, Typography } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { ValidatedForm } from '../../../components/components/form/ValidatedForm';
-import { ValidatedTextInput } from '../../../components/components/form/fields/ValidatedTextInput';
-import { ValidatedDateCalendar } from '../../../components/components/form/fields/ValidatedDateCalendar';
+import { NsForm } from '../../../components/components/form/NsForm';
+import { NsTextInput } from '../../../components/components/form/fields/NsTextInput';
+import { NsDateCalendar } from '../../../components/components/form/fields/NsDateCalendar';
 import { required } from '../../../components/components/form/validators';
-import { GridLayout } from '../../../components/layout/GridLayout';
+import { NsGridLayout } from '../../../components/layout/NsGridLayout';
 import { useTranslation } from 'react-i18next';
 
 export default {
   title: 'Tools/GridLayout',
-  component: GridLayout,
+  component: NsGridLayout,
   parameters: {
     docs: { source: { type: 'code' } },
   },
@@ -20,7 +20,7 @@ export default {
       type: 'number',
     },
   },
-} as Meta<typeof GridLayout>;
+} as Meta<typeof NsGridLayout>;
 
 interface FormContents {
   field1?: string;
@@ -30,25 +30,25 @@ interface FormContents {
   field5?: string;
 }
 
-const Template: StoryFn<typeof GridLayout> = (args) => {
+const Template: StoryFn<typeof NsGridLayout> = (args) => {
   const { t } = useTranslation();
   const [data, setData] = React.useState<FormContents>({});
   return (
     <>
-      <ValidatedForm onSubmit={setData} onReset={() => setData({})}>
-        <GridLayout rowSize={args.rowSize}>
-          <ValidatedTextInput
+      <NsForm onSubmit={setData} onReset={() => setData({})}>
+        <NsGridLayout rowSize={args.rowSize}>
+          <NsTextInput
             name="field1"
             label="Field 1*"
             validate={required}
             errorMessage={t('form.errors.required', { field: 'Field 1' })}
           />
-          <ValidatedTextInput name="field2" label="Field 2" />
-          <ValidatedTextInput name="field3" label="Field 3" />
-          <ValidatedDateCalendar name="field4" label="Field 4" />
-          <ValidatedTextInput name="field5" label="Field 5" />
-        </GridLayout>
-      </ValidatedForm>
+          <NsTextInput name="field2" label="Field 2" />
+          <NsTextInput name="field3" label="Field 3" />
+          <NsDateCalendar name="field4" label="Field 4" />
+          <NsTextInput name="field5" label="Field 5" />
+        </NsGridLayout>
+      </NsForm>
       <Container maxWidth={false}>
         <Divider sx={{ my: 4 }} />
         <Typography>Form Data:</Typography>

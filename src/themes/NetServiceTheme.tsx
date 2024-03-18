@@ -1,5 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import { darken } from '@mui/system';
+import { itIT } from '@mui/x-date-pickers/locales';
+import { itIT as coreItIT } from '@mui/material/locale';
 
 export const accordionBackgroundColor = '#ebefef';
 
@@ -152,6 +154,15 @@ const themeOptions = {
           padding: '8px',
         },
       },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            padding: '0',
+          },
+        }
+      }
     },
     MuiButtonBase: {
 			styleOverrides: {
@@ -371,6 +382,16 @@ const themeOptions = {
         },
       },
     },
+
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          ' .MuiModal-backdrop': {
+            backgroundColor: `${paletteColors.primary.main}80`,
+          },
+        },
+      },
+    }
   },
   accordion: {
     backgroundColor: accordionBackgroundColor,
@@ -429,4 +450,4 @@ export type CustomTheme = {
 };
 
 // @ts-ignore
-export const theme = responsiveFontSizes(createTheme(themeOptions));
+export const theme = responsiveFontSizes(createTheme(themeOptions, itIT, coreItIT));

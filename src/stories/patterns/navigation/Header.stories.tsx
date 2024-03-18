@@ -1,16 +1,16 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { Header } from '../../../components/patterns/navigation/Header';
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { NsHeader } from '../../../components/patterns/navigation/NsHeader';
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
 /**
  * Headers are containers attached to the top of a page that allow the user to navigate through the application.
  *
  */
-const meta: Meta<typeof Header> = {
+const meta: Meta<typeof NsHeader> = {
   title: 'Patterns/Header',
-  component: Header,
+  component: NsHeader,
   parameters: {
     layout: 'fullscreen',
     viewport: {
@@ -20,7 +20,7 @@ const meta: Meta<typeof Header> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof NsHeader>;
 
 export const UserPanelHeader: Story = {
   args: {
@@ -40,8 +40,8 @@ export const UserPanelHeader: Story = {
       { name: 'Profile', path: '/', icon: <PersonIcon /> },
       { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
     ],
-    configuration:{
-      centralLogo:false,
+    configuration: {
+      centralLogo: false,
       dropDownConfiguration: {
         anchorOrigin: {
           vertical: 'top',
@@ -51,10 +51,10 @@ export const UserPanelHeader: Story = {
           vertical: 'top',
           horizontal: 'right',
         },
-      }
+      },
     },
-    router:	null,
-    onLogout:()=>{} ,
+    router: null,
+    onLogout: () => {},
   },
 };
 
@@ -77,7 +77,7 @@ export const LoggedIn: Story = {
 export const Mobile: Story = {
   args: {
     title: {
-      bold: 'Application', 
+      bold: 'Application',
       thin: 'title',
       subtitle: 'version 1.0.0',
     },
@@ -99,7 +99,7 @@ export const VerticalHeader: Story = {
   args: {
     type: 'vertical',
     title: {
-      bold: 'Application', 
+      bold: 'Application',
       thin: 'title',
       subtitle: 'version 1.0.0',
     },
@@ -111,6 +111,3 @@ export const VerticalHeader: Story = {
     ],
   },
 };
-
-
-

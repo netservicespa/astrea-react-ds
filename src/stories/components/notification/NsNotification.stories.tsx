@@ -5,7 +5,7 @@ import {
   NsNotification,
 } from '../../../components/components/notification/NsNotification';
 import { StoryFn } from '@storybook/react';
-import { Header } from '../../../components/patterns/navigation/Header';
+import { NsHeader } from '../../../components/patterns/navigation/NsHeader';
 import { Typography } from '@mui/material';
 
 const meta: Meta<typeof NsNotification> = {
@@ -28,7 +28,7 @@ const Template: StoryFn<typeof NsNotification> = (args: INotificationData) => {
     subtitle: 'version 1.0.0',
   };
   return (
-    <Header
+    <NsHeader
       title={title}
       notificationData={args}
       configuration={{ centralLogo: false }}

@@ -1,13 +1,13 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Login } from '../../components/layout/login/Login';
-import { DefaultButtons } from '../../components/components/form/ValidatedForm';
+import { NsLogin } from '../../components/layout/login/NsLogin';
+import { DefaultButtons } from '../../components/components/form/NsForm';
 /**
  * Login forms are necessary components of most applications and websites.
  */
 export default {
   title: 'Layouts/Login',
-  component: Login,
+  component: NsLogin,
   argTypes: {
     onButtonClick: { action: 'clicked' },
     logoSrc: { control: 'text' },
@@ -18,9 +18,9 @@ export default {
     cardBorderRadius: { control: 'text' },
     handleFormSubmit: { action: 'submit' },
   },
-} as Meta<typeof Login>;
+} as Meta<typeof NsLogin>;
 
-const Template = (args) => <Login {...args} />;
+const Template = (args) => <NsLogin {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -52,8 +52,7 @@ LoginForm.args = {
 
 export const ClassicForm = Template.bind({});
 ClassicForm.args = {
-  
-	gradient:
+  gradient:
     'linear-gradient(-240.64224645720873deg, rgba(48, 138, 125, 0.99)  1.9191447712979693e-14%, rgba(48, 138, 125, 0.7), #0c4b50 100% )',
   imagePath: './images/ns-abstarct.jpg',
   headerTitle: {
@@ -74,10 +73,5 @@ LoginWithButtonSlot.args = {
   title1: 'Login',
   title2: 'Login 2',
   type: 'form',
-  buttonsSlot: (
-    <DefaultButtons
-      buttonPosition="right"
-      submitText="Entra"
-    />
-  ),
+  buttonsSlot: <DefaultButtons buttonPosition="right" submitText="Entra" />,
 };

@@ -1,53 +1,75 @@
-import { Meta } from "@storybook/blocks";
+import { Meta } from '@storybook/blocks';
 import { NsCard } from '../components/components/card/NsCard';
-import { GridLayout } from '../components/layout/GridLayout';
+import { NsGridLayout } from '../components/layout/NsGridLayout';
 
 <Meta title="Welcome" />
 
 <h1>Welcome to Astrea Design System</h1>
 
 <p>
-  Welcome to Astrea Design System, a comprehensive collection of styles, components, patterns, and layouts designed to provide a unified and consistent user experience across all our products and projects.
+  Welcome to Astrea Design System, a comprehensive collection of styles,
+  components, patterns, and layouts designed to provide a unified and consistent
+  user experience across all our products and projects.
 </p>
 
 <h2>Why Design System</h2>
 
-<GridLayout rowSize={3}>
-  <NsCard 
-    mainText="Styles" 
+<NsGridLayout rowSize={3}>
+  <NsCard
+    mainText="Styles"
     subText="Our design system offers a cohesive set of styles, including typography, color palettes, spacing, and visual elements. Consistent styles ensure a unified look and feel, enhancing brand identity and user recognition."
     cardVariant="classic"
   />
-  <NsCard 
-    mainText="Components" 
+  <NsCard
+    mainText="Components"
     subText="Astrea provides a library of reusable UI components such as buttons, forms, cards, navigation bars, and more. These components maintain consistency in design and behavior, streamlining development and promoting efficiency."
   />
-  <NsCard 
-    mainText="Patterns" 
+  <NsCard
+    mainText="Patterns"
     subText="We've curated design patterns for common user interactions and workflows. These patterns are tested and optimized for usability, ensuring a seamless and intuitive user experience."
   />
-  <NsCard 
-    mainText="Layouts" 
+  <NsCard
+    mainText="Layouts"
     subText="Astrea offers predefined layouts and grid systems that facilitate the structuring and organization of content. These layouts maintain consistency in the arrangement of elements across different screens and devices."
   />
-</GridLayout>
+</NsGridLayout>
 
 <h2>More Resources</h2>
 <h4>a. Design Guidelines:</h4>
 <p>
-  Explore our comprehensive design guidelines to understand our design principles, usage recommendations, accessibility considerations, and best practices when implementing the Astrea Design System.
+  Explore our comprehensive design guidelines to understand our design
+  principles, usage recommendations, accessibility considerations, and best
+  practices when implementing the Astrea Design System.
 </p>
 
 <h4>b. View on GitHub:</h4>
 <p>
-  Our design system is open-source! Access our GitHub repository to view the source code, contribute, and stay updated with the latest developments and enhancements.
+  Our design system is open-source! Access our GitHub repository to view the
+  source code, contribute, and stay updated with the latest developments and
+  enhancements.
 </p>
 
-<a style={{ color: '#2E5A60', textDecoration: 'underline' }} href="https://github.com/netservicespa/astrea-react-ds" target="blank">https://github.com/netservicespa/astrea-react-ds</a><br />
+<a
+  style={{ color: '#2E5A60', textDecoration: 'underline' }}
+  href="https://github.com/netservicespa/astrea-react-ds"
+  target="blank"
+>
+  https://github.com/netservicespa/astrea-react-ds
+</a>
+<br />
 
 <h4>c. NPM:</h4>
 <p>
-  Install Astrea Design System via npm to easily incorporate the styles, components, and patterns into your projects. Get started quickly and efficiently with our NPM package.
+  Install Astrea Design System via npm to easily incorporate the styles,
+  components, and patterns into your projects. Get started quickly and
+  efficiently with our NPM package.
 </p>
 
-<a style={{ color: '#2E5A60', textDecoration: 'underline' }} href="https://www.npmjs.com/package/@netservice/astrea-react-ds" target="blank">https://www.npmjs.com/package/@netservice/astrea-react-ds</a><br />
+<a
+  style={{ color: '#2E5A60', textDecoration: 'underline' }}
+  href="https://www.npmjs.com/package/@netservice/astrea-react-ds"
+  target="blank"
+>
+  https://www.npmjs.com/package/@netservice/astrea-react-ds
+</a>
+<br />

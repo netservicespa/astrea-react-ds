@@ -11,7 +11,7 @@ import {
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { NsTabs } from '../tabs/NsTabs';
-import { DynamicLinkProps } from 'src/util/types';
+import { DynamicLinkProps } from '../../../util/types';
 import { DynamicLink } from '../Dropdown/NsDropDown';
 
 export interface IReadWrite {

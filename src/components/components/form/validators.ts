@@ -7,7 +7,7 @@ export type ValidatorFactoryType<ValueType = unknown> = (
   message: React.ReactNode
 ) => ValidatorType<ValueType>;
 
-export type ValidatedInput<InputType, ValueType> = InputType & {
+export type NsInput<InputType, ValueType> = InputType & {
   /** Funzione o array di funzioni per la validazione */
   validate?:
     | ValidatorFactoryType<ValueType>

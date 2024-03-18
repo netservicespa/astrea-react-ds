@@ -6,7 +6,9 @@ import i18n from './i18n';
 import themeLight from './astrea-theme-light';
 import themeDark from './astrea-theme-dark';
 import { theme as nsTheme } from '../src/themes/NetServiceTheme';
-import { theme as blueChia } from '../src/themes/BlueChia';
+import { BlueChiaTheme as blueChia } from '../src/themes/BlueChiaTheme';
+import { GoldMinaTheme as goldMina } from '../src/themes/GoldMinaTheme';
+import { AstreaTheme as astrea } from '../src/themes/AstreaTheme';
 import './styles.scss';
 
 const isDark = typeof window !== `undefined` ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches : null;
@@ -21,8 +23,10 @@ export const globalTypes = {
       icon: 'paintbrush',
       dynamicTitle: true,
       items: [
-        { value: 'nsTheme', left: '🌊', title: 'Green NS' },
-        { value: 'blueChia', left: '🍃', title: 'Blue Chia' }
+        { value: 'nsTheme', left: '🍃', title: 'Green NS' },
+        { value: 'blueChia', left: '🌊', title: 'Blue Chia' },
+        { value: 'goldMina', left: '🌟', title: 'Gold Mina' },
+        { value: 'astrea', left: '🌚', title: 'Astrea' }
       ],
     },
   },
@@ -45,6 +49,8 @@ export const globalTypes = {
 const THEMES = {
   nsTheme,
   blueChia,
+  goldMina,
+  astrea
 };
 
 // Wrap stories in the I18nextProvider component
@@ -100,11 +106,9 @@ const preview: Preview = {
           'Welcome',
           'Styles',
           'Components',
-          'Navigation',
-          'Form',
-          'Wrappers',
-          'Docs',
-          'Example',
+          'Patterns',
+          'Layouts',
+          'Tools',
         ],
         locales: 'en-US',
       },
@@ -121,7 +125,11 @@ const preview: Preview = {
       lightClass: 'light-theme',
       stylePreview: true
     },
-    showCode: true,
+    docs: {
+      canvas: {
+        sourceState: 'shown'
+      }
+    }  
   },
   globals: {
     locale: 'en',

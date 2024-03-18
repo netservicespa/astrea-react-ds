@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import {
-  HttpStatus,
-  HttpStatusProps,
-} from '../../components/layout/httpStatus/HttpStatus.layout';
+  NsHttpStatus,
+  NsHttpStatusProps,
+} from '../../components/layout/httpStatus/NsHttpStatus';
 
 export default {
   title: 'Tools/HttpStatus',
-  component: HttpStatus,
+  component: NsHttpStatus,
   argTypes: {
     httpCode: {
       control: 'number',
@@ -28,9 +28,11 @@ export default {
       defaultValue: false,
     },
   },
-} as Meta<typeof HttpStatus>;
+} as Meta<typeof NsHttpStatus>;
 
-const Template: StoryFn<HttpStatusProps> = (args) => <HttpStatus {...args} />;
+const Template: StoryFn<NsHttpStatusProps> = (args) => (
+  <NsHttpStatus {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { DynamicLinkProps, IDropDown } from 'src/util/types';
+import { DynamicLinkProps, IDropDown } from '../../../util/types';
 
 /**
  * DynamicLink/ Dropdown Component

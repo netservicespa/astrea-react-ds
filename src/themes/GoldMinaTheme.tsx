@@ -132,6 +132,15 @@ const themeOptions = {
         },
       ],
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            padding: '0',
+          },
+        }
+      }
+    },
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
@@ -254,8 +263,21 @@ const themeOptions = {
         standardInfo: {
           borderRadius: '0px !important',
         },
+        icon: {
+          marginTop: '11px',
+          fontSize: '26px',
+        },
       },
     },
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          ' .MuiModal-backdrop': {
+            backgroundColor: `${paletteColors.primary.main}80`,
+          },
+        },
+      },
+    }
   },
   MuiFormLabel: {
     styleOverrides: {

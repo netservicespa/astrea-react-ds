@@ -112,7 +112,7 @@ export interface PageHeaderProps {
 export const NsPageHeader = ({ pageData, configuration }: PageHeaderProps) => {
   return (
     <HeaderContainer>
-      <NavigationContainer configurations={configuration}>
+      <NavigationContainer {...configuration}>
         <nav aria-label="Menu principale">
           {pageData.logoPath ? (
             <Box

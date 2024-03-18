@@ -9,5 +9,5 @@
 Install @netservice/astrea-react-ds using yarn, npm or pnpm:
 
 ```
-yarn add @netservice/astrea-react-ds
+pnpm add @netservice/astrea-react-ds
 ```

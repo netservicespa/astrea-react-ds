@@ -1,15 +1,15 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import ConfirmPage from '../../../components/components/confirmPage/NsConfirmPage';
+import NsConfirmPage from '../../../components/components/confirmPage/NsConfirmPage';
 
 export default {
   title: 'Layouts/ConfirmationPage',
-  component: ConfirmPage,
+  component: NsConfirmPage,
 } as Meta;
 
 const Template: StoryFn<any> = (args) => (
   <div>
-    <ConfirmPage {...args} />
+    <NsConfirmPage {...args} />
   </div>
 );
 

@@ -5,14 +5,14 @@ import { TabProps } from '@mui/material/Tab';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/system';
 
-interface TabPanelProps {
+export interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
   noPadding?: boolean;
 }
 
-interface StyledTabProps extends TabProps {
+export interface StyledTabProps extends TabProps {
   isActive: boolean;
 }
 
@@ -94,7 +94,9 @@ export const NsTabs: React.FC<
     borderLeft: `1px solid ${theme.palette.borderColor.main}`,
     borderRight: `1px solid ${theme.palette.borderColor.main}`,
     borderTop: `1px solid ${theme.palette.borderColor.main}`,
-    borderBottom: isActive ? 'none' : `1px solid ${theme.palette.borderColor.main}`,
+    borderBottom: isActive
+      ? 'none'
+      : `1px solid ${theme.palette.borderColor.main}`,
     height: isActive ? '48px' : '43px',
     minHeight: '43px',
     margin: '0px', // Rimuove margini esterni

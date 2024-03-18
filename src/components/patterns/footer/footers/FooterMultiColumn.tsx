@@ -1,8 +1,8 @@
 import { Box, Grid, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
-import { GridLayout } from '../../../../components/layout/GridLayout';
-import { FooterProps } from 'src/components/patterns/footer/NsFooter';
+import { NsGridLayout } from '../../../layout/NsGridLayout';
+import { FooterProps } from '../../../patterns/footer/NsFooter';
 
 /**
  * Footer Multi Column Component
@@ -68,7 +68,7 @@ const FooterMultiColumn = ({ logoPath, columns, rowSize }: FooterProps) => {
           <Logo src={logoPath} alt="logo" />
         </Box>
         <Grid container p={2}>
-          <GridLayout rowSize={rowSize}>
+          <NsGridLayout rowSize={rowSize}>
             {columns &&
               columns?.map((column: any, id: number) => {
                 return (
@@ -101,7 +101,7 @@ const FooterMultiColumn = ({ logoPath, columns, rowSize }: FooterProps) => {
                   </div>
                 );
               })}
-          </GridLayout>
+          </NsGridLayout>
         </Grid>
       </Box>
     </>

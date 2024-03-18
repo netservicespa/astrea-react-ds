@@ -20,7 +20,7 @@ const PaginationWrapper = styled(Box)(({ theme }) => ({
  *
  */
 
-interface PaginationProps {
+export interface PaginationProps {
   paginationType: 'normal' | 'table';
   page: number;
   totalPages?: number;
