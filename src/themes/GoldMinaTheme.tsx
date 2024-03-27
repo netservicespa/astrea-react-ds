@@ -138,8 +138,8 @@ const themeOptions = {
           '& .MuiOutlinedInput-root': {
             padding: '0',
           },
-        }
-      }
+        },
+      },
     },
     MuiButtonBase: {
       defaultProps: {
@@ -263,10 +263,6 @@ const themeOptions = {
         standardInfo: {
           borderRadius: '0px !important',
         },
-        icon: {
-          marginTop: '11px',
-          fontSize: '26px',
-        },
       },
     },
     MuiModal: {
@@ -277,7 +273,7 @@ const themeOptions = {
           },
         },
       },
-    }
+    },
   },
   MuiFormLabel: {
     styleOverrides: {

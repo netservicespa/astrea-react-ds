@@ -52,6 +52,10 @@ const Alert = React.forwardRef(function Alert(props: any, ref: any) {
             : '0px',
         boxShadow: 'none',
         borderRadius: '0px',
+        '.MuiAlert-icon': {
+          fontSize: '30px',
+          paddingTop: '15px'
+        }
       }}
       elevation={6}
       ref={ref}

@@ -10,6 +10,7 @@ import { useFormField } from 'relay-forms';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment, { Moment } from 'moment';
 import { PickersInputComponentLocaleText } from '@mui/x-date-pickers/locales';
+import { useTranslation } from 'react-i18next';
 
 const FMT = 'DD/MM/YYYY';
 
@@ -34,6 +35,7 @@ export const NsDateCalendar: React.FC<NsDateCalendarProps> = ({
 }) => {
   const key = useMemo(() => name || uniqueId('v_picker-'), [name]);
   const deps = useMemo(() => dependsOn, []);
+  const { i18n } = useTranslation();
 
   const validateCallback = useCallback(
     (v: string, deps: any) =>
@@ -74,7 +76,10 @@ export const NsDateCalendar: React.FC<NsDateCalendarProps> = ({
 
   return (
     <NsLabelInput nameHtml={key} label={label as string}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <LocalizationProvider
+        dateAdapter={AdapterMoment}
+        adapterLocale={i18n.language}
+      >
         <DatePicker
           format={FMT}
           value={moment(value, FMT)}
