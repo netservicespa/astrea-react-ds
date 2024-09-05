@@ -21,7 +21,7 @@ export interface NsFeedbackProps {
   /**
    * The sub-title of the snackbar.
    */
-  message: string;
+  message: string | React.ReactNode;
 
   /**
    * Indicates the type or severity of the snackbar.
@@ -48,14 +48,14 @@ const Alert = React.forwardRef(function Alert(props: any, ref: any) {
           props.variant == 'filled'
             ? '0px'
             : '0px' || props.variant == 'outlined'
-            ? '1px solid rgba(177,180,182,1)'
-            : '0px',
+              ? '1px solid rgba(177,180,182,1)'
+              : '0px',
         boxShadow: 'none',
         borderRadius: '0px',
         '.MuiAlert-icon': {
           fontSize: '30px',
-          paddingTop: '15px'
-        }
+          paddingTop: '15px',
+        },
       }}
       elevation={6}
       ref={ref}

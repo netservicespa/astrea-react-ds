@@ -54,5 +54,3 @@ export const NsConfirmPage: React.FC<NsConfirmPageProps> = ({
     </Grid>
   );
 };
-
-export default NsConfirmPage;

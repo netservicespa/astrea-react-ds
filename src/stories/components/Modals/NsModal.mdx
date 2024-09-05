@@ -1,0 +1,46 @@
+import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview  } from '@storybook/blocks';
+import * as NsModal from './NsModal.stories';
+
+<Meta of={NsModal} />
+
+<h1>Modal</h1>
+<p>
+  The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else.
+</p>
+<p>
+  The background of an application resembles the flat, opaque texture of a sheet of paper, 
+  and an application's behavior mimics paper's ability to be re-sized, shuffled, 
+  and bound together in multiple sheets.
+</p>
+
+<h3>Basic modal</h3>
+<p>
+  This type of modal provides additional information but does not contain any additional action.
+</p>
+<Primary />
+<Controls />
+
+{/* <h3>Nested  modal</h3>
+<p>
+  Modals can be nested, for example a select within a dialog, but stacking of more than two modals, 
+  or any two modals with a backdrop is <b>discouraged</b>.
+</p> */}
+<h3>Modale as a friction</h3>
+<p>
+  Example of a paragraph that contains information and details to take an action or reject it.
+</p>
+<Story  of={NsModal.ActionsModal} />
+
+<h3>Sidebar modal</h3>
+<p>
+  The lateral modal allows you to provide information without completely covering or obscuring the page. 
+  The user can perform repeated actions without losing track of navigation.
+</p>
+<Story  of={NsModal.SidebarModal} />
+
+<h3>Fullscreen modal</h3>
+<p>
+  Modals can be nested, for example a select within a dialog, but stacking of more than two modals, 
+  or any two modals with a backdrop is discouraged.
+</p>
+<Story  of={NsModal.FullscreenModal} />

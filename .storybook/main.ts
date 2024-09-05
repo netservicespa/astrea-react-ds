@@ -1,43 +1,55 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
+
 import path from 'path';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-viewport',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y',
-    'storybook-dark-mode',
-    {
-      name: "@storybook/addon-styling-webpack",
-      options: {
-        rules: [
-          {
-            test: /\.s[ac]ss$/i,
-            use: [
-              "style-loader",
-              "css-loader",
-              {
-                loader: "sass-loader",
-                options: { implementation: require.resolve("sass") }
-              },
-            ],
-          },
-        ]
-      },
+    stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+    addons: [
+        '@storybook/addon-links',
+        '@storybook/addon-essentials',
+        '@storybook/addon-interactions',
+        '@storybook/addon-viewport',
+        '@storybook/addon-docs',
+        '@storybook/addon-a11y',
+        'storybook-dark-mode',
+        {
+            name: '@storybook/addon-styling-webpack',
+            options: {
+                rules: [
+                    {
+                        test: /\.s[ac]ss$/i,
+                        use: [
+                            'style-loader',
+                            'css-loader',
+                            {
+                                loader: 'sass-loader',
+                                options: { implementation: require.resolve('sass') },
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+        '@storybook/addon-mdx-gfm',
+        '@storybook/addon-webpack5-compiler-babel',
+    ],
+    framework: {
+        name: '@storybook/react-webpack5',
+        options: {},
     },
-    '@storybook/addon-mdx-gfm'
-  ],
-  framework: {
-    name: '@storybook/react-webpack5',
-    options: {},
-  },
-  docs: {
-    autodocs: true,
-  },
-  staticDirs: ['../public'],
+    docs: {
+        autodocs: true,
+    },
+    staticDirs: ['../public'],
+    webpackFinal: async (config) => {
+        config.resolve = config.resolve ?? {};
+        config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules'];
+        config.resolve.alias = {
+            ...(config.resolve.alias ?? {}),
+            '@': path.resolve(__dirname, '../src'),
+            'CHANGELOG': path.resolve(__dirname, '../CHANGELOG.md'),
+        };
+        return config;
+    },
 };
 export default config;

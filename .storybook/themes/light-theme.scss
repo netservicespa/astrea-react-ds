@@ -7,17 +7,46 @@
 $class: 'light-theme' !default;
 $font-color: #000;
 
-body.dark-theme {
-    @include apply-where-selector('p') { 
-        color: $font-color;
+body.light-theme {
+  @include apply-where-selector('p') { 
+      color: $font-color;
+  }
+  
+  @include apply-where-selector('h1') { 
+      color: $font-color;
+  }
+  
+  @include apply-where-selector('h2') { 
+      color: $font-color;
+  }
+  
+  thead.docblock-argstable-head th span {
+    color: $font-color;
+  }
+
+  .MuiBox-root {
+    width: auto;
+  }
+
+  .innerZoomElementWrapper {
+    width: 1000px;
+    margin: 0 auto;
+
+    > * {
+      width: 100%;
     }
-    @include apply-where-selector('h1') { 
-        color: $font-color;
+
+    > header {
+      width: 1000px;
+      margin: 0 auto;
     }
-    @include apply-where-selector('h2') { 
-        color: $font-color;
-    }
-    thead.docblock-argstable-head th span {
-        color: $font-color;
-    }
+  }
+  
+  #storybook-root {
+    box-sizing: border-box;
+    margin: auto;
+    padding: 1rem;
+    max-height: 100%;
+    width: 100% !important;
+  }
 }

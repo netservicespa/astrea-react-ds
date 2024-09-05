@@ -60,7 +60,11 @@ const LineBox = () => {
   );
 };
 
-const FooterMultiColumn = ({ logoPath, columns, rowSize }: FooterProps) => {
+export const FooterMultiColumn = ({
+  logoPath,
+  columns,
+  rowSize,
+}: FooterProps) => {
   return (
     <>
       <Box sx={{ backgroundColor: '#ebefef' }}>
@@ -107,5 +111,3 @@ const FooterMultiColumn = ({ logoPath, columns, rowSize }: FooterProps) => {
     </>
   );
 };
-
-export default FooterMultiColumn;

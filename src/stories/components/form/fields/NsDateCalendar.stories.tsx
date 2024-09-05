@@ -2,12 +2,12 @@ import { Grid } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NsForm } from '../../../../components/components/form/NsForm';
-import { NsDateCalendar } from '../../../../components/components/form/fields/NsDateCalendar';
+import { NsForm } from 'src/components/components/form/NsForm';
+import { NsDateCalendar } from 'src/components/components/form/fields/NsDateCalendar';
 import {
   ValidatorFactoryType,
   required,
-} from '../../../../components/components/form/validators';
+} from 'src/components/components/form/validators';
 import { FormValueStateReturn } from 'relay-forms';
 import moment from 'moment';
 
@@ -21,7 +21,7 @@ export default {
 function isRangeValid<ValueType>(message: React.ReactNode) {
   return (
     endDate: ValueType,
-    deps?: { [key: string]: FormValueStateReturn<any> }
+    deps?: { [key: string]: FormValueStateReturn<any> },
   ) => {
     if (deps && deps['dateFieldFrom']) {
       const { value } = deps['dateFieldFrom'];

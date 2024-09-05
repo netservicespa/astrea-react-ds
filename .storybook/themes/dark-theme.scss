@@ -5,24 +5,122 @@
 }
 
 $class: 'dark-theme' !default;
-$font-color: #FFF;
+$font-color-white: #FFF;
+$font-color-black: #000;
 
 body.dark-theme {
-    @include apply-where-selector('p') { 
-        color: $font-color;
-    }
-    @include apply-where-selector('h1') { 
-        color: $font-color;
-    }
-    @include apply-where-selector('h2') { 
-        color: $font-color;
-    }
-    thead.docblock-argstable-head th span {
-        color: $font-color;
+  background: $font-color-white;
+  @include apply-where-selector('p') { 
+      color: $font-color-black;
+  }
+  
+  @include apply-where-selector('h1') { 
+      color: $font-color-white;
+  }
+
+  @include apply-where-selector('h2') { 
+      color: $font-color-white;
+  }
+
+  @include apply-where-selector('a') {
+    color: $font-color-white !important;
+  }
+
+  .sbdocs.sbdocs-content {
+    h1 {
+      color: $font-color-white !important;
     }
 
-    /* MDX elements */
-    .MuiPaper-root.MuiCard-root .MuiTypography-root {
-        color: #000;
+    p {
+      color: $font-color-white;
     }
+    .MuiCardContent-root p,
+    .MuiCardActions-root p {
+      color: $font-color-black;
+    }
+
+    td > p { 
+      color: $font-color-black;
+    }
+
+    p.MuiTypography-root {
+      color: $font-color-black;
+    }
+  }
+
+  .sb-show-main,
+  .sbdocs.sbdocs-wrapper {
+    background: #333333;
+  }
+
+  thead {
+    &.docblock-argstable-head th span {
+      color: $font-color-white;
+    }
+    &.docblock-argstable-head {
+      background: #191919;
+    }
+
+    &.docblock-argstable-head > th {
+      background: $font-color-white !important;
+    }
+  }
+
+  tbody { 
+    &.docblock-argstable-body > tr > td {
+      background: #191919 !important;
+      color: $font-color-white;
+    }
+
+    &.docblock-argstable-body > tr > td > button {
+      color: $font-color-white;
+      display: none;
+    }
+  }
+
+  button { 
+    &.css-otxova {
+      color: #FFF !important;
+    }
+  }
+  
+  .innerZoomElementWrapper {
+    width: 1000px;
+    margin: 0 auto;
+
+    > * {
+      width: 100%;
+    }
+
+    > header {
+      width: 1000px;
+      margin: 0 auto;
+    }
+  }
+
+  .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-3.css-1equabv-MuiGrid-root {
+    width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* MDX elements */
+  .MuiPaper-root.MuiCard-root .MuiTypography-root {
+    color: $font-color-black;
+  }
+
+  .MuiTypography-root {
+    color: $font-color-black;
+  }
+  .MuiBox-root {
+    width: auto;
+    margin: 0 auto;
+  }
+  
+  #storybook-root {
+    box-sizing: border-box;
+    margin: auto;
+    padding: 1rem;
+    max-height: 100%;
+    width: 100% !important;
+  }
 }

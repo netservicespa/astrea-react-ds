@@ -1,10 +1,10 @@
 import { Grid, MenuItem } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { NsForm } from '../../../../components/components/form/NsForm';
-import { NsSelect } from '../../../../components/components/form/fields/NsSelect';
+import { NsForm } from 'src/components/components/form/NsForm';
+import { NsSelect } from 'src/components/components/form/fields/NsSelect';
 import { useTranslation } from 'react-i18next';
-import { required } from '../../../../components/components/form/validators';
+import { required } from 'src/components/components/form/validators';
 
 export default {
   title: 'Components/Form/Select',

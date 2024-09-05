@@ -5,77 +5,79 @@ import uniqueId from '../../../../util/uniqueId';
 import { composeValidators, NsInput } from '../validators';
 
 export interface AdditionalProps {
-  label: string | React.ReactNode;
-  labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
+    label: string | React.ReactNode;
+    labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
 }
 
 export type NsCheckboxProps = NsInput<
-  Omit<CheckboxProps, 'value'> & AdditionalProps,
-  boolean
+    Omit<CheckboxProps, 'value'> & AdditionalProps,
+    boolean
 >;
 
 export const NsCheckbox: React.FC<NsCheckboxProps> = ({
-  name,
-  defaultChecked,
-  validate,
-  label,
-  labelPlacement,
-  errorMessage,
-  disabled,
-  onChange,
-  sx,
-  ...rest
+    name,
+    defaultChecked,
+    validate,
+    label,
+    labelPlacement,
+    errorMessage,
+    disabled,
+    onChange,
+    sx,
+    ...rest
 }) => {
-  const key = useMemo(() => name ?? uniqueId('v_txt-'), [name]);
+    const key = useMemo(() => name ?? uniqueId('v_txt-'), [name]);
 
-  const validateCallback = useCallback(
-    (v: boolean) => composeValidators(validate, errorMessage)(v),
-    [validate, errorMessage]
-  );
+    const validateCallback = useCallback(
+        (v: boolean) => composeValidators(validate, errorMessage)(v),
+        [validate, errorMessage],
+    );
 
-  const [{ value }, setValue] = useFormField({
-    key,
-    initialValue: !!defaultChecked,
-    validate: validateCallback,
-  });
+    const [{ value }, setValue] = useFormField({
+        key,
+        initialValue: !!defaultChecked,
+        validate: validateCallback,
+    });
 
-  const setValueCallback = useCallback(
-    (event: any) => {
-      const value = event.target.checked;
-      setValue(value);
+    const setValueCallback = useCallback(
+        (event: any) => {
+            const value = event.target.checked;
+            setValue(value);
 
-      if (onChange) {
-        const fakeEvent = {
-          target: { value: true, name },
-          currentTarget: { value: true, name },
-          preventDefault: () => {},
-          stopPropagation: () => {},
-        } as unknown as React.ChangeEvent<HTMLInputElement>;
-        onChange(fakeEvent, value);
-      }
-    },
-    [setValue, onChange]
-  );
+            if (onChange) {
+                const fakeEvent = {
+                    target: { value: true, name },
+                    currentTarget: { value: true, name },
+                    preventDefault: () => {
+                    },
+                    stopPropagation: () => {
+                    },
+                } as unknown as React.ChangeEvent<HTMLInputElement>;
+                onChange(fakeEvent, value);
+            }
+        },
+        [setValue, onChange],
+    );
 
-  React.useEffect(() => {
-    if (disabled) {
-      setValue(!!defaultChecked);
-    }
-  }, [disabled]);
+    React.useEffect(() => {
+        if (disabled) {
+            setValue(!!defaultChecked);
+        }
+    }, [disabled]);
 
-  return (
-    <FormControlLabel
-      control={
-        <Checkbox
-          sx={sx}
-          {...rest}
-          checked={value}
-          onChange={setValueCallback}
-          disabled={disabled}
+    return (
+        <FormControlLabel
+            control={
+                <Checkbox
+                    sx={sx}
+                    {...rest}
+                    checked={value}
+                    onChange={setValueCallback}
+                    disabled={disabled}
+                />
+            }
+            labelPlacement={labelPlacement ?? 'end'}
+            label={label}
         />
-      }
-      labelPlacement={labelPlacement ?? 'end'}
-      label={label}
-    />
-  );
+    );
 };

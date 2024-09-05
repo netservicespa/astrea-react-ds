@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import {
   NsFullPageSpinner,
   NsFullPageSpinnerProps,
-} from '../../components/NsFullPageSpinner';
+} from 'src/components/NsFullPageSpinner';
 
 export default {
   title: 'Components/Loader',
@@ -62,7 +62,7 @@ LoadingLoader.args = {
 };
 
 const IndeterminateLoadingTemplate: StoryFn<NsFullPageSpinnerProps> = (
-  args
+  args,
 ) => {
   const { value, variant } = args;
   const [progress, setProgress] = useState(value);
@@ -73,7 +73,7 @@ const IndeterminateLoadingTemplate: StoryFn<NsFullPageSpinnerProps> = (
     } else {
       const timer = setInterval(() => {
         setProgress((prevProgress) =>
-          prevProgress >= 100 ? 0 : prevProgress + 10
+          prevProgress >= 100 ? 0 : prevProgress + 10,
         );
       }, 800);
       return () => {

@@ -1,6 +1,7 @@
 {
   "dragDrop": {
     "noFile": "No file has been uploaded",
+    "uploadedFile": "Upload file",
     "labels": {
       "textDrag": "Drag and drop documents inside the dotted area or upload files from your local drive using the appropriate button.",
       "rilasciaFile": "Drop the file",
@@ -14,7 +15,8 @@
     "close": "Close",
     "buttons": {
       "submit": "Confirm",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     }
   },
   "dialog": {
@@ -30,7 +32,7 @@
     },
     "fileUpload": {
       "selectFile": "Select a file",
-      "noFileSelected": "No file choosen"
+      "noFileSelected": "No file chosen"
     },
     "errors": {
       "required": "The '{{field}}' field is required"
@@ -62,10 +64,37 @@
   },
   "header": {
     "userMenu": "User menu",
+    "menu": "Menu",
     "notifications": "Notifications",
     "openNotifications": "Open notifications",
     "closeNotifications": "Close notifications",
     "account": "Account",
     "openAccount": "Open account"
+  },
+  "confirmPage": {
+    "comeBack": "Go to the homepage",
+    "viewDetail": "View detail"
+  },
+  "scrollTop": {
+    "goUp": "Go up"
+  },
+  "table": {
+    "pagination": {
+      "interval": "{{from}} - {{to}} of {{count}}",
+      "pageSize": "Rows per page:"
+    },
+    "filters": {
+      "selectAll": "All",
+      "apply": "Apply",
+      "clear": "Clear"
+    }
+  },
+  "pagination": {
+    "pag": "Pag.",
+    "of": "of "
+  },
+  "panel":{
+    "close":"Close",
+    "open":"Open"
   }
 }

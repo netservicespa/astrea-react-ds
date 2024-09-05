@@ -1,14 +1,14 @@
 import React from 'react';
-import { NsTag } from '../../components/components/NsTag';
+import { NsTag } from 'src/components/components/NsTag';
+import { Meta } from '@storybook/react';
 
-export default {
+const meta: Meta = {
     title: 'Components/Tag',
     component: NsTag,
     parameters: {
         docs: {
             description: {
-                component:
-                `Use the \`NsTag\` component to display labels, status, categories, and more.`,
+                component: `Use the \`NsTag\` component to display labels, status, categories, and more.`,
             },
         },
     },
@@ -22,7 +22,8 @@ export default {
             },
         },
         color: {
-            description: 'The color scheme of the tag, corresponding to the theme colors.',
+            description:
+                'The color scheme of the tag, corresponding to the theme colors.',
             control: 'select',
             options: ['primary', 'secondary', 'error', 'info', 'warning', 'success'],
             table: {
@@ -44,19 +45,21 @@ export default {
             table: {
                 category: 'Layout',
             },
-        }, 
-    }   
+        },
+    },
 };
+
+export default meta;
 
 const Template = (args) => <NsTag {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    variant: 'filled', 
+    variant: 'filled',
     label: 'Primary',
     color: 'primary',
     size: 'medium',
-    onDelete: undefined
+    onDelete: undefined,
 };
 
 export const Error = Template.bind({});
@@ -65,8 +68,8 @@ Error.args = {
     label: 'Error',
     color: 'error',
     size: 'medium',
-		onDelete: undefined
-}; 
+    onDelete: undefined,
+};
 
 export const Warning = Template.bind({});
 Warning.args = {
@@ -74,7 +77,7 @@ Warning.args = {
     label: 'Warning',
     color: 'warning',
     size: 'medium',
-		onDelete: undefined
+    onDelete: undefined,
 };
 
 export const Success = Template.bind({});
@@ -83,7 +86,7 @@ Success.args = {
     label: 'Success',
     color: 'success',
     size: 'medium',
-		onDelete: undefined
+    onDelete: undefined,
 };
 
 export const ErasableFilter = Template.bind({});

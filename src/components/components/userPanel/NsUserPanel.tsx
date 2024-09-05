@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserPanelProps } from 'src/util/types';
+import { UserPanelProps } from '../../../util/types';
 import { NsHeader } from '../../patterns/navigation/NsHeader';
 
 /**
@@ -9,22 +9,20 @@ import { NsHeader } from '../../patterns/navigation/NsHeader';
  */
 
 export function NsUserPanel({
-  title,
-  logo,
-  userPanelMenuItems,
-  router,
-  configuration,
-  onLogout,
+    logo,
+    userPanelMenuItems,
+    router,
+    configuration,
+    onLogout,
 }: UserPanelProps) {
-  return (
-    <NsHeader
-      title={title}
-      logo={logo}
-      userPanelMenuItems={userPanelMenuItems}
-      router={router}
-      onLogout={onLogout}
-      configuration={configuration}
-      type={'horizontal'}
-    />
-  );
+    return (
+        <NsHeader
+            logo={logo}
+            userPanelMenuItems={userPanelMenuItems}
+            router={router}
+            onLogout={onLogout}
+            configuration={configuration}
+            type={'horizontal'}
+        />
+    );
 }

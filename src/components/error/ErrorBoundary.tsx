@@ -34,7 +34,7 @@ interface FallbackProps {
 interface ErrorBoundaryPropsWithComponent {
   onResetKeysChange?: (
     prevResetKeys: Array<unknown> | undefined,
-    resetKeys: Array<unknown> | undefined
+    resetKeys: Array<unknown> | undefined,
   ) => void;
   onReset?: (...args: Array<unknown>) => void;
   onError?: (error: Error, info: { componentStack: string }) => void;
@@ -45,7 +45,7 @@ interface ErrorBoundaryPropsWithComponent {
 }
 
 declare function FallbackRender(
-  props: FallbackProps
+  props: FallbackProps,
 ): React.ReactElement<
   unknown,
   string | React.FunctionComponent | typeof React.Component
@@ -54,7 +54,7 @@ declare function FallbackRender(
 interface ErrorBoundaryPropsWithRender {
   onResetKeysChange?: (
     prevResetKeys: Array<unknown> | undefined,
-    resetKeys: Array<unknown> | undefined
+    resetKeys: Array<unknown> | undefined,
   ) => void;
   onReset?: (...args: Array<unknown>) => void;
   onError?: (error: Error, info: { componentStack: string }) => void;
@@ -67,7 +67,7 @@ interface ErrorBoundaryPropsWithRender {
 interface ErrorBoundaryPropsWithFallback {
   onResetKeysChange?: (
     prevResetKeys: Array<unknown> | undefined,
-    resetKeys: Array<unknown> | undefined
+    resetKeys: Array<unknown> | undefined,
   ) => void;
   onReset?: (...args: Array<unknown>) => void;
   onError?: (error: Error, info: { componentStack: string }) => void;
@@ -112,13 +112,13 @@ class ErrorBoundary extends React.Component<
     this.setState(initialState);
   }
 
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
+  componentDidCatch(error: Error, info: { componentStack: string }) {
     this.props.onError?.(error, info);
   }
 
   componentDidUpdate(
     prevProps: ErrorBoundaryProps,
-    prevState: ErrorBoundaryState
+    prevState: ErrorBoundaryState,
   ) {
     const { error } = this.state;
     const { resetKeys } = this.props;
@@ -158,7 +158,7 @@ class ErrorBoundary extends React.Component<
         return <FallbackComponent {...props} />;
       } else {
         throw new Error(
-          'react-error-boundary requires either a fallback, fallbackRender, or FallbackComponent prop'
+          'react-error-boundary requires either a fallback, fallbackRender, or FallbackComponent prop',
         );
       }
     }
@@ -169,7 +169,7 @@ class ErrorBoundary extends React.Component<
 
 function withErrorBoundary<P extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<P>,
-  errorBoundaryProps: ErrorBoundaryProps
+  errorBoundaryProps: ErrorBoundaryProps,
 ): React.ComponentType<P> {
   const Wrapped: React.ComponentType<P> = (props) => {
     return (

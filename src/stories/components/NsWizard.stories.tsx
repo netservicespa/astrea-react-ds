@@ -14,23 +14,23 @@ import {
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NsCheckbox } from '../../components/components/form/fields/NsCheckbox';
+import { NsCheckbox } from 'src/components/components/form/fields/NsCheckbox';
 import {
   SelectItem,
   NsSelectAutocomplete,
-} from '../../components/components/form/fields/NsSelectAutocomplete';
-import { NsTextInput } from '../../components/components/form/fields/NsTextInput';
-import { required } from '../../components/components/form/validators';
-import { NsGridLayout } from '../../components/layout/NsGridLayout';
-import { NsWizardStepperProps } from '../../components/wizard/NsStepper';
+} from 'src/components/components/form/fields/NsSelectAutocomplete';
+import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
+import { required } from 'src/components/components/form/validators';
+import { NsGridLayout } from 'src/components/layout/NsGridLayout';
+import { NsWizardStepperProps } from 'src/components/wizard/NsStepper';
 import {
   NsWizard,
   NsWizardFormStep,
   NsWizardProgressButtons,
   NsWizardStep,
-} from '../../components/wizard/NsWizard';
-import { useWizard } from '../../components/wizard/WizardContext';
-import { NsFileUpload } from '../../components/components/form/fields/NsFileUpload';
+} from 'src/components/wizard/NsWizard';
+import { useWizard } from 'src/components/wizard/WizardContext';
+import { NsFileUpload } from 'src/components/components/form/fields/NsFileUpload';
 
 export default {
   title: 'Patterns/Wizard',
@@ -181,7 +181,7 @@ const CustomStepper: React.FC<NsWizardStepperProps> = ({
 }) => {
   const iconElements = React.useMemo(
     () => icons.map((i) => React.createElement(i)),
-    [icons]
+    [icons],
   );
 
   return (

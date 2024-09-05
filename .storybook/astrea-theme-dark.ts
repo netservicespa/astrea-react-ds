@@ -20,7 +20,7 @@ export default create({
   // Text colors
   textColor: '#ffffff', // menu color text for sidebar
   textInverseColor: '#999999',
-  textMutedColor:'#ffffff', 
+  textMutedColor: '#ffffff',
 
   // Toolbar default and active colors
   barTextColor: '#999999', // menu text color for toolbar

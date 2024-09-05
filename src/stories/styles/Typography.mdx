@@ -1,6 +1,31 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, Typeset } from "@storybook/blocks";
 
 <Meta title="Styles/Typography" />
+
+export const typography = {
+  type: {
+    primary: '"Titillium Web", sans-serif',
+  },
+  weight: {
+    regular: '400',
+    bold: '700',
+    extrabold: '800',
+    black: '900',
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 20,
+    m2: 24,
+    m3: 28,
+    l1: 32,
+    l2: 40,
+    l3: 48,
+  },
+};
+
+export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
 <h1>Typography</h1>
 
@@ -17,6 +42,25 @@ import { Meta } from "@storybook/blocks";
 
 <h2>Components</h2>
 <p>The "Typography" component makes it easy to apply a default set of font weights and sizes in your application.</p>
+
+**Weights:** 400(regular), 700(bold), 800(extrabold), 900(black)
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.m1),
+    Number(typography.size.m2),
+    Number(typography.size.m3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3),
+  ]}
+  fontWeight={typography.weight.black}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
 
 <p>
       H1<br />

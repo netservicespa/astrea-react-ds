@@ -5,148 +5,210 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActions, CardMedia } from '@mui/material';
-import { NsButton } from '../NsButton';
+import { Button as NsButton, CardActions, CardMedia } from '@mui/material';
+import { ButtonProps } from '@mui/material/Button';
 
 type VariantType = 'flag' | 'classic' | 'clickable';
+type CardButtonProps = Pick<ButtonProps, 'color' | 'size' | 'onClick'> & { label?: string };
 
-export interface NsCardProps {
-  icon?: any;
-  title?: string | null;
-  subtitle?: string | null;
-  mediaImage?: string;
-  mediaAlt?: string | null;
-  mainText?: string | null;
-  subText?: string | null;
-  buttons?: any[];
-  cardVariant?: VariantType;
+interface NsBasicCardProps extends CommonBaseType {
+    type: 'basic';
+    title?: React.ReactNode;
+    children?: React.ReactNode;
+    buttons?: Array<CardButtonProps>;
+    cardVariant?: VariantType;
 }
 
-export interface StyledCardProps {
-  cardVariant?: VariantType;
+interface NsMediaCardProps extends CommonBaseType {
+    type: 'media';
+    title?: React.ReactNode;
+    children?: React.ReactNode;
+    mediaImage?: string;
+    mediaAlt?: string;
+    cardVariant?: VariantType;
 }
 
-export interface StyledCardContentProps {
-  cardVariant?: VariantType;
+interface NsActionsCardProps extends CommonBaseType {
+    type: 'actions';
+    title?: React.ReactNode;
+    children?: React.ReactNode;
+    mediaImage?: string;
+    mediaAlt?: string;
+    buttons?: Array<CardButtonProps>;
+    cardVariant?: VariantType;
 }
 
-const StyledCard = styled(Card)<StyledCardProps & { isActive: boolean }>(
-  ({ theme, cardVariant, isActive }) => ({
+interface NsClickableCardProps extends CommonBaseType {
+    type: 'clickable';
+    icon?: React.ReactNode;
+    title?: React.ReactNode;
+    children?: React.ReactNode;
+    buttons?: Array<CardButtonProps>;
+    cardVariant?: VariantType;
+}
+
+interface CommonBaseType {}
+
+export type NsCardProps = NsBasicCardProps | NsMediaCardProps | NsActionsCardProps | NsClickableCardProps;
+
+interface StyledCardProps {
+    cardVariant?: VariantType;
+}
+
+interface StyledCardContentProps {
+    cardVariant?: VariantType;
+}
+
+const StyledCard = styled(Card)<StyledCardProps & { isActive: boolean }>(({ theme, cardVariant, isActive }) => ({
     border: '1px solid',
-    borderColor:
-      cardVariant === 'clickable' && isActive
-        ? 'transparent'
-        : theme.palette.divider,
-    borderLeft:
-      cardVariant === 'flag'
-        ? `3px solid ${theme.palette.secondary.main}`
-        : undefined,
-    borderBottom:
-      cardVariant === 'clickable' && isActive
-        ? `3px solid ${theme.palette.primary.main}`
-        : undefined,
-    backgroundColor:
-      cardVariant === 'clickable' && isActive
-        ? lighten(theme.palette.primary.main, 0.9)
-        : undefined, // theme.palette.action.selected
-  })
-);
+    borderColor: cardVariant === 'clickable' && isActive ? 'transparent' : theme.palette.divider,
+    borderLeft: cardVariant === 'flag' ? `3px solid ${theme.palette.secondary.main}` : undefined,
+    borderBottom: cardVariant === 'clickable' && isActive ? `3px solid ${theme.palette.primary.main}` : undefined,
+    backgroundColor: cardVariant === 'clickable' && isActive ? lighten(theme.palette.primary.main, 0.9) : undefined, // theme.palette.action.selected
+}));
 
-const StyledCardActions = styled(CardActions)(({ theme }) => ({
-  padding: '16px',
-  paddingTop: '0',
+const StyledCardActions = styled(CardActions)(() => ({
+    padding: '16px',
+    paddingTop: '0',
 }));
 
 const StyledAvatar = styled('div')(({ theme }) => ({
-  color: `${theme.palette.primary.main}`,
+    color: `${theme.palette.primary.main}`,
 }));
 
-const StyledCardContent = styled(CardContent)<StyledCardContentProps>(
-  ({ cardVariant }) => ({
+const StyledCardContent = styled(CardContent)<StyledCardContentProps>(({ cardVariant }) => ({
     paddingTop: cardVariant === 'clickable' ? '0' : undefined,
     paddingBottom: cardVariant === 'clickable' ? '14px !important' : undefined,
-  })
-);
+}));
 
-const StyledH2 = styled(Typography)<StyledCardContentProps>(
-  ({ cardVariant }) => ({
-    borderBottom:
-      cardVariant === 'clickable' ? '1px solid lightgray' : undefined,
+const StyledH2 = styled(Typography)<StyledCardContentProps>(({ cardVariant }) => ({
+    borderBottom: cardVariant === 'clickable' ? '1px solid lightgray' : undefined,
     paddingBottom: cardVariant === 'clickable' ? '5px' : undefined,
-  })
-);
+}));
 
-export function NsCard({
-  icon = null,
-  title = '',
-  subtitle = '',
-  mediaImage = '',
-  mediaAlt = 'Image description',
-  mainText = null,
-  subText = null,
-  buttons = [],
-  cardVariant = 'classic',
-}: NsCardProps) {
-  const [isActive, setIsActive] = React.useState(false);
-
-  const handleCardClick = () => {
-    if (cardVariant === 'clickable') {
-      setIsActive(!isActive);
-      console.log('Hai cliccato sulla Card!');
-    }
-  };
-
-  return (
-    <StyledCard
-      cardVariant={cardVariant}
-      isActive={isActive}
-      sx={{ maxWidth: 345 }}
-      onClick={handleCardClick}
-      className={`${cardVariant} ${isActive ? 'active' : ''}`}
-    >
-      {icon && (
-        <CardHeader
-          avatar={<StyledAvatar>{icon}</StyledAvatar>}
-          title={title}
-          subheader={subtitle}
-          sx={{ paddingBottom: 0 }}
-        />
-      )}
-
-      {mediaImage && (
-        <CardMedia
-          component="img"
-          height="194"
-          image={mediaImage || undefined}
-          alt={mediaAlt || ''}
-        />
-      )}
-
-      <StyledCardContent cardVariant={cardVariant}>
-        {mainText && (
-          <StyledH2 cardVariant={cardVariant} variant="h2" mb={2}>
-            {mainText}
-          </StyledH2>
-        )}
-
-        {subText && <Typography variant="body2">{subText}</Typography>}
-      </StyledCardContent>
-
-      {buttons.length > 0 && (
+const CardContentTemplate: React.FC<{
+    title: React.ReactNode;
+    children: React.ReactNode;
+    cardVariant: VariantType;
+}> = ({ title, children, cardVariant }) => {
+    return (
+        <StyledCardContent cardVariant={cardVariant}>
+            <StyledH2 cardVariant={cardVariant} variant="h2" mb={2}>
+                {title}
+            </StyledH2>
+            {children}
+        </StyledCardContent>
+    );
+};
+const CardActionsTemplate: React.FC<{
+    buttons: Array<CardButtonProps>;
+}> = ({ buttons }) => {
+    return (
         <StyledCardActions disableSpacing>
-          {buttons.map((btn: any, index: number) => (
-            <NsButton
-              key={btn.label}
-              onClick={btn.onClick}
-              color={btn.color ? btn.color : 'primary'}
-              size="small"
-              style={{ marginRight: index === buttons.length - 1 ? 0 : 10 }}
-            >
-              {btn.label}
-            </NsButton>
-          ))}
+            {buttons.map((btn: CardButtonProps, index: number) => (
+                <NsButton
+                    key={btn.label}
+                    onClick={btn.onClick}
+                    color={btn.color ? btn.color : 'primary'}
+                    size={btn.size ? btn.size : 'small'}
+                    style={{ marginRight: index === buttons.length - 1 ? 0 : 10 }}
+                >
+                    {btn.label}
+                </NsButton>
+            ))}
         </StyledCardActions>
-      )}
-    </StyledCard>
-  );
+    );
+};
+const NsBasicCard = ({ title = '', children = <></>, buttons = [], cardVariant = 'classic' }: NsBasicCardProps) => {
+    return (
+        <>
+            <CardContentTemplate title={title} cardVariant={cardVariant}>
+                {children}
+            </CardContentTemplate>
+            <CardActionsTemplate buttons={buttons} />
+        </>
+    );
+};
+
+const NsMediaCard = ({
+    title = '',
+    children = <></>,
+    cardVariant = 'classic',
+    mediaImage,
+    mediaAlt,
+}: NsMediaCardProps) => {
+    return (
+        <>
+            {mediaImage && <CardMedia component="img" height="194" image={mediaImage} alt={mediaAlt || ''} />}
+            <CardContentTemplate title={title} cardVariant={cardVariant}>
+                {children}
+            </CardContentTemplate>
+        </>
+    );
+};
+const NsActionsCard = ({
+    title = '',
+    children = <></>,
+    buttons = [],
+    cardVariant = 'classic',
+    mediaImage,
+    mediaAlt,
+}: NsActionsCardProps) => {
+    return (
+        <>
+            {mediaImage && <CardMedia component="img" height="194" image={mediaImage} alt={mediaAlt || ''} />}
+            <CardContentTemplate title={title} cardVariant={cardVariant}>
+                {children}
+            </CardContentTemplate>
+            <CardActionsTemplate buttons={buttons} />
+        </>
+    );
+};
+
+const NsClickableCard = ({ icon, title = '', cardVariant = 'classic', children = <></> }: NsClickableCardProps) => {
+    return (
+        <>
+            {icon && <CardHeader avatar={<StyledAvatar>{icon}</StyledAvatar>} sx={{ paddingBottom: 0 }} />}
+            <CardContentTemplate title={title} cardVariant={cardVariant}>
+                {children}
+            </CardContentTemplate>
+        </>
+    );
+};
+
+export function NsCard(props: NsCardProps) {
+    const [isActive, setIsActive] = React.useState(false);
+
+    const handleCardClick = () => {
+        if (props.cardVariant === 'clickable') {
+            setIsActive(!isActive);
+            console.log('Hai cliccato sulla Card!');
+        }
+    };
+    const renderCard = () => {
+        switch (props.type) {
+            case 'basic':
+                return <NsBasicCard {...props} />;
+            case 'media':
+                return <NsMediaCard {...props} />;
+            case 'actions':
+                return <NsActionsCard {...props} />;
+            case 'clickable':
+                return <NsClickableCard {...props} />;
+
+            default:
+                return <></>;
+        }
+    };
+    return (
+        <StyledCard
+            cardVariant={props.cardVariant}
+            isActive={isActive}
+            sx={{ maxWidth: 345 }}
+            onClick={handleCardClick}
+            className={`${props.cardVariant} ${isActive ? 'active' : ''}`}
+        >
+            {renderCard()}
+        </StyledCard>
+    );
 }

@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { NsForm } from '../../../../components/components/form/NsForm';
-import { NsDragDrop } from '../../../../components/components/form/fields/NsDragDrop';
-import { required } from '../../../../components/components/form/validators';
+import { NsForm } from 'src/components/components/form/NsForm';
+import { NsDragDrop } from 'src/components/components/form/fields/NsDragDrop';
+import { required } from 'src/components/components/form/validators';
 import { useTranslation } from 'react-i18next';
 
 export default {

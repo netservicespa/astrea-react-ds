@@ -1,6 +1,7 @@
 {
   "dragDrop": {
     "noFile": "Non è stato caricato alcun file",
+    "uploadedFile": "Carica file",
     "labels": {
       "textDrag": "Trascina i documenti all'interno dell'area tratteggiata o carica i file da locale tramite l'apposito bottone",
       "rilasciaFile": "Rilascia il file",
@@ -14,7 +15,8 @@
     "close": "Chiudi",
     "buttons": {
       "submit": "Conferma",
-      "cancel": "Annulla"
+      "cancel": "Annulla",
+      "confirm": "Conferma"
     }
   },
   "dialog": {
@@ -62,10 +64,37 @@
   },
   "header": {
     "userMenu": "Menu utente",
+    "menu": "Menu",
     "notifications": "Notifiche",
     "openNotifications": "Apri notifiche",
     "closeNotifications": "Chiudi notifiche",
     "account": "Account",
     "openAccount": "Apri account"
+  },
+  "confirmPage": {
+    "comeBack": "Vai alla homepage",
+    "viewDetail": "Vedi Dettagli"
+  },
+  "scrollTop": {
+    "goUp": "Torna su"
+  },
+  "table": {
+    "pagination": {
+      "interval": "{{from}} - {{to}} di {{count}}",
+      "pageSize": "Righe per pagina:"
+    },
+    "filters": {
+      "selectAll": "Tutti",
+      "apply": "Applica",
+      "clear": "Pulisci filtri"
+    }
+  },
+  "pagination": {
+    "pag": "Pag.",
+    "of": "di "
+  },
+  "panel":{
+    "close":"Chiudi",
+    "open": "Apri"
   }
 }

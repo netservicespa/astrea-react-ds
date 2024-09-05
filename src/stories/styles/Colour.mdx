@@ -1,4 +1,6 @@
 import { Meta } from "@storybook/blocks";
+import { ColorPalette, ColorItem} from "@storybook/blocks";
+import NsTabsColors from "../components/NsTabsColors";
 
 <Meta title="Styles/Colour" />
 
@@ -17,30 +19,26 @@ import { Meta } from "@storybook/blocks";
 <p>Only use the variables in the context they’re designed for. In other cases, you should reference the colour palette directly. To use red, you should use nsds-color ("red") rather than $ astrea-error-color.</p>
 
 <h3>Dark text on light background</h3>
+<ColorPalette>
+      <ColorItem title="darkTextColor.primary" subtitle="" colors={{'astrea-text-colour': "#000000"}}/>
+      <ColorItem title="darkTextColor.secondary" subtitle="" colors={{'astrea-secondary-text-colour': "#3D3D3D"}}/>
+      <ColorItem title="darkTextColor.tertiary" subtitle="" colors={{'astrea-tertiary-text-colour': "#595959"}}/>
+</ColorPalette>
+<h3>Accent</h3>
+<ColorPalette>
+      <ColorItem title="primary.main" subtitle="" colors={{'astrea-primary-colour': "#308A7D"}}/>
+      <ColorItem title="secondary.main" subtitle="" colors={{'astrea-secondary-colour': "#cce2df"}}/>
+      <ColorItem title="error.main" subtitle="Only use this colour for success messages. For example, use it as positive feedback when a user completes a task." colors={{'astrea-error-colour': "#D4351C"}}/>
+      <ColorItem title="info.main" subtitle="" colors={{'astrea-info-colour': "#00703c"}}/>
+      <ColorItem title="success.main" subtitle="Only use this colour for success messages. For example, use it as positive feedback when a user completes a task." colors={{'astrea-success-colour': "#006636"}}/>
+      <ColorItem title="focus.main" subtitle="Only use this color to indicate the focus element. For example, when a user selects an element with their keyboard." colors={{'astrea-focus-colour': "#FFE300"}}/>
+      <ColorItem title="borderColor.main" subtitle="" colors={{'astrea-border-colour': "#B1B4B6"}}/>
+</ColorPalette>
 
-<h3>Light  text on dark  background</h3>
-
-<h3>Links</h3>
-
-<h3>Border</h3>
-
-<h3>Focus state</h3>
-<p>Only use this color to indicate the focus element. For example, when a user selects an element with their keyboard.</p>
-
-<h3>Error state</h3>
-<p>Only use this color for error messages. For example, when a user omits a mandatory field in a form.</p>
-
-<h3>Success  state</h3>
-<p>Only use this colour for success messages. For example, use it as positive feedback when a user completes a task.</p>
-
-<h3>Brand colour</h3>
 
 <h2>Alternative colour palettes</h2>
 <p>
       Additional <strong>AAA and accessibility requirements color palettes</strong> are available.
 </p>
 
-<h3>Need help?</h3>
-<p>
-      If you’ve got a question about Astrea Design System, send an email to <a style={{ color: '#2E5A60', textDecoration: 'underline' }} >teamux@netservice.eu</a>
-</p>
+<NsTabsColors/>

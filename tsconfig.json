@@ -1,28 +1,41 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "src/*": ["src/*"]
-    },
+    "outDir": "src",
+    "module": "commonjs",
     "target": "ES6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "declaration": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "jsx": "react",
+    "skipLibCheck": true,
+    "baseUrl": "./",
     "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true,
-    "jsx": "react",
-    "module": "ESNext",
-    "declaration": true,
-    "declarationDir": "types",
-    "sourceMap": true,
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
+  "compileOnSave": true,
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "dist",
     "node_modules",
     "src/**/*.test.tsx",
-    "src/**/*.stories.tsx"
+    "src/**/*.stories.tsx",
+    "src/stories/**/*",
+    "compile",
+    "__tests__/**/*",
+    "examples",
+    "__mocks__",
+    "coverage",
+    "scripts"
   ]
 }

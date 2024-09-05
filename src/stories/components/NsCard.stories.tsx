@@ -1,60 +1,74 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { NsCard } from '../../components/components/card/NsCard';
 import { CardProps } from '@mui/material/Card';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import { NsCard, NsCardProps } from '../../components/components/card/NsCard';
 
-export default {
-  title: 'Components/Card',
-  component: NsCard,
-} as Meta<CardProps>;
+const meta: Meta<typeof NsCard> = {
+    title: 'Components/Card',
+    component: NsCard,
+};
+export default meta;
 
-const Template: StoryFn<CardProps> = (args) => {
-  return (
-    <NsCard {...args} />
-  );
+const Template: StoryFn<typeof NsCard> = (args) => {
+    return <NsCard {...args} />;
 };
 
 // Storia: Basic Card
 export const BasicCard = Template.bind({});
+
+
 BasicCard.args = {
-  mainText: "Card title",
-  subText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat enim. Aenean eu massa venenatis, feugiat eros sed, vulputate tortor.",
-  buttons: [
-    { label: "Link", onClick: () => console.log("Link clicked!") },
-  ],
-  cardVariant: "flag"
-};
+    type: 'basic',
+    title: 'New basic card',
+    mediaImage: './images/ns-abstarct.jpg',
+    children:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat enim. Aenean eu massa venenatis, feugiat eros sed, vulputate tortor.',
+    buttons: [{ label: 'Link', onClick: () => console.log('Link clicked!') }],
+    cardVariant: 'flag',
+} as NsCardProps;
 
 // Storia: Media Card
 export const MediaCard = Template.bind({});
 MediaCard.args = {
-  mediaImage: "./images/ns-abstarct.jpg",
-  mediaAlt: "Alt immagine",
-  mainText: "Card title",
-  subText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis",
-  cardVariant: "classic"
+    type: 'media',
+    mediaImage: './images/ns-abstarct.jpg',
+    mediaAlt: 'Alt immagine',
+    title: 'New media card',
+    children:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis',
+    cardVariant: 'classic',
 };
 
 // Storia: Actions Card
 export const ActionsCard = Template.bind({});
 ActionsCard.args = {
-  mediaImage: "./images/ns-abstarct.jpg",
-  mediaAlt: "Alt immagine",
-  mainText: "Card title",
-  subText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis",
-  cardVariant: "classic",
-  buttons: [
-    { label: "Primary action", onClick: () => console.log("Primary action clicked!") },
-    { label: "Secondary action", color: "secondary", onClick: () => console.log("Secondary action clicked!") },
-  ]
+    type: 'actions',
+    mediaImage: './images/ns-abstarct.jpg',
+    mediaAlt: 'Alt immagine',
+    title: 'New actions card',
+    children:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis',
+    cardVariant: 'classic',
+    buttons: [
+        {
+            label: 'Primary action',
+            onClick: () => console.log('Primary action clicked!'),
+        },
+        {
+            label: 'Secondary action',
+            color: 'secondary',
+            onClick: () => console.log('Secondary action clicked!'),
+        },
+    ],
 };
 
 // Storia: Clickable Card
 export const ClickableCard = Template.bind({});
 ClickableCard.args = {
-  icon: <GetAppIcon/>,
-  mainText: "New",
-  subText: "3 pcaps",
-  cardVariant: "clickable"
+    type: 'clickable',
+    icon: <GetAppIcon />,
+    title: 'New',
+    children: '3 pcaps',
+    cardVariant: 'clickable',
 };

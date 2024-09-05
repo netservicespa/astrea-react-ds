@@ -1,5 +1,5 @@
 import React from 'react';
-import { NsProgress } from '../../components/components/NsProgress';
+import { NsProgress } from 'src/components/components/NsProgress';
 import { BatteryChargingFull } from '@mui/icons-material';
 import StorageIcon from '@mui/icons-material/Storage';
 

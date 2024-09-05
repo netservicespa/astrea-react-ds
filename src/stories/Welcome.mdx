@@ -1,6 +1,13 @@
 import { Meta } from '@storybook/blocks';
-import { NsCard } from '../components/components/card/NsCard';
-import { NsGridLayout } from '../components/layout/NsGridLayout';
+import { NsCard } from 'src/components/components/card/NsCard';
+import { NsGridLayout } from 'src/components/layout/NsGridLayout';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 <Meta title="Welcome" />
 
@@ -15,23 +22,81 @@ import { NsGridLayout } from '../components/layout/NsGridLayout';
 <h2>Why Design System</h2>
 
 <NsGridLayout rowSize={3}>
-  <NsCard
-    mainText="Styles"
-    subText="Our design system offers a cohesive set of styles, including typography, color palettes, spacing, and visual elements. Consistent styles ensure a unified look and feel, enhancing brand identity and user recognition."
-    cardVariant="classic"
-  />
-  <NsCard
-    mainText="Components"
-    subText="Astrea provides a library of reusable UI components such as buttons, forms, cards, navigation bars, and more. These components maintain consistency in design and behavior, streamlining development and promoting efficiency."
-  />
-  <NsCard
-    mainText="Patterns"
-    subText="We've curated design patterns for common user interactions and workflows. These patterns are tested and optimized for usability, ensuring a seamless and intuitive user experience."
-  />
-  <NsCard
-    mainText="Layouts"
-    subText="Astrea offers predefined layouts and grid systems that facilitate the structuring and organization of content. These layouts maintain consistency in the arrangement of elements across different screens and devices."
-  />
+  <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 300, minHeight: 400, border: '1px solid black' }}>
+    <CardContent sx={{ flexGrow: 1 }}>
+      <CardHeader title="Styles" sx={{'.MuiCardHeader-title': { fontSize: 'xx-large', fontWeight: 'bold'}, padding: 0}} />
+      <Typography >
+       Our design system offers a cohesive set of styles, including typography, color palettes, spacing, and visual elements. 
+       Consistent styles ensure a unified look and feel, enhancing brand identity and user recognition.
+      </Typography>
+    </CardContent>
+    <CardActions sx={{justifyContent: "space-between", padding:"16px"}}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <Link href="/?path=/docs/styles-colour--docs" style={{ fontWeight: '700' }}>
+        Browse style 
+      </Link>
+        <ArrowForwardIcon/>
+    </div>
+      <img src="images/styles.png" alt="styles" style={{ maxWidth: '80px', maxHeight: '80px' }}/>
+    </CardActions>
+  </Card>
+
+  <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 300, minHeight: 400, border: '1px solid black' }}>
+    <CardContent sx={{ flexGrow: 1 }}>
+      <CardHeader title="Components" sx={{'.MuiCardHeader-title': { fontSize: 'xx-large', fontWeight: 'bold'}, padding: 0}} />
+      <Typography >
+        Astrea provides a library of reusable UI components such as buttons, forms, cards, navigation bars, and more. 
+        These components maintain consistency in design and behavior, streamlining development and promoting efficiency.      
+      </Typography>
+    </CardContent>
+    <CardActions sx={{justifyContent: "space-between", padding:"16px"}}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <Link href="/?path=/docs/components-accordion--docs" style={{ fontWeight: '700' }}>
+        Browse components 
+      </Link>
+        <ArrowForwardIcon/>
+    </div>
+      <img src="images/component.png" alt="component" style={{ maxWidth: '80px', maxHeight: '80px' }}/>
+    </CardActions>
+  </Card>
+
+  <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 300, minHeight: 400, border: '1px solid black' }}>
+    <CardContent sx={{ flexGrow: 1 }}>
+      <CardHeader title="Patterns" sx={{'.MuiCardHeader-title': { fontSize: 'xx-large', fontWeight: 'bold'}, padding: 0}} />
+      <Typography >
+        We've curated design patterns for common user interactions and workflows. 
+        These patterns are tested and optimized for usability, ensuring a seamless and intuitive user experience.
+      </Typography>
+    </CardContent>
+    <CardActions sx={{justifyContent: "space-between", padding:"16px"}}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <Link href="/?path=/docs/patterns-dragdrop--docs" style={{ fontWeight: '700' }}>
+        Browse patterns 
+      </Link>
+        <ArrowForwardIcon/>
+    </div>
+      <img src="images/pattern.png" alt="pattern" style={{ maxWidth: '80px', maxHeight: '80px' }}/>
+    </CardActions>
+  </Card>
+
+  <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 300, minHeight: 400, border: '1px solid black' }}>
+    <CardContent sx={{ flexGrow: 1 }}>
+      <CardHeader title="Layouts" sx={{'.MuiCardHeader-title': { fontSize: 'xx-large', fontWeight: 'bold'}, padding: 0}} />
+      <Typography >
+        Astrea offers predefined layouts and grid systems that facilitate the structuring and organization of content. 
+        These layouts maintain consistency in the arrangement of elements across different screens and devices. 
+    </Typography>
+    </CardContent>
+    <CardActions sx={{justifyContent: "space-between", padding:"16px"}}>
+    <div style={{ display: 'flex', alignItems: 'center'}}>
+      <Link href="/?path=/docs/layouts-confirmationpage--docs" style={{ fontWeight: '700'}}>
+        Browse layouts 
+      </Link>
+        <ArrowForwardIcon/>
+    </div>
+      <img src="images/layouts.png" alt="layout" style={{ maxWidth: '80px', maxHeight: '80px' }}/>
+    </CardActions>
+  </Card>
 </NsGridLayout>
 
 <h2>More Resources</h2>

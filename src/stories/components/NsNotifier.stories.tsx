@@ -1,9 +1,8 @@
 import React from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
-import { SnackbarProvider } from 'notistack';
-import { useNotifier } from '../../components/notifier/NotificationContext';
-import { NsNotifier } from '../../components/notifier/NsNotifier';
+import { useSnackbar } from 'notistack';
+import { NsNotifier } from 'src/components/notifier/NsNotifier';
 
 export default {
   title: 'Components/Notifier',
@@ -26,7 +25,7 @@ export default {
 
 const Template: StoryFn<typeof NsNotifier> = (args) => {
   const Content = () => {
-    const { notify, dismiss, remove } = useNotifier();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     return (
       <Container>
         <Typography component="p">
@@ -35,7 +34,9 @@ const Template: StoryFn<typeof NsNotifier> = (args) => {
         <Box mt={4} textAlign="center">
           <Button
             variant="contained"
-            onClick={() => notify({ type: args.type, message: args.message })}
+            onClick={() =>
+              enqueueSnackbar(args.message, { variant: args.type })
+            }
           >
             Invia notifica!
           </Button>
@@ -45,18 +46,9 @@ const Template: StoryFn<typeof NsNotifier> = (args) => {
   };
 
   return (
-    <SnackbarProvider
-      maxSnack={20}
-      preventDuplicate
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <NsNotifier>
-        <Content />
-      </NsNotifier>
-    </SnackbarProvider>
+    <NsNotifier {...args}>
+      <Content />
+    </NsNotifier>
   );
 };
 
@@ -64,4 +56,5 @@ export const Notifiche = Template.bind({});
 Notifiche.args = {
   message: 'Prova!',
   type: 'warning',
+  variant: 'filled',
 };

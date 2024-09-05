@@ -4,13 +4,25 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "chrome": 100
-        }
+        "targets": ">0.2%, not dead, not op_mini all"
       }
     ],
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
-  "plugins": []
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./dist"
+        ],
+        "alias": {
+          "@/components": "./dist/components",
+          "@/themes": "./dist/themes",
+          "@/util": "./dist/util"
+        }
+      }
+    ]
+  ]
 }

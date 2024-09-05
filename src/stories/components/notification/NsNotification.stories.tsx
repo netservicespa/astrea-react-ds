@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   INotificationData,
   NsNotification,
-} from '../../../components/components/notification/NsNotification';
+} from 'src/components/components/notification/NsNotification';
 import { StoryFn } from '@storybook/react';
-import { NsHeader } from '../../../components/patterns/navigation/NsHeader';
+import { NsHeader } from 'src/components/patterns/navigation/NsHeader';
 import { Typography } from '@mui/material';
 
 const meta: Meta<typeof NsNotification> = {

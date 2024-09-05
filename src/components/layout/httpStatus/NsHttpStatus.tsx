@@ -47,7 +47,7 @@ export const NsHttpStatus: React.FC<NsHttpStatusProps> = ({
         border={theme.custom.borders[1]}
         p={3}
         width={'50%'}
-        borderRadius="5px"
+        borderRadius="0px"
       >
         <Typography
           color={'primary'}

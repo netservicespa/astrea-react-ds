@@ -1,3 +1,9 @@
 {
-    "singleQuote": true
+  "singleQuote": true,
+  "tabWidth": 4,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "printWidth": 120,
+  "parser": "typescript",
+  "endOfLine": "auto"
 }

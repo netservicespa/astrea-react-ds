@@ -1,4 +1,6 @@
-image: $DOCKER_REGISTRY/cicd/node-ci-image:1.0
+image:
+  name: $DOCKER_REGISTRY/cicd/node-ci-image:1.0-node20
+  entrypoint: [ '/bin/bash', '-s' ]
 
 variables:
   CI: ''
@@ -27,6 +29,11 @@ buildPackage:
     - corepack enable && corepack prepare pnpm@latest --activate
     - pnpm install
     - pnpm run build
+    - pnpm pack
+  artifacts:
+    paths:
+      - 'netservice-astrea-react-ds-*.tgz'
+    expire_in: 1 week
   only:
     - master
     - tags
@@ -62,20 +69,26 @@ deploySite:
 runTests:
   stage: test
   script:
-    - echo "Not implementd yet!"
+    - corepack enable && corepack prepare pnpm@latest --activate
+    - pnpm install
+    - pnpm test
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 1 day
 
 sonarManual:
   stage: analysis
   when: manual
   script:
-    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true
+    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
   except:
     - tags
 
 sonar:
   stage: analysis
   script:
-    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true
+    - sonar-scanner -Dsonar.host.url=$CI_SONAR_URL -Dsonar.login=$CI_SONAR_TOKEN -Dsonar.verbose=true  -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
   only:
     variables:
       - $CI_COMMIT_TAG =~ /(([0-9]*)(\.))(([0-9]{2})(\.)){2}([0-9]){3}((-RC)([0-9]+))?/

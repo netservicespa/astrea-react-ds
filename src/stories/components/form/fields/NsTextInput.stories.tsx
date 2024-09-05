@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { NsForm } from '../../../../components/components/form/NsForm';
-import { NsTextInput } from '../../../../components/components/form/fields/NsTextInput';
+import { NsForm } from 'src/components/components/form/NsForm';
+import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
 
 export default {
   title: 'Components/Form/Text Input',

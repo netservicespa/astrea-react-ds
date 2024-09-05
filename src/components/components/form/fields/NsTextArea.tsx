@@ -8,8 +8,7 @@ import { NsInput, composeValidators } from '../validators';
 
 export type NsTextAreaProps = NsInput<Omit<InputProps, 'value'>, string>;
 
-const TextareaAutosizeStyled = styled(TextareaAutosize)(
-  ({ theme, error }: { theme: any; error: boolean }) => ({
+const TextareaAutosizeStyled = styled(TextareaAutosize)(({ theme, error }: { theme: any; error: boolean }) => ({
     fontFamily: `${theme.typography.fontFamily}`,
     display: 'block',
     padding: 8,
@@ -19,73 +18,70 @@ const TextareaAutosizeStyled = styled(TextareaAutosize)(
     outline: '0',
     borderRadius: '0',
     '&:focus': {
-      boxShadow: `0 0 0 3px ${theme.palette.focus.main}`,
-      borderWidth: '3px',
+        boxShadow: `0 0 0 3px ${theme.palette.focus.main}`,
+        borderWidth: '3px',
     },
     '&:hover': {
-      borderColor: error ? 'red' : '#0B0C0C',
+        borderColor: error ? 'red' : '#0B0C0C',
     },
-  })
-);
+}));
 
 /**
  * Campo di testo integrato con relay-forms.
  * Supporta la validazione tramite i campi validate
  */
 export const NsTextArea: React.FC<any> = ({
-  name,
-  label,
-  defaultValue,
-  validate,
-  errorMessage,
-  disabled,
-  placeholder,
-  onChange,
-  ...rest
+    name,
+    label,
+    defaultValue,
+    validate,
+    errorMessage,
+    disabled,
+    placeholder,
+    onChange,
+    ...rest
 }) => {
-  const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
+    const key = useMemo(() => name || uniqueId('v_txt-'), [name]);
 
-  const validateCallback = useCallback(
-    (v: string) => composeValidators(validate, errorMessage)(v),
-    [validate, errorMessage]
-  );
+    const validateCallback = useCallback(
+        (v: string) => composeValidators(validate, errorMessage)(v),
+        [validate, errorMessage],
+    );
 
-  const [{ value, error }, setValue] = useFormField({
-    key,
-    initialValue: (defaultValue || '') as string,
-    validate: validateCallback,
-  });
+    const [{ value, error }, setValue] = useFormField({
+        key,
+        initialValue: (defaultValue || '') as string,
+        validate: validateCallback,
+    });
 
-  React.useEffect(() => {
-    if (disabled) {
-      setValue((defaultValue || '') as string);
-    }
-  }, [disabled]);
+    React.useEffect(() => {
+        if (disabled) {
+            setValue((defaultValue || '') as string);
+        }
+    }, [disabled]);
 
-  const setValueCallback = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      setValue(value);
+    const setValueCallback = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            const { value } = event.target;
+            setValue(value);
 
-      if (onChange) {
-        onChange(event);
-      }
-    },
-    [setValue, onChange]
-  );
+            if (onChange) {
+                onChange(event);
+            }
+        },
+        [setValue, onChange],
+    );
 
-  return (
-    <NsLabelInput nameHtml={key} label={label as string}>
-      <TextareaAutosizeStyled
-        {...rest}
-        fullWidth
-        value={value}
-        error={!!error}
-        onChange={setValueCallback}
-        disabled={disabled}
-        multiline
-        placeholder={placeholder}
-      />
-    </NsLabelInput>
-  );
+    return (
+        <NsLabelInput nameHtml={key} label={label as string}>
+            <TextareaAutosizeStyled
+                {...rest}
+                value={value}
+                error={error ? !!error : undefined}
+                onChange={setValueCallback}
+                disabled={disabled}
+                placeholder={placeholder}
+            />
+        </NsLabelInput>
+    );
 };

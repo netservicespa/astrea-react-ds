@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { Button, Container, Divider } from '@mui/material';
-import { NsFeedback } from '../../../components/components/feedback/NsFeedback';
+import { NsFeedback } from 'src/components/components/feedback/NsFeedback';
 
 export default {
   title: 'Components/Feedback',

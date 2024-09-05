@@ -1,6 +1,7 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import type { Preview } from '@storybook/react';
+import { DocsContainer, DocsPage, Unstyled } from "@storybook/blocks";
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import themeLight from './astrea-theme-light';
@@ -10,6 +11,7 @@ import { BlueChiaTheme as blueChia } from '../src/themes/BlueChiaTheme';
 import { GoldMinaTheme as goldMina } from '../src/themes/GoldMinaTheme';
 import { AstreaTheme as astrea } from '../src/themes/AstreaTheme';
 import './styles.scss';
+import { NeedHelp } from '../src/stories/utlis/needHelp/NeedHelp';
 
 const isDark = typeof window !== `undefined` ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches : null;
 
@@ -127,8 +129,15 @@ const preview: Preview = {
     },
     docs: {
       canvas: {
-        sourceState: 'shown'
-      }
+        sourceState: 'shown',
+        layout: 'fullscreen'
+      },
+      container: ({ children, context }: { children: any; context: any }) => (
+        <DocsContainer context={context}>
+          {children}
+          {<NeedHelp />}
+        </DocsContainer>
+      ),
     }  
   },
   globals: {

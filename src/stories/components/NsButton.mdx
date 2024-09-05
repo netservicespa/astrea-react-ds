@@ -1,36 +1,65 @@
-import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
-import * as NsButton from './NsButton.stories';
+import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview  } from '@storybook/blocks';
+import * as NsButtonStories from './NsButton.stories';
+import { NsGridLayout } from '../../components/layout/NsGridLayout';
+import { Button as NsButton, } from '@mui/material';
 
-<Meta of={NsButton} />
+<Meta of={NsButtonStories} />
 
 <h1>Button</h1>
+<p>The Button component can be used as either 'NsButton' or 'Button', as it is identical to the MUI Button. There are no logical modifications apart from styling differences. Therefore, you can refer to the MUI documentation available here: [MUI Button Documentation](https://mui.com/material-ui/react-button/). For accessibility information, please consult our documentation on this page.</p>
 <p>The Button component is a reusable UI element used to trigger actions or events when clicked. It serves as an interactive element within the user interface, commonly employed to initiate actions such as form submissions, navigation, or other user interactions.</p>
 <Primary />
+<Controls/>
+
+<br/>
+<h3>When to use this component</h3>
+<p>Use the button component to help users carry out an action.</p>
 
 <h3>How it works</h3>
-<p>The Button component encapsulates a basic HTML &lt;button&gt; element and provides additional features like customizable styles, event handling, and accessibility attributes. It can be easily customised through its props to suit various design requirements and functionalities.</p>
+<p>Write button text in sentence case, describing the action it performs. For example:</p>
 
-<h3>Best Practices</h3>
-<ol>
-  <li>Consistency: Maintain consistent styling and behaviour of buttons throughout the application.</li>
-  <li>Clear Labels: Use descriptive and concise labels to communicate the action or purpose of the button.</li>
-  <li>Accessibility: Ensure proper accessibility attributes (like aria-label, aria-describedby, etc.) for users relying on assistive technologies.</li>
-	<li>Responsive Design: Create responsive button styles to accommodate different device sizes and user interactions.</li>
-	<li>Testability: Implement testing strategies to verify button functionality across different scenarios.</li>
-</ol>
-
-<h3>Props</h3>
-<Controls />
-<p>text</p>
+<ul>
+  <li>‘Start now’ at the start of the service</li>
+  <li>‘Sign in’ to an account a user has already created</li>
+  <li>‘Continue’ when the service does not save a user’s information</li>
+	<li>‘Save and continue’ when the service does save a user’s information</li>
+	<li>‘Save and come back later’ when a user can save their information and come back later</li>
+  <li>‘Add another’ to add another item to a list or group</li>
+</ul>
 
 <h3>Accessibility</h3>
 <p>The Button component is designed with accessibility in mind. To ensure optimal accessibility:</p>
-<ol>
+<ul>
   <li>Use meaningful text or labels (ariaLabel) that describe the button's purpose for screen readers.</li>
   <li>Enable keyboard focus styling (:focus) for easy navigation and usability.</li>
 	<li>Ensure sufficient color contrast and visual cues to aid users with visual impairments.</li>
 	<li>Disable or enable the button based on context, indicating its state to assistive technologies.</li>
-</ol>
+</ul>
 
-<h3>Usage</h3>
-<p>Place buttons in prominent positions based on their importance and action. Primary action buttons should stand out more compared to secondary or tertiary buttons.</p>
+<h3>Primary buttons</h3>
+<p>Use a primary button for the main call to action on a page.</p>
+<p>Avoid using multiple primary buttons on a single page. Having more than one main call to action reduces their impact, and makes it harder for users to know what to do next.</p>
+<Story of={NsButtonStories.DefaultButton}  />
+
+<h3>Secondary buttons</h3>
+<p>Use secondary buttons for secondary calls to action on a page.</p>
+<p>Pages with too many calls to action make it hard for users to know what to do next. Before adding lots of secondary buttons, try to simplify the page or break the content down across multiple pages.</p>
+<Story  of={NsButtonStories.SecondaryButton} />
+
+<h3>Warning buttons</h3>
+<p>Warning buttons are designed to make users think carefully before they use them. They only work if used very sparingly. Most services should not need one.</p>
+<Story of={NsButtonStories.ErrorButton} />
+<p>Only use warning buttons for actions with serious destructive consequences that cannot be easily undone by a user.</p>
+<p>When letting users carry out an action like this, it’s a good idea to include an additional step or friction which asks them to confirm it. In this instance, use another style of button for the initial call to action, and a warning button for the final confirmation.</p>
+<p>Do not only rely on the red colour of a warning button to communicate the serious nature of the action. This is because not all users will be able to see the colour or will understand what it signifies. Make sure the context and button text make clear what will happen if the user selects it.</p>
+
+<h3>Disabled buttons</h3>
+<p>Disabled buttons have poor contrast and can confuse some users, so avoid them if possible.</p>
+<p>Only use disabled buttons if research shows it makes the user interface easier to understand.</p>
+<Story of={NsButtonStories.DisabledButton} />
+
+<h3>Do's and Dont's</h3>
+<Story of={NsButtonStories.DoDontsOne} />
+<Story of={NsButtonStories.DoDontsTwo} />
+
+<Story of={NsButtonStories.DoDontsPadding} /> 

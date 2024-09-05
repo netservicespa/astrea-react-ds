@@ -1,4 +1,4 @@
-FROM harbor.netserv.it/cicd/node-ci-image:1.0 AS builder
+FROM harbor.netserv.it/cicd/node-ci-image:1.0-node20 AS builder
 
 COPY . .
 

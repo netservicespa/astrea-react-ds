@@ -1,11 +1,11 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import {
   NsAccordion,
+  NsAccordionDetails,
   NsAccordionProps,
-} from '../../components/components/NsAccordion';
+} from 'src/components/components/NsAccordion';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 export default {
@@ -27,12 +27,6 @@ export default {
         category: 'Content',
       },
     },
-    content: {
-      description: 'Collapsed content or ReactNode displayed upon expanding the accordion.',
-      table: {
-        category: 'Content',
-      },
-    },
     disabled: {
       description: 'Disables interaction if set.',
       control: 'boolean',
@@ -41,14 +35,16 @@ export default {
       },
     },
     icon: {
-      description: 'The icon to be used as the expand more indicator in the accordion summary.',
+      description:
+        'The icon to be used as the expand more indicator in the accordion summary.',
       control: 'object',
       table: {
         category: 'Appearance',
       },
     },
     typographyProps: {
-      description: 'Props to customize the typography component used for the title text.',
+      description:
+        'Props to customize the typography component used for the title text.',
       control: 'object',
       table: {
         category: 'Appearance',
@@ -60,10 +56,12 @@ export default {
         category: 'Misc',
       },
     },
-  }
+  },
 } as Meta;
 
-const Template: StoryFn<NsAccordionProps & { expanded: boolean; onChange: () => void }> = (args) => {
+const Template: StoryFn<
+  NsAccordionProps & { expanded: boolean; onChange: () => void }
+> = (args) => {
   const [expanded, setExpanded] = useState<boolean | undefined>(args.expanded);
 
   // The onChange handler should mimic the signature of the Accordion's onChange prop
@@ -73,20 +71,24 @@ const Template: StoryFn<NsAccordionProps & { expanded: boolean; onChange: () => 
 
   return (
     <div>
-      <NsAccordion
-        {...args}
-        expanded={expanded}
-        onChange={handleChange}
-      />
+      <NsAccordion {...args} expanded={expanded} onChange={handleChange}>
+        {args.children}
+      </NsAccordion>
       <NsAccordion
         title="Accordion 2"
-        content={<Typography>Additional text for the accordion...</Typography>}
-      />
+      >
+        <NsAccordionDetails>
+          <Typography>Additional text for the accordion...</Typography>
+        </NsAccordionDetails>
+      </NsAccordion>
       <NsAccordion
         title="Disabled Accordion"
-        content={<Typography>Additional text for the accordion...</Typography>}
         disabled={true}
-      />
+      >
+        <NsAccordionDetails>
+          <Typography>Additional text for the accordion...</Typography>
+        </NsAccordionDetails>
+      </NsAccordion>
     </div>
   );
 };
@@ -94,18 +96,17 @@ const Template: StoryFn<NsAccordionProps & { expanded: boolean; onChange: () => 
 export const Default = Template.bind({});
 Default.args = {
   title: 'Change this content to see how it gets overwritten',
-  content: (
-    <Typography>
+  children: (
+    <NsAccordionDetails>
       Change this title to see how it gets overwritten
-    </Typography>
-  ),
+    </NsAccordionDetails>
+  ), // Passa il contenuto come children
   expanded: 'panel1',
   icon: <FilterAltIcon />,
-  typographyProps: { 
-    variant: 'h2', 
+  typographyProps: {
+    variant: 'h2',
   },
 };
-
 
 const TemplateDisabled: StoryFn<NsAccordionProps> = (args) => (
   <div>
@@ -118,10 +119,6 @@ const TemplateDisabled: StoryFn<NsAccordionProps> = (args) => (
 export const DisabledAll = TemplateDisabled.bind({});
 DisabledAll.args = {
   title: 'Disabled Accordion Title',
-  content: (
-    <Typography>
-      This is the content of a disabled accordion
-    </Typography>
-  ),
+  content: <Typography>This is the content of a disabled accordion</Typography>,
   disabled: true,
 };
