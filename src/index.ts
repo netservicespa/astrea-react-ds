@@ -28,6 +28,7 @@ export { NsSkipLink } from './components/components/NsSkipLink';
 export { NsConfirmPage } from './components/components/confirmPage/NsConfirmPage';
 export { NsBreadcrumbs } from './components/components/NsBreadcrumbs';
 export { NsBanner } from './components/components/NsBanner';
+export { NsDialog, NsDialogActions, NsDialogContent, NsDialogTitle } from './components/components/dialog/NsDialog';
 
 /**
  * Forms and validation

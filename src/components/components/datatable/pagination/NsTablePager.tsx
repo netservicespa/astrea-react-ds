@@ -21,6 +21,11 @@ export interface NsTablePagerControlledProps<T> {
      * The pagination information.
      */
     paginationInfo: Omit<PagedData<unknown>, 'data'>;
+
+    /**
+     * The available page sizes
+     */
+    rowsPerPageOptions?: number[];
 }
 
 /**
@@ -49,12 +54,13 @@ export type NsTablePagerProps<T> = NsTablePagerControlledProps<T> | NsTablePager
 export function NsTablePager<T>({ table, type, ...rest }: Readonly<NsTablePagerProps<T>>) {
     const { t } = useTranslation();
 
-    let count, page, rowsPerPage;
+    let count, page, rowsPerPage, rowsPerPageOptions;
 
     if (type === 'server') {
         count = (rest as NsTablePagerControlledProps<T>).paginationInfo.totalItems;
         page = (rest as NsTablePagerControlledProps<T>).paginationInfo.currentPage;
         rowsPerPage = (rest as NsTablePagerControlledProps<T>).paginationInfo.pageSize;
+        rowsPerPageOptions = (rest as NsTablePagerControlledProps<T>).rowsPerPageOptions;
     } else {
         count = table.getFilteredRowModel().rows.length;
         page = table.getState().pagination.pageIndex;
@@ -79,6 +85,7 @@ export function NsTablePager<T>({ table, type, ...rest }: Readonly<NsTablePagerP
             }}
             labelRowsPerPage={t('table.pagination.pageSize')}
             ActionsComponent={TablePaginationActions}
+            rowsPerPageOptions={rowsPerPageOptions}
         />
     );
 }

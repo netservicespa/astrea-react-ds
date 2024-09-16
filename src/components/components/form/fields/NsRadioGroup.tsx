@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useFormField } from 'relay-forms';
 import uniqueId from '../../../../util/uniqueId';
 import { composeValidators, NsInput } from '../validators';
+import { RadioProps } from '@mui/material/Radio/Radio';
 
 export interface AdditionalProps {
     labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
@@ -16,21 +17,20 @@ export type NsRadioProps = NsInput<
 >;
 
 
-export interface MyNsRadioProps {
+export interface MyNsRadioProps extends RadioProps{
     label: string,
     value: string
 }
 
-export function NsRadio({ label, value }: MyNsRadioProps) {
+export function NsRadio({ label, value, ...radioProps }: MyNsRadioProps) {
     return (
-        <FormControlLabel value={value} control={<Radio />} label={label} />
+        <FormControlLabel value={value} control={<Radio {...radioProps}/>} label={label} />
     );
 }
 
 
 export const NsRadioGroup: React.FC<NsRadioProps> = ({
     name,
-    defaultChecked,
     validate,
     errorMessage,
     disabled,
@@ -49,7 +49,7 @@ export const NsRadioGroup: React.FC<NsRadioProps> = ({
     // Error is not handled, as Radio Buttons should not have an error state (for now, at least)
     const [{ value }, setValue] = useFormField({
         key,
-        initialValue: (defaultChecked || '') as string,
+        initialValue: (defaultValue || '') as string,
         validate: validateCallback,
     });
 
@@ -57,8 +57,6 @@ export const NsRadioGroup: React.FC<NsRadioProps> = ({
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const value = event.target.value;
             setValue(value);
-
-            console.log('value', value);
 
             if (onChange) {
                 onChange(event);
@@ -71,7 +69,7 @@ export const NsRadioGroup: React.FC<NsRadioProps> = ({
         if (disabled) {
             setValue((defaultValue || '') as string);
         }
-    }, [disabled, defaultChecked, setValue]);
+    }, [disabled, defaultValue, setValue]);
 
     return (
 

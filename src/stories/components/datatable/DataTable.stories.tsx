@@ -1,10 +1,9 @@
-import { Box, Paper, Stack, Tab } from '@mui/material';
+import { Box, Button as NsButton, Paper, Stack } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import { CellContext, ColumnDef, createColumnHelper, PaginationState } from '@tanstack/react-table';
-import React, { Children, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { NsDataGridOptions } from 'src/components/components/datatable/NsDataGridBase';
 import { ColumnSorting, PagedData } from 'src/components/components/datatable/NsDataGridServer';
-import { Button as NsButton } from '@mui/material';
 import { NsDataGrid } from 'src/components/components/datatable/NsDataGrid';
 
 import {
@@ -79,9 +78,9 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
                 pagination.pageIndex,
                 sorting
                     ? Object.entries(sorting).map(([field, direction]) => ({
-                          field: field as keyof Person,
-                          direction: direction as 'asc' | 'desc',
-                      }))
+                        field: field as keyof Person,
+                        direction: direction as 'asc' | 'desc',
+                    }))
                     : [],
                 filters,
             ).then(
@@ -111,22 +110,23 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
         sortable: true,
         rowSelection: 'single',
         customRowIdMapper: (row) => row.id,
+        pagination: { rowsPerPageOptions: [5, 10] },
     };
 
     const customtableEventListener: NsDataGridEventHandler<Person, PersonFilters> = React.useCallback((event) => {
         switch (event.type) {
-            case NsDataGridEventType.FILTER_CHANGE:
-                console.log('Filter change:', event.payload);
-                break;
-            case NsDataGridEventType.SORT_CHANGE:
-                console.log('Sort change:', event.payload);
-                break;
-            case NsDataGridEventType.SELECTION_CHANGE:
-                console.log('Selection change:', event.payload);
-                break;
-            default:
-                console.error('Unknown event type:', event.type);
-                break;
+        case NsDataGridEventType.FILTER_CHANGE:
+            console.log('Filter change:', event.payload);
+            break;
+        case NsDataGridEventType.SORT_CHANGE:
+            console.log('Sort change:', event.payload);
+            break;
+        case NsDataGridEventType.SELECTION_CHANGE:
+            console.log('Selection change:', event.payload);
+            break;
+        default:
+            console.error('Unknown event type:', event.type);
+            break;
         }
     }, []);
 
@@ -144,10 +144,10 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100% !important' }}>
                     <Typography variant="h4">Titolo</Typography>
                     <NsButton variant="contained" color="primary">
-                        Bottone
+                        Button
                     </NsButton>
                 </Box>
-                <Typography variant="body1">Questo è un piccolo paragrafo sotto il titolo.</Typography>
+                <Typography variant="body1">This is a small paragraph under the title.</Typography>
             </Box>
         );
     };

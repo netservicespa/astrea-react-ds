@@ -12,6 +12,7 @@
     }
   },
   "modal": {
+    "open":"Apri modale",
     "close": "Chiudi",
     "buttons": {
       "submit": "Conferma",

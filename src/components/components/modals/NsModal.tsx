@@ -202,7 +202,7 @@ export const NsModal: React.FC<NsModalProps> = ({
 
     return (
         <div>
-            {!openFromParent && <NsButton onClick={handleOpen}>Open modal</NsButton>}
+            {!openFromParent && <NsButton onClick={handleOpen}>{t('modal.buttons.cancel')}</NsButton>}
             <Modal
                 open={isOpen ?? false}
                 onClose={handleClose}

@@ -12,6 +12,7 @@
     }
   },
   "modal": {
+    "open":"Open modal",
     "close": "Close",
     "buttons": {
       "submit": "Confirm",

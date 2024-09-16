@@ -226,29 +226,22 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
         <></>
     );
     const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
-    const TablePagerComponent = <PagerComponent type="server" table={table} paginationInfo={page} />;
+    const TablePagerComponent = <PagerComponent type="server" table={table} paginationInfo={page} rowsPerPageOptions={options?.pagination?.rowsPerPageOptions}/>;
     return render(FilterContainerComponent, TableComponent, TablePagerComponent, children);
 }
-
-const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, children) => (
-    <Container maxWidth="xl">
-        <Box display="flex" flexDirection="column" gap="50px">
-            {children ? (
-                <>
-                    <Box sx={{ border: '1px solid gray', padding: '10px' }}>{FilterContainer}</Box>
-                    <Box sx={{ border: '1px solid gray', padding: '10px' }}>
-                        {children}
-                        {Table}
-                        {Pager}
-                    </Box>
-                </>
-            ) : (
-                <>
-                    {FilterContainer}
+const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, children) => {
+    const hasFilterContainer =
+        FilterContainer && FilterContainer.props && Object.keys(FilterContainer.props).length > 0;
+    return (
+        <Container maxWidth="xl">
+            <Box display="flex" flexDirection="column" gap="50px">
+                {hasFilterContainer && <Box sx={{ border: '1px solid gray', padding: '10px' }}>{FilterContainer}</Box>}
+                <Box sx={{ border: hasFilterContainer ? '1px solid gray' : 'none', padding: '10px' }}>
+                    {children && children}
                     {Table}
                     {Pager}
-                </>
-            )}
-        </Box>
-    </Container>
-);
+                </Box>
+            </Box>
+        </Container>
+    );
+};

@@ -21,26 +21,31 @@ const Template: StoryFn<typeof NsRadioGroup> = () => {
         setSelectedValue(event.target.value);
     };
 
+
     return (
         <>
             <NsForm onSubmit={(data: { meal: string }) => {
+                console.log(data);
                 setSelectedValue(data.meal);
-            }} buttonsSlot={false}>
+            }}>
                 <FormLabel component="legend">
                     {t('Choose your favourite meal')}
                 </FormLabel>
                 <FormGroup>
                     <NsRadioGroup
                         name="meal"
+                        defaultValue="Lasagne"
                         onChange={handleChange}
                     >
                         <NsRadio
                             label="Tortellini"
                             value="Tortellini"
+                            disabled
                         />
                         <NsRadio
                             label="Lasagne"
                             value="Lasagne"
+                            disabled
                         />
                         <NsRadio
                             label="Erbazzone"

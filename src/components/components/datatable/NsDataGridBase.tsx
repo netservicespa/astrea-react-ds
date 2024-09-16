@@ -48,6 +48,11 @@ export interface NsDataGridOptions<RowType extends object> {
         desc: React.ReactNode | string;
         unordered: React.ReactNode | string;
     };
+    /** Specify options that affect pagination behavior */
+    pagination?: {
+        /** The available page sizes */
+        rowsPerPageOptions?: number[];
+    };
 }
 
 export interface NsDataGridBaseProps<RowType extends object> extends TableContainerProps {
