@@ -1,6 +1,6 @@
 import React from 'react';
 import { INotificationData } from '../components/components/notification/NsNotification';
-import { DialogActionsProps, DialogContentProps, DialogProps, DialogTitleProps } from '@mui/material';
+import { DialogActionsProps, DialogContentProps, DialogProps, DialogTitleProps, SxProps, Theme } from '@mui/material';
 
 export type User = {
     name: string;
@@ -277,4 +277,74 @@ export interface NsDialogProps extends DialogProps {
      * - `false`: Closes the dialog.
      */
     setOpen: (open: boolean) => void;
+}
+export interface PanelProps {
+    /**
+     * Defines the type of the panel.
+     *
+     * - `'primary'`: Default panel styling.
+     * - `'secondary'`: Alternative styling for the panel.
+     *
+     * Default is `'primary'`.
+     */
+    type?: 'primary' | 'secondary';
+
+    /**
+     * The title displayed at the top of the panel.
+     * This is required.
+     */
+    title: string;
+
+    /**
+     * A subtitle displayed below the title, providing additional context or description.
+     */
+    subtitle: string;
+
+    /**
+     * The content to be displayed inside the panel.
+     * Accepts any valid React node (components, elements, etc.).
+     */
+    children: React.ReactNode;
+
+    /**
+     * If true, a side menu will be displayed with controls to open or close the panel.
+     *
+     * Default is `false`, meaning no menu will be shown.
+     */
+    menu?: boolean;
+
+    /**
+     * Controls whether the panel is open or closed.
+     *
+     * - `true`: The panel is open and visible.
+     * - `false`: The panel is closed.
+     *
+     * Default is `true`.
+     */
+    isOpen?: boolean;
+
+    /**
+     * A function that is triggered when the panel is opened or closed.
+     *
+     * This callback is useful for managing the panel's open/close state.
+     */
+    handleOpen: () => any;
+
+    /**
+     * Allows you to customize the styles of the panel using the MUI `sx` prop.
+     * You can pass any valid `SxProps<Theme>` object to apply custom styling to the `StyledCard`.
+     */
+    sx?: SxProps<Theme>;
+
+    /**
+     * If true, a close button will be displayed in the panel title.
+     * You can also pass a custom string or React node to replace the default button.
+     *
+     * - `true`: Displays the default close button.
+     * - `string`: Displays a custom text as the close button.
+     * - `ReactNode`: Allows the rendering of a custom React component.
+     *
+     * Default is `false`, meaning no close button will be shown.
+     */
+    button?: boolean | string | React.ReactNode;
 }

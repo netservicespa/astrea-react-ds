@@ -1,6 +1,6 @@
 {
   "name": "@netservice/astrea-react-ds",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "dist/umd/index.min.js",
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "@fontsource/titillium-web": "^4.5.9",
-    "@storybook/test": "^8.1.6"
+    "@storybook/test": "^8.1.6",
+    "date-fns": "2.29.3"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.1",

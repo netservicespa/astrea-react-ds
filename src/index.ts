@@ -12,7 +12,7 @@ export { NsLabelInput } from './components/components/NsLabelInput';
 export { Button as NsButton } from '@mui/material';
 export { NsTabs } from './components/components/tabs/NsTabs';
 export { NsPanel } from './components/components/panel/NsPanel';
-export { NsAccordion } from './components/components/NsAccordion';
+export { NsAccordion, NsAccordionDetails } from './components/components/NsAccordion';
 export { NsProgress } from './components/components/NsProgress';
 export { NsPageHeader } from './components/components/pageHeader/NsPageHeader';
 export { NsModal } from './components/components/modals/NsModal';
@@ -44,6 +44,7 @@ export { NsSelectAutocomplete } from './components/components/form/fields/NsSele
 export { NsTextInput } from './components/components/form/fields/NsTextInput';
 export { NsTextArea } from './components/components/form/fields/NsTextArea';
 export { NsFileUpload } from './components/components/form/fields/NsFileUpload';
+export { NsTimePicker } from './components/components/form/fields/NsTimePicker';
 export * from './components/components/form/validators';
 
 /**

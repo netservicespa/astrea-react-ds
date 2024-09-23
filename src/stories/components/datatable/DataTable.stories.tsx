@@ -23,6 +23,160 @@ import Typography from '@mui/material/Typography';
 const meta: Meta<typeof NsDataGrid> = {
     title: 'Components/DataGrid',
     component: NsDataGrid,
+    parameters: {
+        docs: {
+            source: {
+                type: 'code',
+            },
+        },
+    },
+    argTypes: {
+        columns: {
+            description: 'An array of column definitions for the grid.',
+            control: 'object',
+            table: {
+                type: {
+                    summary: 'ColumnDef<RowType>[]',
+                },
+                defaultValue: {
+                    summary: '[]',
+                },
+            },
+        },
+        defaultColumn: {
+            description: 'An optional definition to set common defaults for all columns.',
+            control: 'object',
+            table: {
+                type: {
+                    summary: 'Partial<ColumnDef<RowType>>',
+                },
+                defaultValue: {
+                    summary: '{}',
+                },
+            },
+        },
+        eventListener: {
+            description: 'Callback to handle table events.',
+            control: 'function',
+            table: {
+                type: {
+                    summary: 'NsDataGridEventHandler<RowType, FilterType>',
+                },
+                defaultValue: {
+                    summary: '() => {}',
+                },
+            },
+        },
+        PagerComponent: {
+            description: 'Optional component to render a custom pager.',
+            control: 'elementType',
+            table: {
+                type: {
+                    summary: 'React.ComponentType<NsTablePagerProps<RowType>>',
+                },
+                defaultValue: {
+                    summary: 'NsTablePager',
+                },
+            },
+        },
+        FilterContainer: {
+            description: 'Optional component to render the filter container.',
+            control: 'elementType',
+            table: {
+                type: {
+                    summary: 'React.ComponentType<FilterContainerProps<FilterType>>',
+                },
+                defaultValue: {
+                    summary: 'null',
+                },
+            },
+        },
+        options: {
+            description: 'Optional configuration options for the grid.',
+            control: 'object',
+            table: {
+                type: {
+                    summary: 'NsDataGridOptions<RowType>',
+                },
+                defaultValue: {
+                    summary: '{}',
+                },
+            },
+        },
+        render: {
+            description: 'Optional render function to customize the layout of the grid.',
+            control: 'function',
+            table: {
+                type: {
+                    summary: 'NsDataGridRenderFn',
+                },
+                defaultValue: {
+                    summary: 'DefaultRenderer',
+                },
+            },
+        },
+        debug: {
+            description: 'Enable debug mode for the grid.',
+            control: 'boolean',
+            table: {
+                type: {
+                    summary: 'boolean',
+                },
+                defaultValue: {
+                    summary: 'false',
+                },
+            },
+        },
+        children: {
+            description: 'React children to be rendered inside the grid container.',
+            control: 'node',
+            table: {
+                type: {
+                    summary: 'React.ReactNode',
+                },
+                defaultValue: {
+                    summary: 'null',
+                },
+            },
+        },
+        fetcher: {
+            description: 'A function that fetches data for the grid (for server-side rendering).',
+            control: 'function',
+            table: {
+                type: {
+                    summary: 'DataFetcher<RowType, FilterType>',
+                },
+                defaultValue: {
+                    summary: 'undefined',
+                },
+            },
+        },
+        type: {
+            description: 'Determines if the grid uses client-side or server-side data fetching.',
+            control: 'select',
+            options: ['client', 'server'],
+            table: {
+                type: {
+                    summary: '"client" | "server"',
+                },
+                defaultValue: {
+                    summary: '"client"',
+                },
+            },
+        },
+        data: {
+            description: 'The data to be displayed in the grid (for client-side rendering).',
+            control: 'object',
+            table: {
+                type: {
+                    summary: 'RowType[]',
+                },
+                defaultValue: {
+                    summary: '[]',
+                },
+            },
+        },
+    },
 };
 
 export default meta;
@@ -34,7 +188,66 @@ type PersonFilters = Partial<{
     status: string;
 }>;
 
-const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
+const CustomHeader = () => {
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                gap: 2,
+                paddingBottom: '30px',
+            }}
+        >
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100% !important' }}>
+                <Typography variant="h4">Titolo</Typography>
+                <NsButton variant="contained" color="primary">
+                    Button
+                </NsButton>
+            </Box>
+            <Typography variant="body1">This is a small paragraph under the title.</Typography>
+        </Box>
+    );
+};
+const MagicFilterContainer = ({ activeFilters, onFilterChange }: FilterContainerProps<PersonFilters>) => {
+    const filterDefs: FilterFieldDefinition<PersonFilters>[] = React.useMemo(
+        () => [
+            {
+                key: 'firstName',
+                label: 'First Name',
+                type: 'text',
+            },
+            {
+                key: 'lastName',
+                label: 'Last Name',
+                type: 'text',
+            },
+            {
+                key: 'age',
+                label: 'Age',
+                type: 'number',
+            },
+            {
+                key: 'status',
+                label: 'Status',
+                type: 'select',
+                options: [
+                    { label: 'Complicated', value: 'complicated' },
+                    { label: 'Single', value: 'single' },
+                    { label: 'Relationship', value: 'relationship' },
+                ],
+            },
+        ],
+        [],
+    );
+    return (
+        <Paper>
+            <NsDynamicFilterForm activeFilters={activeFilters} onFilterChange={onFilterChange} fieldDefs={filterDefs} />
+        </Paper>
+    );
+};
+
+const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
     // Here we use @tanstack/react-table's createColumnHelper to create a column helper
     // It is also possible to create the column definitions manually, but this is a more type-safe way.
     const columnHelper = createColumnHelper<Person>();
@@ -78,9 +291,9 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
                 pagination.pageIndex,
                 sorting
                     ? Object.entries(sorting).map(([field, direction]) => ({
-                        field: field as keyof Person,
-                        direction: direction as 'asc' | 'desc',
-                    }))
+                          field: field as keyof Person,
+                          direction: direction as 'asc' | 'desc',
+                      }))
                     : [],
                 filters,
             ).then(
@@ -115,63 +328,41 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = ({ render }) => {
 
     const customtableEventListener: NsDataGridEventHandler<Person, PersonFilters> = React.useCallback((event) => {
         switch (event.type) {
-        case NsDataGridEventType.FILTER_CHANGE:
-            console.log('Filter change:', event.payload);
-            break;
-        case NsDataGridEventType.SORT_CHANGE:
-            console.log('Sort change:', event.payload);
-            break;
-        case NsDataGridEventType.SELECTION_CHANGE:
-            console.log('Selection change:', event.payload);
-            break;
-        default:
-            console.error('Unknown event type:', event.type);
-            break;
+            case NsDataGridEventType.FILTER_CHANGE:
+                console.log('Filter change:', event.payload);
+                break;
+            case NsDataGridEventType.SORT_CHANGE:
+                console.log('Sort change:', event.payload);
+                break;
+            case NsDataGridEventType.SELECTION_CHANGE:
+                console.log('Selection change:', event.payload);
+                break;
+            default:
+                console.error('Unknown event type:', event.type);
+                break;
         }
     }, []);
-
-    const CustomHeader = () => {
-        return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    gap: 2,
-                    paddingBottom: '30px',
-                }}
-            >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100% !important' }}>
-                    <Typography variant="h4">Titolo</Typography>
-                    <NsButton variant="contained" color="primary">
-                        Button
-                    </NsButton>
-                </Box>
-                <Typography variant="body1">This is a small paragraph under the title.</Typography>
-            </Box>
-        );
-    };
 
     return (
         <NsDataGrid
             type="server"
-            debug // Enable debug logging
             columns={columns}
             defaultColumn={defaultColumn}
             // NsTablePager is the default pager component and can be omitted, but you can provide your own
             PagerComponent={NsTablePager}
-            FilterContainer={MagicFilterContainer}
+            onRowSelectionChange={setSelectedRows}
+            FilterContainer={args.FilterContainer}
             fetcher={fetcher}
             eventListener={customtableEventListener}
             options={gridOptions}
-            render={render}
+            render={args.render}
         >
-            {CustomHeader()}
+            {args.children}
         </NsDataGrid>
     );
 };
 
-const TemplateClient: StoryFn<typeof NsDataGrid> = () => {
+const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
     // Here we use @tanstack/react-table's createColumnHelper to create a column helper
     // It is also possible to create the column definitions manually, but this is a more type-safe way.
     const columnHelper = createColumnHelper<Person>();
@@ -222,86 +413,29 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = () => {
         rowSelection: 'single',
         customRowIdMapper: (row) => row.id,
     };
-    const CustomHeader = () => {
-        return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    gap: 2,
-                    paddingBottom: '30px',
-                }}
-            >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100% !important' }}>
-                    <Typography variant="h4">Titolo</Typography>
-                    <NsButton variant="contained" color="primary">
-                        Bottone
-                    </NsButton>
-                </Box>
-                <Typography variant="body1">Questo è un piccolo paragrafo sotto il titolo.</Typography>
-            </Box>
-        );
-    };
+
     return (
         <NsDataGrid
             type="client"
-            debug // Enable debug logging
             columns={columns}
             defaultColumn={defaultColumn}
             onRowSelectionChange={setSelectedRows}
-            // NsTablePager is the default pager component and can be omitted, but you can provide your own
             PagerComponent={NsTablePager}
-            FilterContainer={MagicFilterContainer}
             data={data}
             options={gridOptions}
         >
-            {CustomHeader()}
+            {args.children}
         </NsDataGrid>
     );
 };
 
-function MagicFilterContainer({ activeFilters, onFilterChange }: FilterContainerProps<PersonFilters>) {
-    const filterDefs: FilterFieldDefinition<PersonFilters>[] = React.useMemo(
-        () => [
-            {
-                key: 'firstName',
-                label: 'First Name',
-                type: 'text',
-            },
-            {
-                key: 'lastName',
-                label: 'Last Name',
-                type: 'text',
-            },
-            {
-                key: 'age',
-                label: 'Age',
-                type: 'number',
-            },
-            {
-                key: 'status',
-                label: 'Status',
-                type: 'select',
-                options: [
-                    { label: 'Complicated', value: 'complicated' },
-                    { label: 'Single', value: 'single' },
-                    { label: 'Relationship', value: 'relationship' },
-                ],
-            },
-        ],
-        [],
-    );
-    return (
-        <Paper>
-            <NsDynamicFilterForm activeFilters={activeFilters} onFilterChange={onFilterChange} fieldDefs={filterDefs} />
-        </Paper>
-    );
-}
-
 export const ServerDataGrid = TemplateServer.bind({});
+ServerDataGrid.args = {};
+
 export const ServerDataGridCustomLayout = TemplateServer.bind({});
 ServerDataGridCustomLayout.args = {
+    children: <CustomHeader />,
+    FilterContainer: MagicFilterContainer,
     render: (
         FilterContainer: React.ReactElement,
         Table: React.ReactElement,
@@ -323,4 +457,8 @@ ServerDataGridCustomLayout.args = {
         </Box>
     ),
 };
+
 export const ClientDataGrid = TemplateClient.bind({});
+ClientDataGrid.args = {
+    children: <CustomHeader />,
+};

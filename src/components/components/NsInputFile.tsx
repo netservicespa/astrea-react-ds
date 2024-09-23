@@ -8,7 +8,7 @@ export interface NsInputFileProps {
   onChange?: (e: any) => void;
 }
 
-export function NsInputFile({ onChange, value }: NsInputFileProps) {
+export function NsInputFile({ onChange, value, ...rest }: NsInputFileProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<any>(value);
   const { t } = useTranslation();
@@ -50,6 +50,7 @@ export function NsInputFile({ onChange, value }: NsInputFileProps) {
         id={inputId}
         style={{ display: 'none' }}
         ref={inputRef}
+        {...rest}
       />
       <label htmlFor={inputId}>
         <Button

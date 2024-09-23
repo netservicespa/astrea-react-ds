@@ -1,0 +1,29 @@
+import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview ,ArgsTable } from '@storybook/blocks';
+import * as NsPanel from './NsPanel.stories';
+
+<Meta of={NsPanel} />
+
+<h1>Panel</h1>
+
+<p>
+  The background of an application resembles the flat, opaque texture of a sheet of paper, 
+  and an application's behavior mimics paper's ability to be re-sized, shuffled, 
+  and bound together in multiple sheets.
+</p>
+<Primary />
+<Controls/>
+<p>
+The panels serve to visually separate the components of the page and allow the user to visually 
+recognize the individual macro areas. Unlike cards, they can be considered as containers 
+for other components.
+</p>
+<p>
+It is possible to give a weight to the single panels through the use of color as in the following example:
+</p>
+<Story of={NsPanel.BasicPanel}/>
+<Story of={NsPanel.BasicPanelSecondary}/>
+
+
+<h3>Menu panel </h3>
+<Story of={NsPanel.MenuPanel}/>
+

@@ -1,89 +1,103 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, SxProps, Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import { PanelProps } from 'src/util/types';
 
-export interface PanelProps {
-    type?: 'primary' | 'secondary';
-    title: string;
-    children: React.ReactNode;
-    menu?: boolean;
-    isOpen?: boolean;
-    handleOpen: () => any;
-}
-const StyledCard = styled(Card)<any>(({ theme, type }) => ({
+const StyledCard = styled(Card)<any>(({ theme }) => ({
     border: '1px solid',
     borderColor: '#b1b4b6',
+    margin: '0px !important',
     boxSizing: 'border-box',
     boxShadow: 'none',
     borderRadius: '0px',
     height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
 }));
-
 export const NsPanel = ({
     menu = false,
     type = 'primary',
     title,
+    subtitle,
     children,
-    handleOpen: onClose,
+    handleOpen,
+    button,
     isOpen = true,
+    ...rest
 }: PanelProps) => {
     const { t } = useTranslation();
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <StyledCard type={type}>
-            <Box display="flex" flexDirection="row" sx={{ height: '100%' }}>
-                {menu && (
-                    <Box
-                        sx={{
-                            padding: '10px',
-                            flexGrow: 1,
-                            flexDirection: 'column',
-                            background: isHovered ? '#9c9fa1' : '#b1b4b6',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            maxWidth: '40px',
-                        }}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                        onClick={onClose}
-                    >
+        <StyledCard type={type} {...rest}>
+            {menu && (
+                <Box
+                    sx={{
+                        // padding: '10px',
+                        flexGrow: 1,
+                        flexDirection: 'column',
+                        background: isHovered ? '#9c9fa1' : '#b1b4b6',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        maxWidth: '40px',
+                        minWidth: '40px',
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={handleOpen}
+                >
+                    <Typography fontWeight={isHovered ? 'bold' : 'normal'}>
                         {isOpen ? (
                             <>
-                                <CloseIcon fontWeight={isHovered ? 'bold' : 'normal'} />
-                                <Typography fontWeight={isHovered ? 'bold' : 'normal'}>{t('panel.close')}</Typography>
+                                {typeof button !== 'boolean' ? (
+                                    <CloseIcon fontWeight={isHovered ? 'bold' : 'normal'} />
+                                ) : (
+                                    button
+                                )}
                             </>
                         ) : (
                             <>
-                                <ArrowLeftIcon fontWeight={isHovered ? 'bold' : 'normal'} />
-                                <Typography fontWeight={isHovered ? 'bold' : 'normal'}>{t('panel.open')}</Typography>
+                                {typeof button !== 'boolean' ? (
+                                    <ArrowLeftIcon fontWeight={isHovered ? 'bold' : 'normal'} />
+                                ) : (
+                                    button
+                                )}
                             </>
                         )}
-                    </Box>
-                )}
-                {isOpen && (
-                    <Card
-                        sx={{
-                            borderRadius: '0px',
-                            backgroundColor: type === 'secondary' ? '#2e5a6019' : undefined,
-                        }}
-                    >
-                        <CardContent>
+                    </Typography>
+                </Box>
+            )}
+            {isOpen && (
+                <Card
+                    sx={{
+                        borderRadius: '0px',
+                        margin: 0,
+                        backgroundColor: type === 'secondary' ? '#2e5a6019' : undefined,
+                    }}
+                >
+                    <CardContent>
+                        {title && (
                             <Typography variant={'h3'} fontWeight={900} gutterBottom>
                                 {title}
                             </Typography>
-
+                        )}
+                        {subtitle && (
+                            <Typography variant={'h4'} fontWeight={400}>
+                                {subtitle}
+                            </Typography>
+                        )}
+                        <Box component="div" mt={title || subtitle ? 3 : 0}>
                             {children}
-                        </CardContent>
-                    </Card>
-                )}
-            </Box>
+                        </Box>
+                    </CardContent>
+                </Card>
+            )}
         </StyledCard>
     );
 };
