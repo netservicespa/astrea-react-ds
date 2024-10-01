@@ -3,6 +3,149 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [v2.3.0](https://github.com/netservicespa/astrea-react-ds/commit/49dc9e724b849929f5171984db26d19de0ba8b1a) (Sep 30 2024)
+
+# [v2.2.0](https://github.com/netservicespa/astrea-react-ds/commit/49dc9e724b849929f5171984db26d19de0ba8b1a) (Sep 23 2024)
+
+## New additions
+
+- **NsTimePicker**:
+   - A new component called `NsTimePicker` has been introduced, allowing intuitive time selection.
+
+## Improved
+
+- **NsDataGrid**:
+   - Added comprehensive documentation for the `NsDataGrid` component, including usage examples and configuration guidelines.
+
+- **NsFileUpload**:
+   - Enabled the `NsFileUpload` component to specify accepted file types. Additionally, arguments inherited from MUI's `Input` component have been integrated.
+
+- **NsPanel**:
+   - Added customization support through the `sx` property and inherited arguments. A new story has been created for documentation in Storybook.
+
+## Fixed
+
+- **NsAccordionDetails**:
+   - Exported the `NsAccordionDetails` component for consistent usage across the application.
+
+# [v2.1.0](https://github.com/netservicespa/astrea-react-ds/commit/59575cd08cba6875d0e13e9035b9ed7afa506e3e) (Sep 16 2024)
+
+## New additions
+
+- **NsDialog**:
+   - A new component called `NsDialog` has been created, which will replace `NsModal` in the future. We encourage you to switch to `NsDialog` as `NsModal` will be deprecated in future releases. Here are the improvements made:
+     - The close button is now optional, and full customization is allowed (buttons, close X icon, etc.).
+     - It is now possible to pass information outside of the dialog.
+     - Added the ability to block closing the modal when clicking outside of it.
+     - Detailed documentation has been written and is available in Storybook for further guidance on using `NsDialog`.
+
+## Fixed
+
+- **NsDataGrid**:
+   - Fixed an issue where an empty border was displayed when `NsDataGrid` was rendered without filter components.
+
+- **Translation**:
+   - Fixed an issue in the translation modal where a string was missing from the `common.json` translation file.
+
+# [v2.0.0](https://github.com/netservicespa/astrea-react-ds/commit/6d6a948a1c9fd2b37da532b766297fe3afce4883) (Sep 5 2024)
+
+## **Improved**
+
+**NsPagination:**
+- Now allows customizable labels
+- Added `PaginationActions` for greater paginator customization
+- Updated documentation
+- Added `rowsPerPageOptions` prop
+
+**NsPanel:**
+- Added functionality to toggle the panel open or closed via a button
+
+**NsAccordion:**
+- Improved the accordion to align with the design system
+- Changed accordion content to use the `children` prop instead of the `content` prop for more idiomatic usage
+
+**NsLogin:**
+- Added a prop for customizing the login background
+
+**NsHeader:**
+- Added more Storybook examples to showcase title configuration
+- Introduced a slim version that sticks to the top when scrolling
+- Removed the `title` prop from `NsHeader` and integrated it into the `logo` prop (logo, title, or both)
+- `userPanelMenuItems` now accepts a React node
+- Hid the gray bar in the Header when the user dropdown is not set
+
+**NsSelectAutocomplete:**
+- Improved the default equality check for the MUI Autocomplete component, assuming that two `SelectItem` objects represent the same entity if they share the same `value` field
+
+**NsCard:**
+- Now exports a single `NsCard` component with a dynamic set of props based on the type
+- Renamed the `mainText` property to `title` and removed the `subtext` property in favor of the standard React `children` prop
+- Card `title` now accepts React elements as input
+
+**NsButton:**
+- Removed `NsButton` as a wrapper around the MUI Button, but it remains usable as a reference to the MUI Button
+
+**NsModal:**
+- Added option for modal without button
+- Implemented configurable modal width
+
+**NsDragAndDrop:**
+- Added a label to the `NsDragAndDrop` component when a single file is uploaded
+- Updated label translations
+
+**NsHttpStatus:**
+- Removed rounded edges from the `NsHttpStatus` component
+
+**Storybook:**
+- Upgraded from Storybook v7 to v8.1.6
+- Improved dark mode support
+- Dynamically generated release notes
+- Created a Storybook page for the `NsBreadcrumbs` component
+- Updated the Colors story
+- Updated the Welcome story
+- Fixed issues with `astreaTheme`
+
+---
+
+## **Fixes**
+
+**NsScrollTop:**
+- Fixed compilation warnings (`pnpm build`)
+
+**NsLogin:**
+- Fixed button styles
+- Fixed the `buttonsSlot` prop, which was static and not functional
+
+**ErrorBoundary:**
+- Updated type definitions and fixed a compilation warning (`pnpm build`)
+
+**NsHeader:**
+- Fixed mobile version issues
+- Fixed clickable areas
+
+**NsTextInput:**
+- Fixed the issue where the `NsTextInput` component didn’t pass the `type` prop, causing issues with password fields
+
+**NsTextArea:**
+- Fixed prop-related errors
+
+**Storybook:**
+- Fixed logo images not displaying correctly
+- Renamed the folder containing the `NsDragAndDrop.stories.tsx` file to remove spaces
+- Fixed the story for the `ConfirmationPage` component
+
+---
+
+### **New Additions**
+
+- Introduced the `NsScrollTop` component
+- Introduced the `NsDataGrid` component, considering TanStack Table as a base
+- Set up unit testing for the component library
+- Added ESLint and Prettier configuration
+- Introduced the `NsBanner` component
+- Introduced the `NsRadioGroup` component
+
+
 # [v1.9.1](https://github.com/netservicespa/astrea-react-ds/commit/823cd7a44363a2291ab08a65a6e1741d3bea585b) (Mar 27 2024)
 
 ## Fixes

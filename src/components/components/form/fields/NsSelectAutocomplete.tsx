@@ -14,7 +14,7 @@ export interface SelectItem {
 
 export type NsSelectAutocompleteProps = NsInput<
     Omit<SelectProps & Partial<AutocompleteProps<SelectItem, boolean, boolean, boolean>>, 'value'>,
-    SelectItem | string
+    SelectItem | string | SelectItem[]
 >;
 
 const defaultOptionValueEqualityCheck = (option: SelectItem, value: SelectItem) => option.value === value.value;
@@ -30,29 +30,30 @@ export function NsSelectAutocomplete({
     placeholder,
     isOptionEqualToValue = defaultOptionValueEqualityCheck,
     changed,
+    multiple = false, // Aggiungi questa proprietà
     ...rest
 }: NsSelectAutocompleteProps): JSX.Element {
     const key = useMemo(() => name ?? uniqueId('v_selectac-'), [name]);
 
     const validateCallback = useCallback(
-        (v: SelectItem | string) => composeValidators(validate, errorMessage)(v),
+        (v: SelectItem | string | SelectItem[]) => composeValidators(validate, errorMessage)(v),
         [validate, errorMessage],
     );
 
-    const [{ value, error }, setValue] = useFormField<SelectItem | string>({
+    const [{ value, error }, setValue] = useFormField<SelectItem | string | SelectItem[]>({
         key,
         initialValue: (defaultValue || null) as string,
         validate: validateCallback,
     });
 
     const setValueCallback = useCallback(
-        (event: SelectItem) => {
+        (event: SelectItem | SelectItem[]) => {
             setValue(event);
             if (changed) {
                 changed(event);
             }
         },
-        [setValue],
+        [setValue, changed],
     );
 
     React.useEffect(() => {
@@ -79,10 +80,11 @@ export function NsSelectAutocomplete({
         <NsLabelInput nameHtml={key} label={label as string}>
             <Autocomplete<SelectItem, boolean, boolean, boolean>
                 {...rest}
+                multiple={multiple}
                 isOptionEqualToValue={isOptionEqualToValue}
-                onChange={(_event, value) => setValueCallback(value as SelectItem)}
+                onChange={(_event, value) => setValueCallback(value as SelectItem | SelectItem[])}
                 options={items}
-                disableClearable
+                disableClearable={!multiple}
                 handleHomeEndKeys
                 fullWidth
                 disablePortal

@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import { Queries, render as originalRender, RenderOptions, RenderResult } from '@testing-library/react';
-import i18n from '__tests__/i18n';
 import { ThemeProvider } from '@mui/material';
 import { theme } from 'src/themes/NetServiceTheme';
 import { I18nextProvider } from 'react-i18next';
+import i18n from '__mocks__/i18nForTests';
 
 const AllTheProviders: React.FC<PropsWithChildren<unknown>> = ({
     children,

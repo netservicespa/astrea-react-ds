@@ -37,9 +37,7 @@ const config: StorybookConfig = {
         name: '@storybook/react-webpack5',
         options: {},
     },
-    docs: {
-        autodocs: true,
-    },
+    docs: {},
     staticDirs: ['../public'],
     webpackFinal: async (config) => {
         config.resolve = config.resolve ?? {};

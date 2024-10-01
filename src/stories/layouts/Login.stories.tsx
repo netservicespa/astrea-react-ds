@@ -39,6 +39,7 @@ Default.args = {
         subtitle: 'version 1.0.0',
     },
     cardBorderRadius: '0px',
+    cardWidth: '600px',
 };
 
 export const LoginForm = Template.bind({});

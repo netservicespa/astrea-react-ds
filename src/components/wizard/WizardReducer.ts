@@ -16,15 +16,37 @@ export interface WizardAction<T> {
   payload?: T;
 }
 
+function setValueByDotNotation(obj: Record<string, any>, path: string, value: any): void {
+  const parts = path.split('.');
+  const last = parts.pop();
+  const target = parts.reduce((acc: Record<string, any>, part: string) => {
+      if (!acc[part]) {
+          acc[part] = {};
+      }
+      return acc[part];
+  }, obj);
+  
+  if (last) {
+      target[last] = value;
+  }
+}
+
+
 export function wizardReducer<T>(
   state: WizardState<T>,
   action: WizardAction<T>
 ): WizardState<T> {
   switch (action.type) {
     case WizardActionKind.NEXT:
+      const newData = { ...state.data };
+      if (action.payload) {
+        Object.entries(action.payload).forEach(([key, value]) => {
+          setValueByDotNotation(newData, key, value);
+        });
+      }
       return {
         ...state,
-        data: { ...state.data, ...action.payload },
+        data: newData,
         step: state.step + 1,
       };
     case WizardActionKind.PREVIOUS:

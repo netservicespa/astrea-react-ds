@@ -140,15 +140,16 @@ const preview: Preview = {
       ),
     }  
   },
-  globals: {
+  globalTypes,
+  decorators,
+  tags: ['autodocs'],
+  initialGlobals: {
     locale: 'en',
     locales: {
       en: 'English',
       it: 'Italiano',
     },
-  },
-  globalTypes,
-  decorators,
+  }
 };
 
 export default preview;

@@ -12,8 +12,9 @@ export default {
   argTypes: { label: { type: 'string' }, placeholder: { type: 'string' } },
 } as Meta<typeof NsSelectAutocomplete>;
 
-const data = ['1', '2'];
-const Template: StoryFn<typeof NsSelectAutocomplete> = (args) => {
+const data = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+
+const SingleSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
   const { t } = useTranslation();
   const { placeholder } = args;
 
@@ -22,7 +23,7 @@ const Template: StoryFn<typeof NsSelectAutocomplete> = (args) => {
       <Grid container>
         <Grid item xs={3}>
           <NsSelectAutocomplete
-            name="select"
+            name="select-single"
             defaultValue=""
             label="Autocomplete Select"
             validate={required}
@@ -43,4 +44,45 @@ const Template: StoryFn<typeof NsSelectAutocomplete> = (args) => {
   );
 };
 
-export const AutoCompleteSelect = Template.bind({});
+const MultiSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
+  const { t } = useTranslation();
+  const { placeholder } = args;
+
+  return (
+    <NsForm onSubmit={() => {}} buttonsSlot={false}>
+      <Grid container>
+        <Grid item xs={3}>
+          <NsSelectAutocomplete
+            name="select-multiple"
+            defaultValue={[]}
+            label="Autocomplete MultiSelect"
+            validate={required}
+            placeholder={placeholder}
+            multiple={true}
+            errorMessage={t('form.errors.required', {
+              field: 'Select Autocomplete',
+            })}
+          >
+            {data.map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </NsSelectAutocomplete>
+        </Grid>
+      </Grid>
+    </NsForm>
+  );
+};
+
+export const AutoCompleteSelect = SingleSelectTemplate.bind({});
+AutoCompleteSelect.args = {
+  label: 'Select One Option',
+  placeholder: 'Choose an option',
+};
+
+export const AutoCompleteMultiSelect = MultiSelectTemplate.bind({});
+AutoCompleteMultiSelect.args = {
+  label: 'Select Multiple Options',
+  placeholder: 'Choose multiple options',
+};

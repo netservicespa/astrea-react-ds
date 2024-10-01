@@ -39,6 +39,7 @@ export interface NsLoginProps {
     handleFormSubmit: any;
     formBgColor?: string;
     rightBannerColor?: string;
+    cardWidth?: string;
 }
 
 export const NsLogin: React.FC<NsLoginProps> = ({
@@ -58,6 +59,7 @@ export const NsLogin: React.FC<NsLoginProps> = ({
     handleFormSubmit,
     formBgColor = '#fff',
     rightBannerColor = '#fff',
+    cardWidth = '500px',
 }) => {
     const { t } = useTranslation();
     const [username, setUsername] = useState('');
@@ -141,7 +143,7 @@ export const NsLogin: React.FC<NsLoginProps> = ({
                         <Card
                             sx={{
                                 backgroundColor: formBgColor,
-                                width: '500px',
+                                width: cardWidth,
                                 borderRadius: `${cardBorderRadius}`,
                             }}
                         >

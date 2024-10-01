@@ -42,6 +42,12 @@ export interface NsFormProps<T extends Object> {
     buttonsSlot?: React.ReactNode | boolean;
 }
 
+export interface DefaultButtonsProps {
+    buttonPosition?: 'right' | 'left' | 'spaceBetween' | 'reverse' | 'reverseLeft' | 'reverseRight';
+    submitText?: string;
+    resetText?: string;
+}
+
 /**
  * Defines a new form context.
  *
@@ -113,9 +119,9 @@ export const useFormContext = <T extends Object>() => React.useContext<FormConte
 
 export const DefaultButtons = <T extends Object>({
     buttonPosition = 'right',
-    submitText = 'Submit',
-    resetText = 'Reset',
-}) => {
+    submitText,
+    resetText,
+}: DefaultButtonsProps) => {
     const { t } = useTranslation();
     const { onSubmit, onReset } = useFormContext();
 

@@ -23,6 +23,9 @@ export default {
         'utils', // a utility folder
         '<rootDir>', // the root directory
     ],
+    moduleNameMapper: {
+        '^__tests__/i18n$': '<rootDir>/__mocks__/i18nForTests.ts',
+    },    
     coverageThreshold: {
         global: {
             branches: 0,
