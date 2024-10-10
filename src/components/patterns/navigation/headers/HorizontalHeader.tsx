@@ -125,9 +125,6 @@ const NavigationContainer = styled('div')(
         justify-content: space-between;
         background-color: ${!configuration?.centralLogo ? theme.header.menuBackgroundColor : null};
         padding: 0px 8px;
-        @media (min-width: 768px) {
-            margin-bottom: 30px;
-        }
         @media (max-width: 768px) {
             display: none;
             transition: max-height 0.2s ease-out;
@@ -152,6 +149,7 @@ const NavigationContainer = styled('div')(
                 background-color: ${!configuration?.centralLogo ? theme.header.menuBackgroundColor : null};
                 margin-bottom: 30px;
                 padding: 6px 8px;
+                color: ${theme.header.menuTextColor};
 
                 @media (max-width: 768px) {
                     display: none;

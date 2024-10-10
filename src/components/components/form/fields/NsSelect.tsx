@@ -7,7 +7,7 @@ import { composeValidators, NsInput } from '../validators';
 import uniqueId from '../../../../util/uniqueId';
 import { useFormField } from 'relay-forms';
 
-export type NsSelectProps = NsInput<Omit<SelectProps, 'value'>, string>;
+export type NsSelectProps = NsInput<Omit<SelectProps, 'value'>, string | string[]>;
 
 /**
  * Select component integrated with relay-forms.
@@ -25,6 +25,7 @@ export const NsSelect: React.FC<NsSelectProps> = ({
     placeholder,
     changed,
     disabled,
+    multiple = false,
     ...rest
 }) => {
     const key = useMemo(() => name ?? uniqueId('v_select-'), [name]);
@@ -71,6 +72,7 @@ export const NsSelect: React.FC<NsSelectProps> = ({
                 placeholder={placeholder}
                 onChange={setValueCallback}
                 disabled={disabled}
+                multiple={multiple}
             >
                 {children}
             </Select>

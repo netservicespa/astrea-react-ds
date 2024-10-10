@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { NotifierState } from './NotificationReducer';
+import { SnackbarKey, useSnackbar, VariantType } from 'notistack';
 
 export interface INotificationContext {
   readonly state: NotifierState;
@@ -24,4 +25,23 @@ export const NotificationContext = React.createContext<INotificationContext>({
 /**
  * Hook per le notifiche
  */
-export const useNotifier = () => useContext(NotificationContext);
+
+export interface NotifyOptions {
+  type: VariantType;
+  message: string;
+}
+
+export const useNotifier = () => {
+  const context = useContext(NotificationContext);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const notify = useCallback(({ type, message }: NotifyOptions) => {
+    enqueueSnackbar(message, { variant: type });
+  }, [enqueueSnackbar]);
+
+  const dismiss = useCallback((key: SnackbarKey) => {
+    closeSnackbar(key);
+  }, [closeSnackbar]);
+
+  return { ...context, notify, dismiss };
+};

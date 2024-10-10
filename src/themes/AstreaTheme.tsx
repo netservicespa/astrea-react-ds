@@ -382,13 +382,11 @@ const themeOptions = {
         backgroundColor: accordionBackgroundColor,
     },
     header: {
-        backgroundColor: '#a55ba2',
-        borderColor: '0px solid #fff ',
-        menuTextColor: '#a55ba2',
-        padding: '0px !important',
-        color: '#a55ba2',
-        textAlign: 'center',
+        backgroundColor: `${paletteColors.primary.main}`,
+        borderColor: `${paletteColors.primary.main}`,
         menuBackgroundColor: '#EBEFEF',
+        menuTextColor: `${paletteColors.primary.main}`,
+        focusBackgroundColor: `${paletteColors.focus.main}`
     },
     footer: {
         backgroundColor: '#a55ba2',

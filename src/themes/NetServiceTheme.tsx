@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes } from '@mui/material';
-import { darken } from '@mui/system';
+import { darken, lighten } from '@mui/system';
 import { itIT } from '@mui/x-date-pickers/locales';
 import { itIT as coreItIT } from '@mui/material/locale';
 
@@ -384,9 +384,9 @@ const themeOptions = {
     },
     header: {
         backgroundColor: '#000',
-        borderColor: '#308a7d',
-        menuBackgroundColor: 'rgba(229, 237, 238, 0.99)',
-        menuTextColor: '#FFF',
+        borderColor: `${paletteColors.primary.main}`,
+        menuBackgroundColor: lighten(paletteColors.primary.main, 0.875),
+        menuTextColor: `${paletteColors.primary.main}`,
         focusBackgroundColor: `${paletteColors.focus.main}`,
     },
     footer: {

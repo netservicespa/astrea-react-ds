@@ -69,25 +69,23 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
 
     const renderMenuItems = () => {
         if (Array.isArray(dropdownItems)) {
-            return (
-                <>
-                    {dropdownItems.map((item: any, index: number) => (
-                        <DynamicLink to={item.path} router={router} key={index}>
-                            <MenuItem>
-                                <ListItemIcon>{item.icon || <HomeIcon />}</ListItemIcon>
-                                {item.name}
-                            </MenuItem>
-                            <Divider />
-                        </DynamicLink>
-                    ))}
-                    <MenuItem onClick={handleMenuItemClick}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" style={{ color: '#FFF' }} />
-                    </MenuItem>
-                </>
-            );
+            return [
+                ...dropdownItems.map((item: any, index: number) => (
+                    <DynamicLink to={item.path} router={router} key={index}>
+                        <MenuItem>
+                            <ListItemIcon>{item.icon || <HomeIcon />}</ListItemIcon>
+                            {item.name}
+                        </MenuItem>
+                        <Divider />
+                    </DynamicLink>
+                )),
+                <MenuItem onClick={handleMenuItemClick} key="logout">
+                    <ListItemIcon>
+                        <LogoutIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Logout" style={{ color: '#FFF' }} />
+                </MenuItem>,
+            ];
         } else {
             return dropdownItems;
         }
@@ -135,4 +133,3 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
         </>
     );
 };
-

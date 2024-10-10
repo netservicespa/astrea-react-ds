@@ -2,7 +2,7 @@ import { Box, Container, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon/SvgIcon';
 import { BoxProps } from '@mui/system';
-import React, { ReactElement, useReducer } from 'react';
+import React, { ReactElement, useEffect, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'relay-forms';
 import { NsErrors } from '../../components/components/NsErrors';
@@ -76,8 +76,8 @@ export function NsWizard<T = unknown>({
         data: initialData ?? {},
         totalSteps: stepsLabels.length,
         finished: false,
+        CustomCallback: undefined,
     });
-
     // Seeds the wizard context with the initial data
     const ctx: IWizardContext<T> = React.useMemo(
         () => ({
@@ -94,6 +94,10 @@ export function NsWizard<T = unknown>({
                 dispatch({ type: WizardActionKind.PREVIOUS });
             },
             abort: onAbort,
+            setCustomCallback: (callback: ((...args: any[]) => any) | null) => {
+                dispatch({ type: WizardActionKind.SET_CUSTOM_CALLBACK, payload: callback });
+            },
+            CustomCallback: state.CustomCallback || null,
         }),
         [state, onAbort],
     );
@@ -160,7 +164,6 @@ export const NsWizardProgressButtons: React.FC<NsWizardProgressButtonsProps> = (
     const isLastStep = step === totalSteps - 1;
 
     const handleOpen = () => {
-        console.log('open');
         setOpen(true);
     };
 
@@ -236,6 +239,10 @@ interface NsWizardStepPropsBase<T = unknown> {
      */
     onSkip?: () => boolean;
     /**
+     * Optional callback, invoked on specific steps.
+     */
+    onStepCallback?: (...args: any[]) => any;
+    /**
      * The payload passed to the step, merged from all the previous steps and the initial seed data.
      */
     payload?: T;
@@ -292,32 +299,56 @@ export type NsWizardFormStepProps<T = unknown> = NsWizardStepProps<T> & {
  * @param param0
  * @returns
  */
-export function NsWizardFormStep<T = unknown>({ children, showButtons = true, ...rest }: NsWizardFormStepProps<T>) {
+export function NsWizardFormStep<T = unknown>({
+    children,
+    showButtons = true,
+    onStepCallback,
+    ...rest
+}: NsWizardFormStepProps<T>) {
     const {
-        state: { step },
+        state: { step, data, totalSteps },
+        setCustomCallback,
+        CustomCallback,
     } = useWizard();
+
+    useEffect(() => {
+        if (onStepCallback) {
+            setCustomCallback(onStepCallback);
+        }
+    }, []);
+
     return (
         <NsFormWrapper name={`wizard-step-${step}`}>
-            <InnerWizardFormStep showButtons={showButtons} {...rest}>
+            <InnerWizardFormStep showButtons={showButtons} onStepCallback={onStepCallback} {...rest}>
                 {children}
             </InnerWizardFormStep>
         </NsFormWrapper>
     );
 }
 
-function InnerWizardFormStep<T = unknown>({ children, showButtons }: NsWizardFormStepProps<T>) {
-    const { next, previous } = useWizard();
+function InnerWizardFormStep<T = unknown>({ children, showButtons, onStepCallback }: NsWizardFormStepProps<T>) {
+    const {
+        state: { data, step },
+        next,
+        previous,
+        CustomCallback,
+    } = useWizard();
 
     const { submit } = useForm({
         onSubmit: (data) => {
             next(data);
         },
     });
+
+    const handleSubmit = () => {
+        submit();
+    };
+
     return (
         <Container maxWidth={false}>
             {children}
             <NsErrors />
-            {showButtons && <NsWizardProgressButtons onNext={() => submit()} onPrev={() => previous()} />}
+            {showButtons && <NsWizardProgressButtons onNext={() => handleSubmit()} onPrev={() => previous()} />}
         </Container>
     );
 }

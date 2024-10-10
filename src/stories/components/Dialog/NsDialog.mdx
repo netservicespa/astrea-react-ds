@@ -4,26 +4,24 @@ import * as NsDialog from './NsDialog.stories';
 <Meta of={NsDialog} />
 
 <h1>Dialog</h1>
-<p>
+
   The dialog component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else.
-</p>
-<p>
+
   The background of an application resembles the flat, opaque texture of a sheet of paper, 
   and an application's behavior mimics paper's ability to be re-sized, shuffled, 
   and bound together in multiple sheets.
-</p>
+
 <h3>Action dialog</h3>
 
-<p>
   Example of a paragraph that contains information and details to take an action or reject it.
-</p>
+
 <Primary />
 <Controls/>
-<p>
+
 To prevent the dialog from closing when clicking outside of it, 
 you need to pass a function that checks the received value. 
 Example:
-</p>
+
 ```jsx
 const [isOpen, setIsOpen] = React.useState(false);
 const handleClose = (value: any) => {
@@ -33,16 +31,14 @@ const handleClose = (value: any) => {
 };
 ```
 
-<p>
 In this example, the 'handleClose' function ensures that the dialog will only close if a valid value is provided. 
 This avoids unintended closures, such as when clicking outside the dialog.
-</p>
 
 
 <h3>Basic dialog</h3>
-<p>
+
   This type of dialog provides additional information but does not contain any additional action.
-</p>
+
 <Story of={NsDialog.BasicModal}/>
 <Controls of={NsDialog.BasicModal}/>
 {/* <Source of={NsDialog.BasicModal}/> */}
@@ -57,14 +53,14 @@ This avoids unintended closures, such as when clicking outside the dialog.
 <Story  of={NsDialog.FullscreenModal} />
 <Controls of={NsDialog.FullscreenModal}/>
 <h3>No action dialog</h3>
-<p>
+
   Dialogs can be opened without the need for a button by directly setting the state that controls their 
   visibility to true. 
   This means that you can manage the dialog's open state programmatically by updating the state directly, 
   bypassing the need for user actions such as clicking a button. By controlling the open state in this manner, 
   you can programmatically display the dialog based on specific conditions or events within your application, 
   providing greater flexibility and control over its visibility.
-</p>
+
 <br/>
 <br/>
 <br/>

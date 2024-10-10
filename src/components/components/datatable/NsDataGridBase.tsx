@@ -91,13 +91,17 @@ const TableCellHeadStyled = styled(TableCell)<any>(({ theme }) => ({
     borderRight: `${BORDER_PIXEL}px solid ${theme.palette.borderColor.main}`,
     '&:last-child': { borderRight: 'none' },
 }));
-const HeaderBoxStyled = styled(Box)<any>(({ theme, headerJustifyContent }) => ({
+const HeaderBoxStyled = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'headerJustifyContent',
+})<any>(({ theme, headerJustifyContent }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: headerJustifyContent,
 }));
 
-const TableRowStyled = styled(TableRow)<any>(({ theme, isSelected }) => ({
+const TableRowStyled = styled(TableRow, {
+    shouldForwardProp: (prop) => prop !== 'isSelected',
+})<any>(({ theme, isSelected }) => ({
     backgroundColor: isSelected ? alpha(theme.palette.primary.main, 0.2) : 'inherit',
     borderBottom: `${BORDER_PIXEL}px solid ${theme.palette.borderColor.main}`,
     padding: '1em 0 1em',
@@ -110,7 +114,9 @@ const TableRowStyled = styled(TableRow)<any>(({ theme, isSelected }) => ({
         boxShadow: `inset 0 0 0 1px  ${theme.palette.primary.main}`,
     },
 }));
-const TableCellStyled = styled(TableCell)<any>(({ theme, isSelected, bodyTextAlign }) => ({
+const TableCellStyled = styled(TableCell, {
+    shouldForwardProp: (prop) => prop !== 'isSelected' && prop !== 'isSelected' && prop !== 'bodyTextAlign',
+})<any>(({ theme, isSelected, bodyTextAlign }) => ({
     borderRight: `${BORDER_PIXEL}px solid ${theme.palette.borderColor.main}`,
     '&:last-child': { borderRight: 'none' },
     textAlign: bodyTextAlign,
@@ -216,9 +222,7 @@ function TableBody<T>({
     const handleHover = (id: string | null) => {
         setHoveredRow(id);
     };
-    if (debug) {
-        console.log('Real TableBody render');
-    }
+
     return (
         <MuiTableBodyStyled>
             {table.getRowModel().rows.map((row) => (

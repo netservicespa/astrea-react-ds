@@ -12,18 +12,18 @@ import * as NsPagination from './NsPagination.stories';
 <Meta of={NsPagination} />
 
 <h1>Pagination</h1>
-<p>
+
   MUI already offers a Pagination component with a comprehensive API. 
   We should encourage our users to rely on the MUI component.
   In order to guarantee compliance with the Design System specification, 
   we should provida a custom PaginationActions implementation that follows the DS guidelines.
   See https://mui.com/material-ui/react-table/#custom-pagination-actions, 
   or the NsDataGrid pager implementation for reference.
-</p>
+
 <Primary />
 
 <h3>When to use this component</h3>
-<p>
+
   Consider using pagination when:
   <ul>
     <li>
@@ -33,22 +33,20 @@ import * as NsPagination from './NsPagination.stories';
       most users will only need the content on the first page or first few pages
     </li>
   </ul>
-</p>
+
 
 <h3>When not to use this component</h3>
-<p>
+
   Only break up content onto separate pages if it improves the performance or usability of your service.
-</p>
-<p>
+
   Avoid using the ‘infinite scroll’ technique to automatically load content when the user approaches the 
   bottom of the page. This causes problems for keyboard users.
-</p>
-<p>
+
   Do not use this Pagination component for linear journeys — for example, where you’re asking the user to 
   complete a form. 
   Instead, use the Button component (usually a ‘Continue’ button) to let the user move to the next page — and a 
   Back link to let them move to the previous page.
-</p>
+
 
 <h3>Props</h3>
 <Primary />

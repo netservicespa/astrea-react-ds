@@ -191,12 +191,10 @@ export const CustomTestButtons = <T extends Object>({ submitText = 'Submit', res
     const { onSubmit, onReset } = useFormContext();
 
     const { submit, reset } = useForm<T>({
-        // onSubmit: (values) => onSubmit(values),
-        onSubmit: (values) => console.log(values),
+        onSubmit: (values) => onSubmit(values),
     });
 
     const doReset = () => {
-        console.log('RESET');
         onReset?.();
         reset();
     };

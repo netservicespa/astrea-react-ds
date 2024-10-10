@@ -81,8 +81,8 @@ export function mockPersonService(
         currentPage: startPage,
     };
 
-    console.log('filters', filters);
-    console.log('called mockPersonService: ', resultPayload);
+    // console.log('filters', filters);
+    // console.log('called mockPersonService: ', resultPayload);
 
     // Simulate API delay
     return new Promise((resolve) => {

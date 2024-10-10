@@ -14,14 +14,12 @@ import * as NsFileUploadStories from './NsFileUpload.stories';
 <h1>File Upload</h1>
 
 <h3>What is</h3>
-<p>
+
   The File Upload component allows users to upload files as part of a form. It supports different types of files by configuring the accepted file formats.
-</p>
 
 <h3>How it works</h3>
-<p>
+
   The File Upload component is based on MUI and allows users to select a file from their system. You can control the type of files accepted by passing the <code>inputProps</code> prop with an <code>accept</code> attribute, e.g., <code>{`accept: ".pdf,.eml"`}</code> to restrict uploads to PDFs and EML files.
-</p>
 
 <Primary />
 
@@ -29,9 +27,8 @@ import * as NsFileUploadStories from './NsFileUpload.stories';
 <Controls of={NsFileUploadStories.FileUploadComponent} />
 
 <h3>Example with Type and Accepted Files</h3>
-<p>
+
   In the following example, the file input is restricted to only accept PDFs and EML files using the <code>accept</code> attribute in <code>inputProps</code>.
-</p>
 
 <Primary name="FileUploadWithAccept" />
 

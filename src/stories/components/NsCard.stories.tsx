@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { CardProps } from '@mui/material/Card';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { NsCard, NsCardProps } from '../../components/components/card/NsCard';
+import { Box } from '@mui/system';
 
 const meta: Meta<typeof NsCard> = {
     title: 'Components/Card',
@@ -11,12 +12,15 @@ const meta: Meta<typeof NsCard> = {
 export default meta;
 
 const Template: StoryFn<typeof NsCard> = (args) => {
-    return <NsCard {...args} />;
+    return (
+        <Box sx={{ maxWidth: '550px' }}>
+            <NsCard {...args} />
+        </Box>
+    );
 };
 
 // Storia: Basic Card
 export const BasicCard = Template.bind({});
-
 
 BasicCard.args = {
     type: 'basic',
@@ -25,7 +29,7 @@ BasicCard.args = {
     children:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat enim. Aenean eu massa venenatis, feugiat eros sed, vulputate tortor.',
     buttons: [{ label: 'Link', onClick: () => console.log('Link clicked!') }],
-    cardVariant: 'flag',
+    cardvariant: 'flag',
 } as NsCardProps;
 
 // Storia: Media Card
@@ -37,7 +41,7 @@ MediaCard.args = {
     title: 'New media card',
     children:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis',
-    cardVariant: 'classic',
+    cardvariant: 'classic',
 };
 
 // Storia: Actions Card
@@ -49,7 +53,7 @@ ActionsCard.args = {
     title: 'New actions card',
     children:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat addonec sodales mollis',
-    cardVariant: 'classic',
+    cardvariant: 'classic',
     buttons: [
         {
             label: 'Primary action',
@@ -70,5 +74,5 @@ ClickableCard.args = {
     icon: <GetAppIcon />,
     title: 'New',
     children: '3 pcaps',
-    cardVariant: 'clickable',
+    cardvariant: 'clickable',
 };

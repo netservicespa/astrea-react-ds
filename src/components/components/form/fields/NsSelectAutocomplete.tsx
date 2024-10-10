@@ -10,12 +10,27 @@ import { useFormField } from 'relay-forms';
 export interface SelectItem {
     label: string;
     value: any;
+    groupDescrizione?: string;
+    descrizione?: string;
 }
 
 export type NsSelectAutocompleteProps = NsInput<
     Omit<SelectProps & Partial<AutocompleteProps<SelectItem, boolean, boolean, boolean>>, 'value'>,
     SelectItem | string | SelectItem[]
->;
+> & {
+    multiple?: boolean;
+    options?: SelectItem[];
+    groupBy?: (option: SelectItem) => string;
+    getOptionLabel?: (option: SelectItem) => string;
+    onChange?: (event: React.ChangeEvent<{}>, value: SelectItem | SelectItem[] | null) => void;
+    disableCloseOnSelect?: boolean;
+    renderOption?: (
+        props: React.HTMLAttributes<HTMLLIElement>,
+        option: SelectItem,
+        state: { selected: boolean },
+    ) => React.ReactNode;
+    renderInput?: (params: AutocompleteRenderInputParams) => React.ReactNode;
+};
 
 const defaultOptionValueEqualityCheck = (option: SelectItem, value: SelectItem) => option.value === value.value;
 
@@ -29,8 +44,15 @@ export function NsSelectAutocomplete({
     disabled,
     placeholder,
     isOptionEqualToValue = defaultOptionValueEqualityCheck,
-    changed,
-    multiple = false, // Aggiungi questa proprietà
+    // changed,
+    multiple = false,
+    options,
+    groupBy,
+    getOptionLabel,
+    onChange,
+    disableCloseOnSelect,
+    renderOption,
+    renderInput = (params) => <TextField {...params} variant="outlined" label="" />,
     ...rest
 }: NsSelectAutocompleteProps): JSX.Element {
     const key = useMemo(() => name ?? uniqueId('v_selectac-'), [name]);
@@ -49,11 +71,15 @@ export function NsSelectAutocomplete({
     const setValueCallback = useCallback(
         (event: SelectItem | SelectItem[]) => {
             setValue(event);
-            if (changed) {
-                changed(event);
+            // if (changed) {
+            //     changed(event);
+            // }
+            if (onChange) {
+                onchange;
             }
         },
-        [setValue, changed],
+        // [setValue, changed],
+        [setValue, onChange],
     );
 
     React.useEffect(() => {
@@ -79,21 +105,25 @@ export function NsSelectAutocomplete({
     return (
         <NsLabelInput nameHtml={key} label={label as string}>
             <Autocomplete<SelectItem, boolean, boolean, boolean>
-                {...rest}
                 multiple={multiple}
                 isOptionEqualToValue={isOptionEqualToValue}
                 onChange={(_event, value) => setValueCallback(value as SelectItem | SelectItem[])}
-                options={items}
+                groupBy={groupBy}
+                getOptionLabel={getOptionLabel}
+                disableCloseOnSelect={disableCloseOnSelect}
+                options={options ? options : items}
                 disableClearable={!multiple}
                 handleHomeEndKeys
                 fullWidth
                 disablePortal
                 autoComplete
-                value={value}
+                value={value || []}
                 disabled={disabled}
+                renderOption={renderOption}
                 renderInput={(props: AutocompleteRenderInputParams) => (
                     <TextField name={name} error={!!error} {...props} disabled={disabled} placeholder={placeholder} />
                 )}
+                {...rest}
             />
         </NsLabelInput>
     );

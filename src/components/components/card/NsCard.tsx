@@ -59,12 +59,14 @@ interface StyledCardContentProps {
     cardVariant?: VariantType;
 }
 
-const StyledCard = styled(Card)<StyledCardProps & { isActive: boolean }>(({ theme, cardVariant, isActive }) => ({
+const StyledCard = styled(Card, { shouldForwardProp: (prop) => prop !== 'cardVariant' && prop !== 'isActive' })<
+    StyledCardProps & { isActive: boolean }
+>(({ theme, cardVariant, isActive }) => ({
     border: '1px solid',
     borderColor: cardVariant === 'clickable' && isActive ? 'transparent' : theme.palette.divider,
     borderLeft: cardVariant === 'flag' ? `3px solid ${theme.palette.secondary.main}` : undefined,
     borderBottom: cardVariant === 'clickable' && isActive ? `3px solid ${theme.palette.primary.main}` : undefined,
-    backgroundColor: cardVariant === 'clickable' && isActive ? lighten(theme.palette.primary.main, 0.9) : undefined, // theme.palette.action.selected
+    backgroundColor: cardVariant === 'clickable' && isActive ? lighten(theme.palette.primary.main, 0.9) : undefined,
 }));
 
 const StyledCardActions = styled(CardActions)(() => ({
@@ -76,16 +78,19 @@ const StyledAvatar = styled('div')(({ theme }) => ({
     color: `${theme.palette.primary.main}`,
 }));
 
-const StyledCardContent = styled(CardContent)<StyledCardContentProps>(({ cardVariant }) => ({
+const StyledCardContent = styled(CardContent, {
+    shouldForwardProp: (prop) => prop !== 'cardVariant',
+})<StyledCardContentProps>(({ cardVariant }) => ({
     paddingTop: cardVariant === 'clickable' ? '0' : undefined,
     paddingBottom: cardVariant === 'clickable' ? '14px !important' : undefined,
 }));
 
-const StyledH2 = styled(Typography)<StyledCardContentProps>(({ cardVariant }) => ({
-    borderBottom: cardVariant === 'clickable' ? '1px solid lightgray' : undefined,
-    paddingBottom: cardVariant === 'clickable' ? '5px' : undefined,
-}));
-
+const StyledH2 = styled(Typography, { shouldForwardProp: (prop) => prop !== 'cardVariant' })<StyledCardContentProps>(
+    ({ cardVariant }) => ({
+        borderBottom: cardVariant === 'clickable' ? '1px solid lightgray' : undefined,
+        paddingBottom: cardVariant === 'clickable' ? '5px' : undefined,
+    }),
+);
 const CardContentTemplate: React.FC<{
     title: React.ReactNode;
     children: React.ReactNode;
@@ -176,13 +181,12 @@ const NsClickableCard = ({ icon, title = '', cardVariant = 'classic', children =
     );
 };
 
-export function NsCard(props: NsCardProps) {
+export function NsCard(props: NsCardProps, { ...rest }) {
     const [isActive, setIsActive] = React.useState(false);
 
     const handleCardClick = () => {
         if (props.cardVariant === 'clickable') {
             setIsActive(!isActive);
-            console.log('Hai cliccato sulla Card!');
         }
     };
     const renderCard = () => {
@@ -204,9 +208,9 @@ export function NsCard(props: NsCardProps) {
         <StyledCard
             cardVariant={props.cardVariant}
             isActive={isActive}
-            sx={{ maxWidth: 345 }}
             onClick={handleCardClick}
             className={`${props.cardVariant} ${isActive ? 'active' : ''}`}
+            {...rest}
         >
             {renderCard()}
         </StyledCard>

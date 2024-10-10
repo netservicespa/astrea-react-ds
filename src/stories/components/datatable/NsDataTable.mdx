@@ -5,44 +5,36 @@ import * as NsDataTable from './DataTable.stories';
 
 <h1>Table</h1>
 
-<p>
   Use the table component to make information easier to compare and scan for users.
-</p>
-<p>
+
   The `NsDataGrid` component provides a powerful, flexible grid system that can handle both 
   client-side and server-side data rendering. 
   This component is based on the `@tanstack/react-table` library, 
   offering advanced features such as pagination, sorting, filtering, and row selection.
-</p>
-<p>
+
   The `NsDataGrid` component offers flexibility for both client-side and server-side data rendering. 
   Whether you need server-side pagination for large datasets or client-side rendering for smaller data, 
-  the component provides the necessary tools to customize and manage your grid efficiently.
-</p>
+
 
 <h3>Server data grid</h3>
-<p>
+
   The `NsDataGrid` component in server-side mode fetches data from an external source and supports 
   server-side pagination, sorting, and filtering. It requires a `fetcher` function to load data.
-</p>
+
 <Primary />
 <Controls/>
 
 <h3>Client data grid</h3>
-<p>
   The client-side mode directly renders data passed via the `data` prop. 
   All pagination, sorting, and filtering is handled locally.
-  </p>
-
 
 <h3>Customization</h3>
 <h4>Layout customization</h4>
 
-<p>
   You can customize the grid layout by providing a `render` function. 
   The `render` function allows you to specify how the filter section, table, 
-  and pager are laid out on the page.  
-</p>
+  and pager are laid out on the page.
+
 ```jsx
 <NsDataGrid
   type="server"
@@ -63,11 +55,10 @@ import * as NsDataTable from './DataTable.stories';
 
 <h4>Event Listeners</h4>
 
-<p>
   To handle events such as row selection, filtering, or sorting changes, 
   you can provide an `eventListener` callback. 
   This allows you to perform actions based on user interaction with the grid.
-</p>
+  
 ```jsx
 const handleEvent = (event) => {
   if (event.type === 'SELECTION_CHANGE') {
@@ -80,7 +71,6 @@ const handleEvent = (event) => {
   columns={columns}
   data={data}
   eventListener={handleEvent}
-/>;
 />;
 ``` 
 

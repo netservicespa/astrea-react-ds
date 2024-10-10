@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import NsDrawer, { NsDrawerProps } from 'src/components/components/drawer/NsDrawer';
+import { NsDrawer } from 'src/components/components/drawer/NsDrawer';
 import { Button, Typography, Box } from '@mui/material';
 
-export default {
+const meta: Meta<typeof NsDrawer> = {
     title: 'Components/Drawer',
     component: NsDrawer,
-} as Meta;
+    parameters: {
+        docs: {
+            source: {
+                type: 'code',
+            },
+        },
+    },
+};
+export default meta;
 
-const Template: StoryFn<NsDrawerProps> = (args) => {
+const Template: StoryFn<typeof NsDrawer> = (args) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => setIsOpen(true);

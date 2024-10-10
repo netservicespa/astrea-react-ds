@@ -7,20 +7,19 @@ import * as LoginStories from './Login.stories';
 <Primary />
 <Controls/>
 
-<br/>
+
 <h3>When to use this component</h3>
-<p>This login component allows users to access their personal area.</p>
+This login component allows users to access their personal area.
 
 <h3>How to use it</h3>
-<p>
-  <b>handleFormSubmit</b> This prop is not required but is essential for handling form submissions. 
-  If this function is not provided, the default submit button in the form will not work. 
-  The only scenario where `handleFormSubmit` can be omitted is when using custom buttons via the `buttonsSlot` prop.
-  In such cases, the custom buttons must include their own logic to handle the form submission internally.
-</p>
+
+<b>handleFormSubmit</b> This prop is not required but is essential for handling form submissions. 
+If this function is not provided, the default submit button in the form will not work. 
+The only scenario where `handleFormSubmit` can be omitted is when using custom buttons via the `buttonsSlot` prop.
+In such cases, the custom buttons must include their own logic to handle the form submission internally.
 
 <h3>Example with Custom Buttons</h3>
-<p>If you're using custom buttons via the `buttonsSlot` prop, you can manage the form submission logic like in this example:</p>
+If you're using custom buttons via the `buttonsSlot` prop, you can manage the form submission logic like in this example:
 
 <Story of={LoginStories.LoginWithButtonSlot}  />
 ```tsx
