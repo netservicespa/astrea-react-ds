@@ -10,6 +10,7 @@ import { HeaderProps, MenuItem } from '../../../../util/types';
 import { DynamicLink, NsDropDown } from '../../../components/dropdown/NsDropDown';
 import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
+import { display } from '@mui/system';
 
 /**
  * Horizontal Header
@@ -221,7 +222,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
     );
 };
 
-
 export default function HorizontalHeader({
     menuItems,
     logo,
@@ -230,6 +230,7 @@ export default function HorizontalHeader({
     userPanelMenuItems,
     configuration,
     onLogout,
+    infoBox,
 }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
@@ -240,10 +241,21 @@ export default function HorizontalHeader({
     return (
         <HeaderContainer {...configuration}>
             <LogoContainer {...configuration}>
-                <DynamicLink key={'/'} to={'/'} router={router}>
-                    {logo}
-                </DynamicLink>
-                <div
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                    <DynamicLink key={'/'} to={'/'} router={router}>
+                        {logo}
+                    </DynamicLink>
+                    {infoBox && (
+                        <Box
+                            sx={{
+                                backgroundColor: 'secondary.main',
+                            }}
+                        >
+                            {infoBox}
+                        </Box>
+                    )}
+                </Box>
+                <Box
                     className={!configuration?.centralLogo ? 'mobile-menu-icon' : ''}
                     onClick={handleMenuToggle}
                     style={{
@@ -258,7 +270,7 @@ export default function HorizontalHeader({
                         {t('header.menu')}
                         {isMenuOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </Box>
-                </div>
+                </Box>
             </LogoContainer>
             <NavigationContainer
                 className={isMenuOpen ? 'open' : ''}
@@ -277,7 +289,10 @@ export default function HorizontalHeader({
 
                 <AuthContainer
                     style={{
-                        padding: (Array.isArray(userPanelMenuItems) && userPanelMenuItems.length > 0) || onLogout ? '6px' : undefined,
+                        padding:
+                            (Array.isArray(userPanelMenuItems) && userPanelMenuItems.length > 0) || onLogout
+                                ? '6px'
+                                : undefined,
                     }}
                 >
                     <UserMenu

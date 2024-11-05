@@ -23,7 +23,45 @@ const meta: Meta<typeof NsHeader> = {
 
 export default meta;
 type Story = StoryObj<typeof NsHeader>;
-
+const InfoBox = () => {
+    return (
+        <Box
+            sx={{
+                width: '700px !important',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    padding: '10px',
+                    borderRight: '1px solid black',
+                }}
+            >
+                Stai lavorando a: "PROGETTO"
+            </Box>
+            <Box
+                sx={{
+                    borderRight: '1px solid black',
+                }}
+            ></Box>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    padding: '10px',
+                }}
+            >
+                <div>Ente: "ENTE"</div>
+                <div>Gruppo: "GRUPPO"</div>
+            </Box>
+        </Box>
+    );
+};
 export const UserPanelHeaderLogo: Story = {
     args: {
         type: 'horizontal',
@@ -34,6 +72,8 @@ export const UserPanelHeaderLogo: Story = {
             { name: 'Link 3', path: '#' },
             { name: 'Link 4', path: '#' },
         ],
+        infoBox: <InfoBox />,
+
         userPanelMenuItems: [
             { name: 'Profile', path: '/', icon: <PersonIcon /> },
             { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
@@ -183,14 +223,14 @@ export const LoggedIn: Story = {
 
 export const Mobile: Story = {
     args: {
-        logo: (
-            <div className="titles">
-                <h1>
-                    <strong>Astrea</strong>
-                </h1>
-                <p className="subtitle">DESIGN SYSTEM</p>
-            </div>
-        ),
+        // logo: (
+        //     <div className="titles">
+        //         <h1>
+        //             <strong>Astrea</strong>
+        //         </h1>
+        //         <p className="subtitle">DESIGN SYSTEM</p>
+        //     </div>
+        // ),
         logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
         menuItems: [
             { name: 'Link 1', path: '#' },

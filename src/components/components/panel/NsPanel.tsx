@@ -7,17 +7,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { PanelProps } from 'src/util/types';
 
-const StyledCard = styled(Card)<any>(({ theme }) => ({
-    border: '1px solid',
-    borderColor: '#b1b4b6',
-    margin: '0px !important',
-    boxSizing: 'border-box',
-    boxShadow: 'none',
-    borderRadius: '0px',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-}));
 export const NsPanel = ({
     menu = false,
     type = 'primary',
@@ -33,11 +22,24 @@ export const NsPanel = ({
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <StyledCard type={type} {...rest}>
+        <Box
+            sx={{
+                width: '100%',
+                height: '100%',
+                border: '1px solid',
+                borderColor: '#b1b4b6',
+                margin: '0px !important',
+                boxSizing: 'border-box',
+                boxShadow: 'none',
+                borderRadius: '0px',
+                display: 'flex',
+                flexDirection: 'row',
+                ...rest,
+            }}
+        >
             {menu && (
                 <Box
                     sx={{
-                        // padding: '10px',
                         flexGrow: 1,
                         flexDirection: 'column',
                         background: isHovered ? '#9c9fa1' : '#b1b4b6',
@@ -74,7 +76,7 @@ export const NsPanel = ({
                 </Box>
             )}
             {isOpen && (
-                <Card
+                <Box
                     sx={{
                         borderRadius: '0px',
                         margin: 0,
@@ -96,8 +98,8 @@ export const NsPanel = ({
                             {children}
                         </Box>
                     </CardContent>
-                </Card>
+                </Box>
             )}
-        </StyledCard>
+        </Box>
     );
 };

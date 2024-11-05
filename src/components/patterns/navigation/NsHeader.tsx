@@ -14,6 +14,7 @@ export const NsHeader = ({
     logo,
     configuration,
     columns,
+    infoBox,
 }: HeaderProps) => {
     if (type === 'vertical') {
         return (
@@ -53,6 +54,7 @@ export const NsHeader = ({
             userPanelMenuItems={userPanelMenuItems}
             configuration={configuration}
             onLogout={onLogout}
+            infoBox={infoBox}
         />
     );
 };

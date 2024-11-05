@@ -82,6 +82,11 @@ export interface HeaderProps {
     logo?: React.ReactElement;
 
     /**
+     * Optional: The info displayed in the header.
+     */
+    infoBox?: React.ReactElement;
+
+    /**
      * An array of columns used to display multiple columns .
      */
     columns?: {

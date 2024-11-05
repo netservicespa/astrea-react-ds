@@ -43,6 +43,68 @@ const Template: StoryFn<typeof NsPanel> = (args) => {
     );
 };
 
+const TemplateTest: StoryFn<typeof NsPanel> = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                border: 'solid 1px black',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '10px',
+                margin: '10px',
+                width: '100%',
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    height: '400px',
+                    width: '100%',
+                }}
+            >
+                <NsPanel title="NsPanel" subtitle="subtitle NsPanel">
+                    <Box>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa
+                        et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac
+                        habitasse platea dictumst.
+                    </Box>
+                </NsPanel>
+                <Box sx={{ height: '100%', width: isOpen ? '100%' : '50%' }}>
+                    <NsPanel
+                        title="NsPanel menu"
+                        subtitle="subtitle NsPanel"
+                        menu={true}
+                        isOpen={isOpen}
+                        handleOpen={() => setIsOpen(!isOpen)}
+                    >
+                        <Box sx={{ overflowY: 'scroll', maxHeight: '300px' }}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel
+                            massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum
+                            tortor. In hac habitasse platea dictumst.
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus.</li>
+                                <li>Aenean ultricies massa augue.</li>
+                                <li>Suspendisse a vestibulum tortor.</li>
+                                <li>In hac habitasse platea dictumst.</li>
+                            </ul>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel
+                            massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum
+                            tortor. In hac habitasse platea dictumst.
+                        </Box>
+                    </NsPanel>
+                </Box>
+            </Box>
+        </Box>
+    );
+};
+
 export const BasicPanel = Template.bind({});
 BasicPanel.args = {
     menu: false,
@@ -75,3 +137,4 @@ MenuPanel.args = {
         maxWidth: '50%',
     },
 };
+export const examplePanel = TemplateTest.bind({});

@@ -22,6 +22,7 @@ export { NsCard } from './components/components/card/NsCard';
 export { NsTable } from './components/components/NsTable';
 export { NsTooltip } from './components/components/NsTooltip';
 export { NsDropDown } from './components/components/dropdown/NsDropDown';
+export { DynamicLink } from './components/components/dropdown/NsDropDown';
 export { NsPagination } from './components/components/pagination/NsPagination';
 export { NsFeedback } from './components/components/feedback/NsFeedback';
 export { NsScrollTop } from './components/components/NsScrollTop';
@@ -29,6 +30,7 @@ export { NsSkipLink } from './components/components/NsSkipLink';
 export { NsConfirmPage } from './components/components/confirmPage/NsConfirmPage';
 export { NsBreadcrumbs } from './components/components/NsBreadcrumbs';
 export { NsBanner } from './components/components/NsBanner';
+export { NsSwitch } from './components/components/NsSwitch';
 export { NsDialog, NsDialogActions, NsDialogContent, NsDialogTitle } from './components/components/dialog/NsDialog';
 
 /**
@@ -43,6 +45,7 @@ export { NsDragDrop } from './components/components/form/fields/NsDragDrop';
 export { NsSelect } from './components/components/form/fields/NsSelect';
 export { NsSelectAutocomplete } from './components/components/form/fields/NsSelectAutocomplete';
 export { NsTextInput } from './components/components/form/fields/NsTextInput';
+export { NsNumberInput } from './components/components/form/fields/NsNumberInput';
 export { NsTextArea } from './components/components/form/fields/NsTextArea';
 export { NsFileUpload } from './components/components/form/fields/NsFileUpload';
 export { NsTimePicker } from './components/components/form/fields/NsTimePicker';

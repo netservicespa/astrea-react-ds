@@ -44,7 +44,7 @@ export function NsSelectAutocomplete({
     disabled,
     placeholder,
     isOptionEqualToValue = defaultOptionValueEqualityCheck,
-    // changed,
+    changed,
     multiple = false,
     options,
     groupBy,
@@ -71,15 +71,15 @@ export function NsSelectAutocomplete({
     const setValueCallback = useCallback(
         (event: SelectItem | SelectItem[]) => {
             setValue(event);
-            // if (changed) {
-            //     changed(event);
-            // }
-            if (onChange) {
-                onchange;
+            if (changed) {
+                changed(event);
             }
+            // if (onChange) {
+            //     onchange;
+            // }
         },
-        // [setValue, changed],
-        [setValue, onChange],
+        [setValue, changed],
+        // [setValue, onChange],
     );
 
     React.useEffect(() => {

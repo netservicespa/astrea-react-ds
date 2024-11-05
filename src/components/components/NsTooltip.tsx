@@ -5,53 +5,54 @@ import { Theme } from '@mui/system';
 import InfoIcon from '@mui/icons-material/Info';
 
 export interface NsTooltipProps {
-  placement?:
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'top'
-    | 'bottom-end'
-    | 'bottom-start'
-    | 'left-end'
-    | 'left-start'
-    | 'right-end'
-    | 'right-start'
-    | 'top-end'
-    | 'top-start'
-    | undefined;
-  title?: string | React.ReactNode;
-  className?: string;
-  text?: string | any;
-  sx?: SxProps<Theme>;
-  theme?: any;
-  children?: any;
-  colorIcon?: any;
-  icon?: any;
+    placement?:
+        | 'bottom'
+        | 'left'
+        | 'right'
+        | 'top'
+        | 'bottom-end'
+        | 'bottom-start'
+        | 'left-end'
+        | 'left-start'
+        | 'right-end'
+        | 'right-start'
+        | 'top-end'
+        | 'top-start'
+        | undefined;
+    title?: string | React.ReactNode;
+    className?: string;
+    text?: string | any;
+    sx?: SxProps<Theme>;
+    theme?: any;
+    children?: any;
+    colorIcon?: any;
+    icon?: any;
 }
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} arrow classes={{ popper: className }} />
+    <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
-  [`& .${tooltipClasses.arrow}`]: {
-    color: `${theme.palette.common.black}`,
-  },
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: `${theme.palette.common.black}`,
-  },
+    border: 'none',
+    [`& .${tooltipClasses.arrow}`]: {
+        color: `${theme.palette.common.black}`,
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+        backgroundColor: `${theme.palette.common.black}`,
+    },
 }));
 
 export const NsTooltip = ({
-  title = 'I am a tooltip, wich is a tool to show tips',
-  placement = 'right',
-  sx,
-  children,
-  colorIcon,
-  icon,
-  ...otherProps
+    title = 'I am a tooltip, wich is a tool to show tips',
+    placement = 'right',
+    sx,
+    children,
+    colorIcon,
+    icon,
+    ...otherProps
 }: NsTooltipProps) => {
-  return (
-    <CustomTooltip sx={sx} title={title} placement={placement} {...otherProps}>
-      {icon ? icon : <InfoIcon style={{ color: '#000', ...colorIcon }} />}
-    </CustomTooltip>
-  );
+    return (
+        <CustomTooltip sx={sx} title={title} placement={placement} {...otherProps}>
+            {icon ? icon : <InfoIcon style={{ color: '#000', ...colorIcon }} />}
+        </CustomTooltip>
+    );
 };

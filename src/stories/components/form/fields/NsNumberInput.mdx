@@ -1,0 +1,33 @@
+import {
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from '@storybook/blocks';
+import * as NsNumberInput from './NsNumberInput.stories';
+
+<Meta of={NsNumberInput} />
+
+# NsNumberInput
+
+The `NsNumberInput` component was created to address the accessibility limitations of Material UI’s `<input type="number">` component. During our analysis, several issues with `<input type="number">` were identified that reduce the usability and accessibility of numeric fields.
+
+<Primary />
+
+## Why NsNumberInput?
+Using `<input type="number">` presents several challenges:
+
+1. **Accessibility**: The native number input is not fully accessible for users relying on assistive technologies, such as Dragon NaturallySpeaking and NVDA. These technologies often render `<input type="number">` as an unlabeled field or as a "spin button," which includes increment and decrement buttons that lack proper labeling.
+2. **Incrementability and Unintended Validation**: `<input type="number">` is designed for incrementable numeric data, but many numeric fields (like passport numbers or IDs) are not meant to be incremented. This can lead to issues with automatic rounding or unintended number interpretation.
+3. **Character Handling Limitations**: `<input type="number">` automatically discards letters or symbols without feedback, which can be confusing for some users.
+4. **Scroll Interference**: On desktop devices, users can accidentally change the numeric value by using the scroll wheel on their mouse or trackpad gestures, which can lead to unintended input.
+
+## The NsNumberInput Solution
+To address these issues, `NsNumberInput` uses:
+- `<input type="text" inputmode="numeric" pattern="[0-9]*">`, ensuring that numbers can be entered using a numeric keypad on mobile devices without behaving like an incrementable field. This approach ensures compatibility and accessibility, even on older mobile devices.
+- **Customizable Pattern**: The default pattern `[0-9]*` can be modified if needed, providing flexibility without compromising compatibility.
+
+In summary, `NsNumberInput` offers an accessible and flexible solution for numeric input fields, improving user experience across various platforms and devices.

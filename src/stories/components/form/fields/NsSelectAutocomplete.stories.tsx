@@ -5,6 +5,8 @@ import { NsForm } from 'src/components/components/form/NsForm';
 import { NsSelectAutocomplete, SelectItem } from 'src/components/components/form/fields/NsSelectAutocomplete';
 import { required } from 'src/components/components/form/validators';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { Box } from '@mui/system';
 
 export default {
     title: 'Components/Form/AutoCompleteSelect',
@@ -57,32 +59,46 @@ const products: SelectItem[] = [
 ];
 
 const GroupedSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
-    const [selectedProducts, setSelectedProducts] = useState<SelectItem[]>([]);
+    const [selectedProducts, setSelectedProducts] = useState<SelectItem | SelectItem[]>([]);
 
     const handleChange = (event: React.ChangeEvent<{}>, value: SelectItem | SelectItem[] | null) => {
-        setSelectedProducts(value as SelectItem[]);
+        setSelectedProducts(event);
+        console.log(event);
     };
+    useEffect(() => {
+        console.log('products', selectedProducts);
+    }, [selectedProducts]);
 
     return (
-        <NsForm onSubmit={() => {}} buttonsSlot={false}>
-            <Grid container>
-                <Grid item xs={6}>
-                    <NsSelectAutocomplete
-                        multiple
-                        options={products}
-                        groupBy={(option: SelectItem) => option.groupDescrizione || ''}
-                        getOptionLabel={(option: SelectItem) => option.descrizione || ''}
-                        onChange={handleChange}
-                        disableCloseOnSelect
-                        renderOption={(props, option: SelectItem, { selected }) => (
-                            <li {...props}>{option.descrizione}</li>
-                        )}
-                        renderInput={(params) => <TextField {...params} variant="outlined" label="Select Products" />}
-                        {...args}
-                    />
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <NsForm onSubmit={() => {}} buttonsSlot={false}>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <NsSelectAutocomplete
+                            multiple
+                            options={products}
+                            groupBy={(option: SelectItem) => option.groupDescrizione || ''}
+                            getOptionLabel={(option: SelectItem) => option.descrizione || ''}
+                            // onChange={handleChange}
+                            changed={handleChange}
+                            disableCloseOnSelect
+                            renderOption={(props, option: SelectItem, { selected }) => (
+                                <li {...props}>{option.descrizione}</li>
+                            )}
+                            renderInput={(params) => (
+                                <TextField {...params} variant="outlined" label="Select Products" />
+                            )}
+                            {...args}
+                        />
+                    </Grid>
                 </Grid>
-            </Grid>
-        </NsForm>
+            </NsForm>
+            <ul>
+                {selectedProducts.map((product: SelectItem) => (
+                    <li key={product.value}>{product.descrizione}</li>
+                ))}
+            </ul>
+        </Box>
     );
 };
 
