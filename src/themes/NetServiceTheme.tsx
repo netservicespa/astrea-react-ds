@@ -294,7 +294,7 @@ const themeOptions = {
             styleOverrides: {
                 root: {
                     //backgroundColor: '#FFF',
-                    border: '1px solid #B1B4B6',
+                    // border: '1px solid #B1B4B6',
                 },
             },
         },
@@ -334,10 +334,12 @@ const themeOptions = {
             borderWidth: '3px',
           },*/
                     '&.Mui-checked': {
+                        '& input:focus + svg': {
+                            boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
+                        },
                         '& svg': {
                             fill: '#000',
                             border: '3px solid #000',
-                            boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
                             alignItems: 'center',
                             justifyContent: 'center',
                             '& path': {

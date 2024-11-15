@@ -1,8 +1,11 @@
 import React from 'react';
-import { ILink } from '../../../util/types';
 import { FooterMultiColumn } from './footers/FooterMultiColumn';
 import { FooterSimple } from './footers/FooterSimple';
 
+export interface ILink {
+    href: string;
+    text: string;
+}
 /**
  * Footer components
  * @author vadim.chilinciuc, mustapha.aoussar

@@ -3,6 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { NsAccordion, NsAccordionDetails, NsAccordionProps } from 'src/components/components/NsAccordion';
 import Typography from '@mui/material/Typography';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FIGMA from '@root/figma.json';
 
 export default {
     title: 'Components/Accordion',
@@ -12,6 +13,10 @@ export default {
             description: {
                 component: `This \`NsAccordion\` component displays an expandable/collapsible section ideal for showing/hiding content.`,
             },
+        },
+        design: {
+            type: 'figma',
+            url: FIGMA.components.accordion,
         },
     },
     argTypes: {

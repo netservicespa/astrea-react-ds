@@ -1,8 +1,136 @@
 import React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button as NsButton, Typography } from '@mui/material';
+import {
+    Dialog,
+    DialogActions,
+    DialogActionsProps,
+    DialogContent,
+    DialogContentProps,
+    DialogProps,
+    DialogTitle,
+    DialogTitleProps,
+    Button as NsButton,
+    Typography,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-import { NsDialogActionsProps, NsDialogContentProps, NsDialogProps, NsDialogTitleProps } from 'src/util/types';
+
+/**
+ * Props for the NsDialogTitle component, extending MUI's DialogTitleProps.
+ */
+export interface NsDialogTitleProps extends DialogTitleProps {
+    /**
+     * If true, a close button will be displayed in the dialog title.
+     * You can also pass a custom string or React node to replace the default button.
+     *
+     * - `true`: Displays the default close button.
+     * - `string`: Displays a custom text as the close button.
+     * - `ReactNode`: Allows the rendering of a custom React component.
+     *
+     * Default is `false`, meaning no close button will be shown.
+     */
+    closeButton?: boolean | string | React.ReactNode;
+    /**
+     * Function to control the open/close state of the dialog.
+     *
+     * It takes a boolean argument:
+     * - `true`: Opens the dialog.
+     * - `false`: Closes the dialog.
+     */
+    setOpen: (arg0: boolean) => void;
+}
+
+/**
+ * Props for the NsDialogContent component, extending MUI's DialogContentProps.
+ * This interface inherits all properties from MUI's DialogContentProps without additional custom props.
+ */
+export interface NsDialogContentProps extends DialogContentProps {}
+
+/**
+ * Props for the NsDialogTitle component, extending MUI's DialogTitleProps.
+ */
+export interface NsDialogTitleProps extends DialogTitleProps {
+    /**
+     * If true, a close button will be displayed in the dialog title.
+     * You can also pass a custom string or React node to replace the default button.
+     *
+     * - `true`: Displays the default close button.
+     * - `string`: Displays a custom text as the close button.
+     * - `ReactNode`: Allows the rendering of a custom React component.
+     *
+     * Default is `false`, meaning no close button will be shown.
+     */
+    closeButton?: boolean | string | React.ReactNode;
+
+    /**
+     * Function to control the open/close state of the dialog.
+     *
+     * It takes a boolean argument:
+     * - `true`: Opens the dialog.
+     * - `false`: Closes the dialog.
+     */
+    setOpen: (arg0: boolean) => void;
+}
+
+/**
+ * Props for the NsdialogActions component, extending MUI's DialogActionsProps.
+ */
+export interface NsDialogActionsProps extends DialogActionsProps {
+    /**
+     * Determines if a cancel button should be displayed in the dialog actions.
+     * You can pass:
+     * - `true`: Displays the default cancel button.
+     * - `string`: Displays a custom label as the cancel button.
+     * - `ReactNode`: Allows rendering of a custom React component as the cancel button.
+     *
+     * Default is `false`, meaning no cancel button will be shown.
+     */
+    showCancelButton?: boolean | string | React.ReactNode;
+
+    /**
+     * Determines if a submit button should be displayed in the dialog actions.
+     * You can pass:
+     * - `true`: Displays the default submit button.
+     * - `string`: Displays a custom label as the submit button.
+     * - `ReactNode`: Allows rendering of a custom React component as the submit button.
+     *
+     * Default is `false`, meaning no submit button will be shown.
+     */
+    showSubmitButton?: boolean | string | React.ReactNode;
+
+    /**
+     * Function to control the open/close state of the dialog.
+     *
+     * It takes a boolean argument:
+     * - `true`: Opens the dialog.
+     * - `false`: Closes the dialog.
+     */
+    setOpen: (arg0: boolean) => void;
+}
+/**
+ * Props for the NsdialogV3 component, extending MUI's DialogProps.
+ */
+export interface NsDialogProps extends DialogProps {
+    /**
+     * If true, a close button will be displayed in the dialog title.
+     * You can also pass a custom string or React node to replace the default button.
+     *
+     * - `true`: Displays the default close button.
+     * - `string`: Displays a custom text as the close button.
+     * - `ReactNode`: Allows the rendering of a custom React component.
+     *
+     * Default is `false`, meaning no close button will be shown.
+     */
+    closeButton?: boolean | string | React.ReactNode;
+
+    /**
+     * Function to control the open/close state of the dialog.
+     *
+     * It takes a boolean argument:
+     * - `true`: Opens the dialog.
+     * - `false`: Closes the dialog.
+     */
+    setOpen: (open: boolean) => void;
+}
 
 export const NsDialogTitle: React.FC<NsDialogTitleProps> = ({
     title,

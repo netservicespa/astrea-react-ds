@@ -9,10 +9,11 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import React from 'react';
-import { NsDataGridCommonProps } from './NsDataGrid';
+import { NsDataGridCommonProps, NsDataGridClientRenderFn } from './NsDataGrid';
 import { NsDataGridBase } from './NsDataGridBase';
 import { NsTablePager } from './pagination/NsTablePager';
 import { NsDataGridEventType } from './events/NsDataGridEvents';
+import { ColumnVisibilityMenu } from './filtering/ColumnVisibilityMenu';
 
 export interface NsDataGridClientProps<RowType extends object, FilterType extends object>
     extends NsDataGridCommonProps<RowType, FilterType> {
@@ -28,12 +29,14 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
     PagerComponent = NsTablePager,
     options = {},
     debug = false,
+    render = DefaultClientRenderer as NsDataGridClientRenderFn,
     // Mui TableContainer props
     sx,
     component = Paper,
     children,
 }: Readonly<NsDataGridClientProps<RowType, FilterType>>) {
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+    const [columnVisibility, setColumnVisibility] = React.useState({})
 
     // Notify event listener of row selection change
     React.useEffect(() => {
@@ -70,7 +73,9 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         getFilteredRowModel: getFilteredRowModel(),
         state: {
             rowSelection,
+            columnVisibility,
         },
+        onColumnVisibilityChange: setColumnVisibility,
         // Custom row selection
         enableRowSelection: options.rowSelection && options.rowSelection !== 'none',
         enableMultiRowSelection: options.rowSelection === 'multiple',
@@ -82,12 +87,20 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         debugColumns: debug,
     });
 
+    const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
+    const TablePagerComponent = <PagerComponent type="client" table={table} />;
+    const ColumnVisibilityComponent = <ColumnVisibilityMenu table={table} />;
+
+    return render(TableComponent, TablePagerComponent, ColumnVisibilityComponent, children);
+}
+
+const DefaultClientRenderer: NsDataGridClientRenderFn = (Table, Pager, ColumnVisibility, children) => {
     return (
         <Container maxWidth="xl">
             <Box
                 display="flex"
                 flexDirection="column"
-                gap="50px"
+                gap="10px"
                 sx={{
                     ...(children && {
                         border: '1px solid gray',
@@ -96,9 +109,10 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
                 }}
             >
                 {children}
-                <NsDataGridBase {...{ table, options, debug, sx, component }} />
-                <PagerComponent type="client" table={table} />
+                {ColumnVisibility}
+                {Table}
+                {Pager}
             </Box>
         </Container>
     );
-}
+};

@@ -52,7 +52,7 @@ export const NsTooltip = ({
 }: NsTooltipProps) => {
     return (
         <CustomTooltip sx={sx} title={title} placement={placement} {...otherProps}>
-            {icon ? icon : <InfoIcon style={{ color: '#000', ...colorIcon }} />}
+            {children ? children : icon ? icon : <InfoIcon style={{ color: '#000', ...colorIcon }} />}
         </CustomTooltip>
     );
 };

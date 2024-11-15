@@ -242,9 +242,7 @@ function TableBody<T>({
                                 bodyTextAlign={bodyTextAlign}
                                 sx={{ width: cell.column.getSize() }}
                             >
-                                <Typography component={'div'}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </Typography>
+                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </TableCellStyled>
                         );
                     })}

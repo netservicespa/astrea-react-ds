@@ -70,7 +70,14 @@
     "openNotifications": "Open notifications",
     "closeNotifications": "Close notifications",
     "account": "Account",
-    "openAccount": "Open account"
+    "openAccount": "Open account",
+    "notification":{
+      "read":"Read Notification",
+      "unread":"Unread Notification",
+      "markAsRead":"Mark all as read",
+      "readCount": "Read {{count}}",
+      "unreadCount": "Unread {{count}}"
+    }
   },
   "confirmPage": {
     "comeBack": "Go to the homepage",
@@ -88,6 +95,9 @@
       "selectAll": "All",
       "apply": "Apply",
       "clear": "Clear"
+    },
+    "controls": {
+      "columnVisibility": "Columns Visibility"
     }
   },
   "pagination": {
@@ -97,5 +107,11 @@
   "panel":{
     "close":"Close",
     "open":"Open"
+  },
+  "notifications":{
+    "button":{
+      "action":"Action",
+      "view":"View"
+    }
   }
 }

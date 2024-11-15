@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormControlLabel, styled, Switch } from '@mui/material';
-interface NsSwitchProps {
+export interface NsSwitchProps {
     label: string;
+    name: string;
     checked: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     color?: 'default' | 'primary' | 'secondary';
@@ -69,11 +70,12 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export const NsSwitch: React.FC<NsSwitchProps> = ({ label, checked, onChange, color = 'default' }) => {
+export const NsSwitch: React.FC<NsSwitchProps> = ({ label, name, checked, onChange, color = 'default' }) => {
     return (
         <FormControlLabel
             control={<CustomSwitch checked={checked} onChange={onChange} color={color} />}
             label={label}
+            name={name}
         />
     );
 };

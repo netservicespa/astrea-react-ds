@@ -20,6 +20,7 @@ export const INsDropDown: Story = {
             { name: 'Profile', path: '/', icon: <PersonIcon /> },
             { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
         ],
+        overlay: true,
         onLogout: () => {},
         dropDownConfiguration: {
             anchorOrigin: {

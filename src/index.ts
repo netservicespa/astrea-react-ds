@@ -32,6 +32,7 @@ export { NsBreadcrumbs } from './components/components/NsBreadcrumbs';
 export { NsBanner } from './components/components/NsBanner';
 export { NsSwitch } from './components/components/NsSwitch';
 export { NsDialog, NsDialogActions, NsDialogContent, NsDialogTitle } from './components/components/dialog/NsDialog';
+export { NsNotificationList } from './components/components/NsNotificationList';
 
 /**
  * Forms and validation
@@ -82,7 +83,6 @@ export * from './components/components/datatable';
  * Utils
  */
 export * from './util/uniqueId';
-export * from './util/types';
 
 /**
  * Themes

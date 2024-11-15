@@ -1,17 +1,87 @@
 import React, { useState } from 'react';
-import { Divider, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Box, Divider, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { DynamicLinkProps, IDropDown } from '../../../util/types';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 
 /**
  * DynamicLink/ dropdown Component
  * @author vadim.chilinciuc
  */
 
-const StyledLink = styled('a')(({ theme }) => ({
+export interface IDropdownItems {
+    name: string;
+    path: string;
+    icon?: React.ReactElement;
+}
+export interface IDropDownConfiguration {
+    anchorOrigin?: {
+        vertical: any;
+        horizontal?: any;
+    };
+    transformOrigin?: {
+        vertical?: any;
+        horizontal?: any;
+    };
+}
+export interface IDropDown {
+    /**
+     * Router object required for enabling routing functionality.
+     */
+    router: any;
+
+    /**
+     * An array of dropdown items that redirect to specific paths when clicked.
+     */
+    dropdownItems: IDropdownItems[];
+
+    /**
+     * Optional callback function invoked when the "logout" action is triggered.
+     */
+    onLogout?: () => void;
+
+    /**
+     * The clickable element (e.g., icon, div, component) that triggers the dropdown.
+     */
+    children: React.ReactElement;
+
+    /**
+     * Extra configuration for managing the dropdown, such as anchor position and other details (refer to MUI dropdown documentation for more information).
+     */
+    dropDownConfiguration?: IDropDownConfiguration;
+    /**
+     * Extra configuration for Backdrop.
+     */
+    overlay?: boolean;
+}
+
+export interface DynamicLinkProps {
+    /**
+     * Router object required for enabling routing functionality.
+     */
+    router: any;
+
+    /**
+     * The path to which the link should redirect.
+     */
+    to: string;
+
+    /**
+     * The clickable element (e.g., icon, div, component) that triggers the redirection.
+     */
+    children: any;
+}
+
+export const StyledLink = styled('a')(({ theme }) => ({
     color: `${theme.palette.primary.main}`,
+    backgroundColor: 'transparent !important',
+    margin: '0px !important',
+}));
+
+const StyledMenu = styled(Menu)<{ overlay: boolean }>(({ theme, overlay }) => ({
+    '& .MuiBackdrop-root': {
+        backgroundColor: overlay ? alpha(theme.palette.primary.main, 0.5) : 'transparent',
+    },
 }));
 
 export const DynamicLink = ({ router, to, children }: DynamicLinkProps) => {
@@ -48,7 +118,14 @@ export const DynamicLink = ({ router, to, children }: DynamicLinkProps) => {
     }
 };
 
-export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDownConfiguration }: IDropDown) => {
+export const NsDropDown = ({
+    router,
+    dropdownItems,
+    onLogout,
+    children,
+    dropDownConfiguration,
+    overlay = false,
+}: IDropDown) => {
     const [isOpen, setIsOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -69,23 +146,31 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
 
     const renderMenuItems = () => {
         if (Array.isArray(dropdownItems)) {
-            return [
-                ...dropdownItems.map((item: any, index: number) => (
-                    <DynamicLink to={item.path} router={router} key={index}>
-                        <MenuItem>
-                            <ListItemIcon>{item.icon || <HomeIcon />}</ListItemIcon>
-                            {item.name}
-                        </MenuItem>
+            const items = dropdownItems.map((item, index: number) => (
+                <DynamicLink to={item.path} router={router} key={item.path}>
+                    <MenuItem>
+                        {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                        {item.name}
+                    </MenuItem>
+                    {index < dropdownItems.length - 1 && <Divider />}
+                </DynamicLink>
+            ));
+
+            if (onLogout) {
+                items.push(
+                    <>
                         <Divider />
-                    </DynamicLink>
-                )),
-                <MenuItem onClick={handleMenuItemClick} key="logout">
-                    <ListItemIcon>
-                        <LogoutIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Logout" style={{ color: '#FFF' }} />
-                </MenuItem>,
-            ];
+                        <MenuItem onClick={onLogout} key="logout">
+                            <ListItemIcon>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" style={{ color: '#FFF' }} />
+                        </MenuItem>
+                    </>,
+                );
+            }
+
+            return items;
         } else {
             return dropdownItems;
         }
@@ -93,11 +178,11 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
 
     return (
         <>
-            <div style={{ cursor: 'pointer' }} onClick={handleMenuOpen}>
+            <Box sx={{ cursor: 'pointer' }} onClick={handleMenuOpen}>
                 {React.isValidElement(children) && React.Children.only(children)}
-            </div>
-
-            <Menu
+            </Box>
+            <StyledMenu
+                overlay={overlay}
                 id="account-menu"
                 anchorEl={anchorEl}
                 open={isOpen}
@@ -116,8 +201,6 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
                         sx: {
                             overflow: 'visible',
                             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                            border: '1px solid #b1b4b6',
-                            mt: 4,
                             '& .MuiAvatar-root': {
                                 width: 32,
                                 height: 32,
@@ -129,7 +212,7 @@ export const NsDropDown = ({ router, dropdownItems, onLogout, children, dropDown
                 }}
             >
                 {renderMenuItems()}
-            </Menu>
+            </StyledMenu>
         </>
     );
 };

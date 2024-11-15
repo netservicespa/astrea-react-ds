@@ -6,10 +6,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button as NsButton, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { HeaderProps } from '../../../../util/types';
 import { NsDropDown, DynamicLink } from '../../../components/dropdown/NsDropDown';
 import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
+import { HeaderProps } from '../NsHeader';
 
 const HeaderContainer = styled('header')(
     ({ theme, configuration }: any) => css`
@@ -224,6 +224,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         router={router}
                         onLogout={onLogout}
                         dropDownConfiguration={configuration?.dropDownConfiguration}
+                        overlay={false}
                     >
                         <AccountCircleIcon />
                     </NsDropDown>

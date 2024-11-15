@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [v2.5.0](https://github.com/netservicespa/astrea-react-ds/commit/2395ae49e5f9e3d2443a81a162c3c1c094ccebed) (Nov 5 2024)
+
+## New Additions
+
+- **NsSwitch**:
+  - Introduced the new `NsSwitch` component for toggle functionality.
+
+- **NsNumberInput**:
+  - Added NsNumberInput component to replace `<input type="number">` for improved accessibility, non-incrementable fields (like passport numbers), and better user experience. The new component uses `<input type="text" inputmode="numeric" pattern="[0-9]*">` for enhanced compatibility across devices.
+
+## Improved
+
+- **NsHeader**:
+  - Added infoBox prop allowing a React component to be centered within the header for greater customization.
+
+- **NsDataGrid**:
+  - Adjusted Typography to render as `<div>` instead of `<p>` to prevent nesting errors when including other elements inside it.
+
+- **NsPanel**:
+  - Provided an example usage to simulate a specific case and ensure the panel dynamically adapts to the parent container size.
+
+- **Storybook**:
+  - Updated the dark mode banner's "Need Help" color for better visibility.
+
+## Fixed
+
+- **Tooltip**:
+  - Removed the border for a cleaner visual appearance.
+
+- **Exports**:
+  - Exported the DynamicLink component for wider availability in the project.
+
 # [v2.4.0](https://github.com/netservicespa/astrea-react-ds/commit/26f3d60cb3e8a9054f22bb4098e663f7b1b9af2b) (Oct 10 2024)
 
 ## New Additions

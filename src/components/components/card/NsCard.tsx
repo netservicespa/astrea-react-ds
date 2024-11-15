@@ -17,6 +17,7 @@ interface NsBasicCardProps extends CommonBaseType {
     children?: React.ReactNode;
     buttons?: Array<CardButtonProps>;
     cardVariant?: VariantType;
+    sx?: object;
 }
 
 interface NsMediaCardProps extends CommonBaseType {
@@ -26,6 +27,7 @@ interface NsMediaCardProps extends CommonBaseType {
     mediaImage?: string;
     mediaAlt?: string;
     cardVariant?: VariantType;
+    sx?: object;
 }
 
 interface NsActionsCardProps extends CommonBaseType {
@@ -36,6 +38,7 @@ interface NsActionsCardProps extends CommonBaseType {
     mediaAlt?: string;
     buttons?: Array<CardButtonProps>;
     cardVariant?: VariantType;
+    sx?: object;
 }
 
 interface NsClickableCardProps extends CommonBaseType {
@@ -45,6 +48,7 @@ interface NsClickableCardProps extends CommonBaseType {
     children?: React.ReactNode;
     buttons?: Array<CardButtonProps>;
     cardVariant?: VariantType;
+    sx?: object;
 }
 
 interface CommonBaseType {}
@@ -210,6 +214,7 @@ export function NsCard(props: NsCardProps, { ...rest }) {
             isActive={isActive}
             onClick={handleCardClick}
             className={`${props.cardVariant} ${isActive ? 'active' : ''}`}
+            sx={props.sx}
             {...rest}
         >
             {renderCard()}

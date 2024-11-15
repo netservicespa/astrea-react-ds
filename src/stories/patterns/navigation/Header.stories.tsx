@@ -4,7 +4,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { NsHeader } from 'src/components/patterns/navigation/NsHeader';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 /**
  * Headers are containers attached to the top of a page that allow the user to navigate through the application.
@@ -27,7 +27,7 @@ const InfoBox = () => {
     return (
         <Box
             sx={{
-                width: '700px !important',
+                width: '500px !important',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
@@ -41,7 +41,7 @@ const InfoBox = () => {
                     borderRight: '1px solid black',
                 }}
             >
-                Stai lavorando a: "PROGETTO"
+                Example Text
             </Box>
             <Box
                 sx={{
@@ -56,8 +56,8 @@ const InfoBox = () => {
                     padding: '10px',
                 }}
             >
-                <div>Ente: "ENTE"</div>
-                <div>Gruppo: "GRUPPO"</div>
+                <div>example: "EXAMPLE"</div>
+                <div>text: "Text"</div>
             </Box>
         </Box>
     );
@@ -71,6 +71,15 @@ export const UserPanelHeaderLogo: Story = {
             { name: 'Link 2', path: '#' },
             { name: 'Link 3', path: '#' },
             { name: 'Link 4', path: '#' },
+            {
+                name: 'Link 5',
+                path: [
+                    { name: 'SubLink 1', path: '#' },
+                    { name: 'SubLink 2', path: '#' },
+                    { name: 'SubLink 3', path: '#' },
+                    { name: 'SubLink 4', path: '#' },
+                ],
+            },
         ],
         infoBox: <InfoBox />,
 
@@ -78,6 +87,7 @@ export const UserPanelHeaderLogo: Story = {
             { name: 'Profile', path: '/', icon: <PersonIcon /> },
             { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
         ],
+        // userPanelMenuItems: <Button>Logout</Button>,
         configuration: {
             centralLogo: false,
             dropDownConfiguration: {
@@ -111,10 +121,19 @@ export const UserPanelHeaderLogoTitle: Story = {
             { name: 'Link 2', path: '#' },
             { name: 'Link 3', path: '#' },
             { name: 'Link 4', path: '#' },
+            {
+                name: 'Link 5',
+                path: [
+                    { name: 'SubLink 1', path: '#' },
+                    { name: 'SubLink 2', path: '#' },
+                    { name: 'SubLink 3', path: '#' },
+                    { name: 'SubLink 4', path: '#' },
+                ],
+            },
         ],
         userPanelMenuItems: [
-            { name: 'Profile', path: '/', icon: <PersonIcon /> },
-            { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
+            { name: 'Profile', path: '#', icon: <PersonIcon /> },
+            { name: 'User Managment', path: '#', icon: <SettingsIcon /> },
         ],
         configuration: {
             centralLogo: false,
@@ -273,7 +292,7 @@ export const MegamenuHeader: Story = {
                 <p className="subtitle">DESIGN SYSTEM</p>
             </div>
         ),
-        logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
+        // logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
         // menuItems: [{ name: 'Menu', path: '#' }],
         userPanelMenuItems: [
             { name: 'Profile', path: '/', icon: <PersonIcon /> },

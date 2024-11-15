@@ -1,8 +1,7 @@
 import { Box, Grid, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
-import { ILink } from '../../../../util/types';
-import { FooterProps } from '../NsFooter';
+import { FooterProps, ILink } from '../NsFooter';
 
 /**
  * Footer Simple Component

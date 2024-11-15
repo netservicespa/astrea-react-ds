@@ -76,3 +76,23 @@ ClickableCard.args = {
     children: '3 pcaps',
     cardvariant: 'clickable',
 };
+
+export const CustomizedBasicCard = Template.bind({});
+CustomizedBasicCard.args = {
+    type: 'basic',
+    title: 'New basic card',
+    mediaImage: './images/ns-abstarct.jpg',
+    children:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales mollis rhoncus. Aliquam erat volutpat. Donec odio diam, semper a nisi nec, eleifend feugiat enim. Aenean eu massa venenatis, feugiat eros sed, vulputate tortor.',
+    buttons: [{ label: 'Link', onClick: () => console.log('Link clicked!') }],
+    cardvariant: 'flag',
+    sx: {
+        width: '500px',
+        backgroundColor: 'primary.main',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: 'primary.dark',
+            // transition: 'transform 0.3s ease, background-color 0.3s ease',
+        },
+    },
+} as NsCardProps;

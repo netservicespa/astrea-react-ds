@@ -70,7 +70,14 @@
     "openNotifications": "Apri notifiche",
     "closeNotifications": "Chiudi notifiche",
     "account": "Account",
-    "openAccount": "Apri account"
+    "openAccount": "Apri account",
+    "notification":{
+      "read":"Notitifche lette",
+      "unread":"Notitifche da leggere",
+      "markAsRead":"Segna tutte come lette",
+      "readCount": "Lette {{count}}",
+      "unreadCount": "Da leggere {{count}}"
+    }
   },
   "confirmPage": {
     "comeBack": "Vai alla homepage",
@@ -88,6 +95,9 @@
       "selectAll": "Tutti",
       "apply": "Applica",
       "clear": "Pulisci filtri"
+    },
+    "controls": {
+      "columnVisibility": "Mostra/nascondi colonne"
     }
   },
   "pagination": {
@@ -97,5 +107,11 @@
   "panel":{
     "close":"Chiudi",
     "open": "Apri"
+  },
+    "notifications":{
+    "button":{
+      "action":"Azione",
+      "view":"Vedi"
+    }
   }
 }

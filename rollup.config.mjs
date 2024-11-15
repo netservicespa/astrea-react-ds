@@ -8,8 +8,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import analyze from 'rollup-plugin-analyzer';
-import pkg from './package.json' assert { type: 'json' };
-
+import pkg from './package.json' with { type: 'json' };
 
 const makeExternalPredicate = (externalArr) => {
     if (externalArr.length === 0) {
@@ -80,7 +79,6 @@ const confEsm = {
     ],
 };
 
-
 /** @type {import('rollup').RollupOptions} */
 const confUmd = {
     input: 'src/index.ts',
@@ -112,4 +110,4 @@ const confUmd = {
 };
 //export default [...createConfig('umd')];
 
-export default [confEsm, /*confUmd*/];
+export default [confEsm /*confUmd*/];

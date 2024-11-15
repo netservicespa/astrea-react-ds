@@ -3,8 +3,9 @@ import { Badge, Box, Button, List, ListItem, ListItemIcon, Typography } from '@m
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { NsTabs } from '../tabs/NsTabs';
-import { DynamicLinkProps } from '../../../util/types';
-import { DynamicLink } from '../dropdown/NsDropDown';
+import { DynamicLink, DynamicLinkProps } from '../dropdown/NsDropDown';
+import { useTheme } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 
 export interface IReadWrite {
     id: number;
@@ -15,7 +16,7 @@ export interface IReadWrite {
 
 export interface NotificationData {
     notifications: IReadWrite[];
-
+    markAsRead?: (...args: any[]) => any;
     /**
      * Link to show more
      */
@@ -36,6 +37,7 @@ export interface INotificationData {
     unread: NotificationData;
     onlyButton?: Omit<DynamicLinkProps, 'children'>;
     children: React.ReactNode;
+    markAsRead?: (...args: any[]) => any;
 }
 
 /**
@@ -52,22 +54,22 @@ const MainNotificationDiv = ({
     showMore,
     totalCount,
     isReadUnread,
-    markAsRead = true,
-}: NotificationData & { isReadUnread: 'READ' | 'UNREAD' } & {
-    markAsRead?: boolean;
-}) => {
+    markAsRead,
+}: NotificationData & { isReadUnread: 'READ' | 'UNREAD' }) => {
+    const theme = useTheme();
+    const { t } = useTranslation();
     return (
         <List
             sx={{
                 width: '364px',
-                border: '1px solid #b1b4b6',
+                border: `1px solid ${theme.palette.borderColor.main}`,
                 backgroundColor: '#ffffff',
                 boxSizing: 'border-box',
                 p: 3,
             }}
         >
             {isReadUnread === 'READ' ? (
-                <div style={{ fontSize: '24px' }}>Read Notification</div>
+                <div style={{ fontSize: '24px' }}>{t('header.notification.read')}</div>
             ) : (
                 <div
                     key={'x'}
@@ -77,61 +79,62 @@ const MainNotificationDiv = ({
                         alignItems: 'center',
                     }}
                 >
-                    <div style={{ fontSize: '24px' }}>Unread Notification</div>
+                    <div style={{ fontSize: '24px' }}>{t('header.notification.unread')}</div>
                     <Badge style={{ marginRight: '8px' }} badgeContent={totalCount} color="error" />
                 </div>
             )}
 
             {notifications.map((item: any, index: number) => {
                 return (
-                    <ListItem
-                        key={index}
-                        divider
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        <ListItemIcon>
-                            {item.status === Status.valid ? (
-                                <CheckCircleIcon color={'primary'} />
-                            ) : (
-                                <ErrorOutlineIcon color={'error'} />
-                            )}
-                        </ListItemIcon>
-                        <Typography component="h4" variant="h4">
-                            {item.text}
-                        </Typography>
-                    </ListItem>
+                    <DynamicLink {...item.link}>
+                        <ListItem
+                            key={index}
+                            divider
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            <ListItemIcon>
+                                {item.status === Status.valid ? (
+                                    <CheckCircleIcon color={'primary'} />
+                                ) : (
+                                    <ErrorOutlineIcon color={'error'} />
+                                )}
+                            </ListItemIcon>
+                            <Typography component="h4" variant="h4">
+                                {item.text}
+                            </Typography>
+                        </ListItem>
+                    </DynamicLink>
                 );
             })}
 
-            {isReadUnread === 'UNREAD' && markAsRead ? (
-                <Button sx={{ width: '100%', fontSize: '18px', textDecoration: 'underline' }} onClick={() => {}}>
-                    Mark all as read
+            {isReadUnread === 'UNREAD' && markAsRead && (
+                <Button sx={{ width: '100%', fontSize: '18px', textDecoration: 'underline' }} onClick={markAsRead}>
+                    {t('header.notification.markAsRead')}
                 </Button>
-            ) : (
-                <></>
             )}
             {showMore && <DynamicLink {...showMore}></DynamicLink>}
         </List>
     );
 };
 
-export const NsNotification: React.FC<INotificationData> = ({ read, unread, children, onlyButton }) => {
+export const NsNotification: React.FC<INotificationData> = ({ read, unread, children, onlyButton, markAsRead }) => {
     const [isOpenNotification, setIsOpenNotification] = useState(false);
+    const { t } = useTranslation();
 
     const tabs = [
         {
             id: '1',
-            label: `Unread (${unread.totalCount})`,
-            children: <MainNotificationDiv isReadUnread={'UNREAD'} {...unread} />,
+            label: t('header.notification.unreadCount', { count: unread.totalCount }),
+            children: <MainNotificationDiv isReadUnread={'UNREAD'} {...unread} markAsRead={markAsRead} />,
         },
         {
             id: '2',
-            label: `Read (${read.totalCount})`,
-            children: <MainNotificationDiv isReadUnread={'READ'} {...read} />,
+            label: t('header.notification.readCount', { count: read.totalCount }),
+            children: <MainNotificationDiv isReadUnread={'READ'} {...read} markAsRead={markAsRead} />,
         },
     ] as any;
 

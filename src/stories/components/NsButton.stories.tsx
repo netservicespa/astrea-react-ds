@@ -6,6 +6,7 @@ import { Box } from '@mui/system';
 import { NsGridLayout } from 'src/components/layout/NsGridLayout';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import CheckIcon from '@mui/icons-material/Check';
+import FIGMA from '@root/figma.json';
 
 const meta: Meta<ButtonProps> = {
     title: 'Components/Button',
@@ -17,6 +18,10 @@ const meta: Meta<ButtonProps> = {
                 type: 'code',
                 code: '<NsButton {...args} />',
             },
+        },
+        design: {
+            type: 'figma',
+            url: FIGMA.components.button,
         },
     },
     argTypes: {

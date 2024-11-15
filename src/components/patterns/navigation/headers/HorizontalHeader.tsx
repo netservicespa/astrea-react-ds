@@ -3,14 +3,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { Box } from '@mui/material';
+import { Box, Menu, MenuItem, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { HeaderProps, MenuItem } from '../../../../util/types';
-import { DynamicLink, NsDropDown } from '../../../components/dropdown/NsDropDown';
+import { DynamicLink, IDropdownItems, NsDropDown, StyledLink } from '../../../components/dropdown/NsDropDown';
 import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
-import { display } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
+import { HeaderProps } from '../NsHeader';
 
 /**
  * Horizontal Header
@@ -32,84 +32,67 @@ const Logo = styled('svg')({
     display: 'inline-block',
 });
 const LogoContainer = styled('div')(
-    ({ theme, configuration }: any) => css`
-        background-color: ${theme.header.backgroundColor};
-        border-bottom: 9px solid ${theme.header.borderColor};
-        padding: 20px 20px;
-        display: flex;
-        justify-content: ${configuration?.centralLogo ? 'center' : 'space-between'};
-        align-items: center;
+  ({ theme, configuration }: any) => css`
+    background-color: ${theme.header.backgroundColor};
+    border-bottom: 9px solid ${theme.header.borderColor};
+    padding: 20px 20px;
+    display: flex;
+    justify-content: ${configuration?.centralLogo ? 'center' : 'space-between'};
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
 
-        a {
-            display: flex;
-            align-items: center;
-            min-width: ${configuration?.centralLogo ? '370px' : undefined};
+    .titles {
+        text-align: left;
+        width: ${configuration?.centralLogo ? '494px' : 'auto'};
 
-            text-decoration: none;
-            color: ${theme.header.menuTextColor};
-
-            &:focus {
-                background-color: ${theme.header.focusBackgroundColor};
-            }
-
-            &:focus-visible {
-                outline: 0;
-            }
-
-            .titles {
-                text-align: left;
-                width: ${configuration?.centralLogo ? '494px' : undefined};
-
-                h1 {
-                    font-weight: 600;
-                    font-size: 1.7em;
-                    line-height: 1;
-                    margin: 0 0 2px 18px;
-                    color: #fff;
-                }
-
-                .subtitle {
-                    font-size: 0.7em;
-                    text-transform: uppercase;
-                    color: #fff;
-                    margin: 0 0 0 18px;
-                }
-            }
-
-            svg {
-                display: inline-block;
-                vertical-align: top;
-                max-height: 70px;
-                margin-left: 10%;
-            }
-        }
-
-        .mobile-menu-icon {
-            display: none !important;
-            cursor: pointer;
+        h1 {
+            font-weight: 600;
+            font-size: 1.7em;
+            line-height: 1;
+            margin: 0 0 2px 18px;
             color: #fff;
-            font-weight: 599;
+        }
 
-            @media (max-width: 768px) {
-                display: block !important;
-            }
+        .subtitle {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            color: #fff;
+            margin: 0 0 0 18px;
         }
     }
 
-    svg {
-        display: inline-block;
-        vertical-align: top;
-        max-height: 70px;
-        margin-left: 10%;
-    }
+    a {
+        display: flex;
+        align-items: center;
+        min-width: ${configuration?.centralLogo ? '370px' : 'auto'};
+        text-decoration: none;
+        color: ${theme.header.menuTextColor};
 
+        &:focus {
+            background-color: ${theme.header.focusBackgroundColor};
+        }
+
+        &:focus-visible {
+            outline: 0;
+        }
+
+        svg {
+            display: inline-block;
+            vertical-align: top;
+            max-height: 70px;
+        }
     }
 
     .mobile-menu-icon {
-        display: block;
+        display: none !important;
         cursor: pointer;
         color: ${theme.header.backgroundColor};
         font-weight: 599;
+
+        @media (max-width: 768px) {
+            display: block !important;
+        }
     }
 
     @media (min-width: 768px) {
@@ -117,7 +100,7 @@ const LogoContainer = styled('div')(
             display: none !important;
         }
     }
-    `,
+  `
 );
 
 const NavigationContainer = styled('div')(
@@ -180,7 +163,7 @@ const AuthContainer = styled('div')(
 
 export interface UserMenuProps {
     notificationData?: INotificationData;
-    userPanelMenuItems: any;
+    userPanelMenuItems: React.ReactElement | IDropdownItems[];
     router: any;
     onLogout?: () => void;
     configuration?: any;
@@ -205,19 +188,27 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>{t('header.notifications')}</Box>
                 </span>
             )}
-            {userPanelMenuItems && (
-                <span aria-label={t('header.account')} title={t('header.openAccount')} style={{ marginLeft: '20px' }}>
-                    <NsDropDown
-                        dropdownItems={userPanelMenuItems}
-                        router={router}
-                        onLogout={onLogout}
-                        dropDownConfiguration={configuration?.dropDownConfiguration}
+            {userPanelMenuItems &&
+                (Array.isArray(userPanelMenuItems) ? (
+                    <span
+                        aria-label={t('header.account')}
+                        title={t('header.openAccount')}
+                        style={{ marginLeft: '20px' }}
                     >
-                        <AccountCircleIcon />
-                    </NsDropDown>
-                    <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>{t('header.account')}</Box>
-                </span>
-            )}
+                        <NsDropDown
+                            dropdownItems={userPanelMenuItems}
+                            router={router}
+                            onLogout={onLogout}
+                            dropDownConfiguration={configuration?.dropDownConfiguration}
+                            overlay={false}
+                        >
+                            <AccountCircleIcon />
+                        </NsDropDown>
+                        <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>{t('header.account')}</Box>
+                    </span>
+                ) : (
+                    userPanelMenuItems
+                ))}
         </nav>
     );
 };
@@ -234,27 +225,45 @@ export default function HorizontalHeader({
 }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
+    const theme = useTheme();
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return (
         <HeaderContainer {...configuration}>
             <LogoContainer {...configuration}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '40px' }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '40px',
+                        width: '100%',
+                        justifyContent: 'space-between',
+                    }}
+                >
                     <DynamicLink key={'/'} to={'/'} router={router}>
                         {logo}
                     </DynamicLink>
-                    {infoBox && (
-                        <Box
-                            sx={{
-                                backgroundColor: 'secondary.main',
-                            }}
-                        >
-                            {infoBox}
-                        </Box>
-                    )}
                 </Box>
+                {infoBox && (
+                    <Box
+                        sx={{
+                            backgroundColor: 'secondary.main',
+                        }}
+                    >
+                        {infoBox}
+                    </Box>
+                )}
                 <Box
                     className={!configuration?.centralLogo ? 'mobile-menu-icon' : ''}
                     onClick={handleMenuToggle}
@@ -280,11 +289,33 @@ export default function HorizontalHeader({
                 }}
             >
                 <nav aria-label="Menu principale">
-                    {menuItems?.map((item: MenuItem) => (
-                        <DynamicLink key={item.name} to={item.path} router={router}>
-                            {item.name}
-                        </DynamicLink>
-                    ))}
+                    {menuItems?.map((item) =>
+                        typeof item.path === 'string' ? (
+                            <DynamicLink key={item.name} to={item.path} router={router}>
+                                {item.name}
+                            </DynamicLink>
+                        ) : (
+                            Array.isArray(item.path) && (
+                                <NsDropDown
+                                    dropdownItems={item.path}
+                                    router={router}
+                                    dropDownConfiguration={{
+                                        anchorOrigin: {
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                        },
+                                        transformOrigin: {
+                                            vertical: 'top',
+                                            horizontal: 'center',
+                                        },
+                                    }}
+                                    overlay={false}
+                                >
+                                    <StyledLink>{item.name}</StyledLink>
+                                </NsDropDown>
+                            )
+                        ),
+                    )}
                 </nav>
 
                 <AuthContainer
@@ -295,13 +326,17 @@ export default function HorizontalHeader({
                                 : undefined,
                     }}
                 >
-                    <UserMenu
-                        userPanelMenuItems={userPanelMenuItems}
-                        notificationData={notificationData}
-                        router={router}
-                        onLogout={onLogout}
-                        {...configuration}
-                    />
+                    {Array.isArray(userPanelMenuItems) ? (
+                        <UserMenu
+                            userPanelMenuItems={userPanelMenuItems}
+                            notificationData={notificationData}
+                            router={router}
+                            onLogout={onLogout}
+                            {...configuration}
+                        />
+                    ) : (
+                        userPanelMenuItems
+                    )}
                 </AuthContainer>
             </NavigationContainer>
         </HeaderContainer>

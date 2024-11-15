@@ -1,0 +1,39 @@
+{
+    "components": {
+        "accordion": "https://www.figma.com/proto/stnH3WvO0cY4RV0kNVy1um/Astrea-Design-System?node-id=187-4198&t=DaXMtPDeZderXzqt-1",
+        "breadcrumb": "https://www.figma.com/proto/stnH3WvO0cY4RV0kNVy1um/Astrea-Design-System?node-id=188-4210&t=DaXMtPDeZderXzqt-1",
+        "button": "https://www.figma.com/proto/stnH3WvO0cY4RV0kNVy1um/Astrea-Design-System?node-id=188-4216&t=DaXMtPDeZderXzqt-1",
+        "card": "",
+        "datagrid": "",
+        "dialog": "",
+        "drawer": "",
+        "dropdown": "",
+        "feedback": "",
+        "form": "",
+        "loader": "",
+        "modal": "",
+        "notifier": "",
+        "pagination": "",
+        "panel": "",
+        "progress": "",
+        "scrolltop": "",
+        "skip-link": "",
+        "table-classic": "",
+        "tabs": "",
+        "tag": "",
+        "tooltip": ""
+    },
+    "patterns": {
+        "header": "https://www.figma.com/proto/stnH3WvO0cY4RV0kNVy1um/Astrea-Design-System?node-id=2238-11186&t=DaXMtPDeZderXzqt-1",
+        "footer": "https://www.figma.com/proto/stnH3WvO0cY4RV0kNVy1um/Astrea-Design-System?node-id=27-107&t=DaXMtPDeZderXzqt-1",
+        "dragdrop": "",
+        "notification": "",
+        "page-header": "",
+        "user-panel": "",
+        "wizard": ""
+    },
+    "layouts": {
+        "confirmation": "",
+        "login": ""
+    }
+}  

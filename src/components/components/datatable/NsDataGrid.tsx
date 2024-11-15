@@ -19,6 +19,14 @@ export type NsDataGridRenderFn = (
     Table: React.ReactElement,
     Pager: React.ReactElement,
     children?: React.ReactNode,
+    ColumnVisibility?: React.ReactElement,
+) => React.ReactElement;
+
+export type NsDataGridClientRenderFn = (
+    Table: React.ReactElement,
+    Pager: React.ReactElement,
+    ColumnVisibility?: React.ReactElement,
+    children?: React.ReactNode,
 ) => React.ReactElement;
 
 export interface NsDataGridCommonProps<RowType extends object, FilterType extends object> extends TableContainerProps {

@@ -12,6 +12,7 @@ import {
 import { NsDataGridCommonProps, NsDataGridRenderFn } from './NsDataGrid';
 import { NsDataGridBase } from './NsDataGridBase';
 import { TableFilters } from './filtering/FilterContainer';
+import { ColumnVisibilityMenu } from './filtering/ColumnVisibilityMenu';
 import { NsTablePager } from './pagination/NsTablePager';
 import { NsDataGridEventType } from './events/NsDataGridEvents';
 
@@ -110,6 +111,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     const [filters, setFilters] = React.useState<TableFilters<FilterType>>({});
 
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+    const [columnVisibility, setColumnVisibility] = React.useState({})
 
     // Notify event listener of filter change
     React.useEffect(() => {
@@ -199,7 +201,10 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
             pagination,
             sorting,
             rowSelection,
+            columnVisibility,
         },
+        // Custom filtering
+        onColumnVisibilityChange: setColumnVisibility,
         // Custom pagination
         onPaginationChange: setPagination,
         // Custom sorting
@@ -227,9 +232,11 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     );
     const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
     const TablePagerComponent = <PagerComponent type="server" table={table} paginationInfo={page} rowsPerPageOptions={options?.pagination?.rowsPerPageOptions}/>;
-    return render(FilterContainerComponent, TableComponent, TablePagerComponent, children);
+    const ColumnVisibilityComponent = <ColumnVisibilityMenu table={table} />;
+
+    return render(FilterContainerComponent, TableComponent, TablePagerComponent, children, ColumnVisibilityComponent);
 }
-const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, children) => {
+const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, children, ColumnVisibility) => {
     const hasFilterContainer =
         FilterContainer && FilterContainer.props && Object.keys(FilterContainer.props).length > 0;
     return (
@@ -238,6 +245,7 @@ const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, chil
                 {hasFilterContainer && <Box sx={{ border: '1px solid gray', padding: '10px' }}>{FilterContainer}</Box>}
                 <Box sx={{ border: hasFilterContainer ? '1px solid gray' : 'none', padding: '10px' }}>
                     {children && children}
+                    {ColumnVisibility}
                     {Table}
                     {Pager}
                 </Box>
