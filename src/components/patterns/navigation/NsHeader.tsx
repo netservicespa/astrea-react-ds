@@ -88,6 +88,9 @@ export interface HeaderProps {
     configuration: {
         centralLogo?: boolean;
         dropDownConfiguration?: IDropDownConfiguration | undefined;
+        hover?: boolean;
+        dropDownIcon?: React.ReactElement | boolean;
+        notification?: boolean;
     };
 }
 export const NsHeader = ({

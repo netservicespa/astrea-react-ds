@@ -64,7 +64,7 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
 
     const table = useReactTable<RowType>({
         data,
-        columns,
+        columns: columns.filter((column) => !column.meta?.hide),
         defaultColumn,
         columnResizeMode: 'onChange',
         getCoreRowModel: getCoreRowModel(),

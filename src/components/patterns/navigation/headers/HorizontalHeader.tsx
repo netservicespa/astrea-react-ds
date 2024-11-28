@@ -3,7 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { Box, Menu, MenuItem, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { DynamicLink, IDropdownItems, NsDropDown, StyledLink } from '../../../components/dropdown/NsDropDown';
@@ -32,75 +32,75 @@ const Logo = styled('svg')({
     display: 'inline-block',
 });
 const LogoContainer = styled('div')(
-  ({ theme, configuration }: any) => css`
-    background-color: ${theme.header.backgroundColor};
-    border-bottom: 9px solid ${theme.header.borderColor};
-    padding: 20px 20px;
-    display: flex;
-    justify-content: ${configuration?.centralLogo ? 'center' : 'space-between'};
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-
-    .titles {
-        text-align: left;
-        width: ${configuration?.centralLogo ? '494px' : 'auto'};
-
-        h1 {
-            font-weight: 600;
-            font-size: 1.7em;
-            line-height: 1;
-            margin: 0 0 2px 18px;
-            color: #fff;
-        }
-
-        .subtitle {
-            font-size: 0.7em;
-            text-transform: uppercase;
-            color: #fff;
-            margin: 0 0 0 18px;
-        }
-    }
-
-    a {
+    ({ theme, configuration }: any) => css`
+        background-color: ${theme.header.backgroundColor};
+        border-bottom: 9px solid ${theme.header.borderColor};
+        padding: 20px 20px;
         display: flex;
+        justify-content: ${configuration?.centralLogo ? 'center' : 'space-between'};
         align-items: center;
-        min-width: ${configuration?.centralLogo ? '370px' : 'auto'};
-        text-decoration: none;
-        color: ${theme.header.menuTextColor};
+        flex-direction: row;
+        width: 100%;
 
-        &:focus {
-            background-color: ${theme.header.focusBackgroundColor};
+        .titles {
+            text-align: left;
+            width: ${configuration?.centralLogo ? '494px' : 'auto'};
+
+            h1 {
+                font-weight: 600;
+                font-size: 1.7em;
+                line-height: 1;
+                margin: 0 0 2px 18px;
+                color: #fff;
+            }
+
+            .subtitle {
+                font-size: 0.7em;
+                text-transform: uppercase;
+                color: #fff;
+                margin: 0 0 0 18px;
+            }
         }
 
-        &:focus-visible {
-            outline: 0;
+        a {
+            display: flex;
+            align-items: center;
+            min-width: ${configuration?.centralLogo ? '370px' : 'auto'};
+            text-decoration: none;
+            color: ${theme.header.menuTextColor};
+
+            &:focus {
+                background-color: ${theme.header.focusBackgroundColor};
+            }
+
+            &:focus-visible {
+                outline: 0;
+            }
+
+            svg {
+                display: inline-block;
+                vertical-align: top;
+                max-height: 70px;
+            }
         }
 
-        svg {
-            display: inline-block;
-            vertical-align: top;
-            max-height: 70px;
-        }
-    }
-
-    .mobile-menu-icon {
-        display: none !important;
-        cursor: pointer;
-        color: ${theme.header.backgroundColor};
-        font-weight: 599;
-
-        @media (max-width: 768px) {
-            display: block !important;
-        }
-    }
-
-    @media (min-width: 768px) {
         .mobile-menu-icon {
             display: none !important;
+            cursor: pointer;
+            color: ${theme.header.backgroundColor};
+            font-weight: 599;
+
+            @media (max-width: 768px) {
+                display: block !important;
+            }
         }
-    }
-  `
+
+        @media (min-width: 768px) {
+            .mobile-menu-icon {
+                display: none !important;
+            }
+        }
+    `,
 );
 
 const NavigationContainer = styled('div')(
@@ -108,7 +108,6 @@ const NavigationContainer = styled('div')(
         display: flex;
         justify-content: space-between;
         background-color: ${!configuration?.centralLogo ? theme.header.menuBackgroundColor : null};
-        padding: 0px 8px;
         @media (max-width: 768px) {
             display: none;
             transition: max-height 0.2s ease-out;
@@ -121,20 +120,18 @@ const NavigationContainer = styled('div')(
         }
 
         nav {
+            height: 40px;
             display: flex;
             justify-content: flex-start;
             flex-direction: row;
+            align-items: center;
 
             a {
-                padding: 4px 10px;
+                padding: 0px 10px;
                 font-weight: 600;
                 display: flex;
                 justify-content: space-between;
-                background-color: ${!configuration?.centralLogo ? theme.header.menuBackgroundColor : null};
-                margin-bottom: 30px;
-                padding: 6px 8px;
-                color: ${theme.header.menuTextColor};
-
+                margin: 0px;
                 @media (max-width: 768px) {
                     display: none;
                     transition: max-height 0.2s ease-out;
@@ -177,23 +174,59 @@ const UserMenu: React.FC<UserMenuProps> = ({
     configuration,
 }) => {
     const { t } = useTranslation();
+    const theme = useTheme();
+    const [notificationState, setNotificationState] = useState(notificationData);
 
     return (
-        <nav aria-label={t('header.userMenu')} style={{ alignItems: 'center' }}>
-            {notificationData && (
-                <span aria-label={t('header.notifications')} title={t('header.openNotifications')}>
-                    <NsNotification {...notificationData}>
-                        <NotificationsNoneOutlinedIcon />
-                    </NsNotification>{' '}
+        <nav aria-label={t('header.userMenu')}>
+            {configuration.notification && (
+                <Box
+                    aria-label={t('header.notifications')}
+                    title={t('header.openNotifications')}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                        width: '100%',
+                        aspectRatio: '1',
+                        ...(configuration.hover && {
+                            '&:hover': {
+                                backgroundColor: theme.palette.primary.main,
+                                color: '#fff',
+                            },
+                        }),
+                    }}
+                >
+                    <NsNotification {...notificationState}>
+                        <NotificationsNoneOutlinedIcon
+                            sx={{
+                                alignItems: 'center',
+                                height: '100%',
+                            }}
+                        />
+                    </NsNotification>
                     <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>{t('header.notifications')}</Box>
-                </span>
+                </Box>
             )}
             {userPanelMenuItems &&
                 (Array.isArray(userPanelMenuItems) ? (
-                    <span
+                    <Box
                         aria-label={t('header.account')}
                         title={t('header.openAccount')}
-                        style={{ marginLeft: '20px' }}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            aspectRatio: '1',
+                            ...(configuration.hover && {
+                                '&:hover': {
+                                    backgroundColor: theme.palette.primary.main,
+                                    color: '#fff',
+                                },
+                            }),
+                        }}
                     >
                         <NsDropDown
                             dropdownItems={userPanelMenuItems}
@@ -202,10 +235,15 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             dropDownConfiguration={configuration?.dropDownConfiguration}
                             overlay={false}
                         >
-                            <AccountCircleIcon />
+                            <AccountCircleIcon
+                                sx={{
+                                    alignItems: 'center',
+                                    height: '100%',
+                                }}
+                            />
                         </NsDropDown>
                         <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>{t('header.account')}</Box>
-                    </span>
+                    </Box>
                 ) : (
                     userPanelMenuItems
                 ))}
@@ -281,22 +319,34 @@ export default function HorizontalHeader({
                     </Box>
                 </Box>
             </LogoContainer>
-            <NavigationContainer
-                className={isMenuOpen ? 'open' : ''}
-                {...configuration}
-                style={{
-                    padding: menuItems && menuItems.length > 0 ? '6px' : undefined,
-                }}
-            >
+            <NavigationContainer className={isMenuOpen ? 'open' : ''} {...configuration}>
                 <nav aria-label="Menu principale">
-                    {menuItems?.map((item) =>
+                    {menuItems?.map((item, i) =>
                         typeof item.path === 'string' ? (
-                            <DynamicLink key={item.name} to={item.path} router={router}>
+                            <DynamicLink
+                                key={item.name}
+                                to={item.path}
+                                router={router}
+                                sx={{
+                                    gap: '4px',
+                                    alignItems: 'center',
+                                    height: '100%',
+
+                                    ...(configuration.hover && {
+                                        '&:hover': {
+                                            backgroundColor: theme.palette.primary.main,
+                                            color: '#fff',
+                                        },
+                                    }),
+                                }}
+                            >
+                                {item.icon && item.icon}
                                 {item.name}
                             </DynamicLink>
                         ) : (
                             Array.isArray(item.path) && (
                                 <NsDropDown
+                                    key={item.name}
                                     dropdownItems={item.path}
                                     router={router}
                                     dropDownConfiguration={{
@@ -308,36 +358,55 @@ export default function HorizontalHeader({
                                             vertical: 'top',
                                             horizontal: 'center',
                                         },
+                                        hover: configuration.hover,
+                                        dropDownIcon: configuration.dropDownIcon,
                                     }}
                                     overlay={false}
+                                    icon={configuration.dropDownIcon}
                                 >
-                                    <StyledLink>{item.name}</StyledLink>
+                                    <StyledLink
+                                        sx={{
+                                            gap: '4px',
+                                            alignItems: 'center',
+                                            height: '100%',
+                                            ...(configuration.hover && {
+                                                '&:hover': {
+                                                    backgroundColor: theme.palette.primary.main,
+                                                    color: '#fff',
+                                                },
+                                            }),
+                                            // '.caret-icon::before': {
+                                            //     content: "'keyboard_arrow_down'",
+                                            //     fontFamily: 'Material Icons',
+                                            //     fontSize: '16px',
+                                            //     display: 'inline-block',
+                                            //     verticalAlign: 'middle',
+                                            //     color: 'inherit',
+                                            // },
+                                        }}
+                                    >
+                                        {item.icon && item.icon}
+                                        {item.name}
+                                    </StyledLink>
                                 </NsDropDown>
                             )
                         ),
                     )}
                 </nav>
 
-                <AuthContainer
-                    style={{
-                        padding:
-                            (Array.isArray(userPanelMenuItems) && userPanelMenuItems.length > 0) || onLogout
-                                ? '6px'
-                                : undefined,
-                    }}
-                >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     {Array.isArray(userPanelMenuItems) ? (
                         <UserMenu
                             userPanelMenuItems={userPanelMenuItems}
                             notificationData={notificationData}
                             router={router}
                             onLogout={onLogout}
-                            {...configuration}
+                            configuration={configuration}
                         />
                     ) : (
                         userPanelMenuItems
                     )}
-                </AuthContainer>
+                </Box>
             </NavigationContainer>
         </HeaderContainer>
     );

@@ -111,7 +111,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     const [filters, setFilters] = React.useState<TableFilters<FilterType>>({});
 
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-    const [columnVisibility, setColumnVisibility] = React.useState({})
+    const [columnVisibility, setColumnVisibility] = React.useState({});
 
     // Notify event listener of filter change
     React.useEffect(() => {
@@ -170,7 +170,18 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
             sorting.map((sort) => [sort.id, sort.desc ? 'desc' : 'asc']),
         ) as ColumnSorting<RowType>;
         // Call fetcher with pagination and sorting
-        fetcher(pagination, mySorting, filters).then(setPage);
+        // fetcher(pagination, mySorting, filters).then(setPage);
+        fetcher(pagination, mySorting, filters).then((data) => {
+            setPage(data);
+            // if (data.data.length > 0) {
+            //     setRowSelection({ [data.data[0].id!]: true });
+            // }
+            console.log('options', options);
+            if (options.selectedRow) {
+                const firstRowId = options.selectedRow;
+                setRowSelection({ [firstRowId]: true });
+            }
+        });
     }, [pagination, sorting, filters, fetcher]);
 
     // Reset pagination on filter change
@@ -188,7 +199,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     // @tanstack/react-table setup
     const table = useReactTable({
         data: page.data,
-        columns,
+        columns: columns.filter((column) => !column.meta?.hide),
         defaultColumn,
         enableColumnResizing: options?.resizable,
         columnResizeMode: 'onChange',
@@ -231,7 +242,14 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
         <></>
     );
     const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
-    const TablePagerComponent = <PagerComponent type="server" table={table} paginationInfo={page} rowsPerPageOptions={options?.pagination?.rowsPerPageOptions}/>;
+    const TablePagerComponent = (
+        <PagerComponent
+            type="server"
+            table={table}
+            paginationInfo={page}
+            rowsPerPageOptions={options?.pagination?.rowsPerPageOptions}
+        />
+    );
     const ColumnVisibilityComponent = <ColumnVisibilityMenu table={table} />;
 
     return render(FilterContainerComponent, TableComponent, TablePagerComponent, children, ColumnVisibilityComponent);

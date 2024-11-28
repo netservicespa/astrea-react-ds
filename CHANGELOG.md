@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [v2.6.0](https://github.com/netservicespa/astrea-react-ds/commit/94a729a8687c6be837e21e10fe1523dac3b19442) (Nov 15 2024)
+
+## New Additions
+
+- **NsNotificationList**:
+  - Introduced the new `NsNotificationList` component.
+  - Added translation support.
+  - Exported types for usage.
+  - Created a Storybook story for demonstration.
+
+- **NsDataGrid**:
+  - Column Visibility Menu: Introduced a menu to manage column visibility, dynamically positionable using the render function within the table component.
+
+- **Storybook**:
+  - Added Figma integration within Storybook stories.
+
+## Improved
+
+- **NsCard**:
+  - Added `sx` support for enhanced customization.
+
+- **NsTooltip**:
+  - Expanded applicability, allowing tooltips to be applied to any element instead of just icons.
+
+- **Storybook**:
+  - Removed `@storybook/addon-mdx-gfm` as it is no longer necessary.
+  - Integrated `Remark` to support GitHub Flavored Markdown (GFM) in Storybook documentation.
+  - Upgraded Storybook to version 8.4.
+
+- **NsDataGrid**:
+  - Custom Layout Support: Updated `NsDataGridClient` to accept a custom renderer for flexible layouts.
+  - Translation Structure: Introduced `table.controls` section for handling translations, starting with `columnVisibility: "Columns Visibility"`.
+  - Dynamic Alignment: The column visibility button is now right-aligned using `justifyContent: 'flex-end`.
+  - Removed `Typography` within table cells to enable full cell customization.
+
+- **NsNotification**:
+  - Added the ability to include links in notifications.
+  - Introduced a `markAllAsRead` function.
+  - Enhanced translation support.
+
+- **NsHeader**:
+  - Added cascading menu support via dropdown, with an example in Storybook.
+  - Fixed `infoBox` positioning to align on the right.
+  - Removed unnecessary SVG margins.
+
+- **NsFeedback**:
+  - Improved colors based on accessibility testing.
+
+- **NsDropdown**:
+  - Added support for disabling the overlay.
+
+## Fixed
+
+- **Exports**:
+  - Removed `types.ts` file; type declarations are now included within component files.
+  - Resolved deprecated `assert.CallTracker` issue for compatibility with newer Node.js versions.
+
 # [v2.5.0](https://github.com/netservicespa/astrea-react-ds/commit/2395ae49e5f9e3d2443a81a162c3c1c094ccebed) (Nov 5 2024)
 
 ## New Additions

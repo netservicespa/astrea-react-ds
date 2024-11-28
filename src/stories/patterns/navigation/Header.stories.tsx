@@ -4,8 +4,8 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { NsHeader } from 'src/components/patterns/navigation/NsHeader';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Box, Button } from '@mui/material';
-
+import { Box, Typography } from '@mui/material';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 /**
  * Headers are containers attached to the top of a page that allow the user to navigate through the application.
  *
@@ -67,14 +67,14 @@ export const UserPanelHeaderLogo: Story = {
         type: 'horizontal',
         logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
         menuItems: [
-            { name: 'Link 1', path: '#' },
+            { name: 'Link 1', path: '#', hover: true },
             { name: 'Link 2', path: '#' },
             { name: 'Link 3', path: '#' },
             { name: 'Link 4', path: '#' },
             {
                 name: 'Link 5',
                 path: [
-                    { name: 'SubLink 1', path: '#' },
+                    { name: 'SubLink 1', path: '#', icon: <PersonIcon /> },
                     { name: 'SubLink 2', path: '#' },
                     { name: 'SubLink 3', path: '#' },
                     { name: 'SubLink 4', path: '#' },
@@ -117,10 +117,18 @@ export const UserPanelHeaderLogoTitle: Story = {
             </div>
         ),
         menuItems: [
-            { name: 'Link 1', path: '#' },
+            { name: 'Link 1', path: '#', icon: <PersonIcon /> },
             { name: 'Link 2', path: '#' },
             { name: 'Link 3', path: '#' },
-            { name: 'Link 4', path: '#' },
+            {
+                name: 'Link 4',
+                path: [
+                    { name: 'SubLink 1', path: '#' },
+                    { name: 'SubLink 2', path: '#' },
+                    { name: 'SubLink 3', path: '#' },
+                    { name: 'SubLink 4', path: '#' },
+                ],
+            },
             {
                 name: 'Link 5',
                 path: [
@@ -129,7 +137,9 @@ export const UserPanelHeaderLogoTitle: Story = {
                     { name: 'SubLink 3', path: '#' },
                     { name: 'SubLink 4', path: '#' },
                 ],
+                icon: <PersonIcon />,
             },
+            { name: 'Link 6', path: '#' },
         ],
         userPanelMenuItems: [
             { name: 'Profile', path: '#', icon: <PersonIcon /> },
@@ -137,9 +147,13 @@ export const UserPanelHeaderLogoTitle: Story = {
         ],
         configuration: {
             centralLogo: false,
+            hover: true,
+            notification: true,
+            dropDownIcon: true,
+            // dropDownIcon: <ArrowDropDownOutlinedIcon sx={{ color: 'red' }} />,
             dropDownConfiguration: {
                 anchorOrigin: {
-                    vertical: 'top',
+                    vertical: 'bottom',
                     horizontal: 'right',
                 },
                 transformOrigin: {
@@ -150,6 +164,61 @@ export const UserPanelHeaderLogoTitle: Story = {
         },
         router: null,
         onLogout: () => {},
+        notificationData: {
+            unread: {
+                notifications: [
+                    {
+                        id: 1,
+                        status: 'valid',
+                        text: 'Search "TCP" save successfully',
+                        link: {
+                            router: null,
+                            to: '#',
+                        },
+                    },
+                    { id: 2, status: 'invalid', text: 'ghgjgfsdf.pcap' },
+                    { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+                    { id: 2, status: 'valid', text: 'ghgjgfsdfyui.pcap' },
+                ],
+                showMore: {
+                    router: null,
+                    to: '#',
+                    children: <Typography sx={{ color: 'red' }}>Show more</Typography>,
+                },
+                totalCount: 4,
+            },
+            read: {
+                notifications: [
+                    {
+                        id: 1,
+                        status: 'valid',
+                        text: 'sdganhbasddd.pcap',
+                        link: {
+                            router: null,
+                            to: '#',
+                        },
+                    },
+                    {
+                        id: 2,
+                        status: 'invalid',
+                        text: 'ghgjgfsdf.pcap',
+                        link: {
+                            router: null,
+                            to: '#',
+                        },
+                    },
+                    { id: 2, status: 'valid', text: 'new_123aaaa8.pcap' },
+                    { id: 2, status: 'valid', text: 'fsdfsfsfsfsfsdssssssyui.pcap' },
+                    { id: 1, status: 'valid', text: 'nerver_123_new.pcap' },
+                    { id: 2, status: 'valid', text: 'Changes discarded.pcap' },
+                    { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+                ],
+                totalCount: 4,
+            },
+            markAsRead: () => {
+                console.log('markAsRead');
+            },
+        },
     },
 };
 export const UserPanelHeaderTitle: Story = {

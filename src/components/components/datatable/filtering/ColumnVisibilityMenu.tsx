@@ -34,19 +34,44 @@ export function ColumnVisibilityMenu<RowType extends object>({ table }: ColumnVi
                 anchorEl={anchorEl}
                 open={isMenuOpen}
                 onClose={handleMenuClose}
-                sx={{ maxHeight: 300, width: '20ch' }}
+                sx={{
+                    minWidth: 200,
+                    width: 'auto',
+                }}
+                slotProps={{
+                    paper: {
+                        sx: {
+                            minWidth: 200,
+                            width: 'auto',
+                        },
+                    },
+                }}
             >
-                {table.getAllLeafColumns().map((column) => (
-                    <MenuItem key={column.id} onClick={column.getToggleVisibilityHandler()}>
-                        <ListItemIcon>
-                            <Checkbox
-                                checked={column.getIsVisible()}
-                                size="small"
-                            />
-                        </ListItemIcon>
-                        <Typography variant="body2">{column.id}</Typography>
-                    </MenuItem>
-                ))}
+                {table.getAllLeafColumns().map((column) => {
+                    // Determinare il testo da visualizzare
+                    const header = typeof column.columnDef.header === 'string' 
+                        ? column.columnDef.header 
+                        : column.id;
+
+                    return (
+                        <MenuItem
+                            key={column.id}
+                            onClick={column.getToggleVisibilityHandler()}
+                            sx={{
+                                whiteSpace: 'nowrap',
+                                width: 'auto',
+                            }}
+                        >
+                            <ListItemIcon>
+                                <Checkbox
+                                    checked={column.getIsVisible()}
+                                    size="small"
+                                />
+                            </ListItemIcon>
+                            <Typography variant="body2">{header}</Typography>
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </Box>
     );

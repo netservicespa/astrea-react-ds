@@ -15,13 +15,13 @@ export interface IReadWrite {
 }
 
 export interface NotificationData {
-    notifications: IReadWrite[];
+    notifications?: IReadWrite[];
     markAsRead?: (...args: any[]) => any;
     /**
      * Link to show more
      */
     showMore?: DynamicLinkProps;
-    totalCount: number;
+    totalCount?: number;
 }
 
 /**
@@ -33,10 +33,10 @@ export interface NotificationData {
  * An object containing the notification data, including both read and unread notifications.
  */
 export interface INotificationData {
-    read: NotificationData;
-    unread: NotificationData;
+    read?: NotificationData;
+    unread?: NotificationData;
     onlyButton?: Omit<DynamicLinkProps, 'children'>;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     markAsRead?: (...args: any[]) => any;
 }
 
@@ -84,32 +84,33 @@ const MainNotificationDiv = ({
                 </div>
             )}
 
-            {notifications.map((item: any, index: number) => {
-                return (
-                    <DynamicLink {...item.link}>
-                        <ListItem
-                            key={index}
-                            divider
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            <ListItemIcon>
-                                {item.status === Status.valid ? (
-                                    <CheckCircleIcon color={'primary'} />
-                                ) : (
-                                    <ErrorOutlineIcon color={'error'} />
-                                )}
-                            </ListItemIcon>
-                            <Typography component="h4" variant="h4">
-                                {item.text}
-                            </Typography>
-                        </ListItem>
-                    </DynamicLink>
-                );
-            })}
+            {notifications &&
+                notifications.map((item: any, index: number) => {
+                    return (
+                        <DynamicLink {...item.link}>
+                            <ListItem
+                                key={index}
+                                divider
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                <ListItemIcon>
+                                    {item.status === Status.valid ? (
+                                        <CheckCircleIcon color={'primary'} />
+                                    ) : (
+                                        <ErrorOutlineIcon color={'error'} />
+                                    )}
+                                </ListItemIcon>
+                                <Typography component="h4" variant="h4">
+                                    {item.text}
+                                </Typography>
+                            </ListItem>
+                        </DynamicLink>
+                    );
+                })}
 
             {isReadUnread === 'UNREAD' && markAsRead && (
                 <Button sx={{ width: '100%', fontSize: '18px', textDecoration: 'underline' }} onClick={markAsRead}>
@@ -128,12 +129,12 @@ export const NsNotification: React.FC<INotificationData> = ({ read, unread, chil
     const tabs = [
         {
             id: '1',
-            label: t('header.notification.unreadCount', { count: unread.totalCount }),
+            label: t('header.notification.unreadCount', { count: unread?.totalCount || 0 }),
             children: <MainNotificationDiv isReadUnread={'UNREAD'} {...unread} markAsRead={markAsRead} />,
         },
         {
             id: '2',
-            label: t('header.notification.readCount', { count: read.totalCount }),
+            label: t('header.notification.readCount', { count: read?.totalCount || 0 }),
             children: <MainNotificationDiv isReadUnread={'READ'} {...read} markAsRead={markAsRead} />,
         },
     ] as any;
@@ -143,13 +144,13 @@ export const NsNotification: React.FC<INotificationData> = ({ read, unread, chil
     return (
         <>
             {!isOpenNotification ? (
-                <Box sx={{ width: boxWidth, height: '40px' }}>
+                <Box sx={{ width: boxWidth, height: '40px', alignItems: 'center', display: 'flex' }}>
                     <DivIcon {...onlyButton}>
                         <div
                             onClick={() => (onlyButton ? () => {} : setIsOpenNotification(!isOpenNotification))}
                             style={{ textAlign: 'right', cursor: 'pointer' }}
                         >
-                            <Badge style={{ marginRight: '5px' }} badgeContent={unread?.totalCount} color="error">
+                            <Badge badgeContent={unread?.totalCount} color="error">
                                 {children}
                             </Badge>
                         </div>
@@ -158,9 +159,10 @@ export const NsNotification: React.FC<INotificationData> = ({ read, unread, chil
             ) : (
                 <>
                     <Box sx={{ width: boxWidth, height: '40px' }}>
+                        {/* <Box sx={{ width: '100%', height: '100%' }}> */}
                         <div
                             onClick={() => setIsOpenNotification(!isOpenNotification)}
-                            style={{ textAlign: 'right', cursor: 'pointer' }}
+                            style={{ textAlign: 'right', cursor: 'pointer', height: '40px' }}
                         >
                             <Badge style={{ marginRight: '5px' }} badgeContent={unread?.totalCount} color="error">
                                 {children}

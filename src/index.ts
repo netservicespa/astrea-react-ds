@@ -33,6 +33,7 @@ export { NsBanner } from './components/components/NsBanner';
 export { NsSwitch } from './components/components/NsSwitch';
 export { NsDialog, NsDialogActions, NsDialogContent, NsDialogTitle } from './components/components/dialog/NsDialog';
 export { NsNotificationList } from './components/components/NsNotificationList';
+export { NsSessionExpiredModal } from './components/patterns/NsSessionExpiredModal';
 
 /**
  * Forms and validation

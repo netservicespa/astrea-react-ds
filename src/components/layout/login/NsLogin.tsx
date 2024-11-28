@@ -84,14 +84,15 @@ export const NsLogin: React.FC<NsLoginProps> = ({
             <Grid container>
                 {type === 'classic' ? (
                     //if classic we put the Header
-                    <Grid item xs={12} sm={12}>
-                        <NsHeader
-                            logo={headerLogo}
-                            configuration={{ centralLogo: true }}
-                            router={null}
-                            type={'horizontal'}
-                        />
-                    </Grid>
+                    // <Grid item xs={12} sm={12}>
+                    //     <NsHeader
+                    //         logo={headerLogo}
+                    //         configuration={{ centralLogo: true }}
+                    //         router={null}
+                    //         type={'horizontal'}
+                    //     />
+                    // </Grid>
+                    <></>
                 ) : (
                     <>
                         <Grid item xs={12} sm={4}>

@@ -1,5 +1,5 @@
 import { TableContainerProps } from '@mui/material';
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef as BaseColumnDef } from '@tanstack/react-table';
 import React from 'react';
 import { NsDataGridOptions } from './NsDataGridBase';
 import { NsDataGridClient, NsDataGridClientProps } from './NsDataGridClient';
@@ -28,6 +28,13 @@ export type NsDataGridClientRenderFn = (
     ColumnVisibility?: React.ReactElement,
     children?: React.ReactNode,
 ) => React.ReactElement;
+
+export type ColumnDef<RowType, Value = any> = BaseColumnDef<RowType, Value> & {
+    meta?: {
+        hide?: boolean; // Proprietà per nascondere le colonne
+        [key: string]: any;
+    };
+};
 
 export interface NsDataGridCommonProps<RowType extends object, FilterType extends object> extends TableContainerProps {
     /**

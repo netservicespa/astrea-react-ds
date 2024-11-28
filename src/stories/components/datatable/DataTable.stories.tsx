@@ -269,6 +269,7 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
             columnHelper.accessor('progress', {
                 header: 'Profile Progress',
                 cell: (props: CellContext<Person, number>) => `${props.getValue()}%`,
+                meta: { hide: true }
             }),
         ],
         [],
@@ -296,18 +297,21 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
                       }))
                     : [],
                 filters,
-            ).then(
-                (result) =>
-                    ({
-                        // here everything has the same name, but in a real-world scenario,
-                        // you may have to remap the data
-                        data: result.data,
-                        totalItems: result.totalItems,
-                        totalPages: result.totalPages,
-                        pageSize: result.pageSize,
-                        currentPage: result.currentPage,
-                    }) as PagedData<Person>,
-            ),
+            ).then((result) => {
+                // Check if there's data and select the first row
+                if (result.data.length > 0) {
+                    setSelectedRows({ [result.data[0].id]: result.data[0] });
+                }
+
+                return {
+                    // Return the fetched data in the proper format
+                    data: result.data,
+                    totalItems: result.totalItems,
+                    totalPages: result.totalPages,
+                    pageSize: result.pageSize,
+                    currentPage: result.currentPage,
+                } as PagedData<Person>;
+            }),
         [],
     );
 
@@ -324,6 +328,7 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
         rowSelection: 'single',
         customRowIdMapper: (row) => row.id,
         pagination: { rowsPerPageOptions: [5, 10] },
+        selectedRow: selectedRows,
     };
 
     const customtableEventListener: NsDataGridEventHandler<Person, PersonFilters> = React.useCallback((event) => {
@@ -399,12 +404,13 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
 
     // Generate dataset for the grid
     const data = useMemo(() => makeData(200), []);
-
     const [selectedRows, setSelectedRows] = React.useState<Record<string, Person>>({});
-
     useEffect(() => {
-        console.log('Selected rows:', selectedRows);
-    }, [selectedRows]);
+        // Quando i dati sono pronti, seleziona la prima riga
+        if (data.length > 0) {
+            setSelectedRows({ [data[0].id]: data[0] });
+        }
+    }, [data]);
 
     // Additional customizations and optional features
     const gridOptions: NsDataGridOptions<Person> = {
@@ -412,6 +418,8 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
         sortable: true,
         rowSelection: 'single',
         customRowIdMapper: (row) => row.id,
+        bodyTextAlign: 'right',
+        headerJustifyContent: 'flex-start',
     };
 
     return (

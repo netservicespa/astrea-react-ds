@@ -13,12 +13,11 @@ let displayed: any[] = [];
 export type NotificationKey = string | number | undefined;
 
 export interface NsNotifierProps {
-    message: string;
     children?: any;
     variant?: 'filled' | 'outlined';
     textColor?: any;
     iconColor?: any;
-    type?: 'info' | 'success' | 'warning' | 'error';
+    anchorOrigin?: { horizontal: 'left' | 'right' | 'center'; vertical: 'bottom' | 'top' };
 }
 export interface CustomIconProps {
     type?: 'error' | 'check';
@@ -51,7 +50,7 @@ const CustomIcon: React.FC<CustomIconProps> = ({ type = 'check', iconColor, text
                             zIndex: 1,
                         }}
                     />
-                    <ErrorOutlineRoundedIcon
+                    {/* <ErrorOutlineRoundedIcon
                         id="textIconColor"
                         sx={{
                             width: '25px',
@@ -60,7 +59,7 @@ const CustomIcon: React.FC<CustomIconProps> = ({ type = 'check', iconColor, text
                             padding: '1px',
                             zIndex: 0,
                         }}
-                    />
+                    /> */}
                 </>
             )}
         </Box>
@@ -69,27 +68,18 @@ const CustomIcon: React.FC<CustomIconProps> = ({ type = 'check', iconColor, text
 export const NsNotifier: React.FC<NsNotifierProps> = ({
     children,
     variant = 'filled',
-    type = 'info',
     textColor,
     iconColor,
-    message,
+    anchorOrigin = { horizontal: 'right', vertical: 'top' },
 }) => {
     const [state, dispatch] = useReducer(notificationReducer, {
         notifications: [],
     });
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const ctx: INotificationContext = {
         state,
         notify: (notification: any) => dispatch(pushNotification(notification)),
         dismiss: (key: NotificationKey) => dispatch(clearNotifications(key)),
         remove: (key: NotificationKey) => dispatch(removeNotification(key)),
-    };
-    const storeDisplayed = (id: NotificationKey) => {
-        displayed = [...displayed, id];
-    };
-
-    const removeDisplayed = (id: NotificationKey) => {
-        displayed = [...displayed.filter((key) => id !== key)];
     };
 
     const NsNotifierCustom = styled(MaterialDesignContent)(({ theme }) => ({
@@ -140,54 +130,11 @@ export const NsNotifier: React.FC<NsNotifierProps> = ({
         },
     }));
 
-    useEffect(() => {
-        state.notifications.forEach(({ key, messages, options = {}, dismissed = false }) => {
-            if (dismissed) {
-                // dismiss snackbar using notistack
-                closeSnackbar(key);
-                return;
-            }
-
-            // do nothing if snackbar is already displayed
-            if (displayed.find((id) => id === key)) {
-                return;
-            }
-
-            // display snackbar using notistack
-            enqueueSnackbar(message, {
-                key,
-                ...options,
-                action: (snackKey: any) => (
-                    <IconButton onClick={() => closeSnackbar(snackKey)}>
-                        <CloseIcon />
-                    </IconButton>
-                ),
-                // ...options,
-                onClose: (event: any, reason: any, myKey: any) => {
-                    if (options.onClose) {
-                        options.onClose(event, reason, myKey);
-                    }
-                },
-                onExited: (event: any, myKey: any) => {
-                    // remove this snackbar from redux store
-                    dispatch(removeNotification(myKey));
-                    removeDisplayed(myKey);
-                },
-            });
-
-            // keep track of snackbars that we've displayed
-            storeDisplayed(key);
-        });
-    }, [state.notifications, closeSnackbar, enqueueSnackbar]);
-
     return (
         <SnackbarProvider
             maxSnack={20}
             preventDuplicate
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
+            anchorOrigin={anchorOrigin}
             Components={{
                 success: NsNotifierCustom,
                 warning: NsNotifierCustom,

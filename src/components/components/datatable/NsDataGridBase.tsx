@@ -53,14 +53,16 @@ export interface NsDataGridOptions<RowType extends object> {
         /** The available page sizes */
         rowsPerPageOptions?: number[];
     };
+    bodyTextAlign?: 'center' | 'left' | 'right';
+    headerJustifyContent?: 'space-evenly' | 'flex-start' | 'flex-end';
+    /** Specify selected Row */
+    selectedRow?: string;
 }
 
 export interface NsDataGridBaseProps<RowType extends object> extends TableContainerProps {
     table: Table<RowType>;
     options?: NsDataGridOptions<RowType>;
     debug?: boolean;
-    bodyTextAlign?: 'center' | 'left' | 'right';
-    headerJustifyContent?: 'space-evenly' | 'flex-start' | 'flex-end';
 }
 
 /**
@@ -131,8 +133,6 @@ export function NsDataGridBase<RowType extends object>({
     table,
     options = {},
     debug = false,
-    headerJustifyContent,
-    bodyTextAlign,
     // Mui TableContainer props
     sx,
     component = Paper,
@@ -180,7 +180,9 @@ export function NsDataGridBase<RowType extends object>({
                                             }
                                         }}
                                     >
-                                        <HeaderBoxStyled headerJustifyContent={headerJustifyContent || 'space-evenly'}>
+                                        <HeaderBoxStyled
+                                            headerJustifyContent={options.headerJustifyContent || 'space-evenly'}
+                                        >
                                             <Typography variant="h3">
                                                 {header.isPlaceholder
                                                     ? null
@@ -206,7 +208,7 @@ export function NsDataGridBase<RowType extends object>({
                         </TableRow>
                     ))}
                 </TableHeadStyled>
-                <TableBody debug={debug} table={table} bodyTextAlign={bodyTextAlign} />
+                <TableBody debug={debug} table={table} bodyTextAlign={options.bodyTextAlign} />
             </MuiTable>
         </TableContainer>
     );
