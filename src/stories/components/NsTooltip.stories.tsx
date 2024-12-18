@@ -7,7 +7,7 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: `The \`NsTooltip\` component is used to display contextual information to users when they interact with a user interface element. It is customizable in terms of positioning, content, and style.`,
+                component: 'The `NsTooltip` component is used to display contextual information to users when they interact with a user interface element. It is customizable in terms of positioning, content, and style.',
             },
         },
     },

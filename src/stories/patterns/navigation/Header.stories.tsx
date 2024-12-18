@@ -2,10 +2,12 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { NsHeader } from 'src/components/patterns/navigation/NsHeader';
+import { NsDropDown } from 'src/components/components/dropdown/NsDropDown';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Box, Typography } from '@mui/material';
-import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 /**
  * Headers are containers attached to the top of a page that allow the user to navigate through the application.
  *
@@ -62,6 +64,63 @@ const InfoBox = () => {
         </Box>
     );
 };
+
+const notificationDataSample = {
+    unread: {
+        notifications: [
+            {
+                id: 1,
+                status: 'valid',
+                text: 'Search "TCP" save successfully',
+                link: {
+                    router: null,
+                    to: '#',
+                },
+            },
+            { id: 2, status: 'invalid', text: 'ghgjgfsdf.pcap' },
+            { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+            { id: 2, status: 'valid', text: 'ghgjgfsdfyui.pcap' },
+        ],
+        showMore: {
+            router: null,
+            to: '#',
+            children: <Typography sx={{ color: 'red' }}>Show more</Typography>,
+        },
+        totalCount: 4,
+    },
+    read: {
+        notifications: [
+            {
+                id: 1,
+                status: 'valid',
+                text: 'sdganhbasddd.pcap',
+                link: {
+                    router: null,
+                    to: '#',
+                },
+            },
+            {
+                id: 2,
+                status: 'invalid',
+                text: 'ghgjgfsdf.pcap',
+                link: {
+                    router: null,
+                    to: '#',
+                },
+            },
+            { id: 2, status: 'valid', text: 'new_123aaaa8.pcap' },
+            { id: 2, status: 'valid', text: 'fsdfsfsfsfsfsdssssssyui.pcap' },
+            { id: 1, status: 'valid', text: 'nerver_123_new.pcap' },
+            { id: 2, status: 'valid', text: 'Changes discarded.pcap' },
+            { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+        ],
+        totalCount: 4,
+    },
+    markAsRead: () => {
+        console.log('markAsRead');
+    },
+};
+
 export const UserPanelHeaderLogo: Story = {
     args: {
         type: 'horizontal',
@@ -164,61 +223,62 @@ export const UserPanelHeaderLogoTitle: Story = {
         },
         router: null,
         onLogout: () => {},
-        notificationData: {
-            unread: {
-                notifications: [
-                    {
-                        id: 1,
-                        status: 'valid',
-                        text: 'Search "TCP" save successfully',
-                        link: {
-                            router: null,
-                            to: '#',
-                        },
-                    },
-                    { id: 2, status: 'invalid', text: 'ghgjgfsdf.pcap' },
-                    { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
-                    { id: 2, status: 'valid', text: 'ghgjgfsdfyui.pcap' },
-                ],
-                showMore: {
-                    router: null,
-                    to: '#',
-                    children: <Typography sx={{ color: 'red' }}>Show more</Typography>,
+        notificationData: notificationDataSample,
+    },
+};
+export const SlimHeaderLogo: Story = {
+    args: {
+        type: 'slim',
+        router: null,
+        logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
+        notificationData: notificationDataSample,
+        configuration: {
+            notification: true,
+            dropDownConfiguration: {
+                anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'right',
                 },
-                totalCount: 4,
-            },
-            read: {
-                notifications: [
-                    {
-                        id: 1,
-                        status: 'valid',
-                        text: 'sdganhbasddd.pcap',
-                        link: {
-                            router: null,
-                            to: '#',
-                        },
-                    },
-                    {
-                        id: 2,
-                        status: 'invalid',
-                        text: 'ghgjgfsdf.pcap',
-                        link: {
-                            router: null,
-                            to: '#',
-                        },
-                    },
-                    { id: 2, status: 'valid', text: 'new_123aaaa8.pcap' },
-                    { id: 2, status: 'valid', text: 'fsdfsfsfsfsfsdssssssyui.pcap' },
-                    { id: 1, status: 'valid', text: 'nerver_123_new.pcap' },
-                    { id: 2, status: 'valid', text: 'Changes discarded.pcap' },
-                    { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
-                ],
-                totalCount: 4,
-            },
-            markAsRead: () => {
-                console.log('markAsRead');
+                transformOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                },
             },
         },
+        children: (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    m: 0,
+                    p: 0,
+                }}
+            >
+                <NsDropDown
+                    dropdownItems={[
+                        { name: 'Profile', path: '#' },
+                        { name: 'User Managment', path: '#' },
+                    ]}
+                    router={null}
+                    onLogout={() => {}}
+                    dropDownConfiguration={{
+                        anchorOrigin: {
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        },
+                        transformOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right',
+                        },
+                    }}
+                    overlay={false}
+                >
+                    <AccountCircleIcon sx={{ color: '#fff' }} />
+                </NsDropDown>
+            </Box>
+        ),
     },
 };
 export const UserPanelHeaderTitle: Story = {
@@ -309,34 +369,34 @@ export const LoggedIn: Story = {
     },
 };
 
-export const Mobile: Story = {
-    args: {
-        // logo: (
-        //     <div className="titles">
-        //         <h1>
-        //             <strong>Astrea</strong>
-        //         </h1>
-        //         <p className="subtitle">DESIGN SYSTEM</p>
-        //     </div>
-        // ),
-        logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
-        menuItems: [
-            { name: 'Link 1', path: '#' },
-            { name: 'Link 2', path: '#' },
-            { name: 'Link 3', path: '#' },
-            { name: 'Link 4', path: '#' },
-        ],
-        userPanelMenuItems: [
-            { name: 'Profile', path: '/', icon: <PersonIcon /> },
-            { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
-        ],
-    },
-    parameters: {
-        viewport: {
-            defaultViewport: 'iphone6',
-        },
-    },
-};
+// export const Mobile: Story = {
+//     args: {
+//         // logo: (
+//         //     <div className="titles">
+//         //         <h1>
+//         //             <strong>Astrea</strong>
+//         //         </h1>
+//         //         <p className="subtitle">DESIGN SYSTEM</p>
+//         //     </div>
+//         // ),
+//         logo: <Box component="img" src="./images/logo-light.png" alt="logo" sx={{ maxHeight: '45px' }} />,
+//         menuItems: [
+//             { name: 'Link 1', path: '#' },
+//             { name: 'Link 2', path: '#' },
+//             { name: 'Link 3', path: '#' },
+//             { name: 'Link 4', path: '#' },
+//         ],
+//         userPanelMenuItems: [
+//             { name: 'Profile', path: '/', icon: <PersonIcon /> },
+//             { name: 'User Managment', path: '/link2', icon: <SettingsIcon /> },
+//         ],
+//     },
+//     parameters: {
+//         viewport: {
+//             defaultViewport: 'iphone6',
+//         },
+//     },
+// };
 
 export const VerticalHeader: Story = {
     args: {

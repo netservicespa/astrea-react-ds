@@ -2,22 +2,22 @@ import { Box, Button as NsButton, Paper, Stack } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import { CellContext, ColumnDef, createColumnHelper, PaginationState } from '@tanstack/react-table';
 import React, { useEffect, useMemo } from 'react';
-import { NsDataGridOptions } from 'src/components/components/datatable/NsDataGridBase';
-import { ColumnSorting, PagedData } from 'src/components/components/datatable/NsDataGridServer';
-import { NsDataGrid } from 'src/components/components/datatable/NsDataGrid';
+import { NsDataGridOptions } from '../../../components/components/datatable/NsDataGridBase';
+import { ColumnSorting, PagedData } from '../../../components/components/datatable/NsDataGridServer';
+import { NsDataGrid } from '../../../components/components/datatable/NsDataGrid';
 
 import {
     FilterContainerProps,
     FilterFieldDefinition,
     NsDynamicFilterForm,
-} from 'src/components/components/datatable/filtering/FilterContainer';
-import { NsTablePager } from 'src/components/components/datatable/pagination/NsTablePager';
+} from '../../../components/components/datatable/filtering/FilterContainer';
+import { NsTablePager } from '../../../components/components/datatable/pagination/NsTablePager';
 import { makeData, Person } from './makeData';
 import { mockPersonService } from './mockService';
 import {
     NsDataGridEventHandler,
     NsDataGridEventType,
-} from 'src/components/components/datatable/events/NsDataGridEvents';
+} from '../../../components/components/datatable/events/NsDataGridEvents';
 import Typography from '@mui/material/Typography';
 
 const meta: Meta<typeof NsDataGrid> = {
@@ -428,6 +428,7 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
             columns={columns}
             defaultColumn={defaultColumn}
             onRowSelectionChange={setSelectedRows}
+            FilterContainer={MagicFilterContainer}
             PagerComponent={NsTablePager}
             data={data}
             options={gridOptions}

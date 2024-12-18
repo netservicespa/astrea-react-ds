@@ -17,6 +17,7 @@ export { NsProgress } from './components/components/NsProgress';
 export { NsPageHeader } from './components/components/pageHeader/NsPageHeader';
 export { NsModal } from './components/components/modals/NsModal';
 export { NsDrawer } from './components/components/drawer/NsDrawer';
+export { NsSidebar } from './components/components/sidebar/NsSidebar';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
 export { NsTable } from './components/components/NsTable';

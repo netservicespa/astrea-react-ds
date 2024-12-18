@@ -48,7 +48,7 @@ export function NsSelectAutocomplete({
     multiple = false,
     options,
     groupBy,
-    getOptionLabel,
+    getOptionLabel = (option) => typeof option == 'string' ? option : (option.label ?? ''),
     onChange,
     disableCloseOnSelect,
     renderOption,
@@ -117,7 +117,7 @@ export function NsSelectAutocomplete({
                 fullWidth
                 disablePortal
                 autoComplete
-                value={value || []}
+                value={value || (multiple ? [] : null)}
                 disabled={disabled}
                 renderOption={renderOption}
                 renderInput={(props: AutocompleteRenderInputParams) => (

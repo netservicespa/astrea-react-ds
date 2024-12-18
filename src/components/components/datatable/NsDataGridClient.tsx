@@ -1,6 +1,6 @@
-import { Box, Paper } from '@mui/material';
-import { Container } from '@mui/system';
+import { Paper } from '@mui/material';
 import {
+    ColumnFiltersState,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
@@ -9,7 +9,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import React from 'react';
-import { NsDataGridCommonProps, NsDataGridClientRenderFn } from './NsDataGrid';
+import { NsDataGridCommonProps, DataGridDefaultRenderer } from './NsDataGrid';
 import { NsDataGridBase } from './NsDataGridBase';
 import { NsTablePager } from './pagination/NsTablePager';
 import { NsDataGridEventType } from './events/NsDataGridEvents';
@@ -26,17 +26,19 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
     columns,
     defaultColumn,
     eventListener = () => {},
+    FilterContainer,
     PagerComponent = NsTablePager,
     options = {},
     debug = false,
-    render = DefaultClientRenderer as NsDataGridClientRenderFn,
+    render = DataGridDefaultRenderer,
     // Mui TableContainer props
     sx,
     component = Paper,
     children,
 }: Readonly<NsDataGridClientProps<RowType, FilterType>>) {
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-    const [columnVisibility, setColumnVisibility] = React.useState({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [columnVisibility, setColumnVisibility] = React.useState({});
 
     // Notify event listener of row selection change
     React.useEffect(() => {
@@ -73,6 +75,7 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         getFilteredRowModel: getFilteredRowModel(),
         state: {
             rowSelection,
+            columnFilters,
             columnVisibility,
         },
         onColumnVisibilityChange: setColumnVisibility,
@@ -80,6 +83,7 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         enableRowSelection: options.rowSelection && options.rowSelection !== 'none',
         enableMultiRowSelection: options.rowSelection === 'multiple',
         onRowSelectionChange: setRowSelection,
+        onColumnFiltersChange: setColumnFilters,
         getRowId: options.customRowIdMapper,
         // Debugging
         debugTable: debug,
@@ -87,32 +91,40 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         debugColumns: debug,
     });
 
+    const FilterContainerComponent = FilterContainer ? (
+        <FilterContainer
+            activeFilters={writeFilters(columnFilters)}
+            onFilterChange={(newFilters) => {
+                setColumnFilters(readFilters(newFilters));
+            }}
+        />
+    ) : (
+        <></>
+    );
     const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
-    const TablePagerComponent = <PagerComponent type="client" table={table} />;
     const ColumnVisibilityComponent = <ColumnVisibilityMenu table={table} />;
-
-    return render(TableComponent, TablePagerComponent, ColumnVisibilityComponent, children);
+    const TablePagerComponent = (
+        <PagerComponent type="client" table={table} rowsPerPageOptions={options?.pagination?.rowsPerPageOptions} />
+    );
+    return render(
+        FilterContainerComponent,
+        TableComponent,
+        TablePagerComponent,
+        ColumnVisibilityComponent, 
+        children && React.isValidElement(children) ? children : undefined
+    );
 }
 
-const DefaultClientRenderer: NsDataGridClientRenderFn = (Table, Pager, ColumnVisibility, children) => {
-    return (
-        <Container maxWidth="xl">
-            <Box
-                display="flex"
-                flexDirection="column"
-                gap="10px"
-                sx={{
-                    ...(children && {
-                        border: '1px solid gray',
-                        padding: '10px',
-                    }),
-                }}
-            >
-                {children}
-                {ColumnVisibility}
-                {Table}
-                {Pager}
-            </Box>
-        </Container>
-    );
-};
+function readFilters<T>(filterState: Partial<Record<keyof T, unknown>>): ColumnFiltersState {
+    return Object.entries(filterState)
+        .filter(([, value]) => value !== undefined)
+        .map(([id, value]) => ({ id, value }));
+}
+
+function writeFilters<T>(filterState: ColumnFiltersState): Partial<Record<keyof T, unknown>> {
+    const filters: { [key: string]: unknown } = {};
+    filterState.forEach((f) => {
+        filters[f.id] = f.value;
+    });
+    return filters as Partial<Record<keyof T, unknown>>;
+}

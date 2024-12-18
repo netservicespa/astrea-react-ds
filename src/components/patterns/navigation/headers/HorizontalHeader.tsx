@@ -24,6 +24,7 @@ const HeaderContainer = styled('header')(
         display: flex;
         flex-direction: column;
         font-family: ${theme.typography.fontFamily};
+        heigth: 100px;
     `,
 );
 const Logo = styled('svg')({
@@ -198,7 +199,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         }),
                     }}
                 >
-                    <NsNotification {...notificationState}>
+                    <NsNotification {...notificationState} headerHeight="150px">
                         <NotificationsNoneOutlinedIcon
                             sx={{
                                 alignItems: 'center',
@@ -332,7 +333,7 @@ export default function HorizontalHeader({
                                     alignItems: 'center',
                                     height: '100%',
 
-                                    ...(configuration.hover && {
+                                    ...(configuration?.hover && {
                                         '&:hover': {
                                             backgroundColor: theme.palette.primary.main,
                                             color: '#fff',
@@ -358,18 +359,18 @@ export default function HorizontalHeader({
                                             vertical: 'top',
                                             horizontal: 'center',
                                         },
-                                        hover: configuration.hover,
-                                        dropDownIcon: configuration.dropDownIcon,
+                                        hover: configuration?.hover,
+                                        dropDownIcon: configuration?.dropDownIcon,
                                     }}
                                     overlay={false}
-                                    icon={configuration.dropDownIcon}
+                                    icon={configuration?.dropDownIcon}
                                 >
                                     <StyledLink
                                         sx={{
                                             gap: '4px',
                                             alignItems: 'center',
                                             height: '100%',
-                                            ...(configuration.hover && {
+                                            ...(configuration?.hover && {
                                                 '&:hover': {
                                                     backgroundColor: theme.palette.primary.main,
                                                     color: '#fff',

@@ -1,16 +1,15 @@
 import React from 'react';
-
-import { Paper } from '@mui/material';
-import { border, Box, Container } from '@mui/system';
+import { Paper, useMediaQuery, Theme } from '@mui/material';
 import {
+    getCoreRowModel,
     PaginationState,
     RowSelectionState,
     SortingState,
-    getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { NsDataGridCommonProps, NsDataGridRenderFn } from './NsDataGrid';
+import { DataGridDefaultRenderer, NsDataGridCommonProps } from './NsDataGrid';
 import { NsDataGridBase } from './NsDataGridBase';
+import { NsDataGridCard } from './NsDataGridCard';
 import { TableFilters } from './filtering/FilterContainer';
 import { ColumnVisibilityMenu } from './filtering/ColumnVisibilityMenu';
 import { NsTablePager } from './pagination/NsTablePager';
@@ -82,7 +81,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     FilterContainer,
     eventListener = () => {},
     options = {},
-    render = DefaultRenderer,
+    render = DataGridDefaultRenderer,
     debug = false,
     // Mui TableContainer props
     sx,
@@ -113,6 +112,9 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
     const [columnVisibility, setColumnVisibility] = React.useState({});
 
+    const isTabletOrSmaller = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+    const showCardView = isTabletOrSmaller && (options?.enableCard ?? true);
+
     // Notify event listener of filter change
     React.useEffect(() => {
         eventListener({
@@ -137,7 +139,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     React.useEffect(() => {
         // Convert the row selection state to a list of selected row IDs
         const keys = Object.entries(rowSelection)
-            .filter(([, value]) => value === true)
+            .filter(([, value]) => value)
             .map(([key]) => key);
         if (options.customRowIdMapper) {
             // Map the selected rows to the actual data
@@ -241,7 +243,11 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     ) : (
         <></>
     );
-    const TableComponent = <NsDataGridBase {...{ table, options, debug, sx, component }} />;
+    const TableComponent = showCardView ? (
+        <NsDataGridCard table={table} />
+    ) : (
+        <NsDataGridBase {...{ table, options, debug, sx, component }} />
+    );
     const TablePagerComponent = (
         <PagerComponent
             type="server"
@@ -252,22 +258,5 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     );
     const ColumnVisibilityComponent = <ColumnVisibilityMenu table={table} />;
 
-    return render(FilterContainerComponent, TableComponent, TablePagerComponent, children, ColumnVisibilityComponent);
+    return render(FilterContainerComponent, TableComponent, TablePagerComponent, ColumnVisibilityComponent, children);
 }
-const DefaultRenderer: NsDataGridRenderFn = (FilterContainer, Table, Pager, children, ColumnVisibility) => {
-    const hasFilterContainer =
-        FilterContainer && FilterContainer.props && Object.keys(FilterContainer.props).length > 0;
-    return (
-        <Container maxWidth="xl">
-            <Box display="flex" flexDirection="column" gap="50px">
-                {hasFilterContainer && <Box sx={{ border: '1px solid gray', padding: '10px' }}>{FilterContainer}</Box>}
-                <Box sx={{ border: hasFilterContainer ? '1px solid gray' : 'none', padding: '10px' }}>
-                    {children && children}
-                    {ColumnVisibility}
-                    {Table}
-                    {Pager}
-                </Box>
-            </Box>
-        </Container>
-    );
-};

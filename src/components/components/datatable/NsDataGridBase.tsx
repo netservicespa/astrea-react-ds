@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import {
+    alpha,
     Box,
     Paper,
-    Stack,
     styled,
     Table as MuiTable,
     TableBody as MuiTableBody,
@@ -15,7 +15,6 @@ import {
     TableHead,
     TableRow,
     Typography,
-    alpha,
 } from '@mui/material';
 import { ColumnResizeMode, flexRender, Header, Table } from '@tanstack/react-table';
 
@@ -57,6 +56,8 @@ export interface NsDataGridOptions<RowType extends object> {
     headerJustifyContent?: 'space-evenly' | 'flex-start' | 'flex-end';
     /** Specify selected Row */
     selectedRow?: string;
+    /** Allow switching to Card view on small devices. Default: true */
+    enableCard?: boolean;
 }
 
 export interface NsDataGridBaseProps<RowType extends object> extends TableContainerProps {
@@ -189,10 +190,10 @@ export function NsDataGridBase<RowType extends object>({
                                                     : flexRender(header.column.columnDef.header, header.getContext())}
                                             </Typography>
                                             {(canSort &&
-                                                {
-                                                    asc: sortingIcons.asc,
-                                                    desc: sortingIcons.desc,
-                                                }[header.column.getIsSorted() as string]) ??
+                                                    {
+                                                        asc: sortingIcons.asc,
+                                                        desc: sortingIcons.desc,
+                                                    }[header.column.getIsSorted() as string]) ??
                                                 sortingIcons.unordered}
                                         </HeaderBoxStyled>
                                         {canResize && (
@@ -279,9 +280,9 @@ const ResizerDiv = styled('div')<ResizerProps>(({ header, table, resizeMode }) =
     transform:
         resizeMode === 'onEnd' && header.column.getIsResizing()
             ? `translateX(${
-                  (table.options.columnResizeDirection === 'rtl' ? -1 : 1) *
-                  (table.getState().columnSizingInfo.deltaOffset ?? 0)
-              }px)`
+                (table.options.columnResizeDirection === 'rtl' ? -1 : 1) *
+                (table.getState().columnSizingInfo.deltaOffset ?? 0)
+            }px)`
             : '',
     //opacity: header.column.getIsResizing() ? 1 : 0,
     '&:hover': {

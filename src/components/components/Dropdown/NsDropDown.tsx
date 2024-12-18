@@ -147,43 +147,75 @@ export const NsDropDown = ({
         onLogout && onLogout();
     };
 
+    // const renderMenuItems = () => {
+    //     if (Array.isArray(dropdownItems)) {
+    //         const items = dropdownItems.map((item, index) => {
+    //             if (typeof item.path === 'string') {
+    //                 return (
+    //                     <React.Fragment key={item.path}>
+    //                         <DynamicLink to={item.path} router={router}>
+    //                             <MenuItem>
+    //                                 {item.icon && item.icon}
+    //                                 {item.name}
+    //                             </MenuItem>
+    //                         </DynamicLink>
+    //                         {index < dropdownItems.length - 1 && <Divider />}
+    //                     </React.Fragment>
+    //                 );
+    //             }
+    //             return null;
+    //         });
+
+    //         if (onLogout) {
+    //             items.push(
+    //                 <Divider key={Math.random().toString(36).substr(2, 9)} />,
+    //                 <MenuItem onClick={onLogout} key={Math.random().toString(36).substr(2, 9)}>
+    //                     <ListItemIcon>
+    //                         <LogoutIcon />
+    //                     </ListItemIcon>
+    //                     <ListItemText primary="Logout" style={{ color: '#FFF' }} />
+    //                 </MenuItem>,
+    //             );
+    //         }
+
+    //         return items;
+    //     } else {
+    //         return dropdownItems; // Return as-is if not an array
+    //     }
+    // };
     const renderMenuItems = () => {
         if (Array.isArray(dropdownItems)) {
-            const items = dropdownItems.map((item, index) => {
+            const items = dropdownItems.flatMap((item, index) => {
                 if (typeof item.path === 'string') {
-                    return (
-                        <React.Fragment key={item.path}>
-                            <DynamicLink to={item.path} router={router}>
-                                <MenuItem>
-                                    {item.icon && item.icon}
-                                    {item.name}
-                                </MenuItem>
-                            </DynamicLink>
-                            {index < dropdownItems.length - 1 && <Divider />}
-                        </React.Fragment>
-                    );
+                    return [
+                        <DynamicLink to={item.path} router={router} key={`item-${item.path}`}>
+                            <MenuItem>
+                                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                                {item.name}
+                            </MenuItem>
+                        </DynamicLink>,
+                        index < dropdownItems.length - 1 && <Divider key={`divider-${index}`} />,
+                    ];
                 }
-                return null;
+                return [];
             });
 
             if (onLogout) {
                 items.push(
-                    <>
-                        <Divider />
-                        <MenuItem onClick={onLogout} key="logout">
-                            <ListItemIcon>
-                                <LogoutIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Logout" style={{ color: '#FFF' }} />
-                        </MenuItem>
-                    </>,
+                    <Divider key="logout-divider" />,
+                    <MenuItem onClick={onLogout} key="logout-menu-item">
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" style={{ color: '#FFF' }} />
+                    </MenuItem>,
                 );
             }
 
-            return items;
-        } else {
-            return dropdownItems;
+            return items; // Restituisce un array piatto di elementi validi
         }
+
+        return dropdownItems;
     };
 
     const ExtendChildren = ({ children, icon, isOpen }: ExtendChildrenProps) => {

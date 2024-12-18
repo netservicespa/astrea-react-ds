@@ -38,6 +38,7 @@ export interface INotificationData {
     onlyButton?: Omit<DynamicLinkProps, 'children'>;
     children?: React.ReactNode;
     markAsRead?: (...args: any[]) => any;
+    headerHeight?: string;
 }
 
 /**
@@ -122,9 +123,17 @@ const MainNotificationDiv = ({
     );
 };
 
-export const NsNotification: React.FC<INotificationData> = ({ read, unread, children, onlyButton, markAsRead }) => {
+export const NsNotification: React.FC<INotificationData> = ({
+    read,
+    unread,
+    children,
+    onlyButton,
+    markAsRead,
+    headerHeight,
+}) => {
     const [isOpenNotification, setIsOpenNotification] = useState(false);
     const { t } = useTranslation();
+    const theme = useTheme();
 
     const tabs = [
         {
@@ -139,38 +148,54 @@ export const NsNotification: React.FC<INotificationData> = ({ read, unread, chil
         },
     ] as any;
 
-    const DivIcon: any = onlyButton ? DynamicLink : React.Fragment;
-    const boxWidth = onlyButton ? 'auto' : '364px';
+    // const DivIcon: any = onlyButton ? DynamicLink : React.Fragment;
+    // const boxWidth = onlyButton ? 'auto' : '364px';
     return (
         <>
-            {!isOpenNotification ? (
-                <Box sx={{ width: boxWidth, height: '40px', alignItems: 'center', display: 'flex' }}>
-                    <DivIcon {...onlyButton}>
-                        <div
-                            onClick={() => (onlyButton ? () => {} : setIsOpenNotification(!isOpenNotification))}
-                            style={{ textAlign: 'right', cursor: 'pointer' }}
-                        >
-                            <Badge badgeContent={unread?.totalCount} color="error">
-                                {children}
-                            </Badge>
-                        </div>
-                    </DivIcon>
+            {/* <Box sx={{ width: boxWidth, height: '40px', alignItems: 'center', display: 'flex', position: 'relative' }}>
+                <DivIcon {...onlyButton}>
+                    <div
+                        onClick={() => (onlyButton ? () => {} : setIsOpenNotification(!isOpenNotification))}
+                        style={{ textAlign: 'left', cursor: 'pointer' }}
+                    >
+                        <Badge badgeContent={unread?.totalCount} color="error">
+                            {children}
+                        </Badge>
+                    </div>
+                </DivIcon>
+            </Box> */}
+            <Box
+                onClick={() => setIsOpenNotification(!isOpenNotification)}
+                sx={{
+                    height: '100%',
+                    alignItems: 'center',
+                    display: 'flex',
+                    position: 'relative',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    justifyContent: 'left',
+                }}
+            >
+                <Badge badgeContent={unread?.totalCount} color="error">
+                    {children}
+                </Badge>
+            </Box>
+            {isOpenNotification && (
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: headerHeight || 0,
+                        right: 0,
+                        maxWidth: '50%',
+                        minWidth: '25%',
+                        border: `1px solid ${theme.palette.borderColor.main}`,
+                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                        zIndex: 10,
+                        marginX: '10px',
+                    }}
+                >
+                    <NsTabs tabs={tabs} configuration={{ centered: true, boxBorder: 'none' }} />
                 </Box>
-            ) : (
-                <>
-                    <Box sx={{ width: boxWidth, height: '40px' }}>
-                        {/* <Box sx={{ width: '100%', height: '100%' }}> */}
-                        <div
-                            onClick={() => setIsOpenNotification(!isOpenNotification)}
-                            style={{ textAlign: 'right', cursor: 'pointer', height: '40px' }}
-                        >
-                            <Badge style={{ marginRight: '5px' }} badgeContent={unread?.totalCount} color="error">
-                                {children}
-                            </Badge>
-                        </div>
-                        <NsTabs tabs={tabs} configuration={{ centered: true, boxBorder: '1px solid #b1b4b6' }} />
-                    </Box>
-                </>
             )}
         </>
     );

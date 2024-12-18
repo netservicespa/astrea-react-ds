@@ -3,6 +3,7 @@ import { SxProps, styled } from '@mui/material';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { Theme } from '@mui/system';
 import InfoIcon from '@mui/icons-material/Info';
+import Typography from '@mui/material/Typography';
 
 export interface NsTooltipProps {
     placement?:
@@ -24,7 +25,6 @@ export interface NsTooltipProps {
     text?: string | any;
     sx?: SxProps<Theme>;
     theme?: any;
-    children?: any;
     colorIcon?: any;
     icon?: any;
 }
@@ -49,10 +49,20 @@ export const NsTooltip = ({
     colorIcon,
     icon,
     ...otherProps
-}: NsTooltipProps) => {
+}: React.PropsWithChildren<NsTooltipProps>) => {
+    const actualChildren = React.useMemo(() => {
+        if (typeof children === 'string') {
+            return <Typography component='p' variant='body1'>{children}</Typography>;
+        } else if (!children) {
+            return icon ?? <InfoIcon style={{ color: '#000', ...colorIcon }} />;
+        } else {
+            return children;
+        }
+    }, [children]);
+
     return (
         <CustomTooltip sx={sx} title={title} placement={placement} {...otherProps}>
-            {children ? children : icon ? icon : <InfoIcon style={{ color: '#000', ...colorIcon }} />}
+            {actualChildren}
         </CustomTooltip>
     );
 };

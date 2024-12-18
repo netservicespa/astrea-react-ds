@@ -39,6 +39,10 @@ export interface NsTablePagerUncontrolledProps<T> {
      * The table that we are paging.
      */
     table: Table<T>;
+    /**
+     * The available page sizes
+     */
+    rowsPerPageOptions?: number[];
 }
 
 export type NsTablePagerProps<T> = NsTablePagerControlledProps<T> | NsTablePagerUncontrolledProps<T>;
@@ -65,6 +69,7 @@ export function NsTablePager<T>({ table, type, ...rest }: Readonly<NsTablePagerP
         count = table.getFilteredRowModel().rows.length;
         page = table.getState().pagination.pageIndex;
         rowsPerPage = table.getState().pagination.pageSize;
+        rowsPerPageOptions = (rest as NsTablePagerControlledProps<T>).rowsPerPageOptions;
     }
 
     return (

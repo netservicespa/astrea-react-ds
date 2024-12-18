@@ -6,6 +6,8 @@ import { NsDateCalendar } from '../../form/fields/NsDateCalendar';
 import { Container, MenuItem } from '@mui/material';
 import { NsSelectAutocomplete, SelectItem } from '../../form/fields/NsSelectAutocomplete';
 import { useTranslation } from 'react-i18next';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TableFilters<T> = Partial<Record<keyof T, any>>;
 
 export interface FilterContainerProps<T = {}> {

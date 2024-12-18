@@ -4,6 +4,7 @@ import HorizontalHeader from './headers/HorizontalHeader';
 import MegamenuHeader from './headers/MegamenuHeader';
 import { INotificationData } from 'src/components/components/notification/NsNotification';
 import { IDropDownConfiguration, IDropdownItems } from 'src/components/components/dropdown/NsDropDown';
+import SlimHeader from './headers/SlimHeader';
 
 export type ApplicationTitle = {
     bold: string;
@@ -31,7 +32,7 @@ export interface HeaderProps {
     /**
      * Type of the header, which can be either 'vertical' or 'horizontal'.
      */
-    type: 'vertical' | 'horizontal' | 'megamenu';
+    type: 'vertical' | 'horizontal' | 'megamenu' | 'slim';
 
     /**
      * Optional: Callback function invoked when the logout option is clicked.
@@ -41,7 +42,7 @@ export interface HeaderProps {
     /**
      *  Router object required for enabling routing functionality.
      */
-    router: any;
+    router?: any;
 
     /**
      * Optional: An array of header menu items that redirect to specific paths when clicked.
@@ -71,6 +72,10 @@ export interface HeaderProps {
      * Optional: The info displayed in the header.
      */
     infoBox?: React.ReactElement;
+    /**
+     * Optional: right side component of slim header.
+     */
+    children?: React.ReactNode;
 
     /**
      * An array of columns used to display multiple columns .
@@ -85,7 +90,7 @@ export interface HeaderProps {
      * - Managing the header logo position. If centralLogo=true, the logo will be centered.
      * - Managing the User Panel dropdown configuration.
      */
-    configuration: {
+    configuration?: {
         centralLogo?: boolean;
         dropDownConfiguration?: IDropDownConfiguration | undefined;
         hover?: boolean;
@@ -104,6 +109,7 @@ export const NsHeader = ({
     configuration,
     columns,
     infoBox,
+    children,
 }: HeaderProps) => {
     if (type === 'vertical') {
         return (
@@ -129,6 +135,17 @@ export const NsHeader = ({
                 userPanelMenuItems={userPanelMenuItems}
                 onLogout={onLogout}
                 configuration={configuration}
+            />
+        );
+    }
+    if (type === 'slim') {
+        return (
+            <SlimHeader
+                logo={logo}
+                children={children}
+                router={router}
+                configuration={configuration}
+                notificationData={notificationData}
             />
         );
     }

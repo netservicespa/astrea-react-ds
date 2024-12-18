@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [v2.7.0](https://github.com/netservicespa/astrea-react-ds/commit/87813c4a4cf4d1a89ce07c3272d237be7614181b) (Nov 28 2024)
+
+## New Additions
+
+- **NsDataGrid**:
+  - Added the `'hide'` property for column definitions, allowing support for hidden column filtering.
+    - Extended the `ColumnDef` type to include an optional `meta.hide` property.
+    - Updated the column filter in useReactTable to exclude columns with meta.hide set to true.
+    - Resolved type compatibility issues with `@tanstack/react-table` by adding the second generic `Value` to `ColumnDef`.
+  - Added the `selectedRow` property in `NsDataGridOptions`.
+    - When an ID is passed, the table will preselect the specified row.
+
+- **NsSessionExpiredModal**:
+  - Introduced the new `NsSessionExpiredModal` pattern for session expiration handling.
+
+## Improved
+
+- **NsDataGrid**:
+  - Dynamically adapted the width of the `ColumnVisibilityMenu` dropdown menu to match content length.
+  - Moved `bodyTextAlign` and `headerJustifyContent` properties from `NsDataGridBaseProps` to `NsDataGridOptions` for better organization.
+
+- **NsHeader**:
+  - Fixed notification issues.
+  - Enabled `userPanelMenuItems` to render as menuItems.
+  - Added hover effects, icons, and dropdown arrows for the menu.
+  - Introduced additional configuration options.
+
+- **NsNotifier**:
+  - Simplified the component and enhanced its story.
+  - Removed `NsNotifierProps` properties:
+    - `message`
+    - `type`
+  - Added `NsNotifierProps` property:
+    - `anchorOrigin`
+
+## Fixed
+
+- **NsDataGrid**:
+  - Corrected cell text alignment issues for consistency.
+- **NsHeader**:
+  - Resolved issues with the bell and user icons.
+- **NsLogin**:
+  - Removed the `NsHeader` component from the Login layout for cleaner design.
+
 # [v2.6.0](https://github.com/netservicespa/astrea-react-ds/commit/94a729a8687c6be837e21e10fe1523dac3b19442) (Nov 15 2024)
 
 ## New Additions

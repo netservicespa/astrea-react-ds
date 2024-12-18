@@ -7,8 +7,7 @@ import { NsDataGridServer, NsDataGridServerProps } from './NsDataGridServer';
 import { FilterContainerProps } from './filtering/FilterContainer';
 import { NsTablePagerProps } from './pagination/NsTablePager';
 import { NsDataGridEventHandler } from './events/NsDataGridEvents';
-
-export type NsDataGridType = 'client' | 'server';
+import { Box, Container } from '@mui/system';
 
 export type NsDataGridProps<RowType extends object, FilterType extends object> =
     | NsDataGridServerProps<RowType, FilterType>
@@ -16,13 +15,6 @@ export type NsDataGridProps<RowType extends object, FilterType extends object> =
 
 export type NsDataGridRenderFn = (
     FilterContainer: React.ReactElement,
-    Table: React.ReactElement,
-    Pager: React.ReactElement,
-    children?: React.ReactNode,
-    ColumnVisibility?: React.ReactElement,
-) => React.ReactElement;
-
-export type NsDataGridClientRenderFn = (
     Table: React.ReactElement,
     Pager: React.ReactElement,
     ColumnVisibility?: React.ReactElement,
@@ -36,20 +28,22 @@ export type ColumnDef<RowType, Value = any> = BaseColumnDef<RowType, Value> & {
     };
 };
 
-export interface NsDataGridCommonProps<RowType extends object, FilterType extends object> extends TableContainerProps {
+export interface NsDataGridCommonProps<RowType extends object, FilterType extends object, KeyType = unknown>
+    extends TableContainerProps {
+
     /**
      * An array of column definitions for the grid.
      */
-    columns: ColumnDef<RowType>[];
+    columns: ColumnDef<RowType, KeyType>[];
 
     /**
      * An optional definition to set common defaults for all columns.
      */
-    defaultColumn?: Partial<ColumnDef<RowType>>;
+    defaultColumn?: Partial<ColumnDef<RowType, KeyType>>;
 
     /**
      * A callback to handle table change events.
-     * See {@link NsDataGridEvent} for a list of supported events.
+     * See {@link NsDataGridEventType} for a list of supported events.
      */
     eventListener?: NsDataGridEventHandler<RowType, FilterType>;
 
@@ -90,3 +84,34 @@ export function NsDataGrid<RowType extends object, FilterType extends object>(
         return <NsDataGridClient {...props} />;
     }
 }
+
+export const DataGridDefaultRenderer: NsDataGridRenderFn = (
+    FilterContainer,
+    Table,
+    Pager,
+    ColumnVisibility,
+    children,
+) => {
+    const hasFilterContainer = FilterContainer?.props && Object.keys(FilterContainer.props).length > 0;
+    return (
+        <Container maxWidth="xl">
+            <Box
+                display="flex"
+                flexDirection="column"
+                gap="10px"
+                sx={{
+                    ...(children && {
+                        border: '1px solid gray',
+                        padding: '10px',
+                    }),
+                }}
+            >
+                {hasFilterContainer && <Box sx={{ border: '1px solid gray', padding: '10px' }}>{FilterContainer}</Box>}
+                {children}
+                {ColumnVisibility}
+                {Table}
+                {Pager}
+            </Box>
+        </Container>
+    );
+};
