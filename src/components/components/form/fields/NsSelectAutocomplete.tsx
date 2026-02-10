@@ -32,7 +32,7 @@ export type NsSelectAutocompleteProps = NsInput<
     renderInput?: (params: AutocompleteRenderInputParams) => React.ReactNode;
 };
 
-const defaultOptionValueEqualityCheck = (option: SelectItem, value: SelectItem) => option.value === value.value;
+const defaultOptionValueEqualityCheck = (option: SelectItem, value?: SelectItem) => option.value === value?.value;
 
 export function NsSelectAutocomplete({
     name,
@@ -48,8 +48,7 @@ export function NsSelectAutocomplete({
     multiple = false,
     options,
     groupBy,
-    getOptionLabel = (option) => typeof option == 'string' ? option : (option.label ?? ''),
-    onChange,
+    getOptionLabel = (option) => (typeof option == 'string' ? option : (option.label ?? '')),
     disableCloseOnSelect,
     renderOption,
     renderInput = (params) => <TextField {...params} variant="outlined" label="" />,
@@ -62,9 +61,34 @@ export function NsSelectAutocomplete({
         [validate, errorMessage],
     );
 
+    const items: SelectItem[] = React.useMemo(() => {
+        if (options) return options;
+        return (
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            React.Children.map(children, (c: any) => ({
+                label: c.props.children,
+                value: c.props.value,
+            })) || []
+        );
+    }, [children, options]);
+
+    const defaultSelected = React.useMemo(() => {
+        if (multiple) {
+            if (!Array.isArray(defaultValue)) {
+                return [];
+            }
+            return items.filter((item) => defaultValue.some((v) => isOptionEqualToValue(item, v as SelectItem)));
+        } else {
+            if (!defaultValue) {
+                return undefined;
+            }
+            return items.find((item) => isOptionEqualToValue(item, defaultValue as SelectItem));
+        }
+    }, [items, defaultValue, isOptionEqualToValue, multiple]);
+
     const [{ value, error }, setValue] = useFormField<SelectItem | string | SelectItem[]>({
         key,
-        initialValue: (defaultValue || null) as string,
+        initialValue: defaultSelected,
         validate: validateCallback,
     });
 
@@ -88,16 +112,6 @@ export function NsSelectAutocomplete({
         }
     }, [disabled]);
 
-    const items: SelectItem[] = React.useMemo(
-        () =>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            React.Children.map(children, (c: any) => ({
-                label: c.props.children,
-                value: c.props.value,
-            })) || [],
-        [children],
-    );
-
     React.useEffect(() => {
         setValue((defaultValue || null) as string);
     }, [items]);
@@ -111,7 +125,7 @@ export function NsSelectAutocomplete({
                 groupBy={groupBy}
                 getOptionLabel={getOptionLabel}
                 disableCloseOnSelect={disableCloseOnSelect}
-                options={options ? options : items}
+                options={items}
                 disableClearable={!multiple}
                 handleHomeEndKeys
                 fullWidth

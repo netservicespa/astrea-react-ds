@@ -17,7 +17,9 @@ export { NsProgress } from './components/components/NsProgress';
 export { NsPageHeader } from './components/components/pageHeader/NsPageHeader';
 export { NsModal } from './components/components/modals/NsModal';
 export { NsDrawer } from './components/components/drawer/NsDrawer';
+export { NsSidebarLegacy } from './components/components/sidebar/NsSidebarLegacy';
 export { NsSidebar } from './components/components/sidebar/NsSidebar';
+export type { MenuItem as NsSidebarMenuItem } from './components/components/sidebar/NsSidebar';
 export { NsTag } from './components/components/NsTag';
 export { NsCard } from './components/components/card/NsCard';
 export { NsTable } from './components/components/NsTable';
@@ -35,6 +37,17 @@ export { NsSwitch } from './components/components/NsSwitch';
 export { NsDialog, NsDialogActions, NsDialogContent, NsDialogTitle } from './components/components/dialog/NsDialog';
 export { NsNotificationList } from './components/components/NsNotificationList';
 export { NsSessionExpiredModal } from './components/patterns/NsSessionExpiredModal';
+
+/**
+ * Header2 and components
+ */
+export { NsHeader2 } from './components/components/header2/NsHeader2';
+export { NsHeaderLogo } from './components/components/header2/components/NsHeaderLogo';
+export { NsHeaderMenu } from './components/components/header2/components/NsHeaderMenu';
+export { NsHeaderUserMenu } from './components/components/header2/components/NsHeaderUserMenu';
+export { NsHeaderNotification } from './components/components/header2/components/NsHeaderNotification';
+export { NsHeaderBox as NsHeaderBox } from './components/components/header2/components/NsHeaderBox';
+export { NsHeaderHamburger } from './components/components/header2/components/NsHeaderHamburger';
 
 /**
  * Forms and validation

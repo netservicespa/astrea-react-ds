@@ -190,10 +190,10 @@ export function NsDataGridBase<RowType extends object>({
                                                     : flexRender(header.column.columnDef.header, header.getContext())}
                                             </Typography>
                                             {(canSort &&
-                                                    {
-                                                        asc: sortingIcons.asc,
-                                                        desc: sortingIcons.desc,
-                                                    }[header.column.getIsSorted() as string]) ??
+                                                {
+                                                    asc: sortingIcons.asc,
+                                                    desc: sortingIcons.desc,
+                                                }[header.column.getIsSorted() as string]) ??
                                                 sortingIcons.unordered}
                                         </HeaderBoxStyled>
                                         {canResize && (
@@ -280,9 +280,9 @@ const ResizerDiv = styled('div')<ResizerProps>(({ header, table, resizeMode }) =
     transform:
         resizeMode === 'onEnd' && header.column.getIsResizing()
             ? `translateX(${
-                (table.options.columnResizeDirection === 'rtl' ? -1 : 1) *
-                (table.getState().columnSizingInfo.deltaOffset ?? 0)
-            }px)`
+                  (table.options.columnResizeDirection === 'rtl' ? -1 : 1) *
+                  (table.getState().columnSizingInfo.deltaOffset ?? 0)
+              }px)`
             : '',
     //opacity: header.column.getIsResizing() ? 1 : 0,
     '&:hover': {

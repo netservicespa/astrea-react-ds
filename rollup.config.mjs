@@ -57,7 +57,7 @@ const confEsm = {
         indent: false,
         preserveModules: true,
         preserveModulesRoot: 'src',
-        sourcemap: 'inline',
+        sourcemap: true,
         exports: 'named',
     },
     external: makeExternalPredicate([
@@ -87,7 +87,7 @@ const confUmd = {
         format: 'umd',
         name: 'astrea-react-ds',
         indent: false,
-        sourcemap: 'inline',
+        sourcemap: true,
         globals: umdGlobals,
     },
     external: makeExternalPredicate([

@@ -172,24 +172,24 @@ export const NsWizardProgressButtons: React.FC<NsWizardProgressButtonsProps> = (
     };
 
     return (
-        <>
-            <Box sx={{ display: 'flex', flexDirection: 'row', p: 3 }}>
-                <Button color="inherit" onClick={handleOpen} sx={{ marginRight: 1 }}>
-                    {t('wizard.cancel')}
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button
-                    className="normalButton"
-                    color="inherit"
-                    disabled={step === 0}
-                    onClick={() => onPrev()}
-                    sx={{ mr: 1 }}
-                >
-                    {t('wizard.previous')}
-                </Button>
-                <Button type="submit" className="coloredButton" variant="contained" onClick={() => onNext()}>
-                    {isLastStep ? t('wizard.submit') : t('wizard.next')}
-                </Button>
+        <Box sx={{ display: 'flex', flexDirection: 'row', p: 3 }}>
+            <Button color="inherit" onClick={handleOpen} sx={{ marginRight: 1 }}>
+                {t('wizard.cancel')}
+            </Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button
+                className="normalButton"
+                color="inherit"
+                disabled={step === 0}
+                onClick={() => onPrev()}
+                sx={{ mr: 1 }}
+            >
+                {t('wizard.previous')}
+            </Button>
+            <Button type="submit" className="coloredButton" variant="contained" onClick={() => onNext()}>
+                {isLastStep ? t('wizard.submit') : t('wizard.next')}
+            </Button>
+            {open && (
                 <NsModal
                     title={t('wizard.abort.modalTitle')}
                     content={<Box>{t('wizard.abort.modalDescription')}</Box>}
@@ -202,8 +202,8 @@ export const NsWizardProgressButtons: React.FC<NsWizardProgressButtonsProps> = (
                     showConfirmButton
                     width={'400px'}
                 />
-            </Box>
-        </>
+            )}
+        </Box>
     );
 };
 

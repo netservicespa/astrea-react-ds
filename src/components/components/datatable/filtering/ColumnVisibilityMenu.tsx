@@ -23,11 +23,7 @@ export function ColumnVisibilityMenu<RowType extends object>({ table }: ColumnVi
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-            <Button
-                onClick={handleMenuOpen}
-                startIcon={<VisibilityIcon />}
-                size="small"
-            >
+            <Button onClick={handleMenuOpen} startIcon={<VisibilityIcon />} size="small">
                 <Typography variant="body2">{t('table.controls.columnVisibility')}</Typography>
             </Button>
             <Menu
@@ -47,31 +43,40 @@ export function ColumnVisibilityMenu<RowType extends object>({ table }: ColumnVi
                     },
                 }}
             >
-                {table.getAllLeafColumns().map((column) => {
-                    // Determinare il testo da visualizzare
-                    const header = typeof column.columnDef.header === 'string' 
-                        ? column.columnDef.header 
-                        : column.id;
+                {table
+                    .getAllLeafColumns()
+                    .filter((column) => column.getCanHide())
+                    .map((column) => {
+                        const header =
+                            typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id;
 
-                    return (
-                        <MenuItem
-                            key={column.id}
-                            onClick={column.getToggleVisibilityHandler()}
-                            sx={{
-                                whiteSpace: 'nowrap',
-                                width: 'auto',
-                            }}
-                        >
-                            <ListItemIcon>
-                                <Checkbox
-                                    checked={column.getIsVisible()}
-                                    size="small"
-                                />
-                            </ListItemIcon>
-                            <Typography variant="body2">{header}</Typography>
-                        </MenuItem>
-                    );
-                })}
+                        return (
+                            <MenuItem
+                                key={column.id}
+                                onClick={() => {
+                                    column.toggleVisibility();
+                                    handleMenuClose();
+                                }}
+                                sx={{
+                                    whiteSpace: 'nowrap',
+                                    minWidth: 180,
+                                }}
+                            >
+                                <ListItemIcon>
+                                    <Checkbox
+                                        checked={column.getIsVisible()}
+                                        size="small"
+                                        edge="start"
+                                        tabIndex={-1}
+                                        disableRipple
+                                    />
+                                </ListItemIcon>
+                                <Typography variant="body2" noWrap>
+                                    {header}
+                                </Typography>
+                            </MenuItem>
+                        );
+                    })}
             </Menu>
         </Box>
     );

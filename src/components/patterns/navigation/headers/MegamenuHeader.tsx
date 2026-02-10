@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Button as NsButton, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { NsDropDown, DynamicLink } from '../../../components/dropdown/NsDropDown';
+import { NsDropDown, DynamicLink, isActivePath, resolveCurrentPath } from '../../../components/dropdown/NsDropDown';
 import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
 import { HeaderProps } from '../NsHeader';
@@ -246,6 +246,7 @@ export default function MegamenuHeader({
 }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
+    const currentPath = resolveCurrentPath(router);
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -287,13 +288,22 @@ export default function MegamenuHeader({
                         <Box key={index} marginBottom={2} display="flex" flexDirection="column">
                             <MenuTitle>{item.title}</MenuTitle>
                             <Typography variant="h6"></Typography>
-                            {item.links.map((menu, index) => (
-                                <u>
-                                    <DynamicLink key={menu.text} to={menu.href} router={router}>
-                                        {menu.text}
-                                    </DynamicLink>
-                                </u>
-                            ))}
+                            {item.links.map((menu) => {
+                                const linkIsActive = isActivePath(currentPath, menu.href);
+                                return (
+                                    <u key={menu.href}>
+                                        <DynamicLink
+                                            key={menu.text}
+                                            to={menu.href}
+                                            router={router}
+                                            isActive={linkIsActive}
+                                            ariaCurrent={linkIsActive ? 'page' : undefined}
+                                        >
+                                            {menu.text}
+                                        </DynamicLink>
+                                    </u>
+                                );
+                            })}
                         </Box>
                     ))}
                 </Box>

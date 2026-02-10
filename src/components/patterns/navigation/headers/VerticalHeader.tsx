@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { styled } from '@mui/material/styles';
 import { css } from '@emotion/react';
-import { DynamicLink, IDropdownItems } from '../../../components/dropdown/NsDropDown';
+import { DynamicLink, IDropdownItems, isActivePath, resolveCurrentPath } from '../../../components/dropdown/NsDropDown';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { useTranslation } from 'react-i18next';
@@ -70,6 +70,16 @@ const StyledButtonBase = styled(ButtonBase)(
         height: 80px !important;
         padding: 0px !important;
 
+        &[data-active='true'] {
+            background: #fff;
+            border-left: 5px solid ${theme.header.borderColor};
+            font-weight: 700;
+            .MuiListItemText-root,
+            .MuiSvgIcon-root {
+                color: ${theme.header.borderColor} !important;
+            }
+        }
+
         &:hover {
             background: #fff;
             padding: 0px !important;
@@ -107,6 +117,7 @@ export default function VerticalHeader({ menuItems, logo, router }: HeaderProps)
     const [isMenuWide, setIsMenuWide] = React.useState(false);
     const { t } = useTranslation();
     const theme = useTheme();
+    const currentPath = resolveCurrentPath(router);
 
     const handleMenuWidth = () => {
         setIsMenuWide(!isMenuWide);
@@ -174,31 +185,37 @@ export default function VerticalHeader({ menuItems, logo, router }: HeaderProps)
             </List>
 
             <List>
-                {menuItems?.map((item) => (
-                    <StylesListItem key={item.name}>
-                        <StyledButtonBase>
-                            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                                {typeof item.path === 'string' && (
-                                    <DynamicLink router={router} to={item.path}>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="row"
-                                            alignItems="center"
-                                            justifyContent="center"
-                                        >
-                                            <ListItemIcon style={{ justifyContent: 'center' }}>
-                                                {item.icon || <HomeIcon />}
-                                            </ListItemIcon>
-                                            {isMenuWide && (
-                                                <ListItemText primary={item.name} style={{ color: '#FFF' }} />
-                                            )}
-                                        </Box>
-                                    </DynamicLink>
-                                )}
-                            </Box>
-                        </StyledButtonBase>
-                    </StylesListItem>
-                ))}
+                {menuItems?.map((item) => {
+                    const isActive = typeof item.path === 'string' && isActivePath(currentPath, item.path);
+                    return (
+                        <StylesListItem key={item.name}>
+                            <StyledButtonBase data-active={isActive ? 'true' : undefined}>
+                                <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                                    {typeof item.path === 'string' && (
+                                        <DynamicLink router={router} to={item.path} isActive={isActive}>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="row"
+                                                alignItems="center"
+                                                justifyContent="center"
+                                            >
+                                                <ListItemIcon style={{ justifyContent: 'center' }}>
+                                                    {item.icon || <HomeIcon />}
+                                                </ListItemIcon>
+                                                {isMenuWide && (
+                                                    <ListItemText
+                                                        primary={item.name}
+                                                        sx={{ color: isActive ? theme.header.borderColor : '#FFF' }}
+                                                    />
+                                                )}
+                                            </Box>
+                                        </DynamicLink>
+                                    )}
+                                </Box>
+                            </StyledButtonBase>
+                        </StylesListItem>
+                    );
+                })}
             </List>
             <Box sx={{ flex: 1 }}></Box>
             <List>

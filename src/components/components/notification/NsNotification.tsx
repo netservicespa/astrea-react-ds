@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Badge, Box, Button, List, ListItem, ListItemIcon, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -134,7 +134,7 @@ export const NsNotification: React.FC<INotificationData> = ({
     const [isOpenNotification, setIsOpenNotification] = useState(false);
     const { t } = useTranslation();
     const theme = useTheme();
-
+    const notificationRef = useRef<HTMLDivElement | null>(null);
     const tabs = [
         {
             id: '1',
@@ -147,33 +147,35 @@ export const NsNotification: React.FC<INotificationData> = ({
             children: <MainNotificationDiv isReadUnread={'READ'} {...read} markAsRead={markAsRead} />,
         },
     ] as any;
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+                setIsOpenNotification(false);
+            }
+        };
 
-    // const DivIcon: any = onlyButton ? DynamicLink : React.Fragment;
-    // const boxWidth = onlyButton ? 'auto' : '364px';
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
     return (
-        <>
-            {/* <Box sx={{ width: boxWidth, height: '40px', alignItems: 'center', display: 'flex', position: 'relative' }}>
-                <DivIcon {...onlyButton}>
-                    <div
-                        onClick={() => (onlyButton ? () => {} : setIsOpenNotification(!isOpenNotification))}
-                        style={{ textAlign: 'left', cursor: 'pointer' }}
-                    >
-                        <Badge badgeContent={unread?.totalCount} color="error">
-                            {children}
-                        </Badge>
-                    </div>
-                </DivIcon>
-            </Box> */}
+        <Box ref={notificationRef}>
             <Box
                 onClick={() => setIsOpenNotification(!isOpenNotification)}
                 sx={{
                     height: '100%',
+                    aspectRatio: '1/1',
                     alignItems: 'center',
                     display: 'flex',
                     position: 'relative',
                     textAlign: 'left',
                     cursor: 'pointer',
                     justifyContent: 'left',
+                    '&:hover': {
+                        backgroundColor: theme.palette.primary.main,
+                        color: '#fff',
+                    },
                 }}
             >
                 <Badge badgeContent={unread?.totalCount} color="error">
@@ -197,6 +199,6 @@ export const NsNotification: React.FC<INotificationData> = ({
                     <NsTabs tabs={tabs} configuration={{ centered: true, boxBorder: 'none' }} />
                 </Box>
             )}
-        </>
+        </Box>
     );
 };

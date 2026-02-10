@@ -8,6 +8,29 @@
 
 Install @netservice/astrea-react-ds using yarn, npm or pnpm:
 
-```
+```bash
 pnpm add @netservice/astrea-react-ds
 ```
+
+
+## Build and Development
+
+Install project dependencies with pnpm
+
+```bash
+pnpm install
+```
+
+To build the library package:
+
+```bash
+pnpm build
+```
+
+For development, you can launch the Storybook locally with:
+
+```bash
+pnpm storybook
+```
+
+The Storybook will be available ny default on localhost port 6006

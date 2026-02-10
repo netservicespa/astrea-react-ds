@@ -6,7 +6,14 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { DynamicLink, IDropdownItems, NsDropDown, StyledLink } from '../../../components/dropdown/NsDropDown';
+import {
+    DynamicLink,
+    IDropdownItems,
+    NsDropDown,
+    StyledLink,
+    isActivePath,
+    resolveCurrentPath,
+} from '../../../components/dropdown/NsDropDown';
 import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
@@ -133,6 +140,13 @@ const NavigationContainer = styled('div')(
                 display: flex;
                 justify-content: space-between;
                 margin: 0px;
+                &[data-active='true'] {
+                    background-color: ${theme.palette.primary.main};
+                    color: ${theme.palette.primary.contrastText};
+                    svg {
+                        color: ${theme.palette.primary.contrastText};
+                    }
+                }
                 @media (max-width: 768px) {
                     display: none;
                     transition: max-height 0.2s ease-out;
@@ -265,6 +279,7 @@ export default function HorizontalHeader({
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t } = useTranslation();
     const theme = useTheme();
+    const currentPath = resolveCurrentPath(router);
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -322,30 +337,43 @@ export default function HorizontalHeader({
             </LogoContainer>
             <NavigationContainer className={isMenuOpen ? 'open' : ''} {...configuration}>
                 <nav aria-label="Menu principale">
-                    {menuItems?.map((item, i) =>
-                        typeof item.path === 'string' ? (
-                            <DynamicLink
-                                key={item.name}
-                                to={item.path}
-                                router={router}
-                                sx={{
-                                    gap: '4px',
-                                    alignItems: 'center',
-                                    height: '100%',
-
-                                    ...(configuration?.hover && {
-                                        '&:hover': {
+                    {menuItems?.map((item) => {
+                        if (typeof item.path === 'string') {
+                            const isActive = isActivePath(currentPath, item.path);
+                            return (
+                                <DynamicLink
+                                    key={item.name}
+                                    to={item.path}
+                                    router={router}
+                                    isActive={isActive}
+                                    sx={{
+                                        gap: '4px',
+                                        alignItems: 'center',
+                                        height: '100%',
+                                        ...(isActive && {
                                             backgroundColor: theme.palette.primary.main,
-                                            color: '#fff',
-                                        },
-                                    }),
-                                }}
-                            >
-                                {item.icon && item.icon}
-                                {item.name}
-                            </DynamicLink>
-                        ) : (
-                            Array.isArray(item.path) && (
+                                            color: theme.palette.primary.contrastText,
+                                            fontWeight: 700,
+                                        }),
+                                        ...(configuration?.hover && {
+                                            '&:hover': {
+                                                backgroundColor: theme.palette.primary.main,
+                                                color: '#fff',
+                                            },
+                                        }),
+                                    }}
+                                >
+                                    {item.icon && item.icon}
+                                    {item.name}
+                                </DynamicLink>
+                            );
+                        }
+
+                        if (Array.isArray(item.path)) {
+                            const groupIsActive = item.path.some(
+                                (child) => typeof child.path === 'string' && isActivePath(currentPath, child.path),
+                            );
+                            return (
                                 <NsDropDown
                                     key={item.name}
                                     dropdownItems={item.path}
@@ -376,6 +404,11 @@ export default function HorizontalHeader({
                                                     color: '#fff',
                                                 },
                                             }),
+                                            ...(groupIsActive && {
+                                                backgroundColor: theme.palette.primary.main,
+                                                color: theme.palette.primary.contrastText,
+                                                fontWeight: 700,
+                                            }),
                                             // '.caret-icon::before': {
                                             //     content: "'keyboard_arrow_down'",
                                             //     fontFamily: 'Material Icons',
@@ -385,14 +418,17 @@ export default function HorizontalHeader({
                                             //     color: 'inherit',
                                             // },
                                         }}
+                                        data-active={groupIsActive ? 'true' : undefined}
+                                        aria-current={groupIsActive ? 'true' : undefined}
                                     >
                                         {item.icon && item.icon}
                                         {item.name}
                                     </StyledLink>
                                 </NsDropDown>
-                            )
-                        ),
-                    )}
+                            );
+                        }
+                        return null;
+                    })}
                 </nav>
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

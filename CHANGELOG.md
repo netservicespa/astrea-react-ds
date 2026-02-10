@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# v2.9.0 (Feb 10 2026)
+
+## New Additions
+
+- **New Header component**
+  - Added a new `NsHeader` component, with a more modular API
+  - Renamed and deprecated the old NsHeader, now named NsHeader2
+
+- **NsHamburgerMenu**
+  - Plug-in component for the new Header
+
+- **New NsSidebar**
+  - Added a new `NsSidebar` component
+  - Renamed and deprecated the older sidebat components
+
+## Improved
+
+- **NsDataGrid**
+  - Allow to specify table columns that cannot be hidden by the user
+  - BUGFIX: Datagrid rows in card mode were not clickable
+
+- **NsNotificationList**
+  - Allow to customize the pagination for the notification list
+  - Add a "title" parameter
+  - Fix mobile visualization
+  - Allow to apply different colors to the notifications in the list
+  - Make notification Action Buttons customizable
+
+- **NsLogin**
+  - BUGFIX: on mobile, now the login page renders without scrolling
+
+- **NsBreadcrumbs**
+  - Use an icon as path separator instead of the ">" character
+  - BUGFIX: Fix routing to support the use of multiple routing library
+
+- **NsDropDown**
+  - Highlight the currently selected entry visually, and populate the corresponding aria-current attribute for accessibility
+
+- **Storybook**
+  - Created a new "Atoms" section to document the foundational components
+  - Moved legacy component in the "Deprecated" section. They will be removed in the next major release
+
+
+# [v2.8.0](https://github.com/netservicespa/astrea-react-ds/commit/3dd27b7c74e8d31fec0d7e032def65f12f6af080) (Dec 08 2024)
+
+ ## New Additions
+
+- **NsDataGrid**:
+   - Added client-side filtering capabilities, mirroring the functionality available in the server-side version.
+   - Introduced **faceting** and **autocompletion** to enhance client-side usage.
+   - Added **table card view**:  
+     - When `enableCard` is set to `true`, users can switch to a card view on small devices.  
+     - This feature is enabled by default.
+
+- **NsHeader**:
+   - Added a **Slim Header**, a compact version of the header for smaller layouts.
+
+- **NsSidebar**:
+   - Introduced the new **Sidebar** component for improved navigation.
+
+## Improved
+
+- **NsHeader**:
+   - Resolved the unique key issue occurring in the dropdown menu.
+
 # [v2.7.0](https://github.com/netservicespa/astrea-react-ds/commit/87813c4a4cf4d1a89ce07c3272d237be7614181b) (Nov 28 2024)
 
 ## New Additions

@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material';
+import { createTheme, responsiveFontSizes, TableCell, TableRow, Typography } from '@mui/material';
 import { darken, lighten } from '@mui/system';
 import { itIT } from '@mui/x-date-pickers/locales';
 import { itIT as coreItIT } from '@mui/material/locale';
@@ -350,6 +350,45 @@ const themeOptions = {
                                 transform: 'translate(-15%, -15%)',
                             },
                         },
+                    },
+                },
+            },
+        },
+
+        MuiTableHead: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#EBEFEF',
+                    color: '#000',
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    border: '0',
+                    borderRadius: '0px',
+                    '&.MuiTypography-body1': {
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                        color: 'red',
+                    },
+                },
+            },
+        },
+
+        MuiTableContainer: {
+            styleOverrides: {
+                root: {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderRadius: '0px',
+                    borderTop: '1px solid #b1b4b6',
+                    borderRight: '1px solid #b1b4b6',
+
+                    'td.MuiTableCell-root.MuiTableCell-body': {
+                        borderLeft: '1px solid #b1b4b6',
+                        borderBottom: '1px solid #b1b4b6',
+                    },
+                    'th.MuiTableCell-root.MuiTableCell-head': {
+                        borderBottom: '1px solid #b1b4b6',
+                        borderLeft: '1px solid #b1b4b6',
                     },
                 },
             },

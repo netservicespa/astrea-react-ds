@@ -36,8 +36,10 @@ export interface PagedData<T> {
     currentPage: number;
 }
 
-export interface NsDataGridServerProps<RowType extends object, FilterType extends object>
-    extends NsDataGridCommonProps<RowType, FilterType> {
+export interface NsDataGridServerProps<RowType extends object, FilterType extends object> extends NsDataGridCommonProps<
+    RowType,
+    FilterType
+> {
     type: 'server';
     /**
      * A function that fetches data for the grid.
@@ -108,6 +110,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
 
     // Active filters
     const [filters, setFilters] = React.useState<TableFilters<FilterType>>({});
+    const [previousFilters, setPreviousFilters] = React.useState<TableFilters<FilterType>>({});
 
     const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
     const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -184,7 +187,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
                 setRowSelection({ [firstRowId]: true });
             }
         });
-    }, [pagination, sorting, filters, fetcher]);
+    }, [pagination, sorting, fetcher]);
 
     // Reset pagination on filter change
     React.useEffect(() => {
@@ -192,6 +195,7 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
             console.debug('Filter change', filters);
             console.debug('Resetting pagination');
         }
+        // The pagination change will already trigger a refetch, so we don't need to refetch here
         setPagination({
             ...pagination,
             pageIndex: DEFAULT_PAGE_INDEX,
@@ -239,7 +243,13 @@ export function NsDataGridServer<RowType extends object, FilterType extends obje
     }
 
     const FilterContainerComponent = FilterContainer ? (
-        <FilterContainer activeFilters={filters} onFilterChange={setFilters} />
+        <FilterContainer
+            activeFilters={previousFilters}
+            onFilterChange={(newFilters) => {
+                setPreviousFilters(filters);
+                setFilters({ ...filters, ...newFilters });
+            }}
+        />
     ) : (
         <></>
     );

@@ -55,6 +55,10 @@ export interface IDropDown {
      */
     overlay?: boolean;
     icon?: boolean | React.ReactElement;
+    /**
+     * If true, the dropdown menu will close when a menu item is clicked.
+     */
+    closeOnMenuItemClick?: boolean;
 }
 
 export interface DynamicLinkProps {
@@ -73,10 +77,38 @@ export interface DynamicLinkProps {
      */
     children: any;
     sx?: SxProps<Theme>;
+    isActive?: boolean;
+    ariaCurrent?: React.AriaAttributes['aria-current'];
 }
 
 export const StyledLink = styled('a')(({ theme }) => ({
     color: `${theme.palette.primary.main}`,
+    position: 'relative',
+    textDecoration: 'none',
+    '&:hover': {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+    },
+    '&:hover svg': {
+        color: 'inherit',
+    },
+    '&[data-active="true"]': {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+        fontWeight: 700,
+    },
+    '&[data-active="true"] svg': {
+        color: 'inherit',
+    },
+    '&[data-active="true"]::after': {
+        content: '""',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: -2,
+        height: 3,
+        backgroundColor: theme.palette.secondary?.main ?? theme.palette.primary.dark,
+    },
 }));
 
 const StyledMenu = styled(Menu)<{ overlay: boolean }>(({ theme, overlay }) => ({
@@ -90,30 +122,66 @@ type ExtendChildrenProps = {
     icon?: boolean | React.ReactElement;
     isOpen: boolean;
 };
-export const DynamicLink = ({ router, to, children, sx }: DynamicLinkProps) => {
+
+const normalizePath = (path?: string) => {
+    if (!path) return undefined;
+    const [cleanPath] = path.split(/[?#]/);
+    const trimmed = cleanPath.replace(/\/+$/, '');
+    return trimmed === '' ? '/' : trimmed;
+};
+
+export const resolveCurrentPath = (router?: any): string | undefined => {
+    if (!router && typeof window !== 'undefined') return window.location?.pathname;
+    if (typeof router?.asPath === 'string') return router.asPath.split('?')[0];
+    if (typeof router?.pathname === 'string') return router.pathname;
+    if (typeof router?.location?.pathname === 'string') return router.location.pathname;
+    if (typeof router?.history?.location?.pathname === 'string') return router.history.location.pathname;
+    if (typeof window !== 'undefined') return window.location?.pathname;
+    return undefined;
+};
+
+export const isActivePath = (currentPath?: string, targetPath?: string): boolean => {
+    const current = normalizePath(currentPath);
+    const target = normalizePath(targetPath);
+    if (!current || !target) return false;
+    if (target === '/') return current === '/';
+    return current === target || current.startsWith(`${target}/`);
+};
+export const DynamicLink = ({ router, to, children, sx, isActive, ariaCurrent }: DynamicLinkProps) => {
     const isReactRouter = typeof router?.history !== 'undefined';
     const isNextRouter = typeof router?.push !== 'undefined';
-    const commonStyle = {
+    const active = Boolean(isActive);
+    const mergedSx = [
+        {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+        ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+    ];
+    const commonProps = {
         className: 'font-semiBold',
         style: { textDecoration: 'none', cursor: 'pointer', margin: '0px' },
-        sx,
+        sx: mergedSx,
+        'data-active': active ? 'true' : undefined,
+        'aria-current': active ? (ariaCurrent ?? 'page') : undefined,
     };
     if (isReactRouter) {
         return (
-            <StyledLink onClick={() => router.history.push(to)} {...commonStyle}>
+            <StyledLink onClick={() => router.history.push(to)} {...commonProps}>
                 {children}
             </StyledLink>
         );
     } else if (isNextRouter) {
         return (
-            <StyledLink onClick={() => router.push(to)} {...commonStyle}>
+            <StyledLink onClick={() => router.push(to)} {...commonProps}>
                 {children}
             </StyledLink>
         );
     } else {
         // Handle the case when neither React Router nor Next.js Router is detected
         return (
-            <StyledLink href={to} {...commonStyle}>
+            <StyledLink href={to} {...commonProps}>
                 {children}
             </StyledLink>
         );
@@ -126,12 +194,14 @@ export const NsDropDown = ({
     onLogout,
     children,
     dropDownConfiguration,
+    closeOnMenuItemClick,
     overlay = false,
     icon = false,
 }: IDropDown) => {
     const theme = useTheme();
     const [isOpen, setIsOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const currentPath = resolveCurrentPath(router);
     const handleMenuOpen = (event: React.MouseEvent<HTMLDivElement>) => {
         setIsOpen(true);
         setAnchorEl(event.currentTarget);
@@ -147,53 +217,39 @@ export const NsDropDown = ({
         onLogout && onLogout();
     };
 
-    // const renderMenuItems = () => {
-    //     if (Array.isArray(dropdownItems)) {
-    //         const items = dropdownItems.map((item, index) => {
-    //             if (typeof item.path === 'string') {
-    //                 return (
-    //                     <React.Fragment key={item.path}>
-    //                         <DynamicLink to={item.path} router={router}>
-    //                             <MenuItem>
-    //                                 {item.icon && item.icon}
-    //                                 {item.name}
-    //                             </MenuItem>
-    //                         </DynamicLink>
-    //                         {index < dropdownItems.length - 1 && <Divider />}
-    //                     </React.Fragment>
-    //                 );
-    //             }
-    //             return null;
-    //         });
-
-    //         if (onLogout) {
-    //             items.push(
-    //                 <Divider key={Math.random().toString(36).substr(2, 9)} />,
-    //                 <MenuItem onClick={onLogout} key={Math.random().toString(36).substr(2, 9)}>
-    //                     <ListItemIcon>
-    //                         <LogoutIcon />
-    //                     </ListItemIcon>
-    //                     <ListItemText primary="Logout" style={{ color: '#FFF' }} />
-    //                 </MenuItem>,
-    //             );
-    //         }
-
-    //         return items;
-    //     } else {
-    //         return dropdownItems; // Return as-is if not an array
-    //     }
-    // };
     const renderMenuItems = () => {
         if (Array.isArray(dropdownItems)) {
             const items = dropdownItems.flatMap((item, index) => {
                 if (typeof item.path === 'string') {
+                    const linkIsActive = isActivePath(currentPath, item.path);
                     return [
-                        <DynamicLink to={item.path} router={router} key={`item-${item.path}`}>
-                            <MenuItem>
-                                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-                                {item.name}
-                            </MenuItem>
-                        </DynamicLink>,
+                        <Box
+                            component={'span'}
+                            key={'box-menu-item-' + item.name}
+                            onClick={() => {
+                                if (closeOnMenuItemClick) {
+                                    handleMenuClose();
+                                }
+                            }}
+                        >
+                            <DynamicLink
+                                to={item.path}
+                                router={router}
+                                key={`item-${item.path}`}
+                                isActive={linkIsActive}
+                                ariaCurrent={linkIsActive ? 'page' : undefined}
+                            >
+                                <MenuItem>
+                                    <Box
+                                        key={item.name}
+                                        sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+                                    >
+                                        {item.icon && item.icon}
+                                        {item.name}
+                                    </Box>
+                                </MenuItem>
+                            </DynamicLink>
+                        </Box>,
                         index < dropdownItems.length - 1 && <Divider key={`divider-${index}`} />,
                     ];
                 }

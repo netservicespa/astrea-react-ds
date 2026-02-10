@@ -1,0 +1,99 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
+import * as NsSidebar from './NsSidebar.stories';
+
+<Meta of={NsSidebar} />
+
+<h1>Sidebar</h1>
+<p>The NsSidebar component is a vertical navigation sidebar that provides a collapsible menu system for application navigation. It features icon-based navigation with text labels, responsive behavior, and support for active state highlighting.</p>
+<Primary />
+
+<h3>How it works</h3>
+<p>The Sidebar component renders a vertical navigation panel that can be toggled between expanded and collapsed states. When expanded, it displays menu items with both icons and text labels. When collapsed, it shows only icons with tooltips appearing on hover. The component automatically highlights the active menu item based on the current path and provides smooth transitions between states.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Keep menu items concise and use clear, recognizable icons that match the label text.</li>
+  <li>Limit the number of primary menu items (5-8 recommended) to avoid overwhelming users.</li>
+  <li>Use bottomMenuItems for secondary actions like Settings, Help, or Support.</li>
+  <li>Consider enabling autoCloseOnSmallScreen for better mobile and tablet experiences.</li>
+  <li>Provide visual feedback for the active route to help users understand their current location.</li>
+  <li>Organize menu items in a logical hierarchy from most to least frequently used.</li>
+</ul>
+
+<h3>Props</h3>
+<p>The Sidebar component accepts the following props:</p>
+<Controls />
+<ul>
+  <li><strong>open</strong> (boolean, required): Controls whether the sidebar is expanded (true) or collapsed (false).</li>
+  <li><strong>hidden</strong> (boolean, optional): Completely hides the sidebar when set to true. Default: false.</li>
+  <li><strong>menuItems</strong> (MenuItem[], required): Array of menu items to display in the main navigation section.</li>
+  <li><strong>bottomMenuItems</strong> (MenuItem[], optional): Array of menu items to display at the bottom of the sidebar.</li>
+  <li><strong>content</strong> (ReactNode, optional): Custom content to render in the center of the sidebar, vertically centered between menu items and bottom menu items (only visible when expanded).</li>
+  <li><strong>currentPath</strong> (string, required): The current route path used to highlight the active menu item.</li>
+  <li><strong>onNavigate</strong> (function, required): Callback function triggered when a menu item is clicked. Receives the path as parameter.</li>
+  <li><strong>onOpenChange</strong> (function, optional): Callback function triggered when the sidebar open state should change.</li>
+  <li><strong>headerHeight</strong> (string | number, optional): Height of the header to calculate sidebar height. Default: '64px'.</li>
+  <li><strong>menuLabel</strong> (string, optional): Label displayed at the top of the menu section. Default: 'Menu'.</li>
+  <li><strong>autoCloseOnSmallScreen</strong> (boolean, optional): Automatically collapses sidebar on screens ≤1280px. Default: true.</li>
+  <li><strong>sx</strong> (SxProps, optional): Additional MUI styles to apply to the sidebar container.</li>
+</ul>
+
+<h3>MenuItem Interface</h3>
+<p>Each menu item should conform to the following structure:</p>
+<pre>
+{`interface MenuItem {
+  name: string;        // Display name of the menu item
+  path: string;        // Navigation path
+  icon: ReactNode;     // Icon component (Material-UI icon recommended)
+}`}
+</pre>
+
+<h3>Accessibility</h3>
+<p>The Sidebar component implements several accessibility features:</p>
+<ul>
+  <li>Tooltips are provided for collapsed menu items to ensure icon meanings are clear.</li>
+  <li>MenuItem components use semantic HTML with proper click handlers for keyboard navigation.</li>
+  <li>Visual focus states are provided through MUI's built-in focus management.</li>
+  <li>Color contrast ratios meet WCAG standards for text and icons in both active and inactive states.</li>
+  <li>Screen readers can navigate through menu items using standard keyboard controls (Tab, Enter).</li>
+</ul>
+
+<h3>Usage Example</h3>
+<pre>
+{`import { NsSidebar, NsSidebarMenuItem } from '@netservice/astrea-react-ds';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+const menuItems: NsSidebarMenuItem[] = [
+  {
+    name: 'Dashboard',
+    path: '/dashboard',
+    icon: <DashboardIcon />
+  },
+  {
+    name: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  }
+];
+
+<NsSidebar
+  open={sidebarOpen}
+  menuItems={menuItems}
+  currentPath={location.pathname}
+  onNavigate={(path) => navigate(path)}
+  onOpenChange={setSidebarOpen}
+/>`}
+</pre>
+
+<h3>Responsive Behavior</h3>
+<p>By default, the sidebar automatically collapses on screens with width ≤1280px when <code>autoCloseOnSmallScreen</code> is enabled. This provides an optimal experience on laptops with 13" screens and smaller devices. You can disable this behavior or implement custom responsive logic using the <code>onOpenChange</code> callback.</p>
+
+<h3>Theming</h3>
+<p>The component uses colors from the Astrea Design System theme:</p>
+<ul>
+  <li><strong>Primary color</strong> (#308A7D): Used for active item icons</li>
+  <li><strong>Secondary color</strong> (#cce2df): Used for active item background</li>
+  <li><strong>Border color</strong> (#B1B4B6): Used for the right border</li>
+  <li><strong>Dark text colors</strong>: Primary (#000000), Secondary (#3D3D3D), Tertiary (#595959)</li>
+</ul>

@@ -28,9 +28,11 @@ export type ColumnDef<RowType, Value = any> = BaseColumnDef<RowType, Value> & {
     };
 };
 
-export interface NsDataGridCommonProps<RowType extends object, FilterType extends object, KeyType = unknown>
-    extends TableContainerProps {
-
+export interface NsDataGridCommonProps<
+    RowType extends object,
+    FilterType extends object,
+    KeyType = unknown,
+> extends TableContainerProps {
     /**
      * An array of column definitions for the grid.
      */
@@ -71,7 +73,6 @@ export interface NsDataGridCommonProps<RowType extends object, FilterType extend
      * Whether to enable debug mode for the grid.
      */
     debug?: boolean;
-
     children?: React.ReactNode;
 }
 

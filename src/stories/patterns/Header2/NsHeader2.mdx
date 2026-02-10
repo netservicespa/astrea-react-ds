@@ -1,0 +1,48 @@
+import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview ,ArgsTable } from '@storybook/blocks';
+import * as NsHeader2 from './NsHeader2.stories';
+
+
+<Meta of={NsHeader2} />
+
+<h1>NsHeader2</h1>
+
+Il componente `NsHeader2` è un contenitore flessibile per creare header complessi e personalizzabili utilizzando i suoi sotto-componenti: `NsHeaderMainBar`, `NsHeaderMain` e `NsHeaderContent`.
+{/* <Primary />
+<Controls/> */}
+
+<h3>Esempio base</h3>
+<Canvas><Story of={NsHeader2.BaseExample}/></Canvas>
+<h3>Props</h3>
+
+<Controls of={NsHeader2.BaseExample}/>
+
+
+<h3>Esempio avanzato</h3>
+
+Puoi combinare più componenti per creare strutture complesse. Ecco un esempio con una `NsHeaderSub`.
+
+
+{/* <Canvas><Story of={NsHeader2.AdvancedExample}/></Canvas> */}
+<h3>Customizzazione</h3>
+{/* <Controls of={NsHeader2.AdvancedExample}/> */}
+
+Per la customizzazione dell'header è necessario passare come children `NsHeaderBox` e 
+specificare `nsPosition` per ogni componente.
+
+```jsx
+// Esempio di `nsPosition`:
+nsPosition={{
+                desktop: { level: NsHeaderLevel.MAIN_BAR, position: 'center' },
+                mobile: { level: -1, position: 'left' },
+              }}
+```
+All'interno di `NsHeaderBox` è possibile inserire qualsiasi componente.
+<br/>
+Per semplificare la creazione di header complessi, sono stati creati i seguenti componenti:
+- `NsHeaderBox`
+- `NsHeaderHambuger`
+- `NsHeaderLogo`
+- `NsHeaderMenu`
+- `NsHeaderNotification`
+- `NsHeaderUserMenu`
+

@@ -1,24 +1,26 @@
-import { Box, Button as NsButton, Paper, Stack } from '@mui/material';
+import { Box, Button as NsButton, Stack } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 import { CellContext, ColumnDef, createColumnHelper, PaginationState } from '@tanstack/react-table';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { NsDataGrid } from '../../../components/components/datatable/NsDataGrid';
 import { NsDataGridOptions } from '../../../components/components/datatable/NsDataGridBase';
 import { ColumnSorting, PagedData } from '../../../components/components/datatable/NsDataGridServer';
-import { NsDataGrid } from '../../../components/components/datatable/NsDataGrid';
 
-import {
-    FilterContainerProps,
-    FilterFieldDefinition,
-    NsDynamicFilterForm,
-} from '../../../components/components/datatable/filtering/FilterContainer';
-import { NsTablePager } from '../../../components/components/datatable/pagination/NsTablePager';
-import { makeData, Person } from './makeData';
-import { mockPersonService } from './mockService';
+import Typography from '@mui/material/Typography';
 import {
     NsDataGridEventHandler,
     NsDataGridEventType,
 } from '../../../components/components/datatable/events/NsDataGridEvents';
-import Typography from '@mui/material/Typography';
+import { FilterContainerProps } from '../../../components/components/datatable/filtering/FilterContainer';
+import { NsTablePager } from '../../../components/components/datatable/pagination/NsTablePager';
+import { NsForm } from '../../../components/components/form/NsForm';
+import { NsNumberInput } from '../../../components/components/form/fields/NsNumberInput';
+import { NsTextInput } from '../../../components/components/form/fields/NsTextInput';
+import { makeData, Person } from './makeData';
+import { mockPersonService } from './mockService';
+
+import { NsSelectAutocomplete, SelectItem } from '../../../components/components/form/fields/NsSelectAutocomplete';
+import { NsGridLayout } from '../../../components/layout/NsGridLayout';
 
 const meta: Meta<typeof NsDataGrid> = {
     title: 'Components/DataGrid',
@@ -209,41 +211,30 @@ const CustomHeader = () => {
         </Box>
     );
 };
-const MagicFilterContainer = ({ activeFilters, onFilterChange }: FilterContainerProps<PersonFilters>) => {
-    const filterDefs: FilterFieldDefinition<PersonFilters>[] = React.useMemo(
-        () => [
-            {
-                key: 'firstName',
-                label: 'First Name',
-                type: 'text',
-            },
-            {
-                key: 'lastName',
-                label: 'Last Name',
-                type: 'text',
-            },
-            {
-                key: 'age',
-                label: 'Age',
-                type: 'number',
-            },
-            {
-                key: 'status',
-                label: 'Status',
-                type: 'select',
-                options: [
-                    { label: 'Complicated', value: 'complicated' },
-                    { label: 'Single', value: 'single' },
-                    { label: 'Relationship', value: 'relationship' },
-                ],
-            },
-        ],
-        [],
-    );
+
+const FilterContainer = ({ activeFilters, onFilterChange }: FilterContainerProps<PersonFilters>) => {
     return (
-        <Paper>
-            <NsDynamicFilterForm activeFilters={activeFilters} onFilterChange={onFilterChange} fieldDefs={filterDefs} />
-        </Paper>
+        <NsForm
+            onSubmit={(data: Partial<PersonFilters>) =>
+                onFilterChange({ ...data, status: (data?.status as unknown as SelectItem).value })
+            }
+        >
+            <NsGridLayout rowSize={2}>
+                <NsTextInput label="First Name" name="firstName" defaultValue={activeFilters.firstName} />
+                <NsTextInput label="Last Name" name="lastName" defaultValue={activeFilters.lastName} />
+                <NsNumberInput label="Age" name="age" defaultValue={activeFilters.age} />
+                <NsSelectAutocomplete
+                    label="Status"
+                    name="status"
+                    defaultValue={activeFilters.status}
+                    options={[
+                        { label: 'Complicated', value: 'complicated' },
+                        { label: 'Single', value: 'single' },
+                        { label: 'Relationship', value: 'relationship' },
+                    ]}
+                />
+            </NsGridLayout>
+        </NsForm>
     );
 };
 
@@ -269,7 +260,7 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
             columnHelper.accessor('progress', {
                 header: 'Profile Progress',
                 cell: (props: CellContext<Person, number>) => `${props.getValue()}%`,
-                meta: { hide: true }
+                meta: { hide: true },
             }),
         ],
         [],
@@ -298,11 +289,6 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
                     : [],
                 filters,
             ).then((result) => {
-                // Check if there's data and select the first row
-                if (result.data.length > 0) {
-                    setSelectedRows({ [result.data[0].id]: result.data[0] });
-                }
-
                 return {
                     // Return the fetched data in the proper format
                     data: result.data,
@@ -315,12 +301,6 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
         [],
     );
 
-    const [selectedRows, setSelectedRows] = React.useState<Record<string, Person>>({});
-
-    useEffect(() => {
-        console.log('Selected rows:', selectedRows);
-    }, [selectedRows]);
-
     // Additional customizations and optional features
     const gridOptions: NsDataGridOptions<Person> = {
         resizable: true,
@@ -328,7 +308,6 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
         rowSelection: 'single',
         customRowIdMapper: (row) => row.id,
         pagination: { rowsPerPageOptions: [5, 10] },
-        selectedRow: selectedRows,
     };
 
     const customtableEventListener: NsDataGridEventHandler<Person, PersonFilters> = React.useCallback((event) => {
@@ -355,7 +334,6 @@ const TemplateServer: StoryFn<typeof NsDataGrid> = (args) => {
             defaultColumn={defaultColumn}
             // NsTablePager is the default pager component and can be omitted, but you can provide your own
             PagerComponent={NsTablePager}
-            onRowSelectionChange={setSelectedRows}
             FilterContainer={args.FilterContainer}
             fetcher={fetcher}
             eventListener={customtableEventListener}
@@ -375,8 +353,8 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
     // Define columns
     const columns = React.useMemo<ColumnDef<Person, any>[]>(
         () => [
-            columnHelper.accessor('firstName', { header: 'First Name' }),
-            columnHelper.accessor('lastName', { header: 'Last Name' }),
+            columnHelper.accessor('firstName', { header: 'First Name', enableHiding: false }),
+            columnHelper.accessor('lastName', { header: 'Last Name', enableHiding: false }),
             columnHelper.accessor('age', { header: 'Age' }),
             columnHelper.accessor('visits', { header: 'Visits' }),
             // If you want to customize the cell rendering, you can provide a cell function
@@ -404,13 +382,6 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
 
     // Generate dataset for the grid
     const data = useMemo(() => makeData(200), []);
-    const [selectedRows, setSelectedRows] = React.useState<Record<string, Person>>({});
-    useEffect(() => {
-        // Quando i dati sono pronti, seleziona la prima riga
-        if (data.length > 0) {
-            setSelectedRows({ [data[0].id]: data[0] });
-        }
-    }, [data]);
 
     // Additional customizations and optional features
     const gridOptions: NsDataGridOptions<Person> = {
@@ -427,8 +398,7 @@ const TemplateClient: StoryFn<typeof NsDataGrid> = (args) => {
             type="client"
             columns={columns}
             defaultColumn={defaultColumn}
-            onRowSelectionChange={setSelectedRows}
-            FilterContainer={MagicFilterContainer}
+            FilterContainer={FilterContainer}
             PagerComponent={NsTablePager}
             data={data}
             options={gridOptions}
@@ -444,7 +414,7 @@ ServerDataGrid.args = {};
 export const ServerDataGridCustomLayout = TemplateServer.bind({});
 ServerDataGridCustomLayout.args = {
     children: <CustomHeader />,
-    FilterContainer: MagicFilterContainer,
+    FilterContainer: FilterContainer,
     render: (
         FilterContainer: React.ReactElement,
         Table: React.ReactElement,

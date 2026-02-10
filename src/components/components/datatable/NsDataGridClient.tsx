@@ -15,8 +15,10 @@ import { NsTablePager } from './pagination/NsTablePager';
 import { NsDataGridEventType } from './events/NsDataGridEvents';
 import { ColumnVisibilityMenu } from './filtering/ColumnVisibilityMenu';
 
-export interface NsDataGridClientProps<RowType extends object, FilterType extends object>
-    extends NsDataGridCommonProps<RowType, FilterType> {
+export interface NsDataGridClientProps<RowType extends object, FilterType extends object> extends NsDataGridCommonProps<
+    RowType,
+    FilterType
+> {
     type: 'client';
     data: RowType[];
 }
@@ -110,8 +112,8 @@ export function NsDataGridClient<RowType extends object, FilterType extends obje
         FilterContainerComponent,
         TableComponent,
         TablePagerComponent,
-        ColumnVisibilityComponent, 
-        children && React.isValidElement(children) ? children : undefined
+        ColumnVisibilityComponent,
+        children && React.isValidElement(children) ? children : undefined,
     );
 }
 

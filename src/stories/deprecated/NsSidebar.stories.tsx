@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { Box, Button as NsButton } from '@mui/material';
-import { NsSidebar } from 'src/components/components/sidebar/NsSidebar';
+import { NsSidebarLegacy } from '../../components/components/sidebar/NsSidebarLegacy';
 import { Button } from '@mui/material';
 import { IconButton } from '@mui/material';
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
@@ -10,8 +10,8 @@ import { List } from '@mui/icons-material';
 import { ListItem } from '@mui/material';
 
 export default {
-    title: 'Components/NsSidebar',
-    component: NsSidebar,
+    title: 'Deprecated/NsSidebarLegacy',
+    component: NsSidebarLegacy,
     argTypes: {
         open: {
             control: { type: 'boolean' },
@@ -31,7 +31,7 @@ const Template: StoryFn = (args) => {
             <NsButton variant="contained" onClick={handleToggle} sx={{ marginLeft: '500px' }}>
                 Toggle Sidebar
             </NsButton>
-            <NsSidebar
+            <NsSidebarLegacy
                 {...args}
                 open={open}
                 onClose={() => setOpen(false)}
@@ -52,11 +52,11 @@ const Template: StoryFn = (args) => {
                 >
                     <Box sx={{ p: 4 }}>
                         {open ? (
-                            <Button variant="contained" color="primary" onClick={() => {}}>
+                            <Button variant="contained" color="primary" onClick={() => { }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>Download</Box>
                             </Button>
                         ) : (
-                            <IconButton size="small" onClick={() => {}}>
+                            <IconButton size="small" onClick={() => { }}>
                                 <GetAppOutlinedIcon />
                             </IconButton>
                         )}
@@ -83,7 +83,7 @@ const Template: StoryFn = (args) => {
                         </List>
                     </Box>
                 </Box>
-            </NsSidebar>
+            </NsSidebarLegacy>
         </>
     );
 };

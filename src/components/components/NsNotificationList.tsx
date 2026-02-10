@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from '@emotion/styled';
 import { Pagination, Grid, Button, useTheme, Box } from '@mui/material';
 import { useState } from 'react';
@@ -12,12 +12,15 @@ export type Notification = {
     title?: string;
     description?: string;
     readNotification: boolean;
+    color?: 'primary' | 'secondary' | 'success' | 'error';
 };
 
 export type NsNotificationListProps = {
     notifications: Notification[];
     typeNotification: 'basic' | 'classic';
-    actionButtons?: boolean;
+    maxRowsPerPage?: number;
+    color?: 'primary' | 'secondary' | 'success' | 'error';
+    actionButtons?: boolean | ((notification: Notification) => React.ReactNode);
     pagination?: boolean;
     handleView?: () => void;
     handleAction?: () => void;
@@ -30,9 +33,10 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
     pagination,
     handleView,
     handleAction,
+    color = 'primary',
+    maxRowsPerPage = 5,
 }) => {
     const [page, setPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
     const theme = useTheme();
     const { t } = useTranslation();
 
@@ -40,7 +44,7 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
         setPage(value);
     };
 
-    const currentNotifications = notifications.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+    const currentNotifications = notifications.slice((page - 1) * maxRowsPerPage, page * maxRowsPerPage);
 
     const StyledPagination = styled(Pagination)({
         '& .Mui-selected': {
@@ -59,18 +63,12 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
     return (
         <>
             {typeNotification === 'classic' && (
-                <Box
-                    className="notifications-list"
-                    style={{
-                        height: '500px',
-                    }}
-                >
+                <Box className="notifications-list" sx={{ height: '500px' }}>
                     {currentNotifications.map((notification) => (
-                        <Grid
-                            container
+                        <Box
                             key={notification.id}
                             className="notification"
-                            style={{
+                            sx={{
                                 width: '100%',
                                 marginTop: '10px',
                                 padding: '10px 20px',
@@ -78,45 +76,126 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
                                 borderRadius: '0px',
                                 borderBottom: '1px solid #E0E0E0',
                                 borderLeft:
-                                    notification.readNotification === true
-                                        ? `5px solid ${theme.palette.primary.main}`
+                                    notification.readNotification === false
+                                        ? notification?.color && theme.palette[notification?.color]
+                                            ? `5px solid ${theme.palette[notification?.color].main}`
+                                            : `5px solid ${theme.palette[color].main}`
                                         : '5px solid #E0E0E0',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
                             }}
                         >
-                            <Grid item xs={6} className="notification-info">
-                                <Box style={{ marginLeft: '20px' }}>{notification.date}</Box>
-                                <Box style={{ marginLeft: '20px' }}>{notification.description}</Box>
-                            </Grid>
-                            {actionButtons === true && (
-                                <Grid item xs={6} className="notification-buttons">
-                                    <Box style={{ float: 'right' }}>
-                                        <Button
-                                            onClick={handleAction}
-                                            variant="outlined"
-                                            style={{ marginRight: '10px' }}
-                                        >
-                                            {t('notifications.button.action')}
-                                        </Button>
-                                        <Button
-                                            onClick={handleView}
-                                            variant="contained"
-                                            style={{
-                                                border: `1px solid ${theme.palette.primary.main}`,
-                                            }}
-                                        >
-                                            {t('notifications.button.view')}
-                                        </Button>
+                            <Box
+                                className="notification-info"
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: {
+                                            xs: 'column', // colonna su mobile
+                                            sm: 'row', // riga su desktop
+                                        },
+                                        alignItems: {
+                                            xs: 'flex-start',
+                                            sm: 'center',
+                                        },
+                                        gap: '10px',
+                                        flexWrap: 'wrap',
+                                        marginLeft: '20px',
+                                    }}
+                                >
+                                    <Box sx={{ fontWeight: 'bold' }}>{notification.title}</Box>
+
+                                    {/* Bullet visibile solo da sm in su */}
+                                    <Box
+                                        sx={{
+                                            display: {
+                                                xs: 'none',
+                                                sm: 'block',
+                                            },
+                                        }}
+                                    >
+                                        &bull;
                                     </Box>
-                                </Grid>
+
+                                    <Box>{notification.date}</Box>
+                                </Box>
+
+                                {/* Description visibile solo da sm in su */}
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: {
+                                            xs: 'column', // colonna su mobile
+                                            sm: 'row', // riga su desktop
+                                        },
+                                        alignItems: {
+                                            xs: 'flex-start',
+                                            sm: 'center',
+                                        },
+                                        gap: '10px',
+                                        flexWrap: 'wrap',
+                                        marginLeft: '20px',
+                                    }}
+                                >
+                                    {notification.description}
+                                </Box>
+                            </Box>
+
+                            {actionButtons === true && (
+                                <Box
+                                    className="notification-buttons"
+                                    sx={{
+                                        width: '50%',
+                                        textAlign: 'right',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        gap: '10px',
+                                        [theme.breakpoints.down('sm')]: {
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-end',
+                                        },
+                                    }}
+                                >
+                                    <Button
+                                        onClick={handleAction}
+                                        variant="outlined"
+                                        color={color}
+                                        sx={{
+                                            marginRight: '10px',
+                                            [theme.breakpoints.down('sm')]: {
+                                                marginRight: 0,
+                                            },
+                                        }}
+                                    >
+                                        {t('notifications.button.action')}
+                                    </Button>
+                                    <Button
+                                        onClick={handleView}
+                                        variant="contained"
+                                        color={color}
+                                        sx={{
+                                            border: `1px solid ${theme.palette.primary.main}`,
+                                        }}
+                                    >
+                                        {t('notifications.button.view')}
+                                    </Button>
+                                </Box>
                             )}
-                        </Grid>
+                            {typeof actionButtons === 'function' && actionButtons(notification)}
+                        </Box>
                     ))}
                     {pagination === true && (
-                        <Box style={{ paddingTop: '20px' }}>
+                        <Box sx={{ paddingTop: '20px' }}>
                             <StyledPagination
-                                count={Math.ceil(notifications.length / rowsPerPage)}
+                                count={Math.ceil(notifications.length / maxRowsPerPage)}
                                 page={page}
-                                style={{ borderRadius: '0px', float: 'right' }}
+                                sx={{ borderRadius: '0px', float: 'right' }}
                                 variant="outlined"
                                 shape="rounded"
                                 onChange={handleChangePage}
@@ -126,29 +205,26 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
                     )}
                 </Box>
             )}
+
             {typeNotification === 'basic' && (
-                <Box
-                    className="notifications-list"
-                    style={{
-                        height: '500px',
-                    }}
-                >
+                <Box className="notifications-list" sx={{ height: '500px' }}>
                     {currentNotifications.map((notification) => (
-                        <Grid
-                            container
+                        <Box
                             key={notification.id}
                             className="notification"
-                            style={{
+                            sx={{
                                 width: '100%',
                                 marginTop: '10px',
                                 padding: '10px 20px',
                                 borderRadius: '0px',
                                 borderBottom: '1px solid #E0E0E0',
+                                display: 'flex',
+                                alignItems: 'flex-start',
                             }}
                         >
                             {notification.readNotification === true ? (
                                 <CircleIcon
-                                    style={{
+                                    sx={{
                                         color: '#0678BE',
                                         fontSize: '16px',
                                         position: 'relative',
@@ -158,7 +234,7 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
                                 />
                             ) : (
                                 <RadioButtonUncheckedIcon
-                                    style={{
+                                    sx={{
                                         color: '#0678BE',
                                         fontSize: '16px',
                                         position: 'relative',
@@ -167,20 +243,20 @@ export const NsNotificationList: React.FC<NsNotificationListProps> = ({
                                     }}
                                 />
                             )}
-                            <Grid item xs={6} className="notification-info">
-                                <Box style={{ marginLeft: '20px' }}>
+                            <Box className="notification-info" sx={{ marginLeft: '20px', width: '100%' }}>
+                                <Box>
                                     <a href={`/communications/${notification.id}`}>{notification.description}</a>
                                 </Box>
-                                <Box style={{ marginLeft: '20px' }}>{notification.date}</Box>
-                            </Grid>
-                        </Grid>
+                                <Box>{notification.date}</Box>
+                            </Box>
+                        </Box>
                     ))}
                     {pagination === true && (
-                        <Box style={{ paddingTop: '20px' }}>
+                        <Box sx={{ paddingTop: '20px' }}>
                             <StyledPagination
-                                count={Math.ceil(notifications.length / rowsPerPage)}
+                                count={Math.ceil(notifications.length / maxRowsPerPage)}
                                 page={page}
-                                style={{ borderRadius: '0px', float: 'right' }}
+                                sx={{ borderRadius: '0px', float: 'right' }}
                                 variant="outlined"
                                 shape="rounded"
                                 onChange={handleChangePage}

@@ -79,46 +79,92 @@ export const NsLogin: React.FC<NsLoginProps> = ({
                 backgroundImage: `${gradient}, url(${imagePath})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
+                minHeight: '100vh',
             }}
         >
-            <Grid container>
-                {type === 'classic' ? (
-                    //if classic we put the Header
-                    // <Grid item xs={12} sm={12}>
-                    //     <NsHeader
-                    //         logo={headerLogo}
-                    //         configuration={{ centralLogo: true }}
-                    //         router={null}
-                    //         type={'horizontal'}
-                    //     />
-                    // </Grid>
-                    <></>
-                ) : (
-                    <>
-                        <Grid item xs={12} sm={4}>
-                            <div
-                                style={{
-                                    backgroundColor: rightBannerColor,
-                                    height: '100vh',
-                                    display: 'flex',
+            <Grid container sx={{ minHeight: { xs: 'auto', sm: '100vh' }, alignItems: { sm: 'stretch' } }}>
+                {type !== 'classic' && (
+                    <Grid item xs={12} sm={4} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                        <Box
+                            sx={{
+                                backgroundColor: rightBannerColor,
+                                minHeight: { xs: 'auto', sm: '100vh' },
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                py: { xs: 3, sm: 0 },
+                                px: { xs: 2, sm: 0 },
+                            }}
+                        >
+                            <Card>
+                                <CardMedia
+                                    component="img"
+                                    image={logoSrc}
+                                    sx={{
+                                        height: { xs: 140, sm: 220 },
+                                        maxWidth: { xs: 180, sm: 220 },
+                                        objectFit: 'contain',
+                                        backgroundColor: rightBannerColor,
+                                    }}
+                                />
+                            </Card>
+                            <Typography
+                                variant="h1"
+                                align="center"
+                                sx={{ fontSize: { xs: '1.8rem', sm: '2.8rem' }, lineHeight: 1.2, mt: 2 }}
+                            >
+                                {title1}
+                                {title2 && (
+                                    <>
+                                        <br />
+                                        {title2}
+                                    </>
+                                )}
+                            </Typography>
+                        </Box>
+                    </Grid>
+                )}
+                <Grid item xs={12} sm={type !== 'classic' ? 8 : 12}>
+                    <Box
+                        sx={{
+                            minHeight: { xs: 'auto', sm: '100vh' },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            py: { xs: 3, sm: 0 },
+                            px: { xs: 2, sm: 0 },
+                        }}
+                    >
+                        {type !== 'classic' && (
+                            <Box
+                                sx={{
+                                    display: { xs: 'flex', sm: 'none' },
                                     flexDirection: 'column',
                                     alignItems: 'center',
-                                    justifyContent: 'center',
+                                    mb: 3,
+                                    width: '100%',
                                 }}
                             >
-                                <Card>
+                                <Card sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
                                     <CardMedia
                                         component="img"
-                                        height="220"
                                         image={logoSrc}
-                                        style={{
-                                            backgroundColor: rightBannerColor,
-                                            maxWidth: '220px',
+                                        sx={{
+                                            height: 80,
+                                            maxWidth: 180,
                                             objectFit: 'contain',
+                                            backgroundColor: 'transparent',
+                                            mx: 'auto',
                                         }}
                                     />
                                 </Card>
-                                <Typography variant="h1" align="center">
+                                <Typography
+                                    variant="h6"
+                                    align="center"
+                                    sx={{ fontSize: '1.4rem', lineHeight: 1.2, mt: 1 }}
+                                >
                                     {title1}
                                     {title2 && (
                                         <>
@@ -127,28 +173,18 @@ export const NsLogin: React.FC<NsLoginProps> = ({
                                         </>
                                     )}
                                 </Typography>
-                            </div>
-                        </Grid>
-                    </>
-                )}
-                <Grid item xs={12} sm={type !== 'classic' ? 8 : 12}>
-                    <div
-                        style={{
-                            height: '100vh',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                    >
+                            </Box>
+                        )}
                         <Card
                             sx={{
                                 backgroundColor: formBgColor,
-                                width: cardWidth,
-                                borderRadius: `${cardBorderRadius}`,
+                                width: '100%',
+                                maxWidth: cardWidth,
+                                borderRadius: cardBorderRadius,
+                                boxSizing: 'border-box',
                             }}
                         >
-                            <CardContent sx={{ padding: '30px' }}>
+                            <CardContent sx={{ padding: { xs: '20px', sm: '30px' } }}>
                                 <CardHeader
                                     title="Login"
                                     sx={{
@@ -209,7 +245,7 @@ export const NsLogin: React.FC<NsLoginProps> = ({
                                 )}
                             </CardContent>
                         </Card>
-                    </div>
+                    </Box>
                 </Grid>
             </Grid>
         </div>
