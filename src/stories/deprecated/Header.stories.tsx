@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { NsHeader } from '../../components/patterns/navigation/NsHeader';
-import { NsDropDown } from '../../components/components/dropdown/NsDropDown';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
+import { NsHeader } from '@/components/patterns/navigation/NsHeader';
+import { NsDropDown } from '@/components/components/dropdown/NsDropDown';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Box, Typography } from '@mui/material';

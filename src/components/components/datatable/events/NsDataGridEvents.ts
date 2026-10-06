@@ -1,9 +1,10 @@
-import { ColumnSorting } from '../NsDataGridServer';
-import { TableFilters } from '../filtering/FilterContainer';
+import { ColumnSorting } from '@/components/components/datatable/legacy/NsDataGridServer';
+import { TableFilters } from '@/components/components/datatable/filtering/FilterContainer';
 
 export enum NsDataGridEventType {
     FILTER_CHANGE = 'filter',
     SORT_CHANGE = 'sort',
+    PAGINATION_CHANGE = 'pagination',
     /* The callback receives an array of selected row IDs.
      * If a custom row ID mapper is not provided, the row IDs will be the row index by default.
      */

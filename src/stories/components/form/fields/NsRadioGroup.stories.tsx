@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsForm } from 'src/components/components/form/NsForm';
+import { NsForm } from '@/components/components/form/NsForm';
 import { FormGroup, FormLabel } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { NsRadio, NsRadioGroup } from '../../../../components/components/form/fields/NsRadioGroup';
+import { NsRadio, NsRadioGroup } from '@/components/components/form/fields/NsRadioGroup';
 import Typography from '@mui/material/Typography';
 
 const meta: Meta<typeof NsRadioGroup> = {
@@ -21,40 +21,22 @@ const Template: StoryFn<typeof NsRadioGroup> = () => {
         setSelectedValue(event.target.value);
     };
 
-
     return (
         <>
-            <NsForm onSubmit={(data: { meal: string }) => {
-                console.log(data);
-                setSelectedValue(data.meal);
-            }}>
-                <FormLabel component="legend">
-                    {t('Choose your favourite meal')}
-                </FormLabel>
+            <NsForm
+                onSubmit={(data: { meal: string }) => {
+                    console.log(data);
+                    setSelectedValue(data.meal);
+                }}
+            >
+                <FormLabel component="legend">{t('Choose your favourite meal')}</FormLabel>
                 <FormGroup>
-                    <NsRadioGroup
-                        name="meal"
-                        defaultValue="Lasagne"
-                        onChange={handleChange}
-                    >
-                        <NsRadio
-                            label="Tortellini"
-                            value="Tortellini"
-                            disabled
-                        />
-                        <NsRadio
-                            label="Lasagne"
-                            value="Lasagne"
-                            disabled
-                        />
-                        <NsRadio
-                            label="Erbazzone"
-                            value="Erbazzone"
-                        />
-                        <NsRadio
-                            label="Pizza"
-                            value="Pizza"
-                        /></NsRadioGroup>
+                    <NsRadioGroup name="meal" defaultValue="Lasagne" onChange={handleChange}>
+                        <NsRadio label="Tortellini" value="Tortellini" disabled />
+                        <NsRadio label="Lasagne" value="Lasagne" disabled />
+                        <NsRadio label="Erbazzone" value="Erbazzone" />
+                        <NsRadio label="Pizza" value="Pizza" />
+                    </NsRadioGroup>
                 </FormGroup>
             </NsForm>
             <Typography>You chose: {selectedValue}</Typography>
@@ -62,4 +44,6 @@ const Template: StoryFn<typeof NsRadioGroup> = () => {
     );
 };
 
-export const Radio: unknown = Template.bind({});
+export const Radio: unknown = {
+    render: Template,
+};

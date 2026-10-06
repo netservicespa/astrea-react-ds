@@ -15,12 +15,12 @@
       "module-resolver",
       {
         "root": [
-          "./dist"
+          "./src"
         ],
         "alias": {
-          "@/components": "./dist/components",
-          "@/themes": "./dist/themes",
-          "@/util": "./dist/util"
+          "@/components": "./src/components",
+          "@/themes": "./src/themes",
+          "@/util": "./src/util"
         }
       }
     ]

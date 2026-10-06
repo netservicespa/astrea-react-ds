@@ -20,7 +20,7 @@ export interface NsTableProps<T> {
     data: T[]; // Array of data objects
 }
 
-export const NsTable2 = <T,>({ columns, data }: NsTableProps<T>): JSX.Element => {
+export const NsTable2 = <T,>({ columns, data }: NsTableProps<T>): React.JSX.Element => {
     return (
         <TableContainer component={Paper}>
             <Table>

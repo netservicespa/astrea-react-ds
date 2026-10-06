@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { NsFooter } from 'src/components/patterns/footer/NsFooter';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { NsFooter } from '@/components/patterns/footer/NsFooter';
 
 /**
  * Dynamic Footer Stories
@@ -14,7 +14,7 @@ const meta: Meta<typeof NsFooter> = {
 export const FooterSimple: Story = {
     args: {
         type: 'simple',
-        logoPath: './images/u11.png',
+        logoPath: './images/netservice_monogramma.svg',
         links: [
             { href: '#', text: 'Accessibility' },
             { href: '#', text: 'Sitemap' },
@@ -70,7 +70,7 @@ export const FooterSimple: Story = {
 export const FooterMultiColumn: Story = {
     args: {
         type: 'multiColumn',
-        logoPath: './images/u11.png',
+        logoPath: './images/netservice_monogramma.svg',
         links: [
             { href: '#', text: 'Accessibility' },
             { href: '#', text: 'Sitemap' },

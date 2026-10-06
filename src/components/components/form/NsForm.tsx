@@ -3,7 +3,7 @@ import { Button, Grid, SxProps } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'relay-forms';
-import { NsErrors } from '../NsErrors';
+import { NsErrors } from '@/components/components/NsErrors';
 import { NsFormWrapper } from './NsFormWrapper';
 
 export interface NsFormProps<T extends Object> {
@@ -40,6 +40,11 @@ export interface NsFormProps<T extends Object> {
      * buttonPosition: `"left" | "right" | "reverse" | "reverseLeft" | "reverseRight" | "spaceBetween"`
      */
     buttonsSlot?: React.ReactNode | boolean;
+    /**
+     * Set this flag to true to link this form to the parent Relay Environment.
+     * This is required for Relay to work correctly inside the form, and could also be used to link multiple form components together.
+     */
+    inheritContext?: boolean;
 }
 
 export interface DefaultButtonsProps {
@@ -63,9 +68,10 @@ export const NsForm = <T extends Object>({
     sx,
     children,
     buttonsSlot = true,
+    inheritContext = false,
 }: React.PropsWithChildren<NsFormProps<T>>) => {
     return (
-        <NsFormWrapper name={name}>
+        <NsFormWrapper name={name} inheritContext={inheritContext}>
             <FormInner onSubmit={onSubmit} onReset={onReset} sx={sx} buttonsSlot={buttonsSlot}>
                 {children}
             </FormInner>
@@ -94,10 +100,15 @@ const FormInner = <T extends Object>({
     return (
         <FormContext.Provider value={formContextValue}>
             <Grid sx={sx} container>
-                <Grid item xs={12}>
-                    {children}
-                </Grid>
-                <Grid mb={2} mr={1} item container xs={12}>
+                <Grid size={12}>{children}</Grid>
+                <Grid
+                    container
+                    sx={{
+                        mb: 2,
+                        mr: 1,
+                    }}
+                    size={12}
+                >
                     <NsErrors />
                 </Grid>
                 {buttonsContent}
@@ -155,23 +166,26 @@ export const DefaultButtons = <T extends Object>({
     const isReverseRight = buttonPosition === 'reverseRight';
 
     return (
-        <Grid item container xs={12} justifyContent={getButtonContainerJustify()}>
+        <Grid
+            container
+            sx={{
+                justifyContent: getButtonContainerJustify(),
+            }}
+            size={12}
+        >
             {(isReverseLeft || (isReverse && !isReverseRight)) && (
                 <Button onClick={doReset} sx={{ mr: 1 }}>
                     {resetText || t('form.buttons.reset')}
                 </Button>
             )}
-
             {!isReverseRight && (
                 <Button onClick={submit} variant="contained" sx={{ mr: 1 }}>
                     {submitText || t('form.buttons.submit')}
                 </Button>
             )}
-
             {!isReverse && !isReverseLeft && !isReverseRight && (
                 <Button onClick={doReset}>{resetText || t('form.buttons.reset')}</Button>
             )}
-
             {isReverseRight && (
                 <>
                     <Button onClick={doReset} sx={{ mr: 1 }}>
@@ -200,7 +214,7 @@ export const CustomTestButtons = <T extends Object>({ submitText = 'Submit', res
     };
 
     return (
-        <Grid item container xs={12}>
+        <Grid container size={12}>
             <Button onClick={doReset} sx={{ mr: 1 }}>
                 {resetText}
             </Button>

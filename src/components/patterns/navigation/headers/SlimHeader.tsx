@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { css, styled } from '@mui/material/styles';
-import { DynamicLink, IDropDownConfiguration } from 'src/components/components/dropdown/NsDropDown';
+import { DynamicLink, IDropDownConfiguration } from '@/components/components/dropdown/NsDropDown';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
-import { INotificationData, NsNotification } from 'src/components/components/notification/NsNotification';
+import { INotificationData, NsNotification } from '@/components/components/notification/NsNotification';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
 interface SlimHeaderProps {

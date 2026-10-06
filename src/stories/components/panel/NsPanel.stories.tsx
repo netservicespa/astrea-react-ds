@@ -1,7 +1,7 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import { Box, minHeight } from '@mui/system';
-import { NsPanel } from 'src/components/components/panel/NsPanel';
+import { NsPanel } from '@/components/components/panel/NsPanel';
 
 const meta: Meta<typeof NsPanel> = {
     title: 'Components/Panel',
@@ -105,36 +105,50 @@ const TemplateTest: StoryFn<typeof NsPanel> = () => {
     );
 };
 
-export const BasicPanel = Template.bind({});
-BasicPanel.args = {
-    menu: false,
-    type: 'primary',
-    title: 'Basic NsPanel',
-    subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
-    children: <Box> This is a Box passed as children </Box>,
-    sx: {},
-};
-export const BasicPanelSecondary = Template.bind({});
-BasicPanelSecondary.args = {
-    menu: false,
-    type: 'secondary',
-    title: 'Basic NsPanel',
-    subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
-    children: <Box> This is a Box passed as children </Box>,
-    sx: {},
-};
-export const MenuPanel = Template.bind({});
-MenuPanel.args = {
-    menu: true,
-    type: 'primary',
-    title: 'Menu NsPanel',
-    subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
-    children: <Box> This is a Box passed as children </Box>,
-    sx: {
-        maxWidth: '50%',
+export const BasicPanel = {
+    render: Template,
+
+    args: {
+        menu: false,
+        type: 'primary',
+        title: 'Basic NsPanel',
+        subtitle:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
+        children: <Box> This is a Box passed as children </Box>,
+        sx: {},
     },
 };
-export const examplePanel = TemplateTest.bind({});
+
+export const BasicPanelSecondary = {
+    render: Template,
+
+    args: {
+        menu: false,
+        type: 'secondary',
+        title: 'Basic NsPanel',
+        subtitle:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
+        children: <Box> This is a Box passed as children </Box>,
+        sx: {},
+    },
+};
+
+export const MenuPanel = {
+    render: Template,
+
+    args: {
+        menu: true,
+        type: 'primary',
+        title: 'Menu NsPanel',
+        subtitle:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus justo tellus, laoreet vel massa et, ornare luctus tellus. Aenean ultricies massa augue. Suspendisse a vestibulum tortor. In hac habitasse platea dictumst.',
+        children: <Box> This is a Box passed as children </Box>,
+        sx: {
+            maxWidth: '50%',
+        },
+    },
+};
+
+export const examplePanel = {
+    render: TemplateTest,
+};

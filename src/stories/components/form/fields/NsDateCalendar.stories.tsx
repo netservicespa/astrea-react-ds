@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsDateCalendar } from 'src/components/components/form/fields/NsDateCalendar';
-import { ValidatorFactoryType, required } from 'src/components/components/form/validators';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsDateCalendar } from '@/components/components/form/fields/NsDateCalendar';
+import { ValidatorFactoryType, required } from '@/components/components/form/validators';
 import { FormValueStateReturn } from 'relay-forms';
 import moment from 'moment';
 
@@ -40,7 +40,7 @@ const Template: StoryFn<typeof NsDateCalendar> = (args) => {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <NsForm sx={{ width: '50%' }} onSubmit={(data: any) => setData(data)} onReset={() => setData({})}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <NsDateCalendar
                             name={label}
                             label="Birthday date"
@@ -55,4 +55,6 @@ const Template: StoryFn<typeof NsDateCalendar> = (args) => {
     );
 };
 
-export const DateCalendars = Template.bind({});
+export const DateCalendars = {
+    render: Template,
+};

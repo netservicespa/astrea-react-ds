@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Button, Container, Typography } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import { useSnackbar } from 'notistack';
-import { NsNotifier } from 'src/components/notifier/NsNotifier';
+import { NsNotifier } from '@/components/notifier/NsNotifier';
 
 export default {
     title: 'Components/Notifier',
@@ -29,7 +29,15 @@ const Template: StoryFn<typeof NsNotifier> = (args) => {
         return (
             <Container>
                 <Typography component="p">Clicca il pulsante per mostrare la notifica.</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100px' }} textAlign="center">
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        width: '100px',
+                    }}
+                >
                     <Button
                         variant="contained"
                         onClick={() => enqueueSnackbar('success message', { variant: 'success' })}
@@ -62,12 +70,19 @@ const Template: StoryFn<typeof NsNotifier> = (args) => {
     );
 };
 
-export const Notifiche = Template.bind({});
-Notifiche.args = {
-    variant: 'filled',
+export const Notifiche = {
+    render: Template,
+
+    args: {
+        variant: 'filled',
+    },
 };
-export const NotificheOutlined = Template.bind({});
-NotificheOutlined.args = {
-    variant: 'outlined',
-    anchorOrigin: { horizontal: 'left', vertical: 'top' },
+
+export const NotificheOutlined = {
+    render: Template,
+
+    args: {
+        variant: 'outlined',
+        anchorOrigin: { horizontal: 'left', vertical: 'top' },
+    },
 };

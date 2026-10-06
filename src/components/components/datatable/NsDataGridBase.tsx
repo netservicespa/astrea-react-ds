@@ -25,7 +25,7 @@ const DEFAULT_UNORDERED_ICON = <ImportExportIcon fontSize="small" />;
 /**
  * Optional configuration object that can be passed to configure the DataGrid family of components.
  */
-export interface NsDataGridOptions<RowType extends object> {
+export interface NsDataGridOptions<RowType extends object, FilterType extends object = {}> {
     /** Globally allow the columns to be resized. Resizing can still be disabled on individual columns */
     resizable?: boolean;
     /** Globally allow the columns to be sorted. Sorting can still be disabled on individual columns */
@@ -58,11 +58,18 @@ export interface NsDataGridOptions<RowType extends object> {
     selectedRow?: string;
     /** Allow switching to Card view on small devices. Default: true */
     enableCard?: boolean;
+
+    /*****************
+     * NEW ADDITIONS *
+     *****************/
+    defaultFilters?: FilterType;
+    defaultSorting?: any;
 }
 
-export interface NsDataGridBaseProps<RowType extends object> extends TableContainerProps {
+export interface NsDataGridBaseProps<RowType extends object, FilterType extends object = {}>
+    extends TableContainerProps {
     table: Table<RowType>;
-    options?: NsDataGridOptions<RowType>;
+    options?: NsDataGridOptions<RowType, FilterType>;
     debug?: boolean;
 }
 
@@ -130,14 +137,14 @@ const TableCellStyled = styled(TableCell, {
     },
 }));
 
-export function NsDataGridBase<RowType extends object>({
+export function NsDataGridBase<RowType extends object, FilterType extends object = {}>({
     table,
     options = {},
     debug = false,
     // Mui TableContainer props
     sx,
     component = Paper,
-}: Readonly<NsDataGridBaseProps<RowType>>) {
+}: Readonly<NsDataGridBaseProps<RowType, FilterType>>) {
     const sortingIcons = {
         asc: options.customSortingIcons?.asc ?? DEFAULT_ASC_ICON,
         desc: options.customSortingIcons?.desc ?? DEFAULT_DESC_ICON,

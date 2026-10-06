@@ -1,13 +1,12 @@
-import { Select } from '@mui/material';
+import { NsLabelInput } from '@/components/components/NsLabelInput';
+import { composeValidators, NsInput } from '@/components/components/form/validators';
+import uniqueId from '@/util/uniqueId';
+import { Select, SelectChangeEvent, SelectProps } from '@mui/material';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
-import { SelectChangeEvent, SelectProps } from '@mui/material/Select/Select';
-import { NsLabelInput } from '../../NsLabelInput';
-import { composeValidators, NsInput } from '../validators';
-import uniqueId from '../../../../util/uniqueId';
 import { useFormField } from 'relay-forms';
 
-export type NsSelectProps = NsInput<Omit<SelectProps, 'value'>, string | string[]>;
+export type NsSelectProps = NsInput<Omit<SelectProps, 'value'> & { placeholder?: string }, string | string[]>;
 
 /**
  * Select component integrated with relay-forms.
@@ -69,7 +68,7 @@ export const NsSelect: React.FC<NsSelectProps> = ({
                 defaultValue={defaultValue}
                 fullWidth
                 size={size}
-                placeholder={placeholder}
+                inputProps={{ placeholder }}
                 onChange={setValueCallback}
                 disabled={disabled}
                 multiple={multiple}

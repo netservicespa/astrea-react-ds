@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
-import { ColorItem, ColorPalette } from '@storybook/blocks';
+import { ColorItem, ColorPalette } from '@storybook/addon-docs/blocks';
 
 interface TabPanelProps {
     children?: React.ReactNode;

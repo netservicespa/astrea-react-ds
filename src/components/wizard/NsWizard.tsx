@@ -1,14 +1,13 @@
-import { Box, Container, useTheme } from '@mui/material';
+import { NsErrors } from '@/components/components/NsErrors';
+import { NsFormWrapper } from '@/components/components/form/NsFormWrapper';
+import { NsModal } from '@/components/components/modals/NsModal';
+import { Box, Container, SvgIcon, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
-import SvgIcon from '@mui/material/SvgIcon/SvgIcon';
 import { BoxProps } from '@mui/system';
 import React, { ReactElement, useEffect, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'relay-forms';
-import { NsErrors } from '../../components/components/NsErrors';
-import { NsModal } from '../components/modals/NsModal';
-import { NsFormWrapper } from '../../components/components/form/NsFormWrapper';
-import { NsWizardStepperProps, NsWizardStepper } from './NsStepper';
+import { NsWizardStepper, NsWizardStepperProps } from './NsStepper';
 import { IWizardContext, WizardContext, useWizard } from './WizardContext';
 import { WizardActionKind, wizardReducer } from './WizardReducer';
 
@@ -115,7 +114,7 @@ export function NsWizard<T = unknown>({
     }, [state.data]);
 
     // Find out what the actual stepper component is
-    let actualStepper: JSX.Element;
+    let actualStepper: React.JSX.Element;
     if (StepperSlot === true) {
         actualStepper = <NsWizardStepper icons={icons} activeStep={state.step} steps={stepsLabels} />;
     } else if (StepperSlot === false) {
@@ -126,7 +125,16 @@ export function NsWizard<T = unknown>({
     return (
         <WizardContext.Provider value={ctx}>
             {actualStepper}
-            <Box mt={3} border={(theme as any).custom?.borders[0]} {...boxProps}>
+            <Box
+                {...boxProps}
+                sx={[
+                    {
+                        mt: 3,
+                        border: (theme as any).custom?.borders[0],
+                    },
+                    ...(Array.isArray(boxProps.sx) ? boxProps.sx : [boxProps.sx]),
+                ]}
+            >
                 <>{React.Children.toArray(children)[state.step]}</>
             </Box>
         </WizardContext.Provider>
@@ -265,6 +273,8 @@ export type NsWizardFormStepProps<T = unknown> = NsWizardStepProps<T> & {
      * Defaults to true.
      */
     showButtons?: boolean;
+
+    inheritContext?: boolean;
 };
 
 /**
@@ -303,6 +313,7 @@ export function NsWizardFormStep<T = unknown>({
     children,
     showButtons = true,
     onStepCallback,
+    inheritContext = false,
     ...rest
 }: NsWizardFormStepProps<T>) {
     const {
@@ -318,7 +329,7 @@ export function NsWizardFormStep<T = unknown>({
     }, []);
 
     return (
-        <NsFormWrapper name={`wizard-step-${step}`}>
+        <NsFormWrapper name={`wizard-step-${step}`} inheritContext={inheritContext}>
             <InnerWizardFormStep showButtons={showButtons} onStepCallback={onStepCallback} {...rest}>
                 {children}
             </InnerWizardFormStep>

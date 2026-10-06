@@ -86,7 +86,7 @@ export function NsWizardStepper({
   );
 
   return (
-    <Grid item xs={12}>
+    <Grid size={12}>
       <Stepper
         alternativeLabel
         connector={<ColorlibConnector />}
@@ -105,7 +105,9 @@ export function NsWizardStepper({
             <Step key={label}>
               <StepLabel
                 icon={iconElements[index]}
-                StepIconComponent={ColorlibStepIcon}
+                slots={{
+                  stepIcon: ColorlibStepIcon
+                }}
               >
                 {label}
               </StepLabel>

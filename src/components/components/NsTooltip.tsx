@@ -58,7 +58,7 @@ export const NsTooltip = ({
         } else {
             return children;
         }
-    }, [children]);
+    }, [children, icon, colorIcon]);
 
     return (
         <CustomTooltip sx={sx} title={title} placement={placement} {...otherProps}>

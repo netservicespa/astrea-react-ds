@@ -2,8 +2,8 @@ import { Grid } from '@mui/material';
 import React from 'react';
 
 export interface NsGridFormLayoutProps {
-  /** Number of columns per each row. */
-  rowSize?: number;
+    /** Number of columns per each row. */
+    rowSize?: number;
 }
 
 /**
@@ -23,47 +23,21 @@ export interface NsGridFormLayoutProps {
  * </GridLayout>
  * ```
  */
-export const NsGridLayout: React.FC<
-  React.PropsWithChildren<NsGridFormLayoutProps>
-> = ({ children, rowSize = 2 }) => {
-  const childrenList = React.useMemo(
-    () => React.Children.toArray(children),
-    [children]
-  );
-  if (childrenList.length === 0) {
-    return <></>;
-  } else if (childrenList.length === 1) {
-    return <>{children}</>;
-  } else {
-    const lastRowLen = childrenList.length % rowSize;
-    const rows = childrenList.length / rowSize;
-    const grid: (typeof childrenList)[] = [];
-    for (let i = 0; i < rows; i++) {
-      const row: typeof childrenList = [];
-      for (let j = 0; j < rowSize; j++) {
-        row.push(childrenList[i * rowSize + j]);
-      }
-      grid.push(row);
+export const NsGridLayout: React.FC<React.PropsWithChildren<NsGridFormLayoutProps>> = ({ children, rowSize = 2 }) => {
+    const childrenList = React.useMemo(() => React.Children.toArray(children), [children]);
+    if (childrenList.length === 0) {
+        return <></>;
+    } else if (childrenList.length === 1) {
+        return <>{children}</>;
+    } else {
+        return (
+            <Grid container spacing={4}>
+                {childrenList.map((elem, i) => (
+                    <Grid key={i} size={12 / rowSize}>
+                        {elem}
+                    </Grid>
+                ))}
+            </Grid>
+        );
     }
-    if (lastRowLen > 0) {
-      const row: typeof childrenList = [];
-      for (let i = 0; i < lastRowLen; i++) {
-        row.push(childrenList[rows + i]);
-      }
-      grid.push(row);
-    }
-    return (
-      <Grid container>
-        {grid.map((row, i) => (
-          <Grid key={i} spacing={4} container>
-            {row.map((elem, j) => (
-              <Grid my={2} key={j} item sm={12 / row.length}>
-                {elem}
-              </Grid>
-            ))}
-          </Grid>
-        ))}
-      </Grid>
-    );
-  }
 };

@@ -21,7 +21,7 @@ export interface FooterProps {
     /**
      * The path to the logo displayed in the footer.
      */
-    logoPath: string;
+    logoPath?: string;
 
     /**
      * An array of clickable link items for the footer.

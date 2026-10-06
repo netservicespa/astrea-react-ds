@@ -185,7 +185,7 @@ const NsClickableCard = ({ icon, title = '', cardVariant = 'classic', children =
     );
 };
 
-export function NsCard(props: NsCardProps, { ...rest }) {
+export function NsCard(props: NsCardProps) {
     const [isActive, setIsActive] = React.useState(false);
 
     const handleCardClick = () => {
@@ -215,7 +215,6 @@ export function NsCard(props: NsCardProps, { ...rest }) {
             onClick={handleCardClick}
             className={`${props.cardVariant} ${isActive ? 'active' : ''}`}
             sx={props.sx}
-            {...rest}
         >
             {renderCard()}
         </StyledCard>

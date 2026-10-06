@@ -1,5 +1,5 @@
+import { NsHeader, UserPanelProps } from '@/components/patterns/navigation/NsHeader';
 import React from 'react';
-import { NsHeader, UserPanelProps } from '../../patterns/navigation/NsHeader';
 
 /**
  * User Panel Component

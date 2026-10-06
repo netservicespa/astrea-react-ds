@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Accept, useDropzone } from 'react-dropzone';
 import { Box, Button, FormLabel, MenuItem, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutlined';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import ListAltSharpIcon from '@mui/icons-material/ListAltSharp';
 import { NsSelect } from './form/fields/NsSelect';
 import { required } from './form/validators';
+import { NsTooltip } from './NsTooltip';
 
 export interface NsDragAndDropProps {
     value?: File[];
@@ -26,6 +27,7 @@ export interface NsDragAndDropProps {
     displayForm?: boolean;
     name?: string;
     defaultValue?: any;
+    iconFileColor?: string | null;
 }
 
 export function NsDragAndDrop({
@@ -37,11 +39,13 @@ export function NsDragAndDrop({
     validationFile,
     displayForm,
     onFileLoaded,
+    iconFileColor,
 }: NsDragAndDropProps) {
     const theme = useTheme();
     const [images, setImages] = React.useState<File[]>(value ?? []);
     const [showCarica, setShowCarica] = React.useState<boolean | undefined>(displayForm);
-
+    const iconColor = iconFileColor ?? theme.palette.primary.main;
+    const deleteBoxSize = 56;
     React.useEffect(() => {
         setShowCarica(displayForm);
     }, [displayForm]);
@@ -79,7 +83,7 @@ export function NsDragAndDrop({
     const { t } = useTranslation();
 
     function usePrevious(value: any) {
-        const ref = React.useRef();
+        const ref = React.useRef(null);
         React.useEffect(() => {
             ref.current = value;
         });
@@ -124,32 +128,56 @@ export function NsDragAndDrop({
             {
                 <div>
                     {showCarica && (
-                        <Box {...getRootProps({ className: 'dropzone' })} mt={0} mb={0} ml="16px" mr="16px">
+                        <Box
+                            {...getRootProps({ className: 'dropzone' })}
+                            sx={{
+                                mt: 0,
+                                mb: 0,
+                                ml: 0,
+                                mr: 0,
+                            }}
+                        >
                             <Box
-                                mt={3}
-                                mb={2}
-                                p={5}
                                 sx={{
+                                    mt: 3,
+                                    mb: 2,
+                                    p: 5,
+                                    display: !multiple && images.length != 0 ? 'none' : '',
                                     minHeight: '300px',
                                     border: !isDragActive ? '1px dashed grey' : '1px dashed #308A7D',
                                     background: '#F0F0F0',
                                 }}
-                                display={!multiple && images.length != 0 ? 'none' : ''}
                             >
                                 <input {...getInputProps()} />
                                 <Box sx={{ textAlign: 'center' }}>
                                     <FileUploadIcon color="disabled" sx={{ fontSize: 50 }} />
                                 </Box>
                                 {isDragActive ? (
-                                    <Box textAlign={'center'}>
+                                    <Box
+                                        sx={{
+                                            textAlign: 'center',
+                                        }}
+                                    >
                                         <input {...getInputProps()} />
                                         {t('dragDrop.labels.releaseFile')}
                                     </Box>
                                 ) : (
-                                    <Box textAlign={'center'}>{t('dragDrop.labels.textDrag')}</Box>
+                                    <Box
+                                        sx={{
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        {t('dragDrop.labels.textDrag')}
+                                    </Box>
                                 )}
                             </Box>
-                            <Box display={!multiple && images.length != 0 ? 'none' : ''} mb={2} textAlign={'center'}>
+                            <Box
+                                sx={{
+                                    display: !multiple && images.length != 0 ? 'none' : '',
+                                    mb: 2,
+                                    textAlign: 'center',
+                                }}
+                            >
                                 <Button sx={{ width: '100%' }} variant="contained">
                                     {t('dragDrop.labels.loadFromFile')}
                                 </Button>
@@ -157,58 +185,117 @@ export function NsDragAndDrop({
                         </Box>
                     )}
                     <Box>
-                        <Typography component="h2" variant="h2" margin={3} padding={0}>
+                        <Typography
+                            component="h2"
+                            variant="h2"
+                            sx={{
+                                margin: 0,
+                                padding: 0,
+                            }}
+                        >
                             {loadText}
                         </Typography>
                     </Box>
 
                     {images.length <= 0 ? (
                         <Box>
-                            <Typography component="h6" variant="h6" margin={3} padding={0} style={{ fontWeight: 700 }}>
+                            <Typography
+                                variant="h6"
+                                style={{ fontWeight: 600 }}
+                                sx={{
+                                    margin: 0,
+                                    padding: 0,
+                                }}
+                            >
                                 {t('dragDrop.uploadedFile')}
                             </Typography>
-                            <Typography component="h6" variant="h6" margin={3} padding={0}>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    margin: 0,
+                                    padding: 0,
+                                }}
+                            >
                                 {t('dragDrop.noFile')}
                             </Typography>
                         </Box>
                     ) : null}
 
-                    <Box margin={0} padding={0}>
+                    <Box
+                        sx={{
+                            margin: 0,
+                            padding: 0,
+                        }}
+                    >
                         {!multiple &&
                             images.map((image, index) => {
                                 return (
                                     <Box key={image.name}>
-                                        <FormLabel
+                                        <Typography
+                                            variant="h6"
+                                            style={{ fontWeight: 600 }}
                                             sx={{
-                                                fontSize: '20px',
-                                                color: '#000',
-                                                fontWeight: 'bold',
+                                                margin: 0,
+                                                padding: 0,
+                                                pb: 1,
                                             }}
                                         >
                                             {t('dragDrop.uploadedFile')}
-                                        </FormLabel>
-                                        <Box p={3} pt={0} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                p: 0,
+                                                pt: 0,
+                                                display: 'flex',
+                                                alignItems: 'stretch',
+                                            }}
+                                        >
                                             <Box
-                                                p={2}
-                                                border={(theme as any).custom.borders[0]}
-                                                sx={{ width: '90%', display: 'flex' }}
+                                                sx={{
+                                                    p: 1.5,
+                                                    border: (theme as any).custom.borders[0],
+                                                    flex: 1,
+                                                    minWidth: 0,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
                                             >
-                                                <InsertDriveFileIcon sx={{ color: '#308A7D' }} />
-                                                <Box pl={2}>{image.name}</Box>
+                                                <ListAltSharpIcon
+                                                    sx={{ color: iconColor, ml: 3, flexShrink: 0, fontSize: 28 }}
+                                                />
+                                                <NsTooltip placement="top" title={image.name}>
+                                                    <Typography
+                                                        variant="body1"
+                                                        sx={{
+                                                            pl: 3,
+                                                            minWidth: 0,
+                                                            overflow: 'hidden',
+                                                            textOverflow: 'ellipsis',
+                                                            whiteSpace: 'nowrap',
+                                                            fontSize: '1.1rem',
+                                                            lineHeight: 1.4,
+                                                        }}
+                                                    >
+                                                        {image.name}
+                                                    </Typography>
+                                                </NsTooltip>
                                             </Box>
                                             <Box
-                                                p={1}
-                                                sx={{
-                                                    display: 'flex',
-                                                    backgroundColor: '#f7e1e0',
-                                                    width: '10%',
-                                                    cursor: 'pointer',
-                                                }}
                                                 onClick={() => removeImage(index)}
+                                                sx={{
+                                                    width: `${deleteBoxSize}px`,
+                                                    height: `${deleteBoxSize}px`,
+                                                    flexShrink: 0,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    backgroundColor: '#f7e1e0',
+                                                    cursor: 'pointer',
+                                                    borderBottom: '3px solid',
+                                                    borderColor: '#B72438',
+                                                }}
                                             >
-                                                <DeleteOutlineIcon
-                                                    sx={{ marginLeft: 1, color: 'red', margin: 'auto' }}
-                                                />
+                                                <DeleteOutlineIcon sx={{ color: '#B72438', fontSize: 28 }} />
                                             </Box>
                                         </Box>
                                     </Box>
@@ -220,13 +307,63 @@ export function NsDragAndDrop({
                         images.map((image, index) => {
                             return (
                                 <Box key={index}>
-                                    <Box p={3} pb={1} pt={0} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Box p={2} border={(theme as any).custom.borders[0]} sx={{ width: '90%' }}>
-                                            <Box display={'flex'}>
-                                                <InsertDriveFileIcon sx={{ color: '#308A7D' }} />
-                                                <Box pl={2}>{image.name}</Box>
+                                    <Box
+                                        sx={{
+                                            p: 0,
+                                            pb: 2,
+                                            pt: 0,
+                                            display: 'flex',
+                                            alignItems: 'stretch',
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                p: 1.5,
+                                                border: (theme as any).custom.borders[0],
+                                                flex: 1,
+                                                minWidth: 0,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    minWidth: 0,
+                                                }}
+                                            >
+                                                <ListAltSharpIcon
+                                                    sx={{
+                                                        color: iconColor,
+                                                        ml: 3,
+                                                        flexShrink: 0,
+                                                        fontSize: 28,
+                                                    }}
+                                                />
+                                                <NsTooltip placement="top" title={image.name}>
+                                                    <Typography
+                                                        variant="body1"
+                                                        sx={{
+                                                            pl: 3,
+                                                            minWidth: 0,
+                                                            overflow: 'hidden',
+                                                            textOverflow: 'ellipsis',
+                                                            whiteSpace: 'nowrap',
+                                                            fontSize: '1.1rem',
+                                                            lineHeight: 1.4,
+                                                        }}
+                                                    >
+                                                        {image.name}
+                                                    </Typography>
+                                                </NsTooltip>
                                             </Box>
-                                            <Box sx={{ display: 'flex' }} mt={2}>
+                                            <Box
+                                                sx={{
+                                                    mt: 2,
+                                                    display: 'flex',
+                                                }}
+                                            >
                                                 {attachmentTypes ? (
                                                     <NsSelect
                                                         validate={required}
@@ -251,16 +388,26 @@ export function NsDragAndDrop({
                                             </Box>
                                         </Box>
                                         <Box
-                                            p={1}
                                             onClick={() => removeImage(index)}
                                             sx={{
+                                                width: `${deleteBoxSize}px`,
+                                                height: `${deleteBoxSize}px`,
+                                                flexShrink: 0,
                                                 display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
                                                 backgroundColor: '#f7e1e0',
-                                                width: '10%',
                                                 cursor: 'pointer',
+                                                borderBottom: '3px solid',
+                                                borderColor: '#B72438',
                                             }}
                                         >
-                                            <DeleteOutlineIcon sx={{ marginLeft: 1, color: 'red', margin: 'auto' }} />
+                                            <DeleteOutlineIcon
+                                                sx={{
+                                                    color: '#B72438',
+                                                    fontSize: 28,
+                                                }}
+                                            />
                                         </Box>
                                     </Box>
                                 </Box>

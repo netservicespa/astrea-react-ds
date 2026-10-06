@@ -1,9 +1,9 @@
 import React, { CSSProperties } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import { ButtonProps } from '@mui/material/Button';
 import { Button as NsButton, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { NsGridLayout } from 'src/components/layout/NsGridLayout';
+import { NsGridLayout } from '@/components/layout/NsGridLayout';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import CheckIcon from '@mui/icons-material/Check';
 import FIGMA from '@root/figma.json';
@@ -112,13 +112,28 @@ const TemplateExample: StoryFn<ButtonProps> = (args) => {
     return (
         <Box>
             <Grid container spacing={3}>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="large" variant="contained" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="medium" variant="contained" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="small" variant="contained" />
                 </Grid>
             </Grid>
@@ -128,32 +143,73 @@ const TemplateExample: StoryFn<ButtonProps> = (args) => {
 const Template: StoryFn<ButtonProps> = (args) => {
     return (
         <Box>
-            <Typography variant="h4" mt={4} mb={2}>
+            <Typography
+                variant="h4"
+                sx={{
+                    mt: 4,
+                    mb: 2,
+                }}
+            >
                 Filled
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="large" variant="contained" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="medium" variant="contained" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="small" variant="contained" />
                 </Grid>
             </Grid>
-
-            <Typography variant="h4" mt={4} mb={2}>
+            <Typography
+                variant="h4"
+                sx={{
+                    mt: 4,
+                    mb: 2,
+                }}
+            >
                 Outlined
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="large" variant="outlined" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="medium" variant="outlined" />
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid
+                    size={{
+                        xs: 6,
+                        md: 3,
+                    }}
+                >
                     <NsButton {...args} size="small" variant="outlined" />
                 </Grid>
             </Grid>
@@ -161,75 +217,98 @@ const Template: StoryFn<ButtonProps> = (args) => {
     );
 };
 
-export const ExampleButton = TemplateExample.bind({});
-ExampleButton.args = {
-    color: 'primary',
-    children: 'Click me',
-};
-export const DefaultButton = Template.bind({});
-DefaultButton.args = {
-    color: 'primary',
-    children: 'Primary button',
+export const ExampleButton = {
+    render: TemplateExample,
+
+    args: {
+        color: 'primary',
+        children: 'Click me',
+    },
 };
 
-export const SecondaryButton = Template.bind({});
-SecondaryButton.args = {
-    color: 'secondary',
-    children: 'Secondary button',
+export const DefaultButton = {
+    render: Template,
+
+    args: {
+        color: 'primary',
+        children: 'Primary button',
+    },
 };
 
-export const ErrorButton = Template.bind({});
-ErrorButton.args = {
-    color: 'error',
-    children: 'Delete',
+export const SecondaryButton = {
+    render: Template,
+
+    args: {
+        color: 'secondary',
+        children: 'Secondary button',
+    },
 };
 
-export const DisabledButton = Template.bind({});
-DisabledButton.args = {
-    color: 'primary',
-    children: 'Disabled button',
-    disabled: true,
+export const ErrorButton = {
+    render: Template,
+
+    args: {
+        color: 'error',
+        children: 'Delete',
+    },
 };
 
-export const DoDontsOne = DoDonts.bind({});
-DoDontsOne.args = {
-    doText: 'Use 1 or 2 words, no longer than 4 words, with fewer than 20 characters including spaces.',
-    dontText: 'Don’t use punctuation marks such as periods or exclamation points.',
-    LeftSide: () => (
-        <NsButton onClick={() => {}} color="primary" size="small">
-            Get started
-        </NsButton>
-    ),
-    RightSide: () => (
-        <NsButton onClick={() => {}} color="primary" size="small">
-            Get started and enjoy the content!
-        </NsButton>
-    ),
+export const DisabledButton = {
+    render: Template,
+
+    args: {
+        color: 'primary',
+        children: 'Disabled button',
+        disabled: true,
+    },
 };
-export const DoDontsTwo = DoDonts.bind({});
-DoDontsTwo.args = {
-    doText: 'Use active verbs or phrases that clearly indicate action.',
-    dontText: 'Use vague and generic labels that make the user read the dialog before taking action.',
-    LeftSide: () => (
-        <>
-            <NsButton onClick={() => {}} color="secondary" size="small">
-                Cancel
-            </NsButton>
+
+export const DoDontsOne = {
+    render: DoDonts,
+
+    args: {
+        doText: 'Use 1 or 2 words, no longer than 4 words, with fewer than 20 characters including spaces.',
+        dontText: 'Don’t use punctuation marks such as periods or exclamation points.',
+        LeftSide: () => (
             <NsButton onClick={() => {}} color="primary" size="small">
                 Get started
             </NsButton>
-        </>
-    ),
-    RightSide: () => (
-        <>
-            <NsButton onClick={() => {}} color="secondary" size="small">
-                Yes
-            </NsButton>
+        ),
+        RightSide: () => (
             <NsButton onClick={() => {}} color="primary" size="small">
-                No
+                Get started and enjoy the content!
             </NsButton>
-        </>
-    ),
+        ),
+    },
+};
+
+export const DoDontsTwo = {
+    render: DoDonts,
+
+    args: {
+        doText: 'Use active verbs or phrases that clearly indicate action.',
+        dontText: 'Use vague and generic labels that make the user read the dialog before taking action.',
+        LeftSide: () => (
+            <>
+                <NsButton onClick={() => {}} color="secondary" size="small">
+                    Cancel
+                </NsButton>
+                <NsButton onClick={() => {}} color="primary" size="small">
+                    Get started
+                </NsButton>
+            </>
+        ),
+        RightSide: () => (
+            <>
+                <NsButton onClick={() => {}} color="secondary" size="small">
+                    Yes
+                </NsButton>
+                <NsButton onClick={() => {}} color="primary" size="small">
+                    No
+                </NsButton>
+            </>
+        ),
+    },
 };
 
 const doDontPaddingContainer: CSSProperties = {
@@ -257,32 +336,35 @@ const showPaddingWrong: CSSProperties = {
     textAlign: 'center',
 };
 
-export const DoDontsPadding = DoDonts.bind({});
-DoDontsPadding.args = {
-    doText: ' ',
-    dontText: ' ',
-    singleText:
-        'The width of the button depends on the text. The space to the right and left of the text will always be 20',
-    LeftSide: () => (
-        <div style={doDontPaddingContainer}>
-            <NsButton onClick={() => {}} color="primary" size="large">
-                Call to action
-            </NsButton>
-            <div style={doDontPaddingData}>
-                <div style={showPaddingRight}>20</div>
-                <div style={showPaddingRight}>20</div>
+export const DoDontsPadding = {
+    render: DoDonts,
+
+    args: {
+        doText: ' ',
+        dontText: ' ',
+        singleText:
+            'The width of the button depends on the text. The space to the right and left of the text will always be 20',
+        LeftSide: () => (
+            <div style={doDontPaddingContainer}>
+                <NsButton onClick={() => {}} color="primary" size="large">
+                    Call to action
+                </NsButton>
+                <div style={doDontPaddingData}>
+                    <div style={showPaddingRight}>20</div>
+                    <div style={showPaddingRight}>20</div>
+                </div>
             </div>
-        </div>
-    ),
-    RightSide: () => (
-        <div style={doDontPaddingContainer}>
-            <NsButton onClick={() => {}} color="primary" size="large">
-                <span style={{ paddingLeft: '20px', paddingRight: '20px' }}>Call to action</span>
-            </NsButton>
-            <div style={doDontPaddingData}>
-                <div style={showPaddingWrong}>40</div>
-                <div style={showPaddingWrong}>40</div>
+        ),
+        RightSide: () => (
+            <div style={doDontPaddingContainer}>
+                <NsButton onClick={() => {}} color="primary" size="large">
+                    <span style={{ paddingLeft: '20px', paddingRight: '20px' }}>Call to action</span>
+                </NsButton>
+                <div style={doDontPaddingData}>
+                    <div style={showPaddingWrong}>40</div>
+                    <div style={showPaddingWrong}>40</div>
+                </div>
             </div>
-        </div>
-    ),
+        ),
+    },
 };

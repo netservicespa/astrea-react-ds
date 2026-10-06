@@ -115,10 +115,12 @@ export const NsPagination = (props: PaginationProps) => {
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
                     showFirstButton={showFirstButton}
                     showLastButton={showLastButton}
                     rowsPerPageOptions={rowsPerPageOptions}
+                    slots={{
+                        actions: TablePaginationActions
+                    }}
                 />
             );
         case 'custom':

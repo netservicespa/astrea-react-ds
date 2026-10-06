@@ -1,6 +1,11 @@
-import React, { useMemo } from 'react';
+import {
+    IDropdownItems,
+    NsDropDown,
+    isActivePath,
+    resolveCurrentPath,
+} from '@/components/components/dropdown/NsDropDown';
 import { Box, BoxProps } from '@mui/material';
-import { IDropdownItems, NsDropDown, isActivePath, resolveCurrentPath } from '../../dropdown/NsDropDown';
+import React, { useMemo } from 'react';
 import { HeaderLink, NsHeaderHamburger } from './NsHeaderHamburger';
 
 export interface NsHeaderMenuProps extends BoxProps {
@@ -60,43 +65,42 @@ export const NsHeaderMenu: React.FC<NsHeaderMenuProps> = ({
                         aria-current={isActivePath(currentPath, item.path) ? 'page' : undefined}
                     />
                 ) : (
-                    Array.isArray(item.path) && (
-                        // parent is active if any child is active
-                        (() => {
-                            const groupActive = item.path.some(
-                                (child) => typeof child.path === 'string' && isActivePath(currentPath, child.path),
-                            );
-                            return (
-                        <NsDropDown
-                            key={item.name}
-                            dropdownItems={item.path}
-                            router={router}
-                            dropDownConfiguration={{
-                                anchorOrigin: {
-                                    vertical: 'bottom',
-                                    horizontal: 'center',
-                                },
-                                transformOrigin: {
-                                    vertical: 'top',
-                                    horizontal: 'center',
-                                },
-                                hover: hover,
-                                dropDownIcon: dropDownIcon,
-                            }}
-                            overlay={false}
-                            icon={dropDownIcon}
-                            closeOnMenuItemClick={closeOnMenuItemClick}
-                        >
-                            <HeaderLink
-                                menuItem={item}
-                                key={`${item.name}`}
-                                active={groupActive}
-                                aria-current={groupActive ? 'page' : undefined}
-                            />
-                        </NsDropDown>
-                            );
-                        })()
-                    )
+                    Array.isArray(item.path) &&
+                    // parent is active if any child is active
+                    (() => {
+                        const groupActive = item.path.some(
+                            (child) => typeof child.path === 'string' && isActivePath(currentPath, child.path),
+                        );
+                        return (
+                            <NsDropDown
+                                key={item.name}
+                                dropdownItems={item.path}
+                                router={router}
+                                dropDownConfiguration={{
+                                    anchorOrigin: {
+                                        vertical: 'bottom',
+                                        horizontal: 'center',
+                                    },
+                                    transformOrigin: {
+                                        vertical: 'top',
+                                        horizontal: 'center',
+                                    },
+                                    hover: hover,
+                                    dropDownIcon: dropDownIcon,
+                                }}
+                                overlay={false}
+                                icon={dropDownIcon}
+                                closeOnMenuItemClick={closeOnMenuItemClick}
+                            >
+                                <HeaderLink
+                                    menuItem={item}
+                                    key={`${item.name}`}
+                                    active={groupActive}
+                                    aria-current={groupActive ? 'page' : undefined}
+                                />
+                            </NsDropDown>
+                        );
+                    })()
                 ),
             )}
         </Box>

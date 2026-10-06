@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Badge, Box, Button, List, ListItem, ListItemIcon, Typography } from '@mui/material';
+import { DynamicLink, DynamicLinkProps } from '@/components/components/dropdown/NsDropDown';
+import { NsTabs } from '@/components/components/tabs/NsTabs';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { NsTabs } from '../tabs/NsTabs';
-import { DynamicLink, DynamicLinkProps } from '../dropdown/NsDropDown';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutlined';
+import { Badge, Box, Button, List, ListItem, ListItemIcon, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface IReadWrite {

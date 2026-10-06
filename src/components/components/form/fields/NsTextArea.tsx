@@ -2,9 +2,9 @@ import { InputProps, TextareaAutosize } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useCallback, useMemo } from 'react';
 import { useFormField } from 'relay-forms';
-import uniqueId from '../../../../util/uniqueId';
-import { NsLabelInput } from '../../NsLabelInput';
-import { NsInput, composeValidators } from '../validators';
+import uniqueId from '@/util/uniqueId';
+import { NsLabelInput } from '@/components/components/NsLabelInput';
+import { NsInput, composeValidators } from '@/components/components/form/validators';
 
 export type NsTextAreaProps = NsInput<Omit<InputProps, 'value'>, string>;
 

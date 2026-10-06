@@ -1,6 +1,6 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsDialog, NsDialogTitle, NsDialogContent, NsDialogActions } from 'src/components/components/dialog/NsDialog';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsDialog, NsDialogTitle, NsDialogContent, NsDialogActions } from '@/components/components/dialog/NsDialog';
 import { Box, Container } from '@mui/system';
 import { Button, TextField, Typography } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
@@ -252,38 +252,49 @@ const TemplateCustomizable: StoryFn<typeof NsDialog> = (args) => {
     );
 };
 
-export const ActionsModal = TemplateAction.bind({});
-ActionsModal.args = {};
-
-export const BasicModal = TemplateCustomizable.bind({});
-BasicModal.args = {
-    open: false,
-    title: 'Basic modal',
-    content: 'This is a basic modal with custom width.',
-    actions: null,
-    closeButton: <CloseOutlinedIcon />,
-    showCancelButton: true,
-    showSubmitButton: false,
-    maxWidth: 'xl',
-    scroll: 'body',
+export const ActionsModal = {
+    render: TemplateAction,
+    args: {},
 };
 
-export const FullscreenModal = TemplateCustomizable.bind({});
-FullscreenModal.args = {
-    open: false,
-    title: 'Full screen modal',
-    content: 'Contenuto della modal a schermo intero.',
-    fullScreen: true,
-    showCancelButton: true,
-    showSubmitButton: false,
+export const BasicModal = {
+    render: TemplateCustomizable,
+
+    args: {
+        open: false,
+        title: 'Basic modal',
+        content: 'This is a basic modal with custom width.',
+        actions: null,
+        closeButton: <CloseOutlinedIcon />,
+        showCancelButton: true,
+        showSubmitButton: false,
+        maxWidth: 'xl',
+        scroll: 'body',
+    },
 };
 
-export const NoActionsModal = TemplateCustomizable.bind({});
-NoActionsModal.args = {
-    open: true,
-    title: 'No action modal',
-    content: 'This modal automatically open itself',
-    closeButton: <CloseOutlinedIcon />,
-    showCancelButton: true,
-    showSubmitButton: false,
+export const FullscreenModal = {
+    render: TemplateCustomizable,
+
+    args: {
+        open: false,
+        title: 'Full screen modal',
+        content: 'Contenuto della modal a schermo intero.',
+        fullScreen: true,
+        showCancelButton: true,
+        showSubmitButton: false,
+    },
+};
+
+export const NoActionsModal = {
+    render: TemplateCustomizable,
+
+    args: {
+        open: true,
+        title: 'No action modal',
+        content: 'This modal automatically open itself',
+        closeButton: <CloseOutlinedIcon />,
+        showCancelButton: true,
+        showSubmitButton: false,
+    },
 };

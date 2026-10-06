@@ -12,14 +12,23 @@ export function NsProgress({
   const usedSize = (percent / 100) * totalSize;
 
   return (
-    <Box position="relative" width="100%">
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%"
+      }}>
       <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        mb={1}
-      >
-        <Box display="flex" alignItems="center">
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 1
+        }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center"
+          }}>
           <IconButton size="small" edge="start">
             <IconComponent />
           </IconButton>

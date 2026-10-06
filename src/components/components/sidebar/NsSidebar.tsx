@@ -75,13 +75,15 @@ export const NsSidebar: React.FC<NsSidebarProps> = ({
                                 },
                             }}
                         >
-                            {React.cloneElement(item.icon as React.ReactElement, {
-                                sx: {
-                                    color: isActive
-                                        ? theme.palette.primary?.main || '#308A7D'
-                                        : theme.palette.darkTextColor?.tertiary || '#595959',
-                                },
-                            })}
+                            {React.isValidElement(item.icon)
+                                ? React.cloneElement(item.icon as any, {
+                                      style: {
+                                          color: isActive
+                                              ? theme.palette.primary?.main || '#308A7D'
+                                              : theme.palette.darkTextColor?.tertiary || '#595959',
+                                      },
+                                  })
+                                : item.icon}
 
                             {open && <Typography variant={isActive ? 'subtitle1' : 'body1'}>{item.name}</Typography>}
                         </MenuItem>

@@ -1,8 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsPageHeader } from '../../../components/components/pageHeader/NsPageHeader';
+import { NsPageHeader } from '@/components/components/pageHeader/NsPageHeader';
 import { Button as NsButton } from '@mui/material';
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 
 const meta: Meta<typeof NsPageHeader> = {
     title: 'Patterns/Page Header',

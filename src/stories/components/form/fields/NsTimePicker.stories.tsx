@@ -1,9 +1,9 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsTimePicker } from 'src/components/components/form/fields/NsTimePicker';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsTimePicker } from '@/components/components/form/fields/NsTimePicker';
 import { Box } from '@mui/material';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { required } from 'src/components/components/form/validators';
+import { NsForm } from '@/components/components/form/NsForm';
+import { required } from '@/components/components/form/validators';
 import { useTranslation } from 'react-i18next';
 
 export default {
@@ -31,4 +31,6 @@ const Template: StoryFn<typeof NsTimePicker> = (args) => {
     );
 };
 
-export const Default = Template.bind({});
+export const Default = {
+    render: Template,
+};

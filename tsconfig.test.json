@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@test/*": ["./__tests__/*"]
+    }
+  },
+  "include": ["src/**/*", "__tests__/**/*", "__mocks__/**/*", "utils/**/*"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "coverage",
+    "src/**/*.stories.*",
+    "src/stories/**/*"
+  ]
+}

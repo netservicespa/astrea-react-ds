@@ -1,4 +1,4 @@
-import { PagedData } from 'src/components/components/datatable/NsDataGridServer';
+import { PagedData } from '@/components/components/datatable/NsDataGridServer';
 import { Person, makeData } from './makeData';
 
 // Mock data

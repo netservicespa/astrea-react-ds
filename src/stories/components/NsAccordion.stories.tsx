@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsAccordion, NsAccordionDetails, NsAccordionProps } from 'src/components/components/NsAccordion';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsAccordion, NsAccordionDetails, NsAccordionProps } from '@/components/components/NsAccordion';
 import Typography from '@mui/material/Typography';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FIGMA from '@root/figma.json';
@@ -85,14 +85,17 @@ const Template: StoryFn<NsAccordionProps & { expanded: boolean; onChange: () => 
     );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-    title: 'Change this content to see how it gets overwritten',
-    children: <NsAccordionDetails>Change this title to see how it gets overwritten</NsAccordionDetails>, // Passa il contenuto come children
-    expanded: true,
-    icon: <FilterAltIcon />,
-    typographyProps: {
-        variant: 'h2',
+export const Default = {
+    render: Template,
+
+    args: {
+        title: 'Change this content to see how it gets overwritten',
+        children: <NsAccordionDetails>Change this title to see how it gets overwritten</NsAccordionDetails>, // Passa il contenuto come children
+        expanded: true,
+        icon: <FilterAltIcon />,
+        typographyProps: {
+            variant: 'h2',
+        },
     },
 };
 
@@ -104,9 +107,12 @@ const TemplateDisabled: StoryFn<NsAccordionProps> = (args) => (
     </div>
 );
 
-export const DisabledAll = TemplateDisabled.bind({});
-DisabledAll.args = {
-    title: 'Disabled Accordion Title',
-    content: <Typography>This is the content of a disabled accordion</Typography>,
-    disabled: true,
+export const DisabledAll = {
+    render: TemplateDisabled,
+
+    args: {
+        title: 'Disabled Accordion Title',
+        content: <Typography>This is the content of a disabled accordion</Typography>,
+        disabled: true,
+    },
 };

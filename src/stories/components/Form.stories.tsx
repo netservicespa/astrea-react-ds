@@ -1,18 +1,18 @@
 import { Container, Divider, FormGroup, FormLabel, MenuItem, Typography } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
-import { NsTextArea } from 'src/components/components/form/fields/NsTextArea';
-import { NsDateCalendar } from 'src/components/components/form/fields/NsDateCalendar';
-import { NsCheckbox } from 'src/components/components/form/fields/NsCheckbox';
-import { NsSelect } from 'src/components/components/form/fields/NsSelect';
-import { NsSelectAutocomplete } from 'src/components/components/form/fields/NsSelectAutocomplete';
-import { NsDragDrop } from 'src/components/components/form/fields/NsDragDrop';
-import { NsFileUpload } from 'src/components/components/form/fields/NsFileUpload';
-import { required } from 'src/components/components/form/validators';
-import { NsGridLayout } from 'src/components/layout/NsGridLayout';
-import { NsRadio, NsRadioGroup } from '../../components/components/form/fields/NsRadioGroup';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
+import { NsTextArea } from '@/components/components/form/fields/NsTextArea';
+import { NsDateCalendar } from '@/components/components/form/fields/NsDateCalendar';
+import { NsCheckbox } from '@/components/components/form/fields/NsCheckbox';
+import { NsSelect } from '@/components/components/form/fields/NsSelect';
+import { NsSelectAutocomplete } from '@/components/components/form/fields/NsSelectAutocomplete';
+import { NsDragDrop } from '@/components/components/form/fields/NsDragDrop';
+import { NsFileUpload } from '@/components/components/form/fields/NsFileUpload';
+import { required } from '@/components/components/form/validators';
+import { NsGridLayout } from '@/components/layout/NsGridLayout';
+import { NsRadio, NsRadioGroup } from '@/components/components/form/fields/NsRadioGroup';
 import { useTranslation } from 'react-i18next';
 
 const meta: Meta<typeof NsForm> = {
@@ -40,11 +40,7 @@ const Template: StoryFn<typeof NsForm> = (args) => {
 
     return (
         <>
-            <NsForm
-                {...args}
-                onSubmit={(data: any) => setData(data)}
-                onReset={() => setData({})}
-            >
+            <NsForm {...args} onSubmit={(data: any) => setData(data)} onReset={() => setData({})}>
                 <NsGridLayout rowSize={2}>
                     <NsSelect
                         defaultValue=""
@@ -103,30 +99,14 @@ const Template: StoryFn<typeof NsForm> = (args) => {
                     </div>
 
                     <div>
-                        <FormLabel component="legend">
-                            {t('Choose your favourite meal')}
-                        </FormLabel>
+                        <FormLabel component="legend">{t('Choose your favourite meal')}</FormLabel>
                         <FormGroup>
-                            <NsRadioGroup
-                                name="meal"
-                                onChange={console.log}
-                            >
-                                <NsRadio
-                                    label="Tortellini"
-                                    value="Tortellini"
-                                />
-                                <NsRadio
-                                    label="Lasagne"
-                                    value="Lasagne"
-                                />
-                                <NsRadio
-                                    label="Erbazzone"
-                                    value="Erbazzone"
-                                />
-                                <NsRadio
-                                    label="Pizza"
-                                    value="Pizza"
-                                /></NsRadioGroup>
+                            <NsRadioGroup name="meal" onChange={console.log}>
+                                <NsRadio label="Tortellini" value="Tortellini" />
+                                <NsRadio label="Lasagne" value="Lasagne" />
+                                <NsRadio label="Erbazzone" value="Erbazzone" />
+                                <NsRadio label="Pizza" value="Pizza" />
+                            </NsRadioGroup>
                         </FormGroup>
                     </div>
                     <NsDragDrop
@@ -155,4 +135,6 @@ const Template: StoryFn<typeof NsForm> = (args) => {
     );
 };
 
-export const Form = Template.bind({});
+export const Form = {
+    render: Template,
+};

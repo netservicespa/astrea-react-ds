@@ -5,7 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
-import { accordionBackgroundColor } from '../../themes/NetServiceTheme';
+import { accordionBackgroundColor } from '@/themes/NetServiceTheme';
 
 export interface NsAccordionDetailsProps {
     children: React.ReactNode;

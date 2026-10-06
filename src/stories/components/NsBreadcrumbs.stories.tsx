@@ -1,5 +1,5 @@
 import React from 'react';
-import { NsBreadcrumbs } from 'src/components/components/NsBreadcrumbs';
+import { NsBreadcrumbs } from '@/components/components/NsBreadcrumbs';
 import FIGMA from '@root/figma.json';
 
 export default {
@@ -18,18 +18,21 @@ const Template = (args) => {
     return <NsBreadcrumbs {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-    linkItems: [
-        {
-            name: 'Homepage',
-            href: '/home',
-        },
-        {
-            name: 'Insurace',
-            href: '/link',
-        },
-    ],
-    title: 'Banking solution',
-    linkUnderline: 'always',
+export const Default = {
+    render: Template,
+
+    args: {
+        linkItems: [
+            {
+                name: 'Homepage',
+                href: '/home',
+            },
+            {
+                name: 'Insurace',
+                href: '/link',
+            },
+        ],
+        title: 'Banking solution',
+        linkUnderline: 'always',
+    },
 };

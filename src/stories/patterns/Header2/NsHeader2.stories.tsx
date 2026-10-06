@@ -1,12 +1,12 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsHeader2, NsHeaderLevel } from '../../../components/components/header2/NsHeader2';
-import { NsHeaderLogo } from '../../../components/components/header2/components/NsHeaderLogo';
-import { NsHeaderMenu } from '../../../components/components/header2/components/NsHeaderMenu';
-import { NsHeaderUserMenu } from '../../../components/components/header2/components/NsHeaderUserMenu';
-import { NsHeaderNotification } from '../../../components/components/header2/components/NsHeaderNotification';
-import { NsHeaderBox } from '../../../components/components/header2/components/NsHeaderBox';
-import { NsHeaderHamburger } from '../../../components/components/header2/components/NsHeaderHamburger';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsHeader2, NsHeaderLevel } from '@/components/components/header2/NsHeader2';
+import { NsHeaderLogo } from '@/components/components/header2/components/NsHeaderLogo';
+import { NsHeaderMenu } from '@/components/components/header2/components/NsHeaderMenu';
+import { NsHeaderUserMenu } from '@/components/components/header2/components/NsHeaderUserMenu';
+import { NsHeaderNotification } from '@/components/components/header2/components/NsHeaderNotification';
+import { NsHeaderBox } from '@/components/components/header2/components/NsHeaderBox';
+import { NsHeaderHamburger } from '@/components/components/header2/components/NsHeaderHamburger';
 
 import { Box, Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
@@ -181,15 +181,19 @@ const Template: StoryFn<typeof NsHeader2> = (args) => (
                 mobile: { level: NsHeaderLevel.MAIN_BAR, position: 'left' },
             }}
         >
-            <NsHeaderHamburger menuItemsTop={[menuItems, menuItems]} menuItemsBottom={[userPanelMenuItems]} sx={{
-                '& .MuiPaper-root': {
-                    margin: 0,
-                    minWidth: '300px', // Larghezza minima del drawer
-                    width: '30vw', // Larghezza relativa alla viewport
-                    maxWidth: '500px', // Larghezza massima opzionale
-                },
-                height: '100%',
-            }} />
+            <NsHeaderHamburger
+                menuItemsTop={[menuItems, menuItems]}
+                menuItemsBottom={[userPanelMenuItems]}
+                sx={{
+                    '& .MuiPaper-root': {
+                        margin: 0,
+                        minWidth: '300px', // Larghezza minima del drawer
+                        width: '30vw', // Larghezza relativa alla viewport
+                        maxWidth: '500px', // Larghezza massima opzionale
+                    },
+                    height: '100%',
+                }}
+            />
         </NsHeaderBox>
         <NsHeaderBox
             nsPosition={{
@@ -230,7 +234,7 @@ const Template: StoryFn<typeof NsHeader2> = (args) => (
                     console.log('markAsRead');
                 }}
             />
-            <NsHeaderUserMenu menuItems={userPanelMenuItems} onLogout={() => { }} sx={{ paddingX: '10px' }} />
+            <NsHeaderUserMenu menuItems={userPanelMenuItems} onLogout={() => {}} sx={{ paddingX: '10px' }} />
         </NsHeaderBox>
         <NsHeaderBox
             nsPosition={{
@@ -243,48 +247,7 @@ const Template: StoryFn<typeof NsHeader2> = (args) => (
     </NsHeader2>
 );
 
-export const BaseExample = Template.bind({});
-BaseExample.args = {};
-
-// <NsHeader2 {...args}>
-//     <NsHeaderLogo
-//         nsPosition={{
-//             desktop: { level: NsHeaderLevel.MAIN_BAR, position: 'right' },
-//             mobile: { level: NsHeaderLevel.MAIN_BAR, position: 'center' },
-//         }}
-//     >
-//         <Box sx={{ height: '80px', minWidth: '80px', border: 'solid 1px black', backgroundColor: 'blue' }}>
-//             1R 1C
-//         </Box>{' '}
-//     </NsHeaderLogo>
-//     <NsHeaderLogo
-//         nsPosition={{
-//             desktop: { level: NsHeaderLevel.MAIN_BAR, position: 'right' },
-//             mobile: { level: NsHeaderLevel.MAIN_BAR, position: 'center' },
-//         }}
-//     >
-//         <Box sx={{ height: '80px', minWidth: '80px', border: 'solid 1px black', backgroundColor: 'blue' }}>
-//             1R 1C 2
-//         </Box>{' '}
-//     </NsHeaderLogo>
-//     <NsHeaderLogo
-//         nsPosition={{
-//             desktop: { level: NsHeaderLevel.SUB_BAR, position: 'center' },
-//             mobile: { level: NsHeaderLevel.MAIN_BAR, position: 'right' },
-//         }}
-//     >
-//         <Box sx={{ height: '80px', minWidth: '80px', border: 'solid 1px black', backgroundColor: 'red' }}>
-//             2C 1R
-//         </Box>{' '}
-//     </NsHeaderLogo>
-//     <NsHeaderLogo
-//         nsPosition={{
-//             desktop: { level: NsHeaderLevel.MAIN_BAR, position: 'left' },
-//             mobile: { level: NsHeaderLevel.MAIN_BAR, position: 'left' },
-//         }}
-//     >
-//         <Box sx={{ height: '80px', minWidth: '80px', border: 'solid 1px black', backgroundColor: 'green' }}>
-//             1L 1L
-//         </Box>{' '}
-//     </NsHeaderLogo>
-// </NsHeader2>
+export const BaseExample = {
+    render: Template,
+    args: {},
+};

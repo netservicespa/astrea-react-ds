@@ -1,22 +1,24 @@
-import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview ,ArgsTable } from '@storybook/blocks';
-import * as NsDataTable from './DataTable.stories';
+import { Meta, Title, Subtitle, Description , Primary, Source, Controls, Story, Stories, Canvas, Preview ,ArgsTable } from '@storybook/addon-docs/blocks';
+import * as NsDataTable from './DataTableNext.stories';
 
 <Meta of={NsDataTable} />
 
-<h1>Table</h1>
+<h1>Data Grid</h1>
 
-  Use the table component to make information easier to compare and scan for users.
+  Use the data grid component to make information easier to compare and scan for users.
 
-  The `NsDataGrid` component provides a powerful, flexible grid system that can handle both 
-  client-side and server-side data rendering. 
+  The `NsDataGrid` component provides a powerful, flexible grid system that can handle rendering data from various sources. 
   This component is based on the `@tanstack/react-table` library, 
   offering advanced features such as pagination, sorting, filtering, and row selection.
 
-  The `NsDataGrid` component offers flexibility for both client-side and server-side data rendering. 
-  Whether you need server-side pagination for large datasets or client-side rendering for smaller data, 
+  The `NsDataGrid` component offers flexibility for rendering data from paged REST APIs, GraphQL endpoints, or local datasets. 
+  You can implement a custom data fetching strategy by providing either a `fetcher` function, compatible with the legacy NsDataGrid component, or by providing custom hooks for data fetching and state management,
+  through the `useQueryFetch` and `useTableData` props.
+
+  The fetcher approach is simpler, and is suitable for most use cases involving REST APIs, while the hooks approach provides more control and flexibility, allowing to integrate with Relay or other GraphQL clients, or to implement custom caching strategies.
 
 
-<h3>Server data grid</h3>
+<h3>Server side pagination</h3>
 
   The `NsDataGrid` component in server-side mode fetches data from an external source and supports 
   server-side pagination, sorting, and filtering. It requires a `fetcher` function to load data.

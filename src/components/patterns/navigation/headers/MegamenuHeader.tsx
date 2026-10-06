@@ -1,15 +1,15 @@
+import { DynamicLink, isActivePath, NsDropDown, resolveCurrentPath } from '@/components/components/dropdown/NsDropDown';
+import { INotificationData, NsNotification } from '@/components/components/notification/NsNotification';
+import { HeaderProps } from '@/components/patterns/navigation/NsHeader';
 import { css } from '@emotion/react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button as NsButton, Box, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import { Box, Button as NsButton, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { NsDropDown, DynamicLink, isActivePath, resolveCurrentPath } from '../../../components/dropdown/NsDropDown';
-import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
 import { useTranslation } from 'react-i18next';
-import { HeaderProps } from '../NsHeader';
 
 const HeaderContainer = styled('header')(
     ({ theme, configuration }: any) => css`
@@ -278,14 +278,22 @@ export default function MegamenuHeader({
             </NavigationContainer>
             {isMenuOpen && (
                 <Box
-                    display="flex"
-                    justifyContent="center"
-                    flexDirection="row"
-                    alignItems="baseline"
-                    sx={{ justifyContent: 'space-evenly' }}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'baseline',
+                        justifyContent: 'space-evenly',
+                    }}
                 >
                     {columns?.map((item, index) => (
-                        <Box key={index} marginBottom={2} display="flex" flexDirection="column">
+                        <Box
+                            key={index}
+                            sx={{
+                                marginBottom: 2,
+                                display: 'flex',
+                                flexDirection: 'column',
+                            }}
+                        >
                             <MenuTitle>{item.title}</MenuTitle>
                             <Typography variant="h6"></Typography>
                             {item.links.map((menu) => {

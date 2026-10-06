@@ -1,9 +1,9 @@
+import { PagedData } from '@/components/components/datatable/legacy/NsDataGridServer';
 import { TablePagination } from '@mui/material';
 import { Table } from '@tanstack/react-table';
 import React from 'react';
-import { PagedData } from '../NsDataGridServer';
-import TablePaginationActions from './DefaultPaginationActions';
 import { useTranslation } from 'react-i18next';
+import TablePaginationActions from './DefaultPaginationActions';
 
 /**
  * Controlled TablePager component Props.
@@ -88,8 +88,8 @@ export function NsTablePager<T>({ table, type, ...rest }: Readonly<NsTablePagerP
             labelDisplayedRows={({ from, to, count }) => {
                 return t('table.pagination.interval', { from, to, count });
             }}
-            labelRowsPerPage={t('table.pagination.pageSize')}
             ActionsComponent={TablePaginationActions}
+            labelRowsPerPage={t('table.pagination.pageSize')}
             rowsPerPageOptions={rowsPerPageOptions}
         />
     );

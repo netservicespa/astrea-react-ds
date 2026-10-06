@@ -22,7 +22,7 @@ const StyledNsButton = styled(NsButton)(({ theme, color, variant }) => ({
 
 export const NsScrollTop: React.FC<NsScrollTopProps> = ({ children, buttonText, opacity, side = 'right' }) => {
     const { t } = useTranslation();
-    const divRef = React.useRef<HTMLDivElement>();
+    const divRef = React.useRef<HTMLDivElement>(null);
     const child = React.cloneElement(children, { ref: divRef });
     const goToTopPage = () => {
         divRef.current?.scrollTo({ top: 0, behavior: 'smooth' });

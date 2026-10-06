@@ -1,7 +1,115 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# v3.0.0 (Oct 5 2026)
+
+## 🚀 Major Upgrades
+
+- **MUI v7 Migration**
+  - Upgraded from MUI v5 to **MUI v7.3.9** (core, icons, system)
+  - Updated `@mui/x-date-pickers` to **v8.27.2**
+  - **BREAKING CHANGE**: This major upgrade may require code changes in consuming applications
+
+- **React v19**
+  - Upgraded from React 18 to **React 19.1.0**
+  - Updated react-dom to **19.1.0**
+  - **BREAKING CHANGE**: Please review React 19 migration guide for compatibility
+
+- **Storybook v10**
+  - Major upgrade from Storybook 8.4.2 to **10.2.17**
+  - Updated all Storybook addons to compatible v10 versions
+  - Enhanced documentation with improved dark mode support
+
+## ⚠️ Breaking Changes (Components)
+
+- **NsCard**
+  - **BREAKING**: Removed `{...rest}` spread operator - extra props beyond the defined `NsCardProps` interface are no longer forwarded to the underlying component
+  - **Migration**: If you were passing additional props not in the interface, you can now use the `sx` prop for styling customizations or file an issue to request specific props to be added to the interface
+
+## Improved
+
+- **NsHeader2**
+  - Added theme properties to customize header colors
+
+- **NsForm**
+  - Added `inheritContext` prop to allow Relay context inheritance between nested forms
+  - This enables accessing Relay fragments inside forms when needed
+
+- **NsDataGrid**
+  - Major refactor of the data grid to the new table architecture
+  - Introduced `NsDataGridLegacy` to preserve the previous behavior and API for applications still relying on the legacy implementation
+  - This enables a gradual migration path while maintaining compatibility during the upgrade
+
+- **NsDateCalendar**
+  - Added proper validation for required/mandatory fields with asterisk indicator
+  - Placeholder now displays in red when field is in error state
+  - Removed unnecessary border radius for cleaner appearance
+  - Fixed layout issues
+
+- **NsDropDown**
+  - Fixed hover behavior for better user interaction
+  - Improved interaction states and visual feedback
+  - Enhanced accessibility with proper ARIA attributes
+  - Better styling using theme colors instead of hardcoded values
+
+- **NsCheckbox**
+  - Adjusted clickable area for improved usability
+  - Fixed font size to use body value from theme for consistency
+  - Improved layout with better wrapping behavior
+  - Refactored onChange handler for more predictable behavior
+
+- **NsDragAndDrop**
+  - Removed margins after file upload for better visual flow
+  - Improved visual feedback during file upload
+  - Added optional `iconFileColor` prop for customizing file icon colors
+  - Better accessibility with tooltip support
+  - Enhanced file upload experience with improved styling
+
+- **NsTooltip**
+  - Fixed bug where dynamic props (like `disabled`) didn't trigger re-render
+  - Improved responsiveness to prop changes
+
+- **NsFooter**
+  - Fixed hardcoded background color - now properly uses theme property
+  - Improved brand logo sizing to respect theme dimensions
+  - Enhanced layout flexibility
+
+- **NsSidebar**
+  - Significant refactoring for improved maintainability and performance
+
+- **NsLabelInput**
+  - Now uses body1 fontSize from theme for consistency
+
+- **ErrorBoundary & FallbackPage**
+  - Major refactoring for better error handling and recovery
+
+- **NsGridLayout**
+  - Fixed layout issues for better responsiveness
+
+- **Themes**
+  - Extended footer theme properties (width, height, boxSizing, border, font styling)
+  - Improved theme type definitions with better TypeScript support
+  - Enhanced BlueChia, GoldMina, and NetService themes with comprehensive updates
+  - Better support for custom branding
+
+- **Storybook**
+  - Fixed logo rendering issues when toggling between light/dark mode
+  - Updated 70+ stories to work with Storybook v10
+  - Improved documentation across all components
+
+## Dependency Updates
+
+- **Updated**
+  - `i18next` to v25.6.2
+  - `react-i18next` to v16.5.6
+  - `notistack` to v3.0.2
+  - `react-dropzone` to v15.0.0
+  - Various relay packages updated
+
+- **Removed**
+  - `react-relay` dependency (no longer needed)
+
 
 # v2.9.0 (Feb 10 2026)
 

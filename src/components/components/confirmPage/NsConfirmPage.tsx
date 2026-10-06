@@ -20,7 +20,7 @@ export const NsConfirmPage: React.FC<NsConfirmPageProps> = ({
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <CheckCircleIcon sx={{ fontSize: 60, color: 'green', margin: 2 }} />
         <Typography variant="h1" sx={{ margin: 2 }}>
           {title}
@@ -29,7 +29,7 @@ export const NsConfirmPage: React.FC<NsConfirmPageProps> = ({
           {description}
         </Typography>
       </Grid>
-      <Grid item xs={12} sx={{ marginBottom: 4, margin: 2 }}>
+      <Grid sx={{ marginBottom: 4, margin: 2 }} size={12}>
         <Button
           variant="outlined"
           color="primary"

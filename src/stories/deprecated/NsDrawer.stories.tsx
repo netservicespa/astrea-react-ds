@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsDrawer } from '../../components/components/drawer/NsDrawer';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsDrawer } from '@/components/components/drawer/NsDrawer';
 import { Button, Typography, Box } from '@mui/material';
 
 const meta: Meta<typeof NsDrawer> = {
@@ -32,22 +32,28 @@ const Template: StoryFn<typeof NsDrawer> = (args) => {
     );
 };
 
-export const AnchorDrawer = Template.bind({});
-AnchorDrawer.args = {
-    title: 'Anchor Drawer',
-    content: 'This is the content of an anchor drawer.',
-    drawerType: 'anchor',
-    drawerPosition: 'right',
+export const AnchorDrawer = {
+    render: Template,
+
+    args: {
+        title: 'Anchor Drawer',
+        content: 'This is the content of an anchor drawer.',
+        drawerType: 'anchor',
+        drawerPosition: 'right',
+    },
 };
 
-export const ResponsiveDrawer = Template.bind({});
-ResponsiveDrawer.args = {
-    title: 'Responsive Drawer',
-    content: (
-        <Box>
-            <Typography>This is a responsive drawer.</Typography>
-        </Box>
-    ),
-    drawerType: 'anchor',
-    drawerPosition: 'left',
+export const ResponsiveDrawer = {
+    render: Template,
+
+    args: {
+        title: 'Responsive Drawer',
+        content: (
+            <Box>
+                <Typography>This is a responsive drawer.</Typography>
+            </Box>
+        ),
+        drawerType: 'anchor',
+        drawerPosition: 'left',
+    },
 };

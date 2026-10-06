@@ -1,9 +1,9 @@
 import { Grid, MenuItem, TextField } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React, { useState } from 'react';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsSelectAutocomplete, SelectItem } from 'src/components/components/form/fields/NsSelectAutocomplete';
-import { required } from 'src/components/components/form/validators';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsSelectAutocomplete, SelectItem } from '@/components/components/form/fields/NsSelectAutocomplete';
+import { required } from '@/components/components/form/validators';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { Box } from '@mui/system';
@@ -23,7 +23,7 @@ const SingleSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
     return (
         <NsForm onSubmit={() => {}} buttonsSlot={false}>
             <Grid container>
-                <Grid item xs={3}>
+                <Grid size={3}>
                     <NsSelectAutocomplete
                         name="select-single"
                         defaultValue=""
@@ -73,7 +73,7 @@ const GroupedSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <NsForm onSubmit={() => {}} buttonsSlot={false}>
                 <Grid container>
-                    <Grid item xs={6}>
+                    <Grid size={6}>
                         <NsSelectAutocomplete
                             multiple
                             options={products}
@@ -120,7 +120,7 @@ const CheckboxSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
     return (
         <NsForm onSubmit={() => {}} buttonsSlot={false}>
             <Grid container>
-                <Grid item xs={6}>
+                <Grid size={6}>
                     <NsSelectAutocomplete
                         multiple
                         options={products}
@@ -149,20 +149,29 @@ const CheckboxSelectTemplate: StoryFn<typeof NsSelectAutocomplete> = (args) => {
     );
 };
 
-export const SingleSelect = SingleSelectTemplate.bind({});
-SingleSelect.args = {
-    label: 'Single Select',
-    placeholder: 'Select an option',
+export const SingleSelect = {
+    render: SingleSelectTemplate,
+
+    args: {
+        label: 'Single Select',
+        placeholder: 'Select an option',
+    },
 };
 
-export const GroupedSelect = GroupedSelectTemplate.bind({});
-GroupedSelect.args = {
-    label: 'Grouped Select',
-    placeholder: 'Select products',
+export const GroupedSelect = {
+    render: GroupedSelectTemplate,
+
+    args: {
+        label: 'Grouped Select',
+        placeholder: 'Select products',
+    },
 };
 
-export const CheckboxSelect = CheckboxSelectTemplate.bind({});
-CheckboxSelect.args = {
-    label: 'Checkbox Select',
-    placeholder: 'Select products',
+export const CheckboxSelect = {
+    render: CheckboxSelectTemplate,
+
+    args: {
+        label: 'Checkbox Select',
+        placeholder: 'Select products',
+    },
 };

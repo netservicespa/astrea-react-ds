@@ -1,17 +1,17 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import type { Preview } from '@storybook/react';
-import { DocsContainer, DocsPage, Unstyled } from "@storybook/blocks";
+import type { Preview } from '@storybook/react-webpack5';
+import { DocsContainer, DocsPage, Unstyled } from "@storybook/addon-docs/blocks";
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import themeLight from './astrea-theme-light';
 import themeDark from './astrea-theme-dark';
-import { theme as nsTheme } from '../src/themes/NetServiceTheme';
-import { BlueChiaTheme as blueChia } from '../src/themes/BlueChiaTheme';
-import { GoldMinaTheme as goldMina } from '../src/themes/GoldMinaTheme';
-import { AstreaTheme as astrea } from '../src/themes/AstreaTheme';
+import { theme as nsTheme } from '@/themes/NetServiceTheme';
+import { BlueChiaTheme as blueChia } from '@/themes/BlueChiaTheme';
+import { GoldMinaTheme as goldMina } from '@/themes/GoldMinaTheme';
+import { AstreaTheme as astrea } from '@/themes/AstreaTheme';
 import './styles.scss';
-import { NeedHelp } from '../src/stories/utlis/needHelp/NeedHelp';
+import { NeedHelp } from '@/stories/utlis/needHelp/NeedHelp';
 
 const isDark = typeof window !== `undefined` ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches : null;
 
@@ -91,7 +91,6 @@ const decorators = [withI18next, withMuiTheme];
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       expanded: true,
       sort: 'requiredFirst',
@@ -115,7 +114,7 @@ const preview: Preview = {
         locales: 'en-US',
       },
     },
-    backgrounds: { disable: true },
+    backgrounds: { disabled: true },
     layout: 'centered',
     darkMode: {
       current: isDark ? 'dark' : 'light',

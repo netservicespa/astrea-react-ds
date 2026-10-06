@@ -113,5 +113,8 @@
       "action":"Azione",
       "view":"Vedi"
     }
+  },
+  "dropdown": {
+    "logout": "Esci"
   }
 }

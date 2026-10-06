@@ -1,5 +1,5 @@
 import React from 'react';
-import { NsTooltip } from 'src/components/components/NsTooltip';
+import { NsTooltip } from '@/components/components/NsTooltip';
 
 export default {
     title: 'Components/Tooltip',
@@ -7,7 +7,8 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: 'The `NsTooltip` component is used to display contextual information to users when they interact with a user interface element. It is customizable in terms of positioning, content, and style.',
+                component:
+                    'The `NsTooltip` component is used to display contextual information to users when they interact with a user interface element. It is customizable in terms of positioning, content, and style.',
             },
         },
     },
@@ -69,14 +70,20 @@ export default {
 const Template = (args) => <NsTooltip {...args}></NsTooltip>;
 const Template2 = (args) => <NsTooltip {...args}>Text</NsTooltip>;
 
-export const SimpleTooltipIcon = Template.bind({});
-SimpleTooltipIcon.args = {
-    title: 'Simple Tooltip',
-    placement: 'top',
+export const SimpleTooltipIcon = {
+    render: Template,
+
+    args: {
+        title: 'Simple Tooltip',
+        placement: 'top',
+    },
 };
 
-export const SimpleTooltipText = Template2.bind({});
-SimpleTooltipText.args = {
-    title: 'Simple Tooltip',
-    placement: 'top',
+export const SimpleTooltipText = {
+    render: Template2,
+
+    args: {
+        title: 'Simple Tooltip',
+        placement: 'top',
+    },
 };

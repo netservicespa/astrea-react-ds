@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsHttpStatus, NsHttpStatusProps } from 'src/components/layout/httpStatus/NsHttpStatus';
+import { NsHttpStatus, NsHttpStatusProps } from '@/components/layout/httpStatus/NsHttpStatus';
 
 export default {
     title: 'Tools/HttpStatus',
@@ -27,31 +27,31 @@ export default {
     },
 } as Meta<typeof NsHttpStatus>;
 
-const Template: StoryFn<NsHttpStatusProps> = (args) => (
-    <NsHttpStatus {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-    httpCode: 404,
+export const Default = {
+    args: {
+        httpCode: 404,
+    },
 };
 
-export const NotFound = Template.bind({});
-NotFound.args = {
-    httpCode: 404,
-    backButton: true,
+export const NotFound = {
+    args: {
+        httpCode: 404,
+        backButton: true,
+    },
 };
 
-export const InternalServerError = Template.bind({});
-InternalServerError.args = {
-    httpCode: 500,
-    backButton: true,
+export const InternalServerError = {
+    args: {
+        httpCode: 500,
+        backButton: true,
+    },
 };
 
-export const CustomMessage = Template.bind({});
-CustomMessage.args = {
-    httpCode: 403,
-    httpMessage: 'Forbidden',
-    message: 'You do not have permission to access this resource.',
-    backButton: true,
+export const CustomMessage = {
+    args: {
+        httpCode: 403,
+        httpMessage: 'Forbidden',
+        message: 'You do not have permission to access this resource.',
+        backButton: true,
+    },
 };

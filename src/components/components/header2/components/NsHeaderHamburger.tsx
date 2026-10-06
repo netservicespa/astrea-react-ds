@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { Accordion, AccordionSummary, Box, BoxProps, Drawer, Link, LinkProps, styled } from '@mui/material';
-import { IDropdownItems, isActivePath, resolveCurrentPath } from '../../dropdown/NsDropDown';
-import { useTheme } from '@mui/material/styles';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { IDropdownItems, isActivePath, resolveCurrentPath } from '@/components/components/dropdown/NsDropDown';
+import { NsAccordionDetails } from '@/components/components/NsAccordion';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
-import { Button as NsButton } from '@mui/material';
-import { NsAccordionDetails } from '../../NsAccordion';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Accordion, AccordionSummary, Box, BoxProps, Drawer, Link, LinkProps, Button as NsButton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
 export interface NsHeaderHamburgerProps extends BoxProps {
     menuItemsTop?: IDropdownItems[][];
@@ -91,7 +90,7 @@ export const HeaderLink: React.FC<HeaderLinkProps> = ({ menuItem, onClick, activ
                     alignItems: 'center',
                 }}
             >
-                {icon && React.cloneElement(icon, { sx: { mr: '4px' } })}
+                {icon && React.cloneElement(icon as any, { sx: { mr: '4px' } })}
                 {name}
             </Box>
         </Link>

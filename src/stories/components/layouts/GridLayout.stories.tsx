@@ -1,11 +1,11 @@
 import { Container, Divider, Typography } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
-import { NsDateCalendar } from 'src/components/components/form/fields/NsDateCalendar';
-import { required } from 'src/components/components/form/validators';
-import { NsGridLayout } from 'src/components/layout/NsGridLayout';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
+import { NsDateCalendar } from '@/components/components/form/fields/NsDateCalendar';
+import { required } from '@/components/components/form/validators';
+import { NsGridLayout } from '@/components/layout/NsGridLayout';
 import { useTranslation } from 'react-i18next';
 
 export default {
@@ -58,8 +58,10 @@ const Template: StoryFn<typeof NsGridLayout> = (args) => {
     );
 };
 
-export const Grid = Template.bind({});
+export const Grid = {
+    render: Template,
 
-Grid.args = {
-    rowSize: 2,
+    args: {
+        rowSize: 2,
+    },
 };

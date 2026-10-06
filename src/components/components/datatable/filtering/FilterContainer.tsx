@@ -1,10 +1,10 @@
 import React from 'react';
-import { DefaultButtons, NsForm } from '../../form/NsForm';
-import { NsGridLayout } from '../../../layout/NsGridLayout';
-import { NsTextInput } from '../../form/fields/NsTextInput';
-import { NsDateCalendar } from '../../form/fields/NsDateCalendar';
+import { DefaultButtons, NsForm } from '@/components/components/form/NsForm';
+import { NsGridLayout } from '@/components/layout/NsGridLayout';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
+import { NsDateCalendar } from '@/components/components/form/fields/NsDateCalendar';
 import { Container, MenuItem } from '@mui/material';
-import { NsSelectAutocomplete, SelectItem } from '../../form/fields/NsSelectAutocomplete';
+import { NsSelectAutocomplete, SelectItem } from '@/components/components/form/fields/NsSelectAutocomplete';
 import { useTranslation } from 'react-i18next';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

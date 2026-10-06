@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
+import { NsForm } from '@/components/components/form/NsForm';
+import { required } from '@/components/components/form/validators';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
     Box,
-    Button as NsButton,
     Card,
     CardContent,
     CardHeader,
@@ -9,14 +11,11 @@ import {
     Grid,
     IconButton,
     InputAdornment,
+    Button as NsButton,
     Typography,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { NsTextInput } from '../../components/form/fields/NsTextInput';
-import { required } from '../../components/form/validators';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NsForm } from '../../components/form/NsForm';
-import { NsHeader } from '../../patterns/navigation/NsHeader';
 
 export interface NsLoginProps {
     onButtonClick: () => void;
@@ -84,7 +83,13 @@ export const NsLogin: React.FC<NsLoginProps> = ({
         >
             <Grid container sx={{ minHeight: { xs: 'auto', sm: '100vh' }, alignItems: { sm: 'stretch' } }}>
                 {type !== 'classic' && (
-                    <Grid item xs={12} sm={4} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    <Grid
+                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        size={{
+                            xs: 12,
+                            sm: 4,
+                        }}
+                    >
                         <Box
                             sx={{
                                 backgroundColor: rightBannerColor,
@@ -125,7 +130,12 @@ export const NsLogin: React.FC<NsLoginProps> = ({
                         </Box>
                     </Grid>
                 )}
-                <Grid item xs={12} sm={type !== 'classic' ? 8 : 12}>
+                <Grid
+                    size={{
+                        xs: 12,
+                        sm: type !== 'classic' ? 8 : 12,
+                    }}
+                >
                     <Box
                         sx={{
                             minHeight: { xs: 'auto', sm: '100vh' },

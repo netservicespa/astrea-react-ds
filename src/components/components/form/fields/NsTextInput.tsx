@@ -1,9 +1,9 @@
+import { NsLabelInput } from '@/components/components/NsLabelInput';
+import { NsInput, composeValidators } from '@/components/components/form/validators';
+import uniqueId from '@/util/uniqueId';
 import { TextField, TextFieldProps } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 import { useFormField } from 'relay-forms';
-import uniqueId from '../../../../util/uniqueId';
-import { NsLabelInput } from '../../NsLabelInput';
-import { NsInput, composeValidators } from '../validators';
 
 export type NsTextInputProps = NsInput<Omit<TextFieldProps, 'value'>, string>;
 

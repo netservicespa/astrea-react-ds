@@ -124,7 +124,9 @@ export const NsPanel = ({
                     onMouseLeave={() => setIsHovered(false)}
                     onClick={handleOpen}
                 >
-                    <Typography fontWeight={isHovered ? 'bold' : 'normal'}>
+                    <Typography sx={{
+                        fontWeight: isHovered ? 'bold' : 'normal'
+                    }}>
                         {isOpen ? (
                             <>
                                 {typeof button !== 'boolean' ? (
@@ -155,16 +157,22 @@ export const NsPanel = ({
                 >
                     <CardContent>
                         {title && (
-                            <Typography variant={'h3'} fontWeight={900} gutterBottom>
+                            <Typography variant={'h3'} gutterBottom sx={{
+                                fontWeight: 900
+                            }}>
                                 {title}
                             </Typography>
                         )}
                         {subtitle && (
-                            <Typography variant={'h4'} fontWeight={400}>
+                            <Typography variant={'h4'} sx={{
+                                fontWeight: 400
+                            }}>
                                 {subtitle}
                             </Typography>
                         )}
-                        <Box component="div" mt={title || subtitle ? 3 : 0}>
+                        <Box component="div" sx={{
+                            mt: title || subtitle ? 3 : 0
+                        }}>
                             {children}
                         </Box>
                     </CardContent>

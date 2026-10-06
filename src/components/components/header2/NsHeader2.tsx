@@ -66,8 +66,9 @@ const reorderChildren = (children: React.ReactNode, mode: 'desktop' | 'mobile') 
                     if (!React.isValidElement(child)) {
                         return [child];
                     }
-                    const lvl = child.props.nsPosition?.[mode]?.level || 0;
-                    const pos = child.props.nsPosition?.[mode]?.position;
+                    const props = (child as React.ReactElement<{ nsPosition?: INsHeaderPosition }>).props;
+                    const lvl = props.nsPosition?.[mode as keyof INsHeaderPosition]?.level || 0;
+                    const pos = props.nsPosition?.[mode as keyof INsHeaderPosition]?.position;
                     const newElement = (lvl: number, pos: string) => (
                         <NsHeaderBox
                             key={`${lvl}-${pos}`}
@@ -85,7 +86,11 @@ const reorderChildren = (children: React.ReactNode, mode: 'desktop' | 'mobile') 
                     // Se non esiste un elemento con la posizione giusta lo aggiungo
                     if (
                         !children.some(
-                            (c) => React.isValidElement(c) && c.props.nsPosition?.[mode]?.position === position,
+                            (c) =>
+                                React.isValidElement(c) &&
+                                (c as React.ReactElement<{ nsPosition?: INsHeaderPosition }>).props.nsPosition?.[
+                                    mode as keyof INsHeaderPosition
+                                ]?.position === position,
                         )
                     ) {
                         return [newElement(lvl, position), child];
@@ -110,7 +115,7 @@ const reorderChildren = (children: React.ReactNode, mode: 'desktop' | 'mobile') 
     });
 
     // Step 3: controlla che non ci siano doppioni quindi al massimo 3 elementi per livello
-    const removeDuplicate = groupedByLevel.map((group, i) => ({
+    const removeDuplicate = groupedByLevel.map((group) => ({
         ...group,
         children: group.children.filter((child, j) => {
             if (!React.isValidElement(child)) {
@@ -118,9 +123,14 @@ const reorderChildren = (children: React.ReactNode, mode: 'desktop' | 'mobile') 
             }
             const prevChild = group.children[j - 1];
             if (React.isValidElement(prevChild)) {
+                const prevChildProps = (prevChild as React.ReactElement<{ nsPosition?: INsHeaderPosition }>).props;
+                const childProps = (child as React.ReactElement<{ nsPosition?: INsHeaderPosition }>).props;
                 if (
                     React.isValidElement(prevChild) &&
-                    hasSameMode(prevChild.props.nsPosition?.[mode], child.props.nsPosition?.[mode])
+                    hasSameMode(
+                        prevChildProps.nsPosition?.[mode as keyof INsHeaderPosition],
+                        childProps.nsPosition?.[mode as keyof INsHeaderPosition],
+                    )
                 ) {
                     return false;
                 }
@@ -156,9 +166,10 @@ export const NsHeaderMainBar: React.FC<NsHeaderMainBarProps> = ({
                 margin: 0,
                 padding: '10px',
                 minHeight: '80px',
+                color: theme?.header?.textColor ?? theme.palette.secondary.contrastText,
                 borderBottom: `${NsBorderBottom ? '10px solid ' : '0px'}`,
-                borderColor: `${NsBorderBottom ? 'black' : 'transparent'}`, //theme?.header?.borderColor non va????
-                backgroundColor: theme.palette.primary.main,
+                borderColor: `${NsBorderBottom ? theme?.header?.borderColor ?? 'black' : 'transparent'}`, //theme?.header?.borderColor non va????
+                backgroundColor: theme?.header?.backgroundColor ?? theme.palette.primary.main,
                 ...NsHeaderMainBarSx,
             }}
             {...props}
@@ -180,7 +191,11 @@ export const NsHeaderSubBar: React.FC<NsHeaderSubBarProps> = ({ children, NsHead
                 margin: 0,
                 padding: 0,
                 height: '40px',
-                backgroundColor: theme.palette.secondary.main,
+                backgroundColor: theme?.header?.menuBackgroundColor ?? theme.palette.secondary.main,
+                color: theme?.header?.menuTextColor ?? theme.palette.secondary.contrastText,
+                'a:focus': {
+                    backgroundColor: theme?.header?.focusBackgroundColor ?? theme.palette.action.focus,
+                },
                 ...NsHeaderSubBarSx,
             }}
             {...props}

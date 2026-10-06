@@ -1,8 +1,8 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsPagination } from 'src/components/components/pagination/NsPagination';
+import { NsPagination } from '@/components/components/pagination/NsPagination';
 import { Box } from '@mui/material';
-import { TablePaginationActions as defaultActions } from 'src/components/components/pagination/NsPaginationActions';
+import { TablePaginationActions as defaultActions } from '@/components/components/pagination/NsPaginationActions';
 
 const meta: Meta<typeof NsPagination> = {
     title: 'Components/Pagination',
@@ -58,19 +58,21 @@ const Template: StoryFn<typeof NsPagination> = (args) => {
     );
 };
 
-export const PaginationTemplate = Template.bind({});
+export const PaginationTemplate = {
+    render: Template,
 
-PaginationTemplate.args = {
-    paginationType: 'table',
-    totalPages: 22,
-    page: 5,
-    totalElements: 100,
-    showLastButton: true,
-    showFirstButton: false,
-    TablePaginationAction: defaultActions,
-    rowsPerPageOptions: [
-        { label: 'Five', value: 5 },
-        { label: 'Ten', value: 10 },
-        { label: 'Twenty Five', value: 25 },
-    ],
+    args: {
+        paginationType: 'table',
+        totalPages: 22,
+        page: 5,
+        totalElements: 100,
+        showLastButton: true,
+        showFirstButton: false,
+        TablePaginationAction: defaultActions,
+        rowsPerPageOptions: [
+            { label: 'Five', value: 5 },
+            { label: 'Ten', value: 10 },
+            { label: 'Twenty Five', value: 25 },
+        ],
+    },
 };

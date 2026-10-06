@@ -202,36 +202,36 @@ const themeOptions = {
                     fontSize: '1em',
                     textTransform: 'none',
                     fontWeight: 600,
-                    '&.MuiButton-containedPrimary:not(.Mui-disabled):active': {
+                    '&.MuiButton-contained.MuiButton-colorPrimary:not(.Mui-disabled):active': {
                         boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
                     },
-                    '&.MuiButton-outlinedPrimary:not(.Mui-disabled):active': {
-                        boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
-                    },
-
-                    '&.MuiButton-containedSecondary:not(.Mui-disabled):active': {
-                        boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
-                    },
-                    '&.MuiButton-outlinedSecondary:not(.Mui-disabled):active': {
+                    '&.MuiButton-outlined.MuiButton-colorPrimary:not(.Mui-disabled):active': {
                         boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
                     },
 
-                    '&.MuiButton-containedError:not(.Mui-disabled):active': {
+                    '&.MuiButton-contained.MuiButton-colorSecondary:not(.Mui-disabled):active': {
+                        boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
+                    },
+                    '&.MuiButton-outlined.MuiButton-colorSecondary:not(.Mui-disabled):active': {
                         boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
                     },
 
-                    '&.MuiButton-outlinedError:not(.Mui-disabled):active': {
+                    '&.MuiButton-contained.MuiButton-colorError:not(.Mui-disabled):active': {
                         boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
                     },
 
-                    '&.MuiButton-containedSecondary': {
+                    '&.MuiButton-outlined.MuiButton-colorError:not(.Mui-disabled):active': {
+                        boxShadow: `inset 0 0 0 5px ${paletteColors.focus.main}`,
+                    },
+
+                    '&.MuiButton-contained.MuiButton-colorSecondary': {
                         color: '#2E5A60',
                         boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.primary.main, 0.4)}`,
                     },
-                    '&.MuiButton-containedSuccess': {
+                    '&.MuiButton-contained.MuiButton-colorSuccess': {
                         boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.success.main, 0.5)}`,
                     },
-                    '&.MuiButton-containedError': {
+                    '&.MuiButton-contained.MuiButton-colorError': {
                         boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.error.main, 0.5)}`,
                     },
                     '&.Mui-disabled:not(.MuiButton-outlinedPrimary)': {
@@ -247,16 +247,16 @@ const themeOptions = {
                     '&.Mui-focusVisible': {
                         boxShadow: `0 0 0 3px ${paletteColors.focus.main}`,
                     },
-                    '&.MuiButton-outlinedPrimary:not(.Mui-disabled)': {
+                    '&.MuiButton-outlined.MuiButton-colorPrimary:not(.Mui-disabled)': {
                         border: `2px solid ${paletteColors.primary.main}`,
                     },
-                    '&.MuiButton-outlinedSecondary:not(.Mui-disabled)': {
+                    '&.MuiButton-outlined.MuiButton-colorSecondary:not(.Mui-disabled)': {
                         border: 'unset',
                         boxShadow: `inset 0 -3px 0 0 ${darken(paletteColors.primary.main, 0.4)}`,
                         color: '#2E5A60',
                     },
 
-                    '&.MuiButton-outlinedError:not(.Mui-disabled)': {
+                    '&.MuiButton-outlined.MuiButton-colorError:not(.Mui-disabled)': {
                         border: `2px solid ${paletteColors.error.main}`,
                     },
                 },
@@ -431,7 +431,18 @@ const themeOptions = {
         focusBackgroundColor: `${paletteColors.focus.main}`,
     },
     footer: {
-        backgroundColor: '#0f193b',
+        backgroundColor: `${paletteColors.primary.main}`,
+        width: '100%',
+        height: '100%',
+        marginTop: '30px',
+        boxSizing: 'border-box',
+        borderTop: '10px solid ',
+        borderColor: `${paletteColors.secondary.main}`,
+        fontColor: '#FFFFFF',
+        fontSize: '1.125rem',
+        fontWeight: 500,
+        imageWidth: '66px',
+        imageHeight: '73px'
     },
     titleCard: {
         fontSize: '2rem',

@@ -1,13 +1,12 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import { Button, TablePaginationActionsProps } from '@mui/material';
+import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
-import { TablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions';
-import { Button } from '@mui/material';
 
 /**
  * Renders the default pagination actions for a table.
@@ -35,7 +34,7 @@ const TablePaginationActions = (props: TablePaginationActionsProps) => {
         onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
     };
 
-    const StyledNsButton = styled(Button)(({ theme }) => ({
+    const StyledNsButton = styled(Button)(() => ({
         width: '35px',
         height: '35px',
         minWidth: 0,

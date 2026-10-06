@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box, BoxProps } from '@mui/material';
-import { IDropDownConfiguration, IDropdownItems, NsDropDown } from '../../dropdown/NsDropDown';
+import { IDropDownConfiguration, IDropdownItems, NsDropDown } from '@/components/components/dropdown/NsDropDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Box, BoxProps } from '@mui/material';
+import React from 'react';
 
 export interface NsHeaderUserMenuProps extends BoxProps {
     menuItems: IDropdownItems[];

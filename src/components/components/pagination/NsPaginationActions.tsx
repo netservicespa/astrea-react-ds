@@ -6,8 +6,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled, useTheme } from '@mui/material/styles';
-import { TablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions';
-import { Button } from '@mui/material';
+import { Button, TablePaginationActionsProps } from '@mui/material';
 
 /**
  * Renders the default pagination actions for a table.

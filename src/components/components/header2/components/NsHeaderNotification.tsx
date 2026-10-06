@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, BoxProps } from '@mui/material';
-import { DynamicLinkProps } from '../../dropdown/NsDropDown';
-import { useTheme } from '@mui/material/styles';
-import { NotificationData, NsNotification } from '../../notification/NsNotification';
+import { DynamicLinkProps } from '@/components/components/dropdown/NsDropDown';
+import { NotificationData, NsNotification } from '@/components/components/notification/NsNotification';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import { Box, BoxProps } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
 export interface NsHeaderNotificationProps extends BoxProps {
     hover?: boolean;

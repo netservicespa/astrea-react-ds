@@ -2,18 +2,18 @@ import DataObjectSharp from '@mui/icons-material/DataObjectSharp';
 import EditIcon from '@mui/icons-material/Edit';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import { Container, Grid, MenuItem, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NsCheckbox } from 'src/components/components/form/fields/NsCheckbox';
-import { SelectItem, NsSelectAutocomplete } from 'src/components/components/form/fields/NsSelectAutocomplete';
-import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
-import { required } from 'src/components/components/form/validators';
-import { NsGridLayout } from 'src/components/layout/NsGridLayout';
-import { NsWizardStepperProps } from 'src/components/wizard/NsStepper';
-import { NsWizard, NsWizardFormStep, NsWizardProgressButtons, NsWizardStep } from 'src/components/wizard/NsWizard';
-import { useWizard } from 'src/components/wizard/WizardContext';
-import { NsFileUpload } from 'src/components/components/form/fields/NsFileUpload';
+import { NsCheckbox } from '@/components/components/form/fields/NsCheckbox';
+import { SelectItem, NsSelectAutocomplete } from '@/components/components/form/fields/NsSelectAutocomplete';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
+import { required } from '@/components/components/form/validators';
+import { NsGridLayout } from '@/components/layout/NsGridLayout';
+import { NsWizardStepperProps } from '@/components/wizard/NsStepper';
+import { NsWizard, NsWizardFormStep, NsWizardProgressButtons, NsWizardStep } from '@/components/wizard/NsWizard';
+import { useWizard } from '@/components/wizard/WizardContext';
+import { NsFileUpload } from '@/components/components/form/fields/NsFileUpload';
 
 export default {
     title: 'Patterns/Wizard',
@@ -73,7 +73,12 @@ const Template: StoryFn<typeof NsWizard> = ({ sx, StepperSlot }) => {
                     onAbort={() => window.location.reload()}
                 >
                     <NsWizardFormStep name="First Step" icon={EditIcon} onStepCallback={handleField1Change}>
-                        <Typography mx={1} my={2}>
+                        <Typography
+                            sx={{
+                                mx: 1,
+                                my: 2,
+                            }}
+                        >
                             Please insert the following information:
                         </Typography>
                         <NsGridLayout rowSize={1}>
@@ -101,14 +106,18 @@ const Template: StoryFn<typeof NsWizard> = ({ sx, StepperSlot }) => {
                                 errorMessage="The 'File' field is required"
                                 name="fileUpload"
                                 defaultValue={data?.fileUpload}
-                                onChange={() => {
-                                }}
+                                onChange={() => {}}
                                 validate={required}
                             />
                         </NsGridLayout>
                     </NsWizardFormStep>
                     <NsWizardFormStep name="Second Step" icon={DataObjectSharp}>
-                        <Typography mx={1} my={2}>
+                        <Typography
+                            sx={{
+                                mx: 1,
+                                my: 2,
+                            }}
+                        >
                             Don't forget to fill this fields as well:
                         </Typography>
                         <NsGridLayout rowSize={1}>
@@ -142,7 +151,12 @@ const SummaryStep: React.FC = () => {
 
     return (
         <Container maxWidth={false}>
-            <Typography mx={1} my={2}>
+            <Typography
+                sx={{
+                    mx: 1,
+                    my: 2,
+                }}
+            >
                 Summary
             </Typography>
             <NsGridLayout rowSize={1}>
@@ -150,9 +164,7 @@ const SummaryStep: React.FC = () => {
                 <Typography>Field2={state.data?.field2}</Typography>
                 <Typography>Field3={state.data?.field3}</Typography>
                 <Typography>Field4={state.data?.field4?.label}</Typography>
-                {state.data?.fileUpload && (
-                    <Typography>Uploaded File: {state.data.fileUpload.name}</Typography>
-                )}
+                {state.data?.fileUpload && <Typography>Uploaded File: {state.data.fileUpload.name}</Typography>}
             </NsGridLayout>
             <NsWizardProgressButtons onNext={() => next()} onPrev={() => previous()} />
         </Container>
@@ -163,7 +175,7 @@ const CustomStepper: React.FC<NsWizardStepperProps> = ({ steps, activeStep, icon
     const iconElements = React.useMemo(() => icons.map((i) => React.createElement(i)), [icons]);
 
     return (
-        <Grid item xs={12}>
+        <Grid size={12}>
             <Stepper alternativeLabel connector={<StepConnector />} activeStep={activeStep}>
                 {steps.map((label, index) => {
                     return (
@@ -177,16 +189,24 @@ const CustomStepper: React.FC<NsWizardStepperProps> = ({ steps, activeStep, icon
     );
 };
 
-export const DefaultWizard = Template.bind({});
-DefaultWizard.args = { StepperSlot: true };
-
-export const CustomizedWizard = Template.bind({});
-CustomizedWizard.args = {
-    sx: { borderRadius: '1em', border: '2px solid #e4e4e4' },
-    StepperSlot: CustomStepper,
+export const DefaultWizard = {
+    render: Template,
+    args: { StepperSlot: true },
 };
 
-export const NoStepperWizard = Template.bind({});
-NoStepperWizard.args = {
-    StepperSlot: false,
+export const CustomizedWizard = {
+    render: Template,
+
+    args: {
+        sx: { borderRadius: '1em', border: '2px solid #e4e4e4' },
+        StepperSlot: CustomStepper,
+    },
+};
+
+export const NoStepperWizard = {
+    render: Template,
+
+    args: {
+        StepperSlot: false,
+    },
 };

@@ -1,8 +1,8 @@
+import { composeValidators } from '@/components/components/form/validators';
+import { NsInputFile } from '@/components/components/NsInputFile';
+import uniqueId from '@/util/uniqueId';
 import React, { useCallback, useMemo } from 'react';
-import uniqueId from '../../../../util/uniqueId';
-import { composeValidators } from '../validators';
 import { useFormField } from 'relay-forms';
-import { NsInputFile } from '../../NsInputFile';
 
 /**
  * Ns File Upload Component
@@ -54,12 +54,7 @@ export const NsFileUpload = ({
 
     return (
         <div>
-            <NsInputFile
-                {...rest}
-                name={name}
-                value={value}
-                onChange={setValueCallback}
-            />
+            <NsInputFile {...rest} name={name} value={value} onChange={setValueCallback} />
         </div>
     );
 };

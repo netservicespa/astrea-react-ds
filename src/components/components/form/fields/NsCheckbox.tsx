@@ -1,18 +1,15 @@
-import { Checkbox, CheckboxProps, FormControlLabel } from '@mui/material';
+import { Box, Checkbox, CheckboxProps, FormControlLabel } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 import { useFormField } from 'relay-forms';
-import uniqueId from '../../../../util/uniqueId';
-import { composeValidators, NsInput } from '../validators';
+import uniqueId from '@/util/uniqueId';
+import { composeValidators, NsInput } from '@/components/components/form/validators';
 
 export interface AdditionalProps {
     label: string | React.ReactNode;
     labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
 }
 
-export type NsCheckboxProps = NsInput<
-    Omit<CheckboxProps, 'value'> & AdditionalProps,
-    boolean
->;
+export type NsCheckboxProps = NsInput<Omit<CheckboxProps, 'value'> & AdditionalProps, boolean>;
 
 export const NsCheckbox: React.FC<NsCheckboxProps> = ({
     name,
@@ -40,20 +37,11 @@ export const NsCheckbox: React.FC<NsCheckboxProps> = ({
     });
 
     const setValueCallback = useCallback(
-        (event: any) => {
-            const value = event.target.checked;
-            setValue(value);
+        (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+            setValue(checked);
 
             if (onChange) {
-                const fakeEvent = {
-                    target: { value: true, name },
-                    currentTarget: { value: true, name },
-                    preventDefault: () => {
-                    },
-                    stopPropagation: () => {
-                    },
-                } as unknown as React.ChangeEvent<HTMLInputElement>;
-                onChange(fakeEvent, value);
+                onChange(event, checked);
             }
         },
         [setValue, onChange],
@@ -63,21 +51,33 @@ export const NsCheckbox: React.FC<NsCheckboxProps> = ({
         if (disabled) {
             setValue(!!defaultChecked);
         }
-    }, [disabled]);
+    }, [disabled, defaultChecked, setValue]);
 
     return (
-        <FormControlLabel
-            control={
-                <Checkbox
-                    sx={sx}
-                    {...rest}
-                    checked={value}
-                    onChange={setValueCallback}
-                    disabled={disabled}
-                />
-            }
-            labelPlacement={labelPlacement ?? 'end'}
-            label={label}
-        />
+        <Box
+            component="span"
+            sx={{
+                display: 'inline-block',
+                width: 'fit-content',
+                maxWidth: '100%',
+                verticalAlign: 'top',
+            }}
+        >
+            <FormControlLabel
+                sx={{
+                    display: 'inline-flex',
+                    width: 'fit-content',
+                    maxWidth: '100%',
+                    margin: 0,
+                    verticalAlign: 'top',
+                    '& .MuiFormControlLabel-label': {
+                        width: 'auto',
+                    },
+                }}
+                control={<Checkbox sx={sx} {...rest} checked={value} onChange={setValueCallback} disabled={disabled} />}
+                labelPlacement={labelPlacement ?? 'end'}
+                label={label}
+            />
+        </Box>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsSkipLink, SkipLinkProps } from 'src/components/components/NsSkipLink';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsSkipLink, SkipLinkProps } from '@/components/components/NsSkipLink';
 import { Box } from '@mui/material';
 
 const meta: Meta = {
@@ -20,8 +20,12 @@ const Template: StoryFn<SkipLinkProps> = (args) => {
         </Box>
     );
 };
-export const Default = Template.bind({});
-Default.args = {
-    href: '#main',
-    children: 'Skip to main content',
+
+export const Default = {
+    render: Template,
+
+    args: {
+        href: '#main',
+        children: 'Skip to main content',
+    },
 };

@@ -10,10 +10,9 @@ export interface NsBannerProps {
 export const NsBanner = ({ children, backgroundColor, borderColor }: NsBannerProps) => {
     return (
         <Box
-            height={212}
-            width={'100%'}
-            p={2}
             sx={{
+                width: '100%',
+                p: 2,
                 height: '100%',
                 border: `1px solid ${borderColor}`,
                 fontWeight: '700',

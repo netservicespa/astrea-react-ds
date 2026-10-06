@@ -2,8 +2,8 @@ import React from 'react';
 import VerticalHeader from './headers/VerticalHeader';
 import HorizontalHeader from './headers/HorizontalHeader';
 import MegamenuHeader from './headers/MegamenuHeader';
-import { INotificationData } from 'src/components/components/notification/NsNotification';
-import { IDropDownConfiguration, IDropdownItems } from 'src/components/components/dropdown/NsDropDown';
+import { INotificationData } from '@/components/components/notification/NsNotification';
+import { IDropDownConfiguration, IDropdownItems } from '@/components/components/dropdown/NsDropDown';
 import SlimHeader from './headers/SlimHeader';
 
 export type ApplicationTitle = {

@@ -36,7 +36,9 @@ function CustomTabPanel({ children, value, index, noPadding, ...other }: TabPane
             }}
         >
             {isVisible && (
-                <Box p={noPadding ? 0 : 3}>
+                <Box sx={{
+                    p: noPadding ? 0 : 3
+                }}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -114,14 +116,15 @@ export const NsTabs: React.FC<NsTabsProps & Omit<TabsProps, 'value' | 'onChange'
                 value={value}
                 onChange={handleChange}
                 aria-label="basic tabs example"
-                TabIndicatorProps={{ style: { display: 'none' } }}
                 {...otherProps}
                 sx={{
                     zIndex: 2,
                     position: 'relative',
                     bottom: '-1px',
                 }}
-            >
+                slotProps={{
+                    indicator: { style: { display: 'none' } }
+                }}>
                 {tabs.map((tab, index) => (
                     <StyledTab
                         key={tab.id}

@@ -1,9 +1,8 @@
-import { FormControlLabel, Radio, RadioGroup, RadioGroupProps } from '@mui/material';
+import { composeValidators, NsInput } from '@/components/components/form/validators';
+import uniqueId from '@/util/uniqueId';
+import { FormControlLabel, Radio, RadioGroup, RadioGroupProps, RadioProps } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 import { useFormField } from 'relay-forms';
-import uniqueId from '../../../../util/uniqueId';
-import { composeValidators, NsInput } from '../validators';
-import { RadioProps } from '@mui/material/Radio/Radio';
 
 export interface AdditionalProps {
     labelPlacement?: 'bottom' | 'end' | 'start' | 'top';
@@ -11,23 +10,16 @@ export interface AdditionalProps {
     children?: React.ReactElement<MyNsRadioProps>[] | React.ReactElement<MyNsRadioProps>;
 }
 
-export type NsRadioProps = NsInput<
-    Omit<RadioGroupProps, 'value' | 'children'> & AdditionalProps,
-    string
->;
+export type NsRadioProps = NsInput<Omit<RadioGroupProps, 'value' | 'children'> & AdditionalProps, string>;
 
-
-export interface MyNsRadioProps extends RadioProps{
-    label: string,
-    value: string
+export interface MyNsRadioProps extends RadioProps {
+    label: string;
+    value: string;
 }
 
 export function NsRadio({ label, value, ...radioProps }: MyNsRadioProps) {
-    return (
-        <FormControlLabel value={value} control={<Radio {...radioProps}/>} label={label} />
-    );
+    return <FormControlLabel value={value} control={<Radio {...radioProps} />} label={label} />;
 }
-
 
 export const NsRadioGroup: React.FC<NsRadioProps> = ({
     name,
@@ -72,16 +64,8 @@ export const NsRadioGroup: React.FC<NsRadioProps> = ({
     }, [disabled, defaultValue, setValue]);
 
     return (
-
-        <RadioGroup
-            defaultValue={defaultValue}
-            name={name}
-            value={value}
-            onChange={setValueCallback}
-            {...rest}
-        >
+        <RadioGroup defaultValue={defaultValue} name={name} value={value} onChange={setValueCallback} {...rest}>
             {children}
         </RadioGroup>
-
     );
 };

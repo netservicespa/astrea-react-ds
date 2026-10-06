@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { NsDropDown } from 'src/components/components/dropdown/NsDropDown';
+import { NsDropDown } from '@/components/components/dropdown/NsDropDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const meta: Meta<typeof NsDropDown> = {

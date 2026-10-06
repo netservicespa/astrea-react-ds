@@ -2,7 +2,7 @@ import React from 'react';
 import { RelayEnvironmentProvider } from 'relay-hooks';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes';
-import uniqueId from '../../../util/uniqueId';
+import uniqueId from '@/util/uniqueId';
 
 function createEnvironment(records: RecordMap, configName?: string) {
     const recordSource = new RecordSource(records);
@@ -19,6 +19,11 @@ function createEnvironment(records: RecordMap, configName?: string) {
 export interface NsFormProps {
     /** Identificativo del form. Al momento non serve a niente*/
     name?: string;
+    /**
+     * Set this flag to true to link this form to the parent Relay Environment.
+     * This is required for Relay to work correctly inside the form, and could also be used to link multiple form components together.
+     */
+    inheritContext?: boolean;
 }
 
 /**
@@ -27,14 +32,15 @@ export interface NsFormProps {
  */
 export const NsFormWrapper: React.FC<React.PropsWithChildren<NsFormProps>> = ({
     name,
+    inheritContext = false,
     children,
 }) => {
     const key = React.useMemo(() => name || uniqueId('form-'), [name]);
     const environment = React.useMemo(() => createEnvironment({}, key), [key]);
 
-    return (
-        <RelayEnvironmentProvider environment={environment}>
-            {children}
-        </RelayEnvironmentProvider>
-    );
+    if (inheritContext) {
+        return <>{children}</>;
+    }
+
+    return <RelayEnvironmentProvider environment={environment}>{children}</RelayEnvironmentProvider>;
 };

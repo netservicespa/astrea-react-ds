@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { NsModal, NsModalProps } from '../../components/components/modals/NsModal';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import { NsModal, NsModalProps } from '@/components/components/modals/NsModal';
 import { Box, Container } from '@mui/system';
 
 // export default {
@@ -70,47 +70,56 @@ const TemplateInsidePage: StoryFn<NsModalProps> = (args) => {
     );
 };
 
-const Template: StoryFn<NsModalProps> = (args) => <NsModal {...args} />;
+export const TestModal = {
+    render: TemplateInsidePage,
 
-export const TestModal = TemplateInsidePage.bind({});
-TestModal.args = {
-    title: 'Modal',
-    content: 'this Modal does not need any action to be opened and has a custom width',
-    showCancelButton: false,
-    showConfirmButton: false,
-    externalOpen: true,
-    openFromParent: true,
-    width: '600px',
+    args: {
+        title: 'Modal',
+        content: 'this Modal does not need any action to be opened and has a custom width',
+        showCancelButton: false,
+        showConfirmButton: false,
+        externalOpen: true,
+        openFromParent: true,
+        width: '600px',
+    },
 };
-export const BasicModal = Template.bind({});
-BasicModal.args = {
-    title: 'Title',
-    content: 'Example of paragraph',
-    showCancelButton: false,
-    showConfirmButton: false,
+
+export const BasicModal = {
+    args: {
+        title: 'Title',
+        content: 'Example of paragraph',
+        showCancelButton: false,
+        showConfirmButton: false,
+    },
 };
-export const ActionsModal = Template.bind({});
-ActionsModal.args = {
-    title: 'Title of the modal',
-    content: 'Example of a paragraph that contains information and details to take an action or cancel it',
-    onConfirm: () => alert('Confirmed!'),
-    showCancelButton: true,
-    showConfirmButton: true,
+
+export const ActionsModal = {
+    args: {
+        title: 'Title of the modal',
+        content: 'Example of a paragraph that contains information and details to take an action or cancel it',
+        onConfirm: () => alert('Confirmed!'),
+        showCancelButton: true,
+        showConfirmButton: true,
+    },
 };
-export const SidebarModal = Template.bind({});
-SidebarModal.args = {
-    title: 'Titolo Drawer',
-    content: 'Contenuto del drawer.',
-    useDrawer: true,
-    drawerPosition: 'right',
-    showCancelButton: false,
-    showConfirmButton: false,
+
+export const SidebarModal = {
+    args: {
+        title: 'Titolo Drawer',
+        content: 'Contenuto del drawer.',
+        useDrawer: true,
+        drawerPosition: 'right',
+        showCancelButton: false,
+        showConfirmButton: false,
+    },
 };
-export const FullscreenModal = Template.bind({});
-FullscreenModal.args = {
-    title: 'Titolo Modal a Schermo Intero',
-    content: 'Contenuto della modal a schermo intero.',
-    fullScreen: true,
-    showCancelButton: true,
-    showConfirmButton: true,
+
+export const FullscreenModal = {
+    args: {
+        title: 'Titolo Modal a Schermo Intero',
+        content: 'Contenuto della modal a schermo intero.',
+        fullScreen: true,
+        showCancelButton: true,
+        showConfirmButton: true,
+    },
 };

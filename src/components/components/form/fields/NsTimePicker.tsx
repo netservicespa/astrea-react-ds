@@ -1,21 +1,21 @@
+import { composeValidators, NsInput } from '@/components/components/form/validators';
+import { NsLabelInput } from '@/components/components/NsLabelInput';
+import uniqueId from '@/util/uniqueId';
 import { TextFieldProps } from '@mui/material';
+import { TimePicker } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { PickersInputComponentLocaleText } from '@mui/x-date-pickers/locales';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import moment, { Moment } from 'moment';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { composeValidators, NsInput } from '../validators';
-import { NsLabelInput } from '../../NsLabelInput';
-import uniqueId from '../../../../util/uniqueId';
-import { useFormField } from 'relay-forms';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import moment, { Moment } from 'moment';
-import { PickersInputComponentLocaleText } from '@mui/x-date-pickers/locales';
 import { useTranslation } from 'react-i18next';
-import { TimePicker } from '@mui/x-date-pickers';
+import { useFormField } from 'relay-forms';
 
 const FMT = 'HH:mm';
 
 export type NsTimePickerProps = NsInput<Omit<TextFieldProps, 'value'>, string> & {
-    localeText?: PickersInputComponentLocaleText<moment.Moment>;
+    localeText?: PickersInputComponentLocaleText;
     format?: string;
     ampm?: boolean;
 };

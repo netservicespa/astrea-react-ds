@@ -51,8 +51,15 @@ export const NsDrawer: React.FC<NsDrawerProps> = ({
     const renderDrawerContent = () => (
         <DrawerContent sx={{ width }}>
             <Typography variant="h6">{title}</Typography>
-            <Box mt={2}>{content}</Box>
-            <Box mt={2} display="flex" justifyContent="space-between">
+            <Box sx={{
+                mt: 2
+            }}>{content}</Box>
+            <Box
+                sx={{
+                    mt: 2,
+                    display: "flex",
+                    justifyContent: "space-between"
+                }}>
                 {showCancelButton && (
                     <NsButton onClick={handleClose} color="secondary">
                         {t('modal.buttons.cancel')}

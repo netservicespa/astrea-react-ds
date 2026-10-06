@@ -1,13 +1,10 @@
-import { useFormField } from 'relay-forms';
-import uniqueId from '../../../../util/uniqueId';
+import { composeValidators, NsInput } from '@/components/components/form/validators';
+import { NsDragAndDrop, NsDragAndDropProps } from '@/components/components/NsDragAndDrop';
+import uniqueId from '@/util/uniqueId';
 import React, { useCallback, useMemo } from 'react';
-import { composeValidators, NsInput } from '../validators';
-import { NsDragAndDrop, NsDragAndDropProps } from '../../NsDragAndDrop';
+import { useFormField } from 'relay-forms';
 
-export type NsDragDropProps = NsInput<
-    Omit<NsDragAndDropProps, 'value'>,
-    File[]
->;
+export type NsDragDropProps = NsInput<Omit<NsDragAndDropProps, 'value'>, File[]>;
 
 /**
  * Componente per l'upload di file, con dropzone e integrazione con relay-forms.

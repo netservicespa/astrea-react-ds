@@ -17,7 +17,13 @@ export function NsDataGridCard<RowType extends object>({ table }: NsDataGridCard
     return (
         <Grid container spacing={2}>
             {table.getRowModel().rows.map((row) => (
-                <Grid item xs={12} sm={6} md={4} key={row.id}>
+                <Grid
+                    key={row.id}
+                    size={{
+                        xs: 12,
+                        sm: 6,
+                        md: 4
+                    }}>
                     <StyledCard onClick={() => row.toggleSelected()}>
                         <CardContent>
                             {row.getVisibleCells().map((cell) => (

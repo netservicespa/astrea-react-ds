@@ -113,5 +113,8 @@
       "action":"Action",
       "view":"View"
     }
+  },
+  "dropdown": {
+    "logout": "Logout"
   }
 }

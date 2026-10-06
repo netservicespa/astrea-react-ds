@@ -1,11 +1,3 @@
-import { css } from '@emotion/react';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import React, { useState } from 'react';
 import {
     DynamicLink,
     IDropdownItems,
@@ -13,11 +5,18 @@ import {
     StyledLink,
     isActivePath,
     resolveCurrentPath,
-} from '../../../components/dropdown/NsDropDown';
-import { INotificationData, NsNotification } from '../../../components/notification/NsNotification';
+} from '@/components/components/dropdown/NsDropDown';
+import { INotificationData, NsNotification } from '@/components/components/notification/NsNotification';
+import { HeaderProps } from '@/components/patterns/navigation/NsHeader';
+import { css } from '@emotion/react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import { Box } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mui/material/styles';
-import { HeaderProps } from '../NsHeader';
 
 /**
  * Horizontal Header
@@ -329,7 +328,13 @@ export default function HorizontalHeader({
                         justifyContent: 'center',
                     }}
                 >
-                    <Box display="flex" justifyContent="center" alignItems="center">
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
                         {t('header.menu')}
                         {isMenuOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </Box>

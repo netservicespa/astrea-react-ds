@@ -127,12 +127,22 @@ export const NsPageHeader = ({ pageData, configuration }: PageHeaderProps) => {
                         />
                     ) : null}
                     <span>
-                        <Typography variant={'h1'} fontWeight={700} sx={{ fontFamily: ['Titillium Web'] }}>
+                        <Typography
+                            variant={'h1'}
+                            sx={{
+                                fontWeight: 700,
+                                fontFamily: ['Titillium Web']
+                            }}>
                             {pageData.title}
                         </Typography>
                     </span>
                     <span>
-                        <Typography variant={'h4'} fontWeight={700} sx={{ fontFamily: ['Titillium Web'] }}>
+                        <Typography
+                            variant={'h4'}
+                            sx={{
+                                fontWeight: 700,
+                                fontFamily: ['Titillium Web']
+                            }}>
                             {pageData.subtitle}
                         </Typography>
                     </span>

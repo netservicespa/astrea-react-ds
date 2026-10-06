@@ -1,9 +1,9 @@
 import { FormGroup, FormLabel } from '@mui/material';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsCheckbox } from 'src/components/components/form/fields/NsCheckbox';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsCheckbox } from '@/components/components/form/fields/NsCheckbox';
 
 export default {
     title: 'Components/Form/CheckBox',
@@ -14,8 +14,7 @@ const Template: StoryFn<typeof NsCheckbox> = (args) => {
     const { t } = useTranslation();
 
     return (
-        <NsForm onSubmit={() => {
-        }} buttonsSlot={false}>
+        <NsForm onSubmit={() => {}} buttonsSlot={false}>
             <FormLabel component="legend">Choose your favourite meal</FormLabel>
             <FormGroup>
                 <NsCheckbox label="Tortellini" labelPlacement="end" />
@@ -27,4 +26,6 @@ const Template: StoryFn<typeof NsCheckbox> = (args) => {
     );
 };
 
-export const CheckBox = Template.bind({});
+export const CheckBox = {
+    render: Template,
+};

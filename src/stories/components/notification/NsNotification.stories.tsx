@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { INotificationData, NsNotification } from 'src/components/components/notification/NsNotification';
-import { StoryFn } from '@storybook/react';
-import { NsHeader } from 'src/components/patterns/navigation/NsHeader';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { INotificationData, NsNotification } from '@/components/components/notification/NsNotification';
+import { StoryFn } from '@storybook/react-webpack5';
+import { NsHeader } from '@/components/patterns/navigation/NsHeader';
 import { Typography } from '@mui/material';
 
 const meta: Meta<typeof NsNotification> = {
@@ -34,60 +34,63 @@ const Template: StoryFn<typeof NsNotification> = (args: INotificationData) => {
         />
     );
 };
-export const INsNotification = Template.bind({});
 
-INsNotification.args = {
-    unread: {
-        notifications: [
-            {
-                id: 1,
-                status: 'valid',
-                text: 'Search "TCP" save successfully',
-                link: {
-                    router: null,
-                    to: '#',
+export const INsNotification = {
+    render: Template,
+
+    args: {
+        unread: {
+            notifications: [
+                {
+                    id: 1,
+                    status: 'valid',
+                    text: 'Search "TCP" save successfully',
+                    link: {
+                        router: null,
+                        to: '#',
+                    },
                 },
+                { id: 2, status: 'invalid', text: 'ghgjgfsdf.pcap' },
+                { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+                { id: 2, status: 'valid', text: 'ghgjgfsdfyui.pcap' },
+            ],
+            showMore: {
+                router: null,
+                to: '#',
+                children: <Typography sx={{ color: 'red' }}>Show more</Typography>,
             },
-            { id: 2, status: 'invalid', text: 'ghgjgfsdf.pcap' },
-            { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
-            { id: 2, status: 'valid', text: 'ghgjgfsdfyui.pcap' },
-        ],
-        showMore: {
-            router: null,
-            to: '#',
-            children: <Typography sx={{ color: 'red' }}>Show more</Typography>,
+            totalCount: 4,
         },
-        totalCount: 4,
-    },
-    read: {
-        notifications: [
-            {
-                id: 1,
-                status: 'valid',
-                text: 'sdganhbasddd.pcap',
-                link: {
-                    router: null,
-                    to: '#',
+        read: {
+            notifications: [
+                {
+                    id: 1,
+                    status: 'valid',
+                    text: 'sdganhbasddd.pcap',
+                    link: {
+                        router: null,
+                        to: '#',
+                    },
                 },
-            },
-            {
-                id: 2,
-                status: 'invalid',
-                text: 'ghgjgfsdf.pcap',
-                link: {
-                    router: null,
-                    to: '#',
+                {
+                    id: 2,
+                    status: 'invalid',
+                    text: 'ghgjgfsdf.pcap',
+                    link: {
+                        router: null,
+                        to: '#',
+                    },
                 },
-            },
-            { id: 2, status: 'valid', text: 'new_123aaaa8.pcap' },
-            { id: 2, status: 'valid', text: 'fsdfsfsfsfsfsdssssssyui.pcap' },
-            { id: 1, status: 'valid', text: 'nerver_123_new.pcap' },
-            { id: 2, status: 'valid', text: 'Changes discarded.pcap' },
-            { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
-        ],
-        totalCount: 4,
-    },
-    markAsRead: () => {
-        console.log('markAsRead');
+                { id: 2, status: 'valid', text: 'new_123aaaa8.pcap' },
+                { id: 2, status: 'valid', text: 'fsdfsfsfsfsfsdssssssyui.pcap' },
+                { id: 1, status: 'valid', text: 'nerver_123_new.pcap' },
+                { id: 2, status: 'valid', text: 'Changes discarded.pcap' },
+                { id: 2, status: 'invalid', text: 'new_123aaaa8.pcap' },
+            ],
+            totalCount: 4,
+        },
+        markAsRead: () => {
+            console.log('markAsRead');
+        },
     },
 };

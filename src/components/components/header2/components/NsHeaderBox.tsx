@@ -1,6 +1,6 @@
-import React from 'react';
+import { INsHeaderPosition } from '@/components/components/header2/NsHeader2';
 import { Box, BoxProps } from '@mui/material';
-import { INsHeaderPosition } from '../NsHeader2';
+import React from 'react';
 
 export interface NsHeaderBoxProps extends BoxProps {
     nsPosition?: INsHeaderPosition;

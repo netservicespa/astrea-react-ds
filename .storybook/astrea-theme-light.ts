@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming';
+import { create } from 'storybook/theming';
 import baseTheme from './astrea-theme-base';
 import logo from './images/logo-dark.png';
 

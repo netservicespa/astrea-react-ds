@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { ErrorBoundary } from 'src/components/error/ErrorBoundary';
-import { FallbackPage } from 'src/components/error/FallbackPage';
+import { ErrorBoundary } from '@/components/error/ErrorBoundary';
+import { FallbackPage } from '@/components/error/FallbackPage';
 import { Button, Container } from '@mui/material';
 
 export default {
@@ -44,4 +44,6 @@ class BuggyChild extends React.Component<{}, { explode: boolean }> {
     }
 }
 
-export const Boundary = Template.bind({});
+export const Boundary = {
+    render: Template,
+};

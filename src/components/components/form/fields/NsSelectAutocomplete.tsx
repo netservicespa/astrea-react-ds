@@ -1,10 +1,9 @@
-import { Autocomplete, AutocompleteProps, AutocompleteRenderInputParams, TextField } from '@mui/material';
+import { Autocomplete, AutocompleteProps, AutocompleteRenderInputParams, SelectProps, TextField } from '@mui/material';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
-import { SelectProps } from '@mui/material/Select/Select';
-import { NsLabelInput } from '../../NsLabelInput';
-import { composeValidators, NsInput } from '../validators';
-import uniqueId from '../../../../util/uniqueId';
+import { NsLabelInput } from '@/components/components/NsLabelInput';
+import { composeValidators, NsInput } from '@/components/components/form/validators';
+import uniqueId from '@/util/uniqueId';
 import { useFormField } from 'relay-forms';
 
 export interface SelectItem {
@@ -24,6 +23,7 @@ export type NsSelectAutocompleteProps = NsInput<
     getOptionLabel?: (option: SelectItem) => string;
     onChange?: (event: React.ChangeEvent<{}>, value: SelectItem | SelectItem[] | null) => void;
     disableCloseOnSelect?: boolean;
+    placeholder?: string;
     renderOption?: (
         props: React.HTMLAttributes<HTMLLIElement>,
         option: SelectItem,
@@ -48,12 +48,12 @@ export function NsSelectAutocomplete({
     multiple = false,
     options,
     groupBy,
-    getOptionLabel = (option) => (typeof option == 'string' ? option : (option.label ?? '')),
+    getOptionLabel = (option) => (typeof option == 'string' ? option : option.label ?? ''),
     disableCloseOnSelect,
     renderOption,
     renderInput = (params) => <TextField {...params} variant="outlined" label="" />,
     ...rest
-}: NsSelectAutocompleteProps): JSX.Element {
+}: NsSelectAutocompleteProps): React.JSX.Element {
     const key = useMemo(() => name ?? uniqueId('v_selectac-'), [name]);
 
     const validateCallback = useCallback(
@@ -65,10 +65,10 @@ export function NsSelectAutocomplete({
         if (options) return options;
         return (
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            React.Children.map(children, (c: any) => ({
+            (React.Children.map(children, (c: any) => ({
                 label: c.props.children,
                 value: c.props.value,
-            })) || []
+            })) || [])
         );
     }, [children, options]);
 

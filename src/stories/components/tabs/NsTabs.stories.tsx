@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
 import { Button as NsButton } from '@mui/material';
-import { NsTabs } from '../../../components/components/tabs/NsTabs';
+import { NsTabs } from '@/components/components/tabs/NsTabs';
 
 const meta: Meta<typeof NsTabs> = {
     title: 'Components/Tabs',
@@ -33,21 +33,20 @@ const meta: Meta<typeof NsTabs> = {
     },
 };
 
-const Template = (args) => <NsTabs {...args} />;
-
-export const Tabs = Template.bind({});
-Tabs.args = {
-    tabs: [
-        { id: '0', label: 'Tab 1 ', children: 'Tab 1' },
-        {
-            id: '1',
-            label: 'Tab 2',
-            children: 'Example of noPadding',
-            noPadding: true,
-        },
-        { id: '2', label: 'Tab 3', children: <NsButton>Some Text</NsButton> },
-        { id: '3', label: 'Tab 4', children: 'Tab 4' },
-    ],
+export const Tabs = {
+    args: {
+        tabs: [
+            { id: '0', label: 'Tab 1 ', children: 'Tab 1' },
+            {
+                id: '1',
+                label: 'Tab 2',
+                children: 'Example of noPadding',
+                noPadding: true,
+            },
+            { id: '2', label: 'Tab 3', children: <NsButton>Some Text</NsButton> },
+            { id: '3', label: 'Tab 4', children: 'Tab 4' },
+        ],
+    },
 };
 
 export default meta;

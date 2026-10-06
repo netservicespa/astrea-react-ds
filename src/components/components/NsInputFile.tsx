@@ -2,7 +2,7 @@ import React, { useEffect, useId, useMemo, useRef } from 'react';
 import { Button, Input, InputProps } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
-import uniqueId from '../../util/uniqueId';
+import uniqueId from '@/util/uniqueId';
 
 export interface NsInputFileProps extends Omit<InputProps, 'type' | 'value' | 'onChange' | 'defaultValue'> {
     value?: File;
@@ -61,7 +61,9 @@ export function NsInputFile({ name, value, onChange, ...rest }: NsInputFileProps
                     {t('form.fileUpload.selectFile')}
                 </Button>
             </label>
-            <Box pl={2} component="span">
+            <Box component="span" sx={{
+                pl: 2
+            }}>
                 {value?.name ? value.name : t('form.fileUpload.noFileSelected')}{' '}
             </Box>
         </div>

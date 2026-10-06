@@ -1,19 +1,21 @@
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import React from 'react';
-import { NsForm } from 'src/components/components/form/NsForm';
-import { NsTextInput } from 'src/components/components/form/fields/NsTextInput';
+import { NsForm } from '@/components/components/form/NsForm';
+import { NsTextInput } from '@/components/components/form/fields/NsTextInput';
 
 export default {
-  title: 'Components/Form/Text Input',
-  component: NsTextInput,
+    title: 'Components/Form/Text Input',
+    component: NsTextInput,
 } as Meta<typeof NsTextInput>;
 
 const Template: StoryFn<typeof NsTextInput> = (args) => {
-  return (
-    <NsForm onSubmit={() => {}} buttonsSlot={false}>
-      <NsTextInput label="Check me out!" name="ciaone" />
-    </NsForm>
-  );
+    return (
+        <NsForm onSubmit={() => {}} buttonsSlot={false}>
+            <NsTextInput label="Check me out!" name="ciaone" placeholder="Es. check me out! I'm a placeholder" />
+        </NsForm>
+    );
 };
 
-export const TextInput = Template.bind({});
+export const TextInput = {
+    render: Template,
+};

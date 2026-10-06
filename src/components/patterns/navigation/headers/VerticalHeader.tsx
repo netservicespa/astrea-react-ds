@@ -4,12 +4,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { styled } from '@mui/material/styles';
 import { css } from '@emotion/react';
-import { DynamicLink, IDropdownItems, isActivePath, resolveCurrentPath } from '../../../components/dropdown/NsDropDown';
+import { DynamicLink, isActivePath, resolveCurrentPath } from '@/components/components/dropdown/NsDropDown';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
-import { HeaderProps } from '../NsHeader';
+import { HeaderProps } from '@/components/patterns/navigation/NsHeader';
 
 /**
  * Vertical Header Component
@@ -170,7 +170,13 @@ export default function VerticalHeader({ menuItems, logo, router }: HeaderProps)
             <List>
                 <StylesListItem style={{ height: '80px', padding: '0px !important' }}>
                     <StyledButtonBase onClick={handleMenuWidth}>
-                        <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
                             <ListItemIcon style={{ justifyContent: 'center' }}>
                                 {isMenuWide ? (
                                     <KeyboardDoubleArrowLeftIcon style={{ color: '#FFF' }} />
@@ -183,22 +189,28 @@ export default function VerticalHeader({ menuItems, logo, router }: HeaderProps)
                     </StyledButtonBase>
                 </StylesListItem>
             </List>
-
             <List>
                 {menuItems?.map((item) => {
                     const isActive = typeof item.path === 'string' && isActivePath(currentPath, item.path);
                     return (
                         <StylesListItem key={item.name}>
                             <StyledButtonBase data-active={isActive ? 'true' : undefined}>
-                                <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
                                     {typeof item.path === 'string' && (
                                         <DynamicLink router={router} to={item.path} isActive={isActive}>
                                             <Box
-                                                display="flex"
-                                                flexDirection="row"
-                                                alignItems="center"
-                                                justifyContent="center"
-                                            >
+                                                sx={{
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    justifyContent: "center"
+                                                }}>
                                                 <ListItemIcon style={{ justifyContent: 'center' }}>
                                                     {item.icon || <HomeIcon />}
                                                 </ListItemIcon>
@@ -221,7 +233,13 @@ export default function VerticalHeader({ menuItems, logo, router }: HeaderProps)
             <List>
                 <StylesListItem>
                     <StyledButtonBase>
-                        <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
                             <ListItemIcon style={{ justifyContent: 'center' }}>
                                 <ExitToAppIcon style={{ color: '#FFF' }} />
                             </ListItemIcon>

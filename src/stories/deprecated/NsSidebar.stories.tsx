@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import { Box, Button as NsButton } from '@mui/material';
-import { NsSidebarLegacy } from '../../components/components/sidebar/NsSidebarLegacy';
+import { NsSidebarLegacy } from '@/components/components/sidebar/NsSidebarLegacy';
 import { Button } from '@mui/material';
 import { IconButton } from '@mui/material';
 import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
@@ -52,11 +52,11 @@ const Template: StoryFn = (args) => {
                 >
                     <Box sx={{ p: 4 }}>
                         {open ? (
-                            <Button variant="contained" color="primary" onClick={() => { }}>
+                            <Button variant="contained" color="primary" onClick={() => {}}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>Download</Box>
                             </Button>
                         ) : (
-                            <IconButton size="small" onClick={() => { }}>
+                            <IconButton size="small" onClick={() => {}}>
                                 <GetAppOutlinedIcon />
                             </IconButton>
                         )}
@@ -88,7 +88,10 @@ const Template: StoryFn = (args) => {
     );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-    open: true,
+export const Default = {
+    render: Template,
+
+    args: {
+        open: true,
+    },
 };

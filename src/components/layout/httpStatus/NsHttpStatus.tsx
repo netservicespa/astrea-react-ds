@@ -42,27 +42,36 @@ export const NsHttpStatus: React.FC<NsHttpStatusProps> = ({
   };
 
   return (
-    <Grid p={2}>
+    <Grid sx={{
+      p: 2
+    }}>
       <Box
-        border={theme.custom.borders[1]}
-        p={3}
-        width={'50%'}
-        borderRadius="0px"
-      >
+        sx={{
+          border: theme.custom.borders[1],
+          p: 3,
+          width: '50%',
+          borderRadius: "0px"
+        }}>
         <Typography
           color={'primary'}
-          sx={{ fontSize: '4rem !important', fontWeight: 'bold' }}
-          mb={2}
-        >
+          sx={{
+            mb: 2,
+            fontSize: '4rem !important',
+            fontWeight: 'bold'
+          }}>
           {httpCode}
         </Typography>
-        <Typography variant="h2" mb={2}>
+        <Typography variant="h2" sx={{
+          mb: 2
+        }}>
           {getHttpMessage()}
         </Typography>
         <Typography
-          mb={3}
           variant="body1"
           dangerouslySetInnerHTML={{ __html: message || getDefaultMessage() }}
+          sx={{
+            mb: 3
+          }}
         />
         {backButton && (
           <Button variant="contained" color="primary">
