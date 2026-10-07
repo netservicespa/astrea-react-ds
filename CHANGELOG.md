@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+# v3.0.1 (Oct 7 2026)
+
+## Fixed
+
+- **TypeScript Exports**
+  - Fixed consumer resolution of components and types re-exported with `export *` by rewriting internal `@/` aliases to relative paths in generated declarations
+  - Added `tsc-alias` to the build pipeline, preserving source aliases without requiring alias configuration in consuming applications
+
 # v3.0.0 (Oct 5 2026)
 
 ## 🚀 Major Upgrades

@@ -14,10 +14,10 @@ export const DataGridDefaultRenderer: NsDataGridRenderFn = (
     return (
         <Container maxWidth="xl">
             <Box
-                display="flex"
-                flexDirection="column"
-                gap="10px"
                 sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
                     ...(children && {
                         border: '1px solid gray',
                         padding: '10px',

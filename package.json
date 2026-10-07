@@ -1,6 +1,6 @@
 {
   "name": "@netservice/astrea-react-ds",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "dist/umd/index.min.js",
   "module": "dist/esm/index.js",
   "license": "Apache-2.0",
@@ -36,7 +36,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && rollup -c && tsc-alias -p tsconfig.esm.json",
     "typecheck": "tsc --project tsconfig.build.json --noEmit && tsc --project tsconfig.test.json --noEmit",
     "prepare": "npm run build",
     "clean": "rimraf dist",
@@ -148,6 +148,7 @@
     "sass-loader": "^14.1.1",
     "storybook": "^10.2.17",
     "style-loader": "^3.3.4",
+    "tsc-alias": "^1.9.7",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "tslib": "^2.4.1",
     "typescript": "^5.9.3",
